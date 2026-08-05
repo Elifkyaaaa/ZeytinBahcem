@@ -1,0 +1,28 @@
+import type { MetadataRoute } from 'next';
+import { site } from '@/lib/data/site';
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: [
+      {
+        userAgent: '*',
+        allow: '/',
+        // Kişisel ve işlem sayfaları arama sonuçlarında yer almamalı.
+        disallow: [
+          '/admin',
+          '/hesap',
+          '/sepet',
+          '/odeme',
+          '/favoriler',
+          '/giris',
+          '/kayit',
+          '/sifremi-unuttum',
+          '/auth/',
+          '/api/',
+        ],
+      },
+    ],
+    sitemap: `${site.url}/sitemap.xml`,
+    host: site.url,
+  };
+}

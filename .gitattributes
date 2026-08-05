@@ -1,0 +1,12 @@
+# Depoda satır sonları daima LF; çalışma kopyasında platforma bırakılır.
+* text=auto eol=lf
+
+# İkili dosyalar dönüştürülmemeli
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.woff binary
+*.woff2 binary

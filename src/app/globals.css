@@ -1,0 +1,341 @@
+@import 'tailwindcss';
+
+/* next-themes `class` stratejisi: Tailwind v4'te `dark:` varsayılan olarak
+   prefers-color-scheme'e bağlıdır, bu satır olmadan tema düğmesi çalışmaz. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   Palet — Beyaz + Krem + Zeytin Yeşili + Altın
+--------------------------------------------------------------------------- */
+@theme {
+  --color-cream-50: #fdfbf7;
+  --color-cream-100: #f9f5ec;
+  --color-cream-200: #f2ebdc;
+  --color-cream-300: #e8dcc5;
+  --color-cream-400: #d9c9a8;
+
+  --color-olive-50: #f4f6ef;
+  --color-olive-100: #e5ead9;
+  --color-olive-200: #ccd6b6;
+  --color-olive-300: #a9ba8b;
+  --color-olive-400: #869b64;
+  --color-olive-500: #6b7f4e;
+  --color-olive-600: #55683c;
+  --color-olive-700: #41512d;
+  --color-olive-800: #303c22;
+  --color-olive-900: #232b18;
+  --color-olive-950: #12150e;
+
+  --color-gold-50: #fbf7e9;
+  --color-gold-100: #f5ebc7;
+  --color-gold-200: #ecd894;
+  --color-gold-300: #e0c46a;
+  --color-gold-400: #d4b04a;
+  --color-gold-500: #c9a227;
+  --color-gold-600: #a9861b;
+  --color-gold-700: #866818;
+  --color-gold-800: #6a521a;
+  --color-gold-900: #59451b;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, 'Times New Roman', serif;
+
+  --shadow-soft: 0 1px 2px -1px rgb(35 43 24 / 0.06), 0 4px 16px -6px rgb(35 43 24 / 0.1);
+  --shadow-lift: 0 8px 20px -8px rgb(35 43 24 / 0.16), 0 24px 48px -20px rgb(35 43 24 / 0.22);
+  --shadow-glow: 0 0 0 1px rgb(201 162 39 / 0.25), 0 12px 32px -12px rgb(201 162 39 / 0.35);
+
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-quint: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-shimmer: shimmer 2.4s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-ring: ring 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  --animate-marquee: marquee 38s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  70%,
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Semantik yüzeyler — açık/koyu tema arasında takla atan token'lar
+--------------------------------------------------------------------------- */
+:root {
+  --background: #fdfbf7;
+  --surface: #ffffff;
+  --surface-muted: #f9f5ec;
+  --foreground: #232b18;
+  --muted-foreground: #6a7360;
+  --border: #e8e2d4;
+  --accent: #c9a227;
+  --ring: #c9a227;
+}
+
+.dark {
+  --background: #12150e;
+  --surface: #1b2016;
+  --surface-muted: #222819;
+  --foreground: #ece7db;
+  --muted-foreground: #a3a795;
+  --border: #2e3626;
+  --accent: #d4b04a;
+  --ring: #d4b04a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-ring: var(--ring);
+}
+
+/* ---------------------------------------------------------------------------
+   Temel katman
+--------------------------------------------------------------------------- */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--accent) 28%, transparent);
+    color: var(--foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* İnce, temaya uyumlu kaydırma çubuğu */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--muted-foreground) 40%, transparent) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: color-mix(in oklab, var(--muted-foreground) 35%, transparent);
+    border-radius: 9999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in oklab, var(--muted-foreground) 60%, transparent);
+  }
+
+  /* Tema geçişini ani renk sıçraması yerine yumuşat */
+  html.theme-transition,
+  html.theme-transition *,
+  html.theme-transition *::before,
+  html.theme-transition *::after {
+    transition:
+      background-color 320ms var(--ease-premium),
+      border-color 320ms var(--ease-premium),
+      color 320ms var(--ease-premium) !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Koyu hero üzerindeki şeffaf header
+
+   Header sayfanın tepesindeyken şeffaftır. Altında koyu bir hero görseli
+   varsa `--foreground` (açık temada koyu zeytin) okunmaz hâle gelir.
+   `:has()` ile sayfada koyu hero olup olmadığını CSS'te tespit edip
+   header'ın renk değişkenlerini açık tonlara çeviriyoruz.
+
+   Neden JS değil: bu bilgi sunucu render'ında da doğru olmalı; bir store ya da
+   context ile taşısaydık ilk boyamada bir kare yanlış renk görünürdü.
+--------------------------------------------------------------------------- */
+body:has([data-dark-hero]) header[data-transparent='true'] {
+  --foreground: #fdfbf7;
+  --muted-foreground: #e8dcc5;
+  --border: rgb(253 251 247 / 0.22);
+  --surface: rgb(253 251 247 / 0.12);
+}
+
+/* Görselin açık bölgelerinde de okunabilirlik için ince bir karartma */
+body:has([data-dark-hero]) header[data-transparent='true']::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgb(18 21 14 / 0.42), transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   Yardımcı sınıflar
+--------------------------------------------------------------------------- */
+@utility container-x {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 84rem;
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+
+  @media (width >= 80rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Zeytinyağı damlası dokusu: çok hafif, kağıt hissi veren grain */
+@utility grain {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Butonlarda soldan sağa geçen ışık süpürmesi */
+@utility sheen {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-120%) skewX(-18deg);
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.28), transparent);
+    transition: transform 780ms var(--ease-out-quint);
+  }
+
+  &:hover::before {
+    transform: translateX(120%) skewX(-18deg);
+  }
+}
+
+@utility text-gradient-gold {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-gold-600),
+    var(--color-gold-300) 45%,
+    var(--color-gold-600)
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+@utility hairline-gold {
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--accent) 55%, transparent),
+    transparent
+  );
+}
+
+/* Yüklenmemiş görsellerin altında duran yumuşak parıltı */
+@utility skeleton {
+  background-image: linear-gradient(
+    90deg,
+    var(--surface-muted) 25%,
+    color-mix(in oklab, var(--surface-muted) 55%, var(--surface)) 50%,
+    var(--surface-muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+/* ---------------------------------------------------------------------------
+   Hareket tercihine saygı
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
