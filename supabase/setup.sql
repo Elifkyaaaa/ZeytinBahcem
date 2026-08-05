@@ -707,7 +707,7 @@ insert into public.settings (key, value) values
      'phone', '+90 232 555 04 12',
      'whatsapp', '+90 532 555 04 12',
      'email', 'merhaba@zeytinbahcem.com',
-     'address', 'Zeytinlik Mah. Hasat Cad. No: 12, Ayvalık / Balıkesir',
+     'address', 'Ortaköy Mah. Hasat Cad. No: 12, Orhangazi / Bursa',
      'free_shipping_threshold', 500
    )),
   ('shipping', jsonb_build_object(

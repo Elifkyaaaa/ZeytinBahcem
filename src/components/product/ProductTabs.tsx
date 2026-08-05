@@ -37,7 +37,7 @@ const shippingOptions = [
     Icon: MapPin,
     title: 'Mağazadan Teslim',
     detail: 'Aynı gün',
-    price: 'Ücretsiz — Ayvalık mağazamızdan',
+    price: 'Ücretsiz — Orhangazi mağazamızdan',
   },
 ];
 

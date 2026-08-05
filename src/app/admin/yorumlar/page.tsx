@@ -1,191 +1,99 @@
-'use client';
-
-import { Check, MessageSquare, Star, Trash2, X } from 'lucide-react';
-import Image from 'next/image';
-import { useMemo, useState } from 'react';
 import { AdminPageHeader } from '@/components/admin/AdminShell';
-import {
-  DemoNotice,
-  EmptyState,
-  Panel,
-  StatCard,
-  Status,
-  Toolbar,
-} from '@/components/admin/primitives';
-import { StarRating } from '@/components/ui/StarRating';
-import { adminReviews, type AdminReview } from '@/lib/data/admin';
-import { blurDataURL, formatDate, slugify } from '@/lib/utils';
+import { DemoNotice } from '@/components/admin/primitives';
+import { ReviewModeration, type PanelReview } from '@/components/admin/ReviewModeration';
+import { adminReviews } from '@/lib/data/admin';
+import { isSupabaseConfigured } from '@/utils/env';
+import { createClient } from '@/utils/supabase/server';
+import type { ReviewRow } from '@/types/database';
 
-const tabs = [
-  { id: 'all', label: 'Tümü' },
-  { id: 'bekliyor', label: 'Onay Bekleyen' },
-  { id: 'onaylandi', label: 'Onaylanan' },
-  { id: 'reddedildi', label: 'Reddedilen' },
-];
+export const metadata = { title: 'Yorum Yönetimi' };
+export const dynamic = 'force-dynamic';
 
-export default function AdminReviewsPage() {
-  const [tab, setTab] = useState('all');
-  const [search, setSearch] = useState('');
-  const [states, setStates] = useState<Record<string, AdminReview['status']>>(
-    Object.fromEntries(adminReviews.map((r) => [r.id, r.status])),
-  );
+type Row = ReviewRow & { products: { name: string; slug: string } | null };
 
-  const rows = useMemo(() => {
-    const q = slugify(search.trim());
-    return adminReviews.filter((r) => {
-      if (tab !== 'all' && states[r.id] !== tab) return false;
-      if (q.length >= 2 && !slugify(`${r.product} ${r.customer} ${r.comment}`).includes(q))
-        return false;
-      return true;
-    });
-  }, [tab, search, states]);
+export default async function AdminReviewsPage() {
+  const supabase = await createClient();
 
-  const counts = {
-    all: adminReviews.length,
-    bekliyor: Object.values(states).filter((s) => s === 'bekliyor').length,
-    onaylandi: Object.values(states).filter((s) => s === 'onaylandi').length,
-    reddedildi: Object.values(states).filter((s) => s === 'reddedildi').length,
-  };
+  let reviews: PanelReview[] = [];
+  let live = false;
 
-  const avg =
-    adminReviews.reduce((s, r) => s + r.rating, 0) / (adminReviews.length || 1);
+  if (supabase) {
+    const { data, error } = await supabase
+      .from('reviews')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (!error && data) {
+      live = true;
+
+      // Ürün adlarını tek sorguda eşliyoruz (gömülü ilişki yerine).
+      const { data: products } = await supabase.from('products').select('id, name, slug');
+      const byId = new Map((products ?? []).map((p) => [p.id, p]));
+
+      reviews = (data as Row[]).map((row) => {
+        const product = byId.get(row.product_id);
+        return {
+          id: row.id,
+          productName: product?.name ?? 'Silinmiş ürün',
+          productSlug: product?.slug ?? '',
+          author: row.author_name,
+          avatarUrl: null,
+          rating: row.rating,
+          title: row.title,
+          comment: row.comment,
+          date: row.created_at,
+          status: row.status,
+          verified: row.is_verified,
+        };
+      });
+    }
+  }
+
+  if (!live) {
+    reviews = adminReviews.map((r) => ({
+      id: r.id,
+      productName: r.product,
+      productSlug: '',
+      author: r.customer,
+      avatarUrl: r.avatar,
+      rating: r.rating,
+      title: null,
+      comment: r.comment,
+      date: r.date,
+      status: r.status === 'onaylandi' ? 'approved' : r.status === 'reddedildi' ? 'rejected' : 'pending',
+      verified: false,
+    }));
+  }
 
   return (
     <>
       <AdminPageHeader
         title="Yorum Yönetimi"
-        description="Müşteri değerlendirmelerini onaylayın veya reddedin"
+        description={
+          live
+            ? `${reviews.length} yorum — veritabanından okunuyor`
+            : 'Örnek veri gösteriliyor'
+        }
       />
 
-      <div className="mb-4 grid gap-4 sm:grid-cols-3">
-        <StatCard
-          label="Onay Bekleyen"
-          value={String(counts.bekliyor)}
-          Icon={MessageSquare}
-          accent="gold"
-        />
-        <StatCard
-          label="Ortalama Puan"
-          value={avg.toFixed(1)}
-          hint="Tüm yorumların ortalaması"
-          Icon={Star}
-          accent="olive"
-        />
-        <StatCard
-          label="Reddedilen"
-          value={String(counts.reddedildi)}
-          hint="Spam veya kural dışı"
-          Icon={X}
-          accent="rose"
-        />
-      </div>
+      {!live && (
+        <DemoNotice>
+          {isSupabaseConfigured
+            ? 'Yorum listesi okunamadı. Hesabınızın rolü admin veya staff olmalı.'
+            : 'Supabase bağlanmadığı için örnek veri gösteriliyor.'}
+        </DemoNotice>
+      )}
 
-      <DemoNotice>
-        Onay/ret düğmeleri bu oturumda durum değişikliğini gösterir; kalıcı kayıt için yönetim API’si
-        gerekir.
-      </DemoNotice>
+      {live && reviews.length === 0 && (
+        <DemoNotice>
+          Veritabanındaki <code className="rounded bg-foreground/8 px-1">reviews</code> tablosu
+          henüz boş. Müşteriler ürün sayfalarından yorum bıraktıkça burada onayınıza düşer.
+          Örnek yorumları aktarmak için sunucu açıkken{' '}
+          <code className="rounded bg-foreground/8 px-1">npm run db:seed</code> çalıştırın.
+        </DemoNotice>
+      )}
 
-      <Panel padded={false}>
-        <div className="p-5 pb-0">
-          <Toolbar
-            search={search}
-            onSearch={setSearch}
-            placeholder="Ürün, müşteri veya yorum metni…"
-            tabs={tabs.map((t) => ({ ...t, count: counts[t.id as keyof typeof counts] }))}
-            activeTab={tab}
-            onTab={setTab}
-          />
-        </div>
-
-        {rows.length === 0 ? (
-          <EmptyState title="Yorum bulunamadı" description="Bu filtreye uyan kayıt yok." />
-        ) : (
-          <ul className="divide-y divide-border">
-            {rows.map((review) => {
-              const status = states[review.id];
-              return (
-                <li key={review.id} className="p-5">
-                  <div className="flex flex-col gap-4 sm:flex-row">
-                    <span className="relative size-11 shrink-0 overflow-hidden rounded-full bg-surface-muted">
-                      <Image
-                        src={review.avatar}
-                        alt=""
-                        fill
-                        sizes="44px"
-                        placeholder="blur"
-                        blurDataURL={blurDataURL()}
-                        className="object-cover"
-                      />
-                    </span>
-
-                    <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-                        <span className="font-medium text-foreground">{review.customer}</span>
-                        <Status
-                          tone={
-                            status === 'onaylandi'
-                              ? 'success'
-                              : status === 'reddedildi'
-                                ? 'danger'
-                                : 'warning'
-                          }
-                        >
-                          {status === 'onaylandi'
-                            ? 'Onaylandı'
-                            : status === 'reddedildi'
-                              ? 'Reddedildi'
-                              : 'Bekliyor'}
-                        </Status>
-                        <time
-                          dateTime={review.date}
-                          className="ml-auto text-xs text-muted-foreground"
-                        >
-                          {formatDate(review.date)}
-                        </time>
-                      </div>
-
-                      <p className="mt-1 text-xs text-muted-foreground">{review.product}</p>
-                      <StarRating rating={review.rating} className="mt-2" />
-                      <p className="mt-2.5 text-sm leading-relaxed text-foreground/85">
-                        {review.comment}
-                      </p>
-
-                      <div className="mt-4 flex flex-wrap items-center gap-2">
-                        <button
-                          onClick={() =>
-                            setStates((prev) => ({ ...prev, [review.id]: 'onaylandi' }))
-                          }
-                          disabled={status === 'onaylandi'}
-                          className="inline-flex h-9 items-center gap-1.5 rounded-full bg-olive-700 px-4 text-xs font-semibold text-cream-50 transition-all hover:bg-olive-600 active:scale-95 disabled:opacity-40 dark:bg-olive-500 dark:text-olive-950"
-                        >
-                          <Check className="size-3.5" strokeWidth={2.8} />
-                          Onayla
-                        </button>
-                        <button
-                          onClick={() =>
-                            setStates((prev) => ({ ...prev, [review.id]: 'reddedildi' }))
-                          }
-                          disabled={status === 'reddedildi'}
-                          className="inline-flex h-9 items-center gap-1.5 rounded-full border border-border px-4 text-xs font-medium transition-colors hover:border-red-400/60 hover:text-red-600 disabled:opacity-40"
-                        >
-                          <X className="size-3.5" strokeWidth={2.6} />
-                          Reddet
-                        </button>
-                        <button
-                          aria-label="Yorumu sil"
-                          className="ml-auto grid size-9 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-red-500/8 hover:text-red-600"
-                        >
-                          <Trash2 className="size-4" strokeWidth={1.9} />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </Panel>
+      <ReviewModeration reviews={reviews} />
     </>
   );
 }

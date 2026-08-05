@@ -27,7 +27,7 @@ export function Footer() {
           <div>
             <Logo tone="inverted" />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-cream-200/70">
-              {site.founded} yılından bu yana Ayvalık’taki bahçelerimizde zeytin yetiştiriyor,
+              {site.founded} yılından bu yana Orhangazi’deki bahçelerimizde zeytin yetiştiriyor,
               her sezon dalından özenle topladığımız meyveyi soğuk sıkım yöntemiyle
               zeytinyağına dönüştürüyoruz.
             </p>

@@ -78,10 +78,11 @@ async function main() {
     process.exit(1);
   }
 
-  const { categories, products, blogs } = payload.seeded;
+  const { categories, products, blogs, reviews } = payload.seeded;
   console.log(`${c.green('✓')} ${categories} kategori`);
   console.log(`${c.green('✓')} ${products} ürün`);
   console.log(`${c.green('✓')} ${blogs} blog yazısı`);
+  console.log(`${c.green('✓')} ${reviews} yorum`);
   console.log(`\n${c.green('Katalog veritabanına aktarıldı.')}\n`);
 }
 

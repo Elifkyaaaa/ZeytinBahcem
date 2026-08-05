@@ -15,14 +15,14 @@ export const site = {
   whatsappHref: 'https://wa.me/905325550412',
   email: 'merhaba@zeytinbahcem.com',
   address: {
-    street: 'Zeytinlik Mah. Hasat Cad. No: 12',
-    district: 'Ayvalık',
-    city: 'Balıkesir',
-    postalCode: '10400',
+    street: 'Ortaköy Mah. Hasat Cad. No: 12',
+    district: 'Orhangazi',
+    city: 'Bursa',
+    postalCode: '16800',
     country: 'Türkiye',
   },
   mapEmbed:
-    'https://www.google.com/maps?q=Ayval%C4%B1k%2C%20Bal%C4%B1kesir&z=13&output=embed',
+    'https://www.google.com/maps?q=Ortak%C3%B6y%2C%20Orhangazi%2C%20Bursa&z=13&output=embed',
   social: {
     instagram: 'https://instagram.com/',
     facebook: 'https://facebook.com/',

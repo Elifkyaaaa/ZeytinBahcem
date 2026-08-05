@@ -140,7 +140,7 @@ export default function ContactPage() {
                   Ziyaret ve Tadım
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  Ayvalık’taki bahçemiz ve değirmenimiz randevuyla ziyarete açık. Hasat döneminde
+                  Orhangazi’deki bahçemiz ve değirmenimiz randevuyla ziyarete açık. Hasat döneminde
                   (Ekim–Kasım) toplama sürecine katılabilir, taze sıkım tadımı yapabilirsiniz.
                   Grup ziyaretleri için en az bir hafta önceden haber vermenizi rica ederiz.
                 </p>

@@ -117,12 +117,42 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: blogError.message }, { status: 500 });
   }
 
+  /* Yorumlar --------------------------------------------------------------- */
+  // Ürün kimlikleri veritabanında üretildiği için slug üzerinden eşliyoruz.
+  const { data: savedProducts } = await db.from('products').select('id, slug');
+  const productIdBySlug = new Map((savedProducts ?? []).map((p) => [p.slug, p.id]));
+
+  const reviewRows = products.flatMap((product) => {
+    const productId = productIdBySlug.get(product.slug);
+    if (!productId) return [];
+    return product.reviews.map((review) => ({
+      product_id: productId,
+      author_name: review.name,
+      rating: review.rating,
+      title: review.title,
+      comment: review.comment,
+      // Örnek yorumların bir kısmı onay kuyruğunda kalsın ki panel test edilebilsin.
+      status: review.verified ? ('approved' as const) : ('pending' as const),
+      is_verified: review.verified,
+      created_at: review.date,
+    }));
+  });
+
+  // Tekrar çalıştırıldığında yorumların çoğalmaması için önce temizliyoruz.
+  await db.from('reviews').delete().not('id', 'is', null);
+
+  const { error: reviewError } = await db.from('reviews').insert(reviewRows);
+  if (reviewError) {
+    return NextResponse.json({ ok: false, error: reviewError.message }, { status: 500 });
+  }
+
   return NextResponse.json({
     ok: true,
     seeded: {
       categories: categories.length,
       products: products.length,
       blogs: posts.length,
+      reviews: reviewRows.length,
     },
   });
 }

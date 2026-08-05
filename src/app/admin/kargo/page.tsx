@@ -112,7 +112,7 @@ export default function AdminShippingPage() {
               checked={flags.pickup}
               onChange={(v) => setFlags((f) => ({ ...f, pickup: v }))}
               label="Mağazadan teslim"
-              description="Ayvalık mağazasından ücretsiz teslim seçeneği sunulur."
+              description="Orhangazi mağazasından ücretsiz teslim seçeneği sunulur."
             />
             <Toggle
               checked={flags.insurance}

@@ -61,7 +61,7 @@ export const shippingMethods = [
   {
     id: 'magaza',
     name: 'Mağazadan Teslim Al',
-    detail: 'Ayvalık mağazamızdan aynı gün',
+    detail: 'Orhangazi mağazamızdan aynı gün',
     price: 0,
   },
 ] as const;

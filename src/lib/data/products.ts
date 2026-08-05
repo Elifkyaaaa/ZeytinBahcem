@@ -231,7 +231,7 @@ const reviewPool: ProductReview[] = [
     date: '2026-01-07',
     title: 'Tam bir Ege ürünü',
     comment:
-      'Ayvalık’ta büyüdüm, çocukluğumdaki tadı buldum diyebilirim. Katkısız olduğu tadından belli.',
+      'Orhangazi’de büyüdüm, çocukluğumdaki tadı buldum diyebilirim. Katkısız olduğu tadından belli.',
     verified: true,
   },
 ];
@@ -285,7 +285,7 @@ const drafts: Draft[] = [
     ],
     specs: [
       { label: 'Zeytin Çeşidi', value: 'Ayvalık (Edremit Yağlık)' },
-      { label: 'Hasat Bölgesi', value: 'Ayvalık / Balıkesir' },
+      { label: 'Hasat Bölgesi', value: 'Orhangazi / Bursa' },
       { label: 'Hasat Zamanı', value: 'Kasım – Aralık' },
       { label: 'Üretim Yöntemi', value: 'Soğuk sıkım, sürekli sistem' },
       { label: 'Serbest Asitlik', value: '%0,4' },
@@ -746,7 +746,7 @@ const drafts: Draft[] = [
     ],
     shortDescription: 'Tek bir bahçenin, tek bir günün hasadı. Numaralandırılmış 900 şişe.',
     description:
-      'Ayvalık’ın kuzeyinde, denize bakan yamaçtaki 140 yaşındaki ağaçlardan oluşan tek bir bahçenin ürünü. Hasat tek günde, elle yapılır ve aynı akşam sıkılır. Yılda yalnızca 900 şişe çıkar; her şişe numaralandırılır ve hasat ekibinin adı etikete işlenir. Bu, bir zeytinyağından çok, o yılın kaydıdır.',
+      'Orhangazi’nin kuzeyinde, İznik Gölü’ne bakan yamaçtaki 140 yaşındaki ağaçlardan oluşan tek bir bahçenin ürünü. Hasat tek günde, elle yapılır ve aynı akşam sıkılır. Yılda yalnızca 900 şişe çıkar; her şişe numaralandırılır ve hasat ekibinin adı etikete işlenir. Bu, bir zeytinyağından çok, o yılın kaydıdır.',
     highlights: [
       'Tek bahçe, tek gün hasat',
       'Yılda 900 numaralı şişe',
@@ -755,7 +755,7 @@ const drafts: Draft[] = [
     ],
     specs: [
       { label: 'Zeytin Çeşidi', value: 'Ayvalık (Edremit Yağlık)' },
-      { label: 'Hasat Bölgesi', value: 'Küçükköy / Ayvalık' },
+      { label: 'Hasat Bölgesi', value: 'Ortaköy / Orhangazi' },
       { label: 'Hasat Zamanı', value: '9 Ekim, tek gün' },
       { label: 'Üretim Yöntemi', value: 'Soğuk sıkım, aynı gün' },
       { label: 'Serbest Asitlik', value: '%0,18' },

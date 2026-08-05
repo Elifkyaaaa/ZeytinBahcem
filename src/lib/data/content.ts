@@ -189,7 +189,7 @@ export const instagramPosts: InstagramPost[] = [
   {
     id: 'ig6',
     image: img(IMG.aegeanPath, 600, 600),
-    caption: 'Bahçeye giden yol. Ayvalık, sabah.',
+    caption: 'Bahçeye giden yol. Orhangazi, sabah.',
     likes: 1521,
     comments: 52,
     href: 'https://instagram.com/',

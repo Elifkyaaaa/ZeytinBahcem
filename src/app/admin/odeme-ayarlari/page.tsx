@@ -257,7 +257,7 @@ export default function AdminPaymentSettingsPage() {
               </select>
             </AdminField>
             <AdminField label="Vergi dairesi">
-              <input className={adminInput} defaultValue="Ayvalık" />
+              <input className={adminInput} defaultValue="Orhangazi" />
             </AdminField>
             <AdminField label="Vergi numarası">
               <input className={adminInput} inputMode="numeric" defaultValue="0000000000" />

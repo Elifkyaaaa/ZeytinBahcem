@@ -244,7 +244,7 @@ export const posts: Post[] = [
     slug: 'hasat-gunlugu-2026',
     title: 'Hasat Günlüğü 2026: Üç Haftada Bir Sezon',
     excerpt:
-      'Ayvalık’taki bahçemizde ekim ayının nasıl geçtiğini, ilk sıkımdan şişeleme gününe kadar anlattık.',
+      'Orhangazi’deki bahçemizde ekim ayının nasıl geçtiğini, ilk sıkımdan şişeleme gününe kadar anlattık.',
     cover: img(IMG.harvestCrate, 1200, 800),
     category: 'Bahçeden',
     date: '2026-04-02',

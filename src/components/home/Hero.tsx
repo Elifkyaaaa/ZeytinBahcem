@@ -42,7 +42,7 @@ export function Hero() {
       >
         <Image
           src={img(IMG.heroGrove, 1920, 1280)}
-          alt="Ayvalık’ta sabah güneşi altında sıra sıra uzanan asırlık zeytin ağaçları"
+          alt="Orhangazi’de sabah güneşi altında sıra sıra uzanan asırlık zeytin ağaçları"
           fill
           priority
           fetchPriority="high"
@@ -76,7 +76,7 @@ export function Hero() {
         >
           <OliveBranchIcon className="size-4 text-gold-300" />
           <span className="text-[0.7rem] font-medium tracking-[0.2em] text-cream-100/90 uppercase">
-            1963’ten beri Ayvalık
+            1963’ten beri Orhangazi
           </span>
         </motion.div>
 

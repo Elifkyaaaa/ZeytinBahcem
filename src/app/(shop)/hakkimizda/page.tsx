@@ -18,7 +18,7 @@ const trail = [
 export const metadata = buildMetadata({
   title: 'Hakkımızda',
   description:
-    '1963’ten bu yana Ayvalık’ta zeytin yetiştiriyor, her sezon dalından topladığımız meyveyi soğuk sıkım yöntemiyle zeytinyağına dönüştürüyoruz.',
+    '1963’ten bu yana Orhangazi’de zeytin yetiştiriyor, her sezon dalından topladığımız meyveyi soğuk sıkım yöntemiyle zeytinyağına dönüştürüyoruz.',
   path: '/hakkimizda',
   image: img(IMG.groveHill, 1200, 630),
 });
@@ -27,7 +27,7 @@ const timeline = [
   {
     year: '1963',
     title: 'İlk ağaçlar',
-    text: 'Dedemiz Hüseyin Aydoğan, Ayvalık Küçükköy’de denize bakan yamaca ilk 120 zeytin fidanını dikti. O ağaçların bir kısmı bugün hâlâ meyve veriyor.',
+    text: 'Dedemiz Hüseyin Aydoğan, Orhangazi Ortaköy’de İznik Gölü’ne bakan yamaca ilk 120 zeytin fidanını dikti. O ağaçların bir kısmı bugün hâlâ meyve veriyor.',
   },
   {
     year: '1978',
@@ -106,7 +106,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow={`Est. ${site.founded}`}
         title="Üç Kuşaktır Aynı Yamaçtayız"
-        description="Ayvalık’ta, denize bakan altmış dönümlük bir bahçede başlayan hikâye. Değişen çok şey oldu; zeytini ne zaman toplayacağımıza karar verme biçimimiz hariç."
+        description="Orhangazi’de, İznik Gölü’ne bakan altmış dönümlük bir bahçede başlayan hikâye. Değişen çok şey oldu; zeytini ne zaman toplayacağımıza karar verme biçimimiz hariç."
         image={img(IMG.groveHill, 1920, 900)}
         trail={trail}
       />
