@@ -12,11 +12,15 @@ export interface Toast {
 interface UiState {
   searchOpen: boolean;
   menuOpen: boolean;
+  /** Yönetim panelindeki rehberli tanıtım turu açık mı */
+  tourOpen: boolean;
   toasts: Toast[];
   openSearch: () => void;
   closeSearch: () => void;
   openMenu: () => void;
   closeMenu: () => void;
+  openTour: () => void;
+  closeTour: () => void;
   toast: (t: Omit<Toast, 'id'>) => void;
   dismiss: (id: number) => void;
 }
@@ -26,12 +30,15 @@ let toastId = 0;
 export const useUi = create<UiState>((set) => ({
   searchOpen: false,
   menuOpen: false,
+  tourOpen: false,
   toasts: [],
 
   openSearch: () => set({ searchOpen: true, menuOpen: false }),
   closeSearch: () => set({ searchOpen: false }),
   openMenu: () => set({ menuOpen: true, searchOpen: false }),
   closeMenu: () => set({ menuOpen: false }),
+  openTour: () => set({ tourOpen: true }),
+  closeTour: () => set({ tourOpen: false }),
 
   toast: (t) => {
     const id = ++toastId;

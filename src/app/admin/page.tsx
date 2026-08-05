@@ -43,7 +43,7 @@ export default function AdminDashboard() {
         description="4 Ağustos 2026 · Son 12 ayın performans özeti"
       />
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div data-tour="stats" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
           label="Bugünkü Siparişler"
           value={formatNumber(dashboardStats.todayOrders)}
@@ -101,7 +101,7 @@ export default function AdminDashboard() {
         ))}
       </div>
 
-      <div className="mt-4 grid gap-4 xl:grid-cols-[1.7fr_1fr]">
+      <div data-tour="charts" className="mt-4 grid gap-4 xl:grid-cols-[1.7fr_1fr]">
         <Panel title="Ciro Grafiği" description="Son 12 ayın aylık cirosu (₺)">
           <AreaChart data={monthlySales} valueKey="revenue" />
         </Panel>
@@ -121,7 +121,7 @@ export default function AdminDashboard() {
         </Panel>
       </div>
 
-      <div className="mt-4 grid gap-4 xl:grid-cols-[1.55fr_1fr]">
+      <div data-tour="orders" className="mt-4 grid gap-4 xl:grid-cols-[1.55fr_1fr]">
         <Panel
           title="Son Siparişler"
           description="En güncel 6 sipariş"

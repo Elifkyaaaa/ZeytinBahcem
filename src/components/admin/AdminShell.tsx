@@ -5,12 +5,14 @@ import {
   Bell,
   ChevronDown,
   ChevronLeft,
+  Compass,
   CreditCard,
   ExternalLink,
   FileText,
   Folder,
   ImageUp,
   Images,
+  KeyRound,
   LayoutDashboard,
   LogOut,
   Menu,
@@ -34,11 +36,13 @@ import { usePathname } from 'next/navigation';
 import { useCallback, useState, type ReactNode } from 'react';
 import { signOut } from '@/app/(auth)/actions';
 import { AdminSearch } from '@/components/admin/AdminSearch';
+import { AdminTour } from '@/components/admin/AdminTour';
 import { OliveBranchIcon } from '@/components/ui/icons';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useEscape, useLockBodyScroll } from '@/hooks';
 import { dashboardStats } from '@/lib/data/admin';
 import { site } from '@/lib/data/site';
+import { useUi } from '@/lib/store/ui';
 import { cn } from '@/lib/utils';
 
 interface NavEntry {
@@ -193,11 +197,12 @@ const roleLabels: Record<string, string> = {
 
 function AdminUserMenu({ user }: { user: AdminUser }) {
   const [open, setOpen] = useState(false);
+  const openTour = useUi((s) => s.openTour);
   const close = useCallback(() => setOpen(false), []);
   useEscape(close, open);
 
   return (
-    <div className="relative ml-2 border-l border-border pl-3">
+    <div data-tour="user" className="relative ml-2 border-l border-border pl-3">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -259,6 +264,25 @@ function AdminUserMenu({ user }: { user: AdminUser }) {
               </div>
 
               <div className="p-1.5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    close();
+                    openTour();
+                  }}
+                  className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
+                >
+                  <Compass className="size-4" strokeWidth={1.9} />
+                  Tanıtım Turu
+                </button>
+                <Link
+                  href="/admin/sifre-degistir"
+                  onClick={close}
+                  className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
+                >
+                  <KeyRound className="size-4" strokeWidth={1.9} />
+                  Şifre Değiştir
+                </Link>
                 <Link
                   href="/hesap"
                   onClick={close}
@@ -300,7 +324,10 @@ export function AdminShell({ children, user }: { children: ReactNode; user: Admi
   return (
     <div className="flex min-h-dvh bg-surface-muted">
       {/* Masaüstü kenar çubuğu */}
-      <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col border-r border-border bg-background lg:flex">
+      <aside
+        data-tour="sidebar"
+        className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col border-r border-border bg-background lg:flex"
+      >
         <div className="flex h-16 items-center gap-2.5 border-b border-border px-5">
           <span className="grid size-9 place-items-center rounded-full bg-olive-600/8 text-olive-600 ring-1 ring-olive-600/20 dark:bg-gold-400/10 dark:text-gold-400 dark:ring-gold-400/25">
             <OliveBranchIcon className="size-5" />
@@ -367,7 +394,9 @@ export function AdminShell({ children, user }: { children: ReactNode; user: Admi
             <Menu className="size-5" strokeWidth={1.8} />
           </button>
 
-          <AdminSearch />
+          <div data-tour="search" className="contents">
+            <AdminSearch />
+          </div>
 
           <div className="ml-auto flex items-center gap-1">
             <button
@@ -384,6 +413,8 @@ export function AdminShell({ children, user }: { children: ReactNode; user: Admi
 
         <main className="min-w-0 flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
       </div>
+
+      <AdminTour />
     </div>
   );
 }
