@@ -68,6 +68,18 @@ export async function updateSession(request: NextRequest) {
       url.search = '';
       return NextResponse.redirect(url);
     }
+
+    // İki adımlı doğrulama kuruluysa yönetim paneli AAL2 ister.
+    // `nextLevel > currentLevel` yalnızca doğrulanmış faktörü olanlarda oluşur;
+    // 2FA açmamış yöneticiler etkilenmez.
+    const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+
+    if (aal && aal.nextLevel === 'aal2' && aal.nextLevel !== aal.currentLevel) {
+      const url = request.nextUrl.clone();
+      url.pathname = '/dogrulama';
+      url.search = `?next=${encodeURIComponent(pathname)}`;
+      return NextResponse.redirect(url);
+    }
   }
 
   return response;

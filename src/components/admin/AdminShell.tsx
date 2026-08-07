@@ -20,6 +20,7 @@ import {
   Package,
   Percent,
   Settings,
+  ShieldCheck,
   ShoppingCart,
   Ticket,
   Truck,
@@ -275,6 +276,14 @@ function AdminUserMenu({ user }: { user: AdminUser }) {
                   <Compass className="size-4" strokeWidth={1.9} />
                   Tanıtım Turu
                 </button>
+                <Link
+                  href="/hesap/guvenlik"
+                  onClick={close}
+                  className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
+                >
+                  <ShieldCheck className="size-4" strokeWidth={1.9} />
+                  İki Adımlı Doğrulama
+                </Link>
                 <Link
                   href="/admin/sifre-degistir"
                   onClick={close}

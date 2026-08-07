@@ -12,7 +12,8 @@
     "db:check": "node scripts/check-supabase.mjs",
     "db:link": "supabase link --project-ref wqurbxhsfhwtoufhzixa",
     "db:push": "supabase db push",
-    "db:seed": "node scripts/seed-catalog.mjs"
+    "db:seed": "node scripts/seed-catalog.mjs",
+    "mfa:reset": "node scripts/mfa-reset.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.4",

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Heart, KeyRound, LogOut, MapPin, Package, User } from 'lucide-react';
+import { Heart, KeyRound, LogOut, MapPin, Package, ShieldCheck, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -13,6 +13,7 @@ const items = [
   { label: 'Siparişlerim', href: '/hesap/siparislerim', Icon: Package },
   { label: 'Favoriler', href: '/hesap/favoriler', Icon: Heart },
   { label: 'Adreslerim', href: '/hesap/adreslerim', Icon: MapPin },
+  { label: 'Güvenlik', href: '/hesap/guvenlik', Icon: ShieldCheck },
   { label: 'Şifre Değiştir', href: '/hesap/sifre-degistir', Icon: KeyRound },
 ];
 
