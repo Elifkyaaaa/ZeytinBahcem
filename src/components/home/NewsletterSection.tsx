@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, type FormEvent } from 'react';
 import { Container } from '@/components/ui/Section';
-import { IMG, img } from '@/lib/images';
+import { IMG } from '@/lib/images';
 import { blurDataURL } from '@/lib/utils';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -32,7 +32,7 @@ export function NewsletterSection() {
       <Container className="py-16 sm:py-20 lg:py-24">
         <div className="relative overflow-hidden rounded-3xl border border-olive-800/30 shadow-lift">
           <Image
-            src={img(IMG.leavesGreen, 1800, 900)}
+            src={IMG.leavesGreen}
             alt=""
             fill
             sizes="(min-width: 1280px) 80rem, 94vw"

@@ -1,5 +1,5 @@
 import type { FaqItem, NutritionRow, Product, ProductReview, ProductVariant } from '@/types';
-import { AVATAR, IMG, img } from '@/lib/images';
+import { AVATAR, IMG } from '@/lib/images';
 
 /* -------------------------------------------------------------------------- */
 /*  Paylaşılan şablonlar                                                       */
@@ -127,7 +127,7 @@ const reviewPool: ProductReview[] = [
   {
     id: 'r1',
     name: 'Elif Yıldırım',
-    avatar: img(AVATAR.a1, 96, 96),
+    avatar: AVATAR.a1,
     rating: 5,
     date: '2026-06-18',
     title: 'Kahvaltı sofrasının yıldızı',
@@ -138,7 +138,7 @@ const reviewPool: ProductReview[] = [
   {
     id: 'r2',
     name: 'Mert Aksoy',
-    avatar: img(AVATAR.a3, 96, 96),
+    avatar: AVATAR.a3,
     rating: 5,
     date: '2026-05-30',
     title: 'Kargo ve paketleme kusursuz',
@@ -149,7 +149,7 @@ const reviewPool: ProductReview[] = [
   {
     id: 'r3',
     name: 'Ayşe Demirtaş',
-    avatar: img(AVATAR.a2, 96, 96),
+    avatar: AVATAR.a2,
     rating: 4,
     date: '2026-05-11',
     title: 'Aroması yoğun',
@@ -160,7 +160,7 @@ const reviewPool: ProductReview[] = [
   {
     id: 'r4',
     name: 'Burak Şen',
-    avatar: img(AVATAR.a4, 96, 96),
+    avatar: AVATAR.a4,
     rating: 5,
     date: '2026-04-27',
     title: 'Üçüncü siparişim',
@@ -171,7 +171,7 @@ const reviewPool: ProductReview[] = [
   {
     id: 'r5',
     name: 'Zeynep Karaca',
-    avatar: img(AVATAR.a6, 96, 96),
+    avatar: AVATAR.a6,
     rating: 5,
     date: '2026-04-09',
     title: 'Hediye olarak da aldım',
@@ -182,7 +182,7 @@ const reviewPool: ProductReview[] = [
   {
     id: 'r6',
     name: 'Onur Bilgin',
-    avatar: img(AVATAR.a5, 96, 96),
+    avatar: AVATAR.a5,
     rating: 5,
     date: '2026-03-22',
     title: 'Fiyat performans',
@@ -193,7 +193,7 @@ const reviewPool: ProductReview[] = [
   {
     id: 'r7',
     name: 'Selin Aydın',
-    avatar: img(AVATAR.a2, 96, 96),
+    avatar: AVATAR.a2,
     rating: 4,
     date: '2026-03-05',
     title: 'Güzel ama stok sorunu var',
@@ -204,7 +204,7 @@ const reviewPool: ProductReview[] = [
   {
     id: 'r8',
     name: 'Kaan Erdem',
-    avatar: img(AVATAR.a7, 96, 96),
+    avatar: AVATAR.a7,
     rating: 5,
     date: '2026-02-14',
     title: 'Restoranımızda kullanıyoruz',
@@ -215,7 +215,7 @@ const reviewPool: ProductReview[] = [
   {
     id: 'r9',
     name: 'Deniz Uçar',
-    avatar: img(AVATAR.a1, 96, 96),
+    avatar: AVATAR.a1,
     rating: 5,
     date: '2026-01-28',
     title: 'Çocuklar bile fark etti',
@@ -226,7 +226,7 @@ const reviewPool: ProductReview[] = [
   {
     id: 'r10',
     name: 'Hakan Türkmen',
-    avatar: img(AVATAR.a4, 96, 96),
+    avatar: AVATAR.a4,
     rating: 5,
     date: '2026-01-07',
     title: 'Tam bir Ege ürünü',
@@ -267,12 +267,12 @@ const drafts: Draft[] = [
     defaultVariant: 2,
     rating: 4.9,
     reviewCount: 428,
-    image: img(IMG.cruetOlives, 900, 1100),
+    image: IMG.cruetOlives,
     gallery: [
-      img(IMG.cruetOlives, 900, 1100),
-      img(IMG.branchOlives, 900, 1100),
-      img(IMG.harvestCrate, 900, 1100),
-      img(IMG.heroGrove, 900, 1100),
+      IMG.cruetOlives,
+      IMG.branchOlives,
+      IMG.harvestCrate,
+      IMG.heroGrove,
     ],
     shortDescription: 'Ayvalık yağlık zeytininden, ilk soğuk sıkım. Asit oranı %0,4.',
     description:
@@ -308,12 +308,12 @@ const drafts: Draft[] = [
     defaultVariant: 0,
     rating: 5,
     reviewCount: 316,
-    image: img(IMG.bottleLemon, 900, 1100),
+    image: IMG.bottleLemon,
     gallery: [
-      img(IMG.bottleLemon, 900, 1100),
-      img(IMG.branchMacro, 900, 1100),
-      img(IMG.harvestHand, 900, 1100),
-      img(IMG.groveField, 900, 1100),
+      IMG.bottleLemon,
+      IMG.branchMacro,
+      IMG.harvestHand,
+      IMG.groveField,
     ],
     shortDescription: 'Ekimin ilk haftasında toplanan yeşil zeytinden. Polifenol 520 mg/kg.',
     description:
@@ -348,12 +348,12 @@ const drafts: Draft[] = [
     defaultVariant: 1,
     rating: 4.8,
     reviewCount: 194,
-    image: img(IMG.bottleDark, 900, 1100),
+    image: IMG.bottleDark,
     gallery: [
-      img(IMG.bottleDark, 900, 1100),
-      img(IMG.olivesMixed, 900, 1100),
-      img(IMG.harvestNet, 900, 1100),
-      img(IMG.rocksTree, 900, 1100),
+      IMG.bottleDark,
+      IMG.olivesMixed,
+      IMG.harvestNet,
+      IMG.rocksTree,
     ],
     shortDescription: 'Granit değirmende düşük devirde ezilir. Geleneksel yöntem, yoğun aroma.',
     description:
@@ -389,12 +389,12 @@ const drafts: Draft[] = [
     defaultVariant: 2,
     rating: 4.7,
     reviewCount: 512,
-    image: img(IMG.cruetCounter, 900, 1100),
+    image: IMG.cruetCounter,
     gallery: [
-      img(IMG.cruetCounter, 900, 1100),
-      img(IMG.olivesBasin, 900, 1100),
-      img(IMG.groveHill, 900, 1100),
-      img(IMG.foodTable, 900, 1100),
+      IMG.cruetCounter,
+      IMG.olivesBasin,
+      IMG.groveHill,
+      IMG.foodTable,
     ],
     shortDescription: 'Her gün, her yemekte. Dengeli aroma, ekonomik hacimler.',
     description:
@@ -428,12 +428,12 @@ const drafts: Draft[] = [
     defaultVariant: 0,
     rating: 4.9,
     reviewCount: 231,
-    image: img(IMG.bottlePourer, 900, 1100),
+    image: IMG.bottlePourer,
     gallery: [
-      img(IMG.bottlePourer, 900, 1100),
-      img(IMG.branchClose, 900, 1100),
-      img(IMG.leavesTilt, 900, 1100),
-      img(IMG.ingredients, 900, 1100),
+      IMG.bottlePourer,
+      IMG.branchClose,
+      IMG.leavesTilt,
+      IMG.ingredients,
     ],
     shortDescription: 'Organik tarım sertifikalı bahçelerden. Sentetik gübre ve pestisit yok.',
     description:
@@ -469,12 +469,12 @@ const drafts: Draft[] = [
     defaultVariant: 1,
     rating: 4.8,
     reviewCount: 287,
-    image: img(IMG.olivesBowls, 900, 1100),
+    image: IMG.olivesBowls,
     gallery: [
-      img(IMG.olivesBowls, 900, 1100),
-      img(IMG.olivesMixed, 900, 1100),
-      img(IMG.mezeTable, 900, 1100),
-      img(IMG.foodSpread, 900, 1100),
+      IMG.olivesBowls,
+      IMG.olivesMixed,
+      IMG.mezeTable,
+      IMG.foodSpread,
     ],
     shortDescription: 'Yeşil ve siyah çeşitlerin dengeli harmanı. Doğal salamura.',
     description:
@@ -508,12 +508,12 @@ const drafts: Draft[] = [
     defaultVariant: 0,
     rating: 4.7,
     reviewCount: 176,
-    image: img(IMG.olivesGreen, 900, 1100),
+    image: IMG.olivesGreen,
     gallery: [
-      img(IMG.olivesGreen, 900, 1100),
-      img(IMG.olivesBasin, 900, 1100),
-      img(IMG.branchMacro, 900, 1100),
-      img(IMG.mezeTable, 900, 1100),
+      IMG.olivesGreen,
+      IMG.olivesBasin,
+      IMG.branchMacro,
+      IMG.mezeTable,
     ],
     shortDescription: 'Taşla kırılmış, limon ve kekikle harmanlanmış çıtır yeşil zeytin.',
     description:
@@ -547,12 +547,12 @@ const drafts: Draft[] = [
     defaultVariant: 1,
     rating: 4.9,
     reviewCount: 342,
-    image: img(IMG.olivesMixed, 900, 1100),
+    image: IMG.olivesMixed,
     gallery: [
-      img(IMG.olivesMixed, 900, 1100),
-      img(IMG.olivesDark, 900, 1100),
-      img(IMG.foodTable, 900, 1100),
-      img(IMG.harvestCrate, 900, 1100),
+      IMG.olivesMixed,
+      IMG.olivesDark,
+      IMG.foodTable,
+      IMG.harvestCrate,
     ],
     shortDescription: 'Ağacında olgunlaşıp kendiliğinden tatlanan, yağlı ve yumuşak Gemlik.',
     description:
@@ -585,12 +585,12 @@ const drafts: Draft[] = [
     defaultVariant: 0,
     rating: 4.8,
     reviewCount: 98,
-    image: img(IMG.harvestHand, 900, 1100),
+    image: IMG.harvestHand,
     gallery: [
-      img(IMG.harvestHand, 900, 1100),
-      img(IMG.harvestNet, 900, 1100),
-      img(IMG.branchOlives, 900, 1100),
-      img(IMG.groveField, 900, 1100),
+      IMG.harvestHand,
+      IMG.harvestNet,
+      IMG.branchOlives,
+      IMG.groveField,
     ],
     shortDescription: 'Hiç filtrelenmeden şişelenir. Bulanık görünüm, maksimum aroma.',
     description:
@@ -624,12 +624,12 @@ const drafts: Draft[] = [
     defaultVariant: 0,
     rating: 4.6,
     reviewCount: 143,
-    image: img(IMG.olivesPile, 900, 1100),
+    image: IMG.olivesPile,
     gallery: [
-      img(IMG.olivesPile, 900, 1100),
-      img(IMG.olivesGreen, 900, 1100),
-      img(IMG.mezeTable, 900, 1100),
-      img(IMG.branchClose, 900, 1100),
+      IMG.olivesPile,
+      IMG.olivesGreen,
+      IMG.mezeTable,
+      IMG.branchClose,
     ],
     shortDescription: 'Bıçakla çizilerek salamuraya alınan, tuzlu ve keskin klasik.',
     description:
@@ -661,12 +661,12 @@ const drafts: Draft[] = [
     defaultVariant: 0,
     rating: 4.8,
     reviewCount: 89,
-    image: img(IMG.olivesBasin, 900, 1100),
+    image: IMG.olivesBasin,
     gallery: [
-      img(IMG.olivesBasin, 900, 1100),
-      img(IMG.olivesBowls, 900, 1100),
-      img(IMG.leavesGreen, 900, 1100),
-      img(IMG.ingredients, 900, 1100),
+      IMG.olivesBasin,
+      IMG.olivesBowls,
+      IMG.leavesGreen,
+      IMG.ingredients,
     ],
     shortDescription: 'Organik sertifikalı bahçelerden, yalnızca tuz ve suyla olgunlaştırılmış.',
     description:
@@ -700,12 +700,12 @@ const drafts: Draft[] = [
     defaultVariant: 1,
     rating: 4.7,
     reviewCount: 205,
-    image: img(IMG.olivesDark, 900, 1100),
+    image: IMG.olivesDark,
     gallery: [
-      img(IMG.olivesDark, 900, 1100),
-      img(IMG.olivesMixed, 900, 1100),
-      img(IMG.harvestCrate, 900, 1100),
-      img(IMG.foodSpread, 900, 1100),
+      IMG.olivesDark,
+      IMG.olivesMixed,
+      IMG.harvestCrate,
+      IMG.foodSpread,
     ],
     shortDescription: 'Kuru tuzla, hasır selelerde olgunlaştırılan buruşuk siyah zeytin.',
     description:
@@ -737,12 +737,12 @@ const drafts: Draft[] = [
     defaultVariant: 0,
     rating: 5,
     reviewCount: 61,
-    image: img(IMG.branchClose, 900, 1100),
+    image: IMG.branchClose,
     gallery: [
-      img(IMG.branchClose, 900, 1100),
-      img(IMG.loneTree, 900, 1100),
-      img(IMG.heroGrove, 900, 1100),
-      img(IMG.bottleDark, 900, 1100),
+      IMG.branchClose,
+      IMG.loneTree,
+      IMG.heroGrove,
+      IMG.bottleDark,
     ],
     shortDescription: 'Tek bir bahçenin, tek bir günün hasadı. Numaralandırılmış 900 şişe.',
     description:
@@ -777,12 +777,12 @@ const drafts: Draft[] = [
     defaultVariant: 0,
     rating: 4.9,
     reviewCount: 112,
-    image: img(IMG.ingredients, 900, 1100),
+    image: IMG.ingredients,
     gallery: [
-      img(IMG.ingredients, 900, 1100),
-      img(IMG.foodSpread, 900, 1100),
-      img(IMG.cruetOlives, 900, 1100),
-      img(IMG.aegeanTables, 900, 1100),
+      IMG.ingredients,
+      IMG.foodSpread,
+      IMG.cruetOlives,
+      IMG.aegeanTables,
     ],
     shortDescription: 'İki şişe organik zeytinyağı, sofralık zeytin ve el yapımı sabun.',
     description:

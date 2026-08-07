@@ -6,7 +6,7 @@ import { PageHero } from '@/components/ui/PageHero';
 import { Reveal } from '@/components/ui/Reveal';
 import { Container, Section, SectionHeading } from '@/components/ui/Section';
 import { site } from '@/lib/data/site';
-import { AVATAR, IMG, img } from '@/lib/images';
+import { AVATAR, IMG } from '@/lib/images';
 import { breadcrumbJsonLd, buildMetadata } from '@/lib/seo';
 import { blurDataURL } from '@/lib/utils';
 
@@ -20,7 +20,7 @@ export const metadata = buildMetadata({
   description:
     '1963’ten bu yana Orhangazi’de zeytin yetiştiriyor, her sezon dalından topladığımız meyveyi soğuk sıkım yöntemiyle zeytinyağına dönüştürüyoruz.',
   path: '/hakkimizda',
-  image: img(IMG.groveHill, 1200, 630),
+  image: IMG.groveHill,
 });
 
 const timeline = [
@@ -83,19 +83,19 @@ const team = [
   {
     name: 'Nesrin Aydoğan',
     role: 'Kurucu Ortak',
-    avatar: img(AVATAR.a1, 400, 400),
+    avatar: AVATAR.a1,
     bio: 'İkinci kuşağın büyük kızı. Bahçe planlaması ve organik geçiş sürecini yürüttü.',
   },
   {
     name: 'Kerem Aydoğan',
     role: 'Üretim Sorumlusu',
-    avatar: img(AVATAR.a7, 400, 400),
+    avatar: AVATAR.a7,
     bio: 'Hasat takvimi, sıkım süreci ve kalite kontrolden sorumlu. Her partiyi kendisi tadar.',
   },
   {
     name: 'Tolga Bayram',
     role: 'Gıda Mühendisi',
-    avatar: img(AVATAR.a5, 400, 400),
+    avatar: AVATAR.a5,
     bio: 'Laboratuvar analizleri, sertifikasyon ve raf ömrü çalışmalarını yürütüyor.',
   },
 ];
@@ -107,7 +107,7 @@ export default function AboutPage() {
         eyebrow={`Est. ${site.founded}`}
         title="Üç Kuşaktır Aynı Yamaçtayız"
         description="Orhangazi’de, İznik Gölü’ne bakan altmış dönümlük bir bahçede başlayan hikâye. Değişen çok şey oldu; zeytini ne zaman toplayacağımıza karar verme biçimimiz hariç."
-        image={img(IMG.groveHill, 1920, 900)}
+        image={IMG.groveHill}
         trail={trail}
       />
 
@@ -154,7 +154,7 @@ export default function AboutPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="relative aspect-3/4 overflow-hidden rounded-2xl shadow-soft">
                   <Image
-                    src={img(IMG.harvestCrate, 700, 950)}
+                    src={IMG.harvestCrate}
                     alt="Hasat sırasında kasalara toplanan zeytinler"
                     fill
                     sizes="(min-width: 1024px) 22vw, 45vw"
@@ -166,7 +166,7 @@ export default function AboutPage() {
                 <div className="mt-8 grid gap-4">
                   <div className="relative aspect-square overflow-hidden rounded-2xl shadow-soft">
                     <Image
-                      src={img(IMG.branchClose, 600, 600)}
+                      src={IMG.branchClose}
                       alt="Dalında olgunlaşan zeytinler"
                       fill
                       sizes="(min-width: 1024px) 22vw, 45vw"
@@ -177,7 +177,7 @@ export default function AboutPage() {
                   </div>
                   <div className="relative aspect-square overflow-hidden rounded-2xl shadow-soft">
                     <Image
-                      src={img(IMG.cruetOlives, 600, 600)}
+                      src={IMG.cruetOlives}
                       alt="Cam sürahide yeni sıkılmış zeytinyağı"
                       fill
                       sizes="(min-width: 1024px) 22vw, 45vw"

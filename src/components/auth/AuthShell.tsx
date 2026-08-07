@@ -3,7 +3,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { OliveBranchIcon } from '@/components/ui/icons';
 import { site } from '@/lib/data/site';
-import { IMG, img } from '@/lib/images';
+import { IMG } from '@/lib/images';
 import { blurDataURL } from '@/lib/utils';
 
 /** Giriş/kayıt sayfalarının iki sütunlu ortak kabuğu. */
@@ -11,7 +11,7 @@ export function AuthShell({
   eyebrow,
   title,
   description,
-  image = img(IMG.groveHill, 1200, 1600),
+  image = IMG.groveHill,
   quote,
   children,
   footer,

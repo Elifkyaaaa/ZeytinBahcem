@@ -11,9 +11,8 @@
 const csp = {
   // iyzico ödeme formu ve 3D Secure akışı
   iyzico: ['https://*.iyzipay.com', 'https://*.iyzico.com'],
-  // Görsel CDN'leri
+  // Görsel CDN'leri (yerel görseller 'self' kapsamında)
   images: [
-    'https://images.unsplash.com',
     'https://res.cloudinary.com',
     'https://lh3.googleusercontent.com',
     'https://*.supabase.co',

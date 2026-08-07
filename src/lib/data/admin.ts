@@ -1,4 +1,4 @@
-import { AVATAR, img } from '@/lib/images';
+import { AVATAR } from '@/lib/images';
 
 export type OrderStatus = 'bekliyor' | 'hazirlaniyor' | 'kargoda' | 'teslim' | 'iptal';
 
@@ -27,16 +27,16 @@ export const orderStatusMeta: Record<
 };
 
 export const orders: AdminOrder[] = [
-  { id: 'ZB-10428', customer: 'Elif Yıldırım', email: 'elif.y@example.com', avatar: img(AVATAR.a1, 64, 64), date: '2026-08-04', items: 3, total: 1847.5, status: 'hazirlaniyor', payment: 'Kredi Kartı', city: 'İzmir' },
-  { id: 'ZB-10427', customer: 'Mert Aksoy', email: 'mert.aksoy@example.com', avatar: img(AVATAR.a3, 64, 64), date: '2026-08-04', items: 1, total: 649, status: 'bekliyor', payment: 'Havale', city: 'Ankara' },
-  { id: 'ZB-10426', customer: 'Ayşe Demirtaş', email: 'ayse.d@example.com', avatar: img(AVATAR.a2, 64, 64), date: '2026-08-04', items: 5, total: 2394, status: 'kargoda', payment: 'Kredi Kartı', city: 'İstanbul' },
-  { id: 'ZB-10425', customer: 'Burak Şen', email: 'burak.sen@example.com', avatar: img(AVATAR.a4, 64, 64), date: '2026-08-03', items: 2, total: 1128, status: 'teslim', payment: 'Kredi Kartı', city: 'Bursa' },
-  { id: 'ZB-10424', customer: 'Zeynep Karaca', email: 'zeynep.k@example.com', avatar: img(AVATAR.a6, 64, 64), date: '2026-08-03', items: 1, total: 599, status: 'teslim', payment: 'Kapıda Ödeme', city: 'Antalya' },
-  { id: 'ZB-10423', customer: 'Onur Bilgin', email: 'onur.b@example.com', avatar: img(AVATAR.a5, 64, 64), date: '2026-08-02', items: 4, total: 1976.4, status: 'kargoda', payment: 'Kredi Kartı', city: 'Eskişehir' },
-  { id: 'ZB-10422', customer: 'Kaan Erdem', email: 'kaan.e@example.com', avatar: img(AVATAR.a7, 64, 64), date: '2026-08-02', items: 8, total: 4210, status: 'teslim', payment: 'Havale', city: 'İzmir' },
-  { id: 'ZB-10421', customer: 'Selin Aydın', email: 'selin.a@example.com', avatar: img(AVATAR.a2, 64, 64), date: '2026-08-01', items: 2, total: 878, status: 'iptal', payment: 'Kredi Kartı', city: 'Muğla' },
-  { id: 'ZB-10420', customer: 'Deniz Uçar', email: 'deniz.u@example.com', avatar: img(AVATAR.a1, 64, 64), date: '2026-08-01', items: 3, total: 1533, status: 'teslim', payment: 'Kredi Kartı', city: 'Kocaeli' },
-  { id: 'ZB-10419', customer: 'Hakan Türkmen', email: 'hakan.t@example.com', avatar: img(AVATAR.a4, 64, 64), date: '2026-07-31', items: 6, total: 3120, status: 'teslim', payment: 'Havale', city: 'Balıkesir' },
+  { id: 'ZB-10428', customer: 'Elif Yıldırım', email: 'elif.y@example.com', avatar: AVATAR.a1, date: '2026-08-04', items: 3, total: 1847.5, status: 'hazirlaniyor', payment: 'Kredi Kartı', city: 'İzmir' },
+  { id: 'ZB-10427', customer: 'Mert Aksoy', email: 'mert.aksoy@example.com', avatar: AVATAR.a3, date: '2026-08-04', items: 1, total: 649, status: 'bekliyor', payment: 'Havale', city: 'Ankara' },
+  { id: 'ZB-10426', customer: 'Ayşe Demirtaş', email: 'ayse.d@example.com', avatar: AVATAR.a2, date: '2026-08-04', items: 5, total: 2394, status: 'kargoda', payment: 'Kredi Kartı', city: 'İstanbul' },
+  { id: 'ZB-10425', customer: 'Burak Şen', email: 'burak.sen@example.com', avatar: AVATAR.a4, date: '2026-08-03', items: 2, total: 1128, status: 'teslim', payment: 'Kredi Kartı', city: 'Bursa' },
+  { id: 'ZB-10424', customer: 'Zeynep Karaca', email: 'zeynep.k@example.com', avatar: AVATAR.a6, date: '2026-08-03', items: 1, total: 599, status: 'teslim', payment: 'Kapıda Ödeme', city: 'Antalya' },
+  { id: 'ZB-10423', customer: 'Onur Bilgin', email: 'onur.b@example.com', avatar: AVATAR.a5, date: '2026-08-02', items: 4, total: 1976.4, status: 'kargoda', payment: 'Kredi Kartı', city: 'Eskişehir' },
+  { id: 'ZB-10422', customer: 'Kaan Erdem', email: 'kaan.e@example.com', avatar: AVATAR.a7, date: '2026-08-02', items: 8, total: 4210, status: 'teslim', payment: 'Havale', city: 'İzmir' },
+  { id: 'ZB-10421', customer: 'Selin Aydın', email: 'selin.a@example.com', avatar: AVATAR.a2, date: '2026-08-01', items: 2, total: 878, status: 'iptal', payment: 'Kredi Kartı', city: 'Muğla' },
+  { id: 'ZB-10420', customer: 'Deniz Uçar', email: 'deniz.u@example.com', avatar: AVATAR.a1, date: '2026-08-01', items: 3, total: 1533, status: 'teslim', payment: 'Kredi Kartı', city: 'Kocaeli' },
+  { id: 'ZB-10419', customer: 'Hakan Türkmen', email: 'hakan.t@example.com', avatar: AVATAR.a4, date: '2026-07-31', items: 6, total: 3120, status: 'teslim', payment: 'Havale', city: 'Balıkesir' },
 ];
 
 export interface AdminCustomer {
@@ -53,14 +53,14 @@ export interface AdminCustomer {
 }
 
 export const customers: AdminCustomer[] = [
-  { id: 'M-2041', name: 'Kaan Erdem', email: 'kaan.e@example.com', phone: '0532 555 11 04', avatar: img(AVATAR.a7, 64, 64), city: 'İzmir', orders: 24, spent: 48720, joined: '2023-03-14', segment: 'VIP' },
-  { id: 'M-2038', name: 'Elif Yıldırım', email: 'elif.y@example.com', phone: '0533 555 22 18', avatar: img(AVATAR.a1, 64, 64), city: 'İzmir', orders: 17, spent: 26340, joined: '2023-08-02', segment: 'VIP' },
-  { id: 'M-2035', name: 'Hakan Türkmen', email: 'hakan.t@example.com', phone: '0542 555 33 27', avatar: img(AVATAR.a4, 64, 64), city: 'Balıkesir', orders: 12, spent: 19880, joined: '2024-01-19', segment: 'Sadık' },
-  { id: 'M-2029', name: 'Ayşe Demirtaş', email: 'ayse.d@example.com', phone: '0505 555 44 62', avatar: img(AVATAR.a2, 64, 64), city: 'İstanbul', orders: 9, spent: 14210, joined: '2024-05-06', segment: 'Sadık' },
-  { id: 'M-2024', name: 'Onur Bilgin', email: 'onur.b@example.com', phone: '0546 555 55 91', avatar: img(AVATAR.a5, 64, 64), city: 'Eskişehir', orders: 7, spent: 9640, joined: '2024-09-22', segment: 'Sadık' },
-  { id: 'M-2018', name: 'Zeynep Karaca', email: 'zeynep.k@example.com', phone: '0555 555 66 30', avatar: img(AVATAR.a6, 64, 64), city: 'Antalya', orders: 4, spent: 5180, joined: '2025-02-11', segment: 'Yeni' },
-  { id: 'M-2011', name: 'Mert Aksoy', email: 'mert.aksoy@example.com', phone: '0537 555 77 45', avatar: img(AVATAR.a3, 64, 64), city: 'Ankara', orders: 3, spent: 3290, joined: '2025-06-28', segment: 'Yeni' },
-  { id: 'M-1998', name: 'Selin Aydın', email: 'selin.a@example.com', phone: '0538 555 88 12', avatar: img(AVATAR.a2, 64, 64), city: 'Muğla', orders: 1, spent: 878, joined: '2024-11-03', segment: 'Pasif' },
+  { id: 'M-2041', name: 'Kaan Erdem', email: 'kaan.e@example.com', phone: '0532 555 11 04', avatar: AVATAR.a7, city: 'İzmir', orders: 24, spent: 48720, joined: '2023-03-14', segment: 'VIP' },
+  { id: 'M-2038', name: 'Elif Yıldırım', email: 'elif.y@example.com', phone: '0533 555 22 18', avatar: AVATAR.a1, city: 'İzmir', orders: 17, spent: 26340, joined: '2023-08-02', segment: 'VIP' },
+  { id: 'M-2035', name: 'Hakan Türkmen', email: 'hakan.t@example.com', phone: '0542 555 33 27', avatar: AVATAR.a4, city: 'Balıkesir', orders: 12, spent: 19880, joined: '2024-01-19', segment: 'Sadık' },
+  { id: 'M-2029', name: 'Ayşe Demirtaş', email: 'ayse.d@example.com', phone: '0505 555 44 62', avatar: AVATAR.a2, city: 'İstanbul', orders: 9, spent: 14210, joined: '2024-05-06', segment: 'Sadık' },
+  { id: 'M-2024', name: 'Onur Bilgin', email: 'onur.b@example.com', phone: '0546 555 55 91', avatar: AVATAR.a5, city: 'Eskişehir', orders: 7, spent: 9640, joined: '2024-09-22', segment: 'Sadık' },
+  { id: 'M-2018', name: 'Zeynep Karaca', email: 'zeynep.k@example.com', phone: '0555 555 66 30', avatar: AVATAR.a6, city: 'Antalya', orders: 4, spent: 5180, joined: '2025-02-11', segment: 'Yeni' },
+  { id: 'M-2011', name: 'Mert Aksoy', email: 'mert.aksoy@example.com', phone: '0537 555 77 45', avatar: AVATAR.a3, city: 'Ankara', orders: 3, spent: 3290, joined: '2025-06-28', segment: 'Yeni' },
+  { id: 'M-1998', name: 'Selin Aydın', email: 'selin.a@example.com', phone: '0538 555 88 12', avatar: AVATAR.a2, city: 'Muğla', orders: 1, spent: 878, joined: '2024-11-03', segment: 'Pasif' },
 ];
 
 /** Son 12 ayın satış ve sipariş serisi (grafikler için). */
@@ -127,12 +127,12 @@ export interface AdminReview {
 }
 
 export const adminReviews: AdminReview[] = [
-  { id: 'Y-881', product: 'Erken Hasat Natürel Sızma', customer: 'Deniz Uçar', avatar: img(AVATAR.a1, 64, 64), rating: 5, comment: 'Boğazdaki yakıcılık tam istediğim gibi. Kesinlikle tekrar alacağım.', date: '2026-08-04', status: 'bekliyor' },
-  { id: 'Y-880', product: 'Sofralık Karışık Zeytin', customer: 'Mert Aksoy', avatar: img(AVATAR.a3, 64, 64), rating: 5, comment: 'Kahvaltı sofrasında çok beğenildi, tuz dengesi harika.', date: '2026-08-03', status: 'bekliyor' },
-  { id: 'Y-879', product: 'Ayvalık Natürel Sızma', customer: 'Elif Yıldırım', avatar: img(AVATAR.a1, 64, 64), rating: 5, comment: 'Üçüncü siparişim, kalite hiç değişmedi.', date: '2026-08-02', status: 'onaylandi' },
-  { id: 'Y-878', product: 'Taş Baskı Zeytinyağı', customer: 'Burak Şen', avatar: img(AVATAR.a4, 64, 64), rating: 4, comment: 'Aroması yoğun ama fiyatı biraz yüksek geldi.', date: '2026-08-01', status: 'onaylandi' },
-  { id: 'Y-877', product: 'Gemlik Hurma Siyah Zeytin', customer: 'Anonim', avatar: img(AVATAR.a7, 64, 64), rating: 1, comment: 'Spam içerikli yorum — bağlantı paylaşımı.', date: '2026-07-31', status: 'reddedildi' },
-  { id: 'Y-876', product: 'Organik Hediye Seti', customer: 'Zeynep Karaca', avatar: img(AVATAR.a6, 64, 64), rating: 5, comment: 'Ambalajı çok şık, hediye için mükemmel.', date: '2026-07-30', status: 'onaylandi' },
+  { id: 'Y-881', product: 'Erken Hasat Natürel Sızma', customer: 'Deniz Uçar', avatar: AVATAR.a1, rating: 5, comment: 'Boğazdaki yakıcılık tam istediğim gibi. Kesinlikle tekrar alacağım.', date: '2026-08-04', status: 'bekliyor' },
+  { id: 'Y-880', product: 'Sofralık Karışık Zeytin', customer: 'Mert Aksoy', avatar: AVATAR.a3, rating: 5, comment: 'Kahvaltı sofrasında çok beğenildi, tuz dengesi harika.', date: '2026-08-03', status: 'bekliyor' },
+  { id: 'Y-879', product: 'Ayvalık Natürel Sızma', customer: 'Elif Yıldırım', avatar: AVATAR.a1, rating: 5, comment: 'Üçüncü siparişim, kalite hiç değişmedi.', date: '2026-08-02', status: 'onaylandi' },
+  { id: 'Y-878', product: 'Taş Baskı Zeytinyağı', customer: 'Burak Şen', avatar: AVATAR.a4, rating: 4, comment: 'Aroması yoğun ama fiyatı biraz yüksek geldi.', date: '2026-08-01', status: 'onaylandi' },
+  { id: 'Y-877', product: 'Gemlik Hurma Siyah Zeytin', customer: 'Anonim', avatar: AVATAR.a7, rating: 1, comment: 'Spam içerikli yorum — bağlantı paylaşımı.', date: '2026-07-31', status: 'reddedildi' },
+  { id: 'Y-876', product: 'Organik Hediye Seti', customer: 'Zeynep Karaca', avatar: AVATAR.a6, rating: 5, comment: 'Ambalajı çok şık, hediye için mükemmel.', date: '2026-07-30', status: 'onaylandi' },
 ];
 
 export interface SliderItem {
@@ -156,11 +156,11 @@ export interface AdminUser {
 }
 
 export const adminUsers: AdminUser[] = [
-  { id: 'U-01', name: 'Nesrin Aydoğan', email: 'nesrin@zeytinbahcem.com', avatar: img(AVATAR.a1, 64, 64), role: 'Yönetici', lastActive: '2 dakika önce', status: 'aktif' },
-  { id: 'U-02', name: 'Kerem Aydoğan', email: 'kerem@zeytinbahcem.com', avatar: img(AVATAR.a7, 64, 64), role: 'Yönetici', lastActive: '1 saat önce', status: 'aktif' },
-  { id: 'U-03', name: 'Tolga Bayram', email: 'tolga@zeytinbahcem.com', avatar: img(AVATAR.a5, 64, 64), role: 'Editör', lastActive: 'Dün', status: 'aktif' },
-  { id: 'U-04', name: 'Sibel Korkmaz', email: 'sibel@zeytinbahcem.com', avatar: img(AVATAR.a2, 64, 64), role: 'Sipariş Sorumlusu', lastActive: '3 saat önce', status: 'aktif' },
-  { id: 'U-05', name: 'Emre Duran', email: 'emre@zeytinbahcem.com', avatar: img(AVATAR.a3, 64, 64), role: 'Depo', lastActive: '5 gün önce', status: 'pasif' },
+  { id: 'U-01', name: 'Nesrin Aydoğan', email: 'nesrin@zeytinbahcem.com', avatar: AVATAR.a1, role: 'Yönetici', lastActive: '2 dakika önce', status: 'aktif' },
+  { id: 'U-02', name: 'Kerem Aydoğan', email: 'kerem@zeytinbahcem.com', avatar: AVATAR.a7, role: 'Yönetici', lastActive: '1 saat önce', status: 'aktif' },
+  { id: 'U-03', name: 'Tolga Bayram', email: 'tolga@zeytinbahcem.com', avatar: AVATAR.a5, role: 'Editör', lastActive: 'Dün', status: 'aktif' },
+  { id: 'U-04', name: 'Sibel Korkmaz', email: 'sibel@zeytinbahcem.com', avatar: AVATAR.a2, role: 'Sipariş Sorumlusu', lastActive: '3 saat önce', status: 'aktif' },
+  { id: 'U-05', name: 'Emre Duran', email: 'emre@zeytinbahcem.com', avatar: AVATAR.a3, role: 'Depo', lastActive: '5 gün önce', status: 'pasif' },
 ];
 
 export const permissionMatrix = [

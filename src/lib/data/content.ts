@@ -1,5 +1,5 @@
 import type { Feature, InstagramPost, Stat, Testimonial } from '@/types';
-import { AVATAR, IMG, img } from '@/lib/images';
+import { AVATAR, IMG } from '@/lib/images';
 
 export const stats: Stat[] = [
   {
@@ -87,7 +87,7 @@ export const testimonials: Testimonial[] = [
     id: 't1',
     name: 'Elif Yıldırım',
     city: 'İzmir',
-    avatar: img(AVATAR.a1, 160, 160),
+    avatar: AVATAR.a1,
     rating: 5,
     comment:
       'Zeytinyağını ilk açtığımda mutfağın kokusu değişti. Boğazda bıraktığı o hafif yakıcılık, gerçek erken hasat olduğunun kanıtı. Üç yıldır başka marka almıyorum.',
@@ -97,7 +97,7 @@ export const testimonials: Testimonial[] = [
     id: 't2',
     name: 'Mert Aksoy',
     city: 'Ankara',
-    avatar: img(AVATAR.a3, 160, 160),
+    avatar: AVATAR.a3,
     rating: 5,
     comment:
       'Etiketin arkasında hasat tarihi, asit oranı ve parti numarası yazıyor. Bu şeffaflığı başka hiçbir yerde göremedim. Ürün de tam anlatıldığı gibi çıktı.',
@@ -107,7 +107,7 @@ export const testimonials: Testimonial[] = [
     id: 't3',
     name: 'Ayşe Demirtaş',
     city: 'İstanbul',
-    avatar: img(AVATAR.a2, 160, 160),
+    avatar: AVATAR.a2,
     rating: 5,
     comment:
       'Kahvaltı sofram için sofralık zeytin siparişi verdim, kargo iki günde geldi. Zeytinler diri, tuz dengesi tam kararında. Ailem “bunları nereden buldun” diye sordu.',
@@ -117,7 +117,7 @@ export const testimonials: Testimonial[] = [
     id: 't4',
     name: 'Burak Şen',
     city: 'Bursa',
-    avatar: img(AVATAR.a4, 160, 160),
+    avatar: AVATAR.a4,
     rating: 5,
     comment:
       'Restoranımızda meze tabaklarının son dokunuşunda kullanıyoruz. Misafirlerimiz düzenli olarak hangi yağ olduğunu soruyor. Toplu siparişte de aynı özen var.',
@@ -127,7 +127,7 @@ export const testimonials: Testimonial[] = [
     id: 't5',
     name: 'Zeynep Karaca',
     city: 'Antalya',
-    avatar: img(AVATAR.a6, 160, 160),
+    avatar: AVATAR.a6,
     rating: 5,
     comment:
       'Hediye setini anneme gönderdim, el yazısı notu görünce çok duygulandı. Ahşap kutusu da o kadar güzel ki attırmadı, mutfakta kullanıyor.',
@@ -137,7 +137,7 @@ export const testimonials: Testimonial[] = [
     id: 't6',
     name: 'Onur Bilgin',
     city: 'Eskişehir',
-    avatar: img(AVATAR.a5, 160, 160),
+    avatar: AVATAR.a5,
     rating: 5,
     comment:
       'Buzdolabına koyduğumda bulanıklaştı, önce endişelendim. Sonra sitedeki yazıyı okudum — meğer katkısız olduğunun en pratik testiymiş. Böyle bilgilendirme çok kıymetli.',
@@ -148,7 +148,7 @@ export const testimonials: Testimonial[] = [
 export const instagramPosts: InstagramPost[] = [
   {
     id: 'ig1',
-    image: img(IMG.heroGrove, 600, 600),
+    image: IMG.heroGrove,
     caption: 'Sabahın altıda bahçedeyiz. Hasat başlıyor.',
     likes: 1284,
     comments: 46,
@@ -156,7 +156,7 @@ export const instagramPosts: InstagramPost[] = [
   },
   {
     id: 'ig2',
-    image: img(IMG.harvestCrate, 600, 600),
+    image: IMG.harvestCrate,
     caption: 'Elle toplanan her tane ayrı ayrı seçiliyor.',
     likes: 962,
     comments: 31,
@@ -164,7 +164,7 @@ export const instagramPosts: InstagramPost[] = [
   },
   {
     id: 'ig3',
-    image: img(IMG.cruetOlives, 600, 600),
+    image: IMG.cruetOlives,
     caption: 'İlk sıkım. Rengine bakın.',
     likes: 2107,
     comments: 88,
@@ -172,7 +172,7 @@ export const instagramPosts: InstagramPost[] = [
   },
   {
     id: 'ig4',
-    image: img(IMG.olivesBowls, 600, 600),
+    image: IMG.olivesBowls,
     caption: 'Pazar kahvaltısı hazırlıkları 🫒',
     likes: 1743,
     comments: 64,
@@ -180,7 +180,7 @@ export const instagramPosts: InstagramPost[] = [
   },
   {
     id: 'ig5',
-    image: img(IMG.branchMacro, 600, 600),
+    image: IMG.branchMacro,
     caption: 'Ekimin ilk haftası: erken hasat zamanı.',
     likes: 1189,
     comments: 27,
@@ -188,7 +188,7 @@ export const instagramPosts: InstagramPost[] = [
   },
   {
     id: 'ig6',
-    image: img(IMG.aegeanPath, 600, 600),
+    image: IMG.aegeanPath,
     caption: 'Bahçeye giden yol. Orhangazi, sabah.',
     likes: 1521,
     comments: 52,
@@ -196,7 +196,7 @@ export const instagramPosts: InstagramPost[] = [
   },
   {
     id: 'ig7',
-    image: img(IMG.mezeTable, 600, 600),
+    image: IMG.mezeTable,
     caption: 'Zeytinyağlı mezeler, uzun sofralar.',
     likes: 2384,
     comments: 103,
@@ -204,7 +204,7 @@ export const instagramPosts: InstagramPost[] = [
   },
   {
     id: 'ig8',
-    image: img(IMG.loneTree, 600, 600),
+    image: IMG.loneTree,
     caption: '140 yaşında. Hâlâ meyve veriyor.',
     likes: 3016,
     comments: 141,

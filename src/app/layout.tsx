@@ -3,7 +3,7 @@ import { Cormorant_Garamond, Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { Providers } from '@/components/providers/Providers';
 import { site } from '@/lib/data/site';
-import { IMG, img } from '@/lib/images';
+import { IMG } from '@/lib/images';
 import './globals.css';
 
 const inter = Inter({
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     description: site.description,
     images: [
       {
-        url: img(IMG.heroGrove, 1200, 630),
+        url: IMG.heroGrove,
         width: 1200,
         height: 630,
         alt: 'Orhangazi’de güneş altında uzanan zeytin bahçesi',
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `${site.name} — ${site.tagline}`,
     description: site.description,
-    images: [img(IMG.heroGrove, 1200, 630)],
+    images: [IMG.heroGrove],
   },
   robots: {
     index: true,

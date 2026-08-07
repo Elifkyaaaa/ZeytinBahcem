@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { site } from '@/lib/data/site';
 import type { Post, Product } from '@/types';
-import { IMG, img } from '@/lib/images';
+import { IMG } from '@/lib/images';
 
-const defaultOg = img(IMG.heroGrove, 1200, 630);
+const defaultOg = IMG.heroGrove;
 
 export function buildMetadata({
   title,

@@ -67,7 +67,3 @@ export function blurDataURL(tone: 'cream' | 'olive' = 'cream') {
   return `data:image/svg+xml;charset=utf-8,${svg}`;
 }
 
-/** Unsplash görsellerini sabit en–boy oranı ve kalite ile ister. */
-export function unsplash(id: string, w = 1200, h = 1200) {
-  return `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&h=${h}&q=80`;
-}

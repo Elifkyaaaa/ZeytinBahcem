@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { AdminPageHeader } from '@/components/admin/AdminShell';
 import { AdminField, adminInput, DemoNotice, Panel, Status, Toggle } from '@/components/admin/primitives';
-import { IMG, img } from '@/lib/images';
+import { IMG } from '@/lib/images';
 import type { SliderItem } from '@/lib/data/admin';
 import { blurDataURL, cn } from '@/lib/utils';
 
@@ -14,7 +14,7 @@ const initialSlides: SliderItem[] = [
     id: 'S-01',
     title: 'Doğadan Sofranıza Gerçek Zeytinyağı',
     subtitle: 'Dalından özenle toplanan zeytinlerden soğuk sıkım olarak üretilmiştir.',
-    image: img(IMG.heroGrove, 800, 450),
+    image: IMG.heroGrove,
     link: '/urunler',
     order: 1,
     active: true,
@@ -23,7 +23,7 @@ const initialSlides: SliderItem[] = [
     id: 'S-02',
     title: 'Erken Hasat Sezonu Başladı',
     subtitle: 'Ekimin ilk haftasında toplanan zeytinlerden, sınırlı üretim.',
-    image: img(IMG.branchMacro, 800, 450),
+    image: IMG.branchMacro,
     link: '/urunler?kategori=erken-hasat',
     order: 2,
     active: true,
@@ -32,7 +32,7 @@ const initialSlides: SliderItem[] = [
     id: 'S-03',
     title: 'Kahvaltı Sofraları İçin',
     subtitle: 'Doğal salamura sofralık zeytin çeşitleri.',
-    image: img(IMG.olivesBowls, 800, 450),
+    image: IMG.olivesBowls,
     link: '/urunler?kategori=sofralik-zeytin',
     order: 3,
     active: true,
@@ -41,7 +41,7 @@ const initialSlides: SliderItem[] = [
     id: 'S-04',
     title: 'Hediye Setleri',
     subtitle: 'Ahşap kutuda, el yazısı notunuzla birlikte.',
-    image: img(IMG.ingredients, 800, 450),
+    image: IMG.ingredients,
     link: '/urunler/organik-hediye-seti',
     order: 4,
     active: false,

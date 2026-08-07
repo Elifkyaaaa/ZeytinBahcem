@@ -5,7 +5,7 @@ import { PageHero } from '@/components/ui/PageHero';
 import { Reveal } from '@/components/ui/Reveal';
 import { Container, Section, SectionHeading } from '@/components/ui/Section';
 import { site } from '@/lib/data/site';
-import { IMG, img } from '@/lib/images';
+import { IMG } from '@/lib/images';
 import { breadcrumbJsonLd, buildMetadata } from '@/lib/seo';
 
 const trail = [
@@ -18,7 +18,7 @@ export const metadata = buildMetadata({
   description:
     'Restoran, otel ve kurumsal alımlar için toptan fiyat listesi, özel etiketleme ve hediye seti çözümleri.',
   path: '/kurumsal',
-  image: img(IMG.mezeTable, 1200, 630),
+  image: IMG.mezeTable,
 });
 
 const services = [
@@ -66,7 +66,7 @@ export default function CorporatePage() {
         eyebrow="Kurumsal"
         title="İş Ortaklarımız İçin"
         description="Sofrasında zeytinyağının fark yarattığına inanan işletmelerle çalışıyoruz. Toptan tedarik, özel etiketleme ve kurumsal hediye çözümlerimizi inceleyin."
-        image={img(IMG.mezeTable, 1920, 900)}
+        image={IMG.mezeTable}
         trail={trail}
       />
 

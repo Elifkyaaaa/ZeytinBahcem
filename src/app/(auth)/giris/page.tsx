@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import { LoginForm } from '@/components/auth/LoginForm';
 import { AuthShell } from '@/components/auth/AuthShell';
-import { IMG, img } from '@/lib/images';
+import { IMG } from '@/lib/images';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata = buildMetadata({
@@ -18,7 +18,7 @@ export default function LoginPage() {
       eyebrow="Tekrar hoş geldiniz"
       title="Hesabınıza Giriş Yapın"
       description="Siparişlerinizi takip edin, favorilerinize ulaşın ve adreslerinizi yönetin."
-      image={img(IMG.groveHill, 1200, 1600)}
+      image={IMG.groveHill}
       quote={{
         text: 'Zeytinyağı almak, aslında bir üreticiye güvenmektir. Güven ise doğrulanabilir bilgiyle başlar.',
         author: 'Kerem Aydoğan · Üretim Sorumlusu',

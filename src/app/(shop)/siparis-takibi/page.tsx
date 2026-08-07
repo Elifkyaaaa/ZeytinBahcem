@@ -2,7 +2,7 @@ import { OrderTracker } from '@/components/account/OrderTracker';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { PageHero } from '@/components/ui/PageHero';
 import { Container } from '@/components/ui/Section';
-import { IMG, img } from '@/lib/images';
+import { IMG } from '@/lib/images';
 import { breadcrumbJsonLd, buildMetadata } from '@/lib/seo';
 import { Suspense } from 'react';
 
@@ -24,7 +24,7 @@ export default function OrderTrackingPage() {
         eyebrow="Sipariş Takibi"
         title="Siparişiniz Nerede?"
         description="Sipariş numaranız ve e-posta adresinizle güncel durumu sorgulayabilirsiniz."
-        image={img(IMG.harvestNet, 1920, 900)}
+        image={IMG.harvestNet}
         trail={trail}
         compact
       />

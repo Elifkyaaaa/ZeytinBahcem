@@ -7,7 +7,7 @@ import { useRef } from 'react';
 import { Button } from '@/components/ui/Button';
 import { OliveBranchIcon } from '@/components/ui/icons';
 import { useMediaQuery } from '@/hooks';
-import { IMG, img } from '@/lib/images';
+import { IMG } from '@/lib/images';
 import { blurDataURL } from '@/lib/utils';
 
 const title = ['Doğadan', 'Sofranıza', 'Gerçek', 'Zeytinyağı'];
@@ -41,7 +41,7 @@ export function Hero() {
         style={enabled ? { y: imageY, scale: imageScale } : undefined}
       >
         <Image
-          src={img(IMG.heroGrove, 1920, 1280)}
+          src={IMG.heroGrove}
           alt="Orhangazi’de sabah güneşi altında sıra sıra uzanan asırlık zeytin ağaçları"
           fill
           priority

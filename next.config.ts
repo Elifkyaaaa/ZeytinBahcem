@@ -20,9 +20,8 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    // Görseller Unsplash CDN üzerinden servis edilir.
+    // Yerel görseller public/ altından; uzak kaynaklar yalnızca aşağıdakiler.
     remotePatterns: [
-      { protocol: 'https', hostname: 'images.unsplash.com', pathname: '/**' },
       // Cloudinary — yönetim panelinden yüklenen ürün/blog görselleri
       { protocol: 'https', hostname: 'res.cloudinary.com', pathname: '/**' },
       // Google ile giriş yapan kullanıcıların profil fotoğrafı
@@ -31,6 +30,13 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: '*.supabase.co', pathname: '/storage/v1/object/public/**' },
     ],
     formats: ['image/avif', 'image/webp'],
+
+    // Avatarlar baş harfli SVG rozetlerdir. next/image SVG'yi varsayılan
+    // olarak engeller; aşağıdaki iki ayar Next'in belgelediği azaltmadır:
+    // sunulan SVG sandbox'lanır ve betik çalıştıramaz, indirme olarak işaretlenir.
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     // Kaynak görseller 1920 px ile sınırlı; daha büyük varyant istemek anlamsız.
     deviceSizes: [360, 480, 640, 750, 828, 1080, 1200, 1440, 1920],
     imageSizes: [64, 96, 128, 192, 256, 384],

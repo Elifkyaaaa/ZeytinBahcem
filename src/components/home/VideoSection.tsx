@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useCallback, useState } from 'react';
 import { Container } from '@/components/ui/Section';
 import { useEscape, useLockBodyScroll } from '@/hooks';
-import { IMG, img } from '@/lib/images';
+import { IMG } from '@/lib/images';
 import { blurDataURL } from '@/lib/utils';
 
 /** Hasat filmi — yalnızca oynat tıklanınca yüklenir (facade deseni). */
@@ -25,7 +25,7 @@ export function VideoSection() {
         <div className="relative overflow-hidden rounded-3xl shadow-lift">
           <div className="relative aspect-16/10 sm:aspect-21/9">
             <Image
-              src={img(IMG.harvestCrate, 1800, 900)}
+              src={IMG.harvestCrate}
               alt="Hasat sırasında kasalara toplanan zeytinler ve ayıklama yapan eller"
               fill
               sizes="(min-width: 1280px) 80rem, 94vw"

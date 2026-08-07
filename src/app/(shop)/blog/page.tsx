@@ -7,7 +7,7 @@ import { PageHero } from '@/components/ui/PageHero';
 import { Reveal } from '@/components/ui/Reveal';
 import { Container } from '@/components/ui/Section';
 import { posts } from '@/lib/data/posts';
-import { IMG, img } from '@/lib/images';
+import { IMG } from '@/lib/images';
 import { breadcrumbJsonLd, buildMetadata } from '@/lib/seo';
 import { blurDataURL, formatDate } from '@/lib/utils';
 
@@ -21,7 +21,7 @@ export const metadata = buildMetadata({
   description:
     'Zeytinyağı seçimi, saklama, erken hasat, sofralık zeytin çeşitleri ve bahçeden notlar — üretimin içinden yazılar.',
   path: '/blog',
-  image: img(IMG.treeOlives, 1200, 630),
+  image: IMG.treeOlives,
 });
 
 export default function BlogPage() {
@@ -34,7 +34,7 @@ export default function BlogPage() {
         eyebrow="Blog"
         title="Zeytinin Peşinde"
         description="Bahçede öğrendiklerimizi, laboratuvarda doğruladıklarımızı ve mutfakta denediklerimizi burada paylaşıyoruz."
-        image={img(IMG.treeOlives, 1920, 900)}
+        image={IMG.treeOlives}
         trail={trail}
         compact
       />

@@ -1,5 +1,5 @@
 import type { Category } from '@/types';
-import { IMG, img } from '@/lib/images';
+import { IMG } from '@/lib/images';
 
 export const categories: Category[] = [
   {
@@ -8,7 +8,7 @@ export const categories: Category[] = [
     tagline: 'Asit oranı %0,8’in altında',
     description:
       'Hiçbir kimyasal işlem görmeden, yalnızca mekanik yöntemlerle elde edilen en saf zeytinyağı sınıfı. Meyvemsi aroması ve dengeli acılığıyla günlük kullanımın vazgeçilmezi.',
-    image: img(IMG.cruetOlives, 1000, 1200),
+    image: IMG.cruetOlives,
     featured: true,
   },
   {
@@ -17,7 +17,7 @@ export const categories: Category[] = [
     tagline: 'Ekim ayının ilk haftası',
     description:
       'Zeytin henüz yeşilken toplanır. Polifenol değeri yüksek, yoğun yeşil renkli, boğazda hissedilen karakteristik yakıcılığa sahip özel bir üretim.',
-    image: img(IMG.branchMacro, 900, 700),
+    image: IMG.branchMacro,
   },
   {
     slug: 'tas-baski',
@@ -25,7 +25,7 @@ export const categories: Category[] = [
     tagline: 'Geleneksel granit değirmen',
     description:
       'Zeytin, granit taşlar arasında düşük devirde ezilir. Yavaş üretim, aromayı ve yağın doğal yapısını olduğu gibi korur.',
-    image: img(IMG.bottleDark, 900, 700),
+    image: IMG.bottleDark,
   },
   {
     slug: 'sofralik-zeytin',
@@ -33,7 +33,7 @@ export const categories: Category[] = [
     tagline: 'Doğal salamura, katkısız',
     description:
       'Gemlik, Ayvalık ve Domat çeşitleri; yalnızca kaya tuzu ve zamanla olgunlaştırılır. Sirke, koruyucu ya da renklendirici içermez.',
-    image: img(IMG.olivesBowls, 900, 700),
+    image: IMG.olivesBowls,
   },
   {
     slug: 'organik-urunler',
@@ -41,7 +41,7 @@ export const categories: Category[] = [
     tagline: 'Sertifikalı organik tarım',
     description:
       'Bahçeden şişeye kadar her aşaması bağımsız kuruluşlarca denetlenen, organik tarım sertifikalı ürün ailemiz.',
-    image: img(IMG.ingredients, 900, 700),
+    image: IMG.ingredients,
   },
 ];
 

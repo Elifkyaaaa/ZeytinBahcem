@@ -6,7 +6,7 @@ import { PageHero } from '@/components/ui/PageHero';
 import { Reveal } from '@/components/ui/Reveal';
 import { Container, Section } from '@/components/ui/Section';
 import { site } from '@/lib/data/site';
-import { IMG, img } from '@/lib/images';
+import { IMG } from '@/lib/images';
 import { breadcrumbJsonLd, buildMetadata, faqJsonLd } from '@/lib/seo';
 
 const trail = [
@@ -19,7 +19,7 @@ export const metadata = buildMetadata({
   description:
     'Sorularınız, toptan siparişleriniz veya bahçe ziyareti için bize telefon, WhatsApp veya e-posta ile ulaşın.',
   path: '/iletisim',
-  image: img(IMG.aegeanTables, 1200, 630),
+  image: IMG.aegeanTables,
 });
 
 const channels = [
@@ -83,7 +83,7 @@ export default function ContactPage() {
         eyebrow="İletişim"
         title="Bize Ulaşın"
         description="Ürünlerimiz, siparişiniz veya bahçe ziyareti hakkında merak ettiğiniz her şeyi sorun. Gerçekten cevap veriyoruz."
-        image={img(IMG.aegeanTables, 1920, 900)}
+        image={IMG.aegeanTables}
         trail={trail}
         compact
       />

@@ -1,21 +1,21 @@
 import type { Post } from '@/types';
-import { AVATAR, IMG, img } from '@/lib/images';
+import { AVATAR, IMG } from '@/lib/images';
 
 const authors = {
   kerem: {
     name: 'Kerem Aydoğan',
     role: 'Üretim Sorumlusu',
-    avatar: img(AVATAR.a7, 96, 96),
+    avatar: AVATAR.a7,
   },
   nesrin: {
     name: 'Nesrin Aydoğan',
     role: 'Kurucu Ortak',
-    avatar: img(AVATAR.a1, 96, 96),
+    avatar: AVATAR.a1,
   },
   tolga: {
     name: 'Tolga Bayram',
     role: 'Gıda Mühendisi',
-    avatar: img(AVATAR.a5, 96, 96),
+    avatar: AVATAR.a5,
   },
 };
 
@@ -25,7 +25,7 @@ export const posts: Post[] = [
     title: 'İyi Zeytinyağı Nasıl Anlaşılır? 7 Pratik Test',
     excerpt:
       'Etiketteki asit oranından buzdolabı testine kadar, market rafında ve evde uygulayabileceğiniz yedi somut kontrol.',
-    cover: img(IMG.cruetOlives, 1200, 800),
+    cover: IMG.cruetOlives,
     category: 'Rehber',
     date: '2026-07-12',
     readingTime: 8,
@@ -81,7 +81,7 @@ export const posts: Post[] = [
     title: 'Erken Hasat Nedir, Neden Daha Pahalıdır?',
     excerpt:
       'Aynı ağaçtan, üç hafta arayla toplanan iki zeytin neden bambaşka iki ürüne dönüşür? Verim ve polifenol arasındaki takas.',
-    cover: img(IMG.branchMacro, 1200, 800),
+    cover: IMG.branchMacro,
     category: 'Üretim',
     date: '2026-06-28',
     readingTime: 6,
@@ -122,7 +122,7 @@ export const posts: Post[] = [
     title: 'Zeytinyağını Doğru Saklamanın Kuralları',
     excerpt:
       'Işık, ısı, hava ve zaman. Zeytinyağının dört düşmanına karşı evde alabileceğiniz basit ama etkili önlemler.',
-    cover: img(IMG.bottleLemon, 1200, 800),
+    cover: IMG.bottleLemon,
     category: 'Rehber',
     date: '2026-06-05',
     readingTime: 5,
@@ -163,7 +163,7 @@ export const posts: Post[] = [
     title: 'Sofralık Zeytin Çeşitleri: Gemlik’ten Domat’a',
     excerpt:
       'Kahvaltı sofrasının başrolü. Hangi çeşit nerede yetişir, nasıl işlenir ve neyle en iyi gider?',
-    cover: img(IMG.olivesBowls, 1200, 800),
+    cover: IMG.olivesBowls,
     category: 'Mutfak',
     date: '2026-05-19',
     readingTime: 7,
@@ -209,7 +209,7 @@ export const posts: Post[] = [
     title: 'Zeytinyağı ve Akdeniz Mutfağı: Bir Ömür Meselesi',
     excerpt:
       'Dünyanın en uzun yaşayan topluluklarının ortak paydası neden hep aynı şişeye çıkıyor?',
-    cover: img(IMG.mezeTable, 1200, 800),
+    cover: IMG.mezeTable,
     category: 'Sağlık',
     date: '2026-04-30',
     readingTime: 6,
@@ -245,7 +245,7 @@ export const posts: Post[] = [
     title: 'Hasat Günlüğü 2026: Üç Haftada Bir Sezon',
     excerpt:
       'Orhangazi’deki bahçemizde ekim ayının nasıl geçtiğini, ilk sıkımdan şişeleme gününe kadar anlattık.',
-    cover: img(IMG.harvestCrate, 1200, 800),
+    cover: IMG.harvestCrate,
     category: 'Bahçeden',
     date: '2026-04-02',
     readingTime: 9,

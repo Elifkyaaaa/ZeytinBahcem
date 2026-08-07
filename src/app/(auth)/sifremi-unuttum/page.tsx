@@ -6,7 +6,7 @@ import { useActionState } from 'react';
 import { requestPasswordReset, type AuthState } from '@/app/(auth)/actions';
 import { AuthShell } from '@/components/auth/AuthShell';
 import { AuthField, FormAlert, SubmitButton, authInput } from '@/components/auth/FormParts';
-import { IMG, img } from '@/lib/images';
+import { IMG } from '@/lib/images';
 
 const initialState: AuthState = {};
 
@@ -18,7 +18,7 @@ export default function ForgotPasswordPage() {
       eyebrow="Şifre sıfırlama"
       title="Şifrenizi mi Unuttunuz?"
       description="Kayıtlı e-posta adresinizi girin; şifrenizi yenilemeniz için bir bağlantı gönderelim."
-      image={img(IMG.leavesTilt, 1200, 1600)}
+      image={IMG.leavesTilt}
       footer={
         <Link
           href="/giris"
