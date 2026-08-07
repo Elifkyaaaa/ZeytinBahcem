@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { env, isIyzicoConfigured, isSupabaseConfigured } from '@/utils/env';
 import { initCheckoutForm } from '@/utils/iyzico';
 import { sendAdminOrderNotice, sendOrderConfirmation } from '@/utils/mail';
+import { checkRateLimit, clientKey, tooManyRequests } from '@/utils/rate-limit';
 import { createClient, createServiceClient } from '@/utils/supabase/server';
 
 export const runtime = 'nodejs';
@@ -56,6 +57,13 @@ function badRequest(message: string) {
  *   4) Havale/kapıda ödemede sipariş doğrudan onaylanır ve mailler gönderilir
  */
 export async function POST(request: Request) {
+  // Sipariş oluşturma pahalı bir işlem; dakikada 10 denemeyle sınırlı.
+  const limit = checkRateLimit(clientKey(request, 'checkout'), {
+    limit: 10,
+    windowMs: 60_000,
+  });
+  if (!limit.ok) return tooManyRequests(limit.retryAfter);
+
   let body: CheckoutRequestBody;
   try {
     body = (await request.json()) as CheckoutRequestBody;

@@ -1,9 +1,11 @@
+import { timingSafeEqual } from 'node:crypto';
 import { NextResponse } from 'next/server';
 import { categories } from '@/lib/data/categories';
 import { posts } from '@/lib/data/posts';
 import { products } from '@/lib/data/products';
 import { createServiceClient } from '@/utils/supabase/server';
 import { hasServiceRole } from '@/utils/env';
+import { checkRateLimit, clientKey, tooManyRequests } from '@/utils/rate-limit';
 
 export const runtime = 'nodejs';
 
@@ -17,6 +19,10 @@ export const runtime = 'nodejs';
  * SUPABASE_SERVICE_ROLE_KEY ile eşleşmelidir — herkese açık bir uç değildir.
  */
 export async function POST(request: Request) {
+  // Anahtar tahminine karşı: dakikada 5 deneme.
+  const limit = checkRateLimit(clientKey(request, 'seed'), { limit: 5, windowMs: 60_000 });
+  if (!limit.ok) return tooManyRequests(limit.retryAfter);
+
   const db = createServiceClient();
 
   if (!db || !hasServiceRole) {
@@ -30,7 +36,29 @@ export async function POST(request: Request) {
     );
   }
 
-  if (request.headers.get('x-seed-token') !== process.env.SUPABASE_SERVICE_ROLE_KEY) {
+  // Bu uç yıkıcıdır: katalogu ezer ve yorumları siler. Üretimde yalnızca
+  // ALLOW_SEED_ENDPOINT=true ile bilinçli olarak açılabilir.
+  if (process.env.NODE_ENV === 'production' && process.env.ALLOW_SEED_ENDPOINT !== 'true') {
+    return NextResponse.json(
+      {
+        ok: false,
+        error:
+          'Tohumlama ucu üretimde kapalıdır. Gerekiyorsa ALLOW_SEED_ENDPOINT=true tanımlayıp işlem sonrası kaldırın.',
+      },
+      { status: 403 },
+    );
+  }
+
+  const provided = request.headers.get('x-seed-token') ?? '';
+  const expected = process.env.SUPABASE_SERVICE_ROLE_KEY ?? '';
+
+  // Sabit süreli karşılaştırma — `===` karakter karakter kısa devre yaptığı
+  // için yanıt süresinden anahtar tahmin edilebilir.
+  const a = Buffer.from(provided);
+  const b = Buffer.from(expected);
+  const valid = a.length === b.length && timingSafeEqual(a, b);
+
+  if (!valid) {
     return NextResponse.json({ ok: false, error: 'Geçersiz tohumlama anahtarı.' }, { status: 401 });
   }
 

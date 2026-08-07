@@ -1,7 +1,24 @@
 import type { NextConfig } from 'next';
+import { privateHeaders, securityHeaders } from './src/lib/security-headers';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+
+  // Sunucu sürümünü sızdırmayalım — saldırgana bilgi vermez.
+  poweredByHeader: false,
+
+  async headers() {
+    return [
+      { source: '/:path*', headers: securityHeaders },
+      // Hesap, sepet, ödeme ve yönetim sayfaları önbelleğe alınmamalı ve
+      // arama motorlarında görünmemeli.
+      { source: '/hesap/:path*', headers: privateHeaders },
+      { source: '/sepet', headers: privateHeaders },
+      { source: '/odeme/:path*', headers: privateHeaders },
+      { source: '/admin/:path*', headers: privateHeaders },
+      { source: '/api/:path*', headers: privateHeaders },
+    ];
+  },
   images: {
     // Görseller Unsplash CDN üzerinden servis edilir.
     remotePatterns: [

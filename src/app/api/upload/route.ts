@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createUploadSignature } from '@/utils/cloudinary';
+import { checkRateLimit, clientKey, tooManyRequests } from '@/utils/rate-limit';
 import { createClient } from '@/utils/supabase/server';
 import { isSupabaseConfigured } from '@/utils/env';
 
@@ -10,6 +11,13 @@ export const runtime = 'nodejs';
  * Yalnızca admin/staff rolü çağırabilir — imza sızarsa keyfi yükleme yapılabilirdi.
  */
 export async function POST(request: Request) {
+  // İmza üretimi ucuz ama kötüye kullanılabilir; dakikada 30 istek.
+  const limit = checkRateLimit(clientKey(request, 'upload'), {
+    limit: 30,
+    windowMs: 60_000,
+  });
+  if (!limit.ok) return tooManyRequests(limit.retryAfter);
+
   // Supabase bağlıysa yetki denetimi zorunludur.
   if (isSupabaseConfigured) {
     const supabase = await createClient();
