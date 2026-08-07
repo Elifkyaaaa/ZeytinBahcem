@@ -17,7 +17,7 @@ import {
   Tr,
 } from '@/components/admin/primitives';
 import { orderStatusMeta, orders, type OrderStatus } from '@/lib/data/admin';
-import { blurDataURL, formatDate, formatNumber, formatPrice, slugify } from '@/lib/utils';
+import { blurDataURL, formatDate, formatNumber, formatPrice, safeImageSrc, slugify } from '@/lib/utils';
 import { CheckCircle2, Clock, PackageOpen, Truck } from 'lucide-react';
 
 const statusTabs: { id: OrderStatus | 'all'; label: string }[] = [
@@ -146,7 +146,7 @@ export default function AdminOrdersPage() {
                         <span className="flex items-center gap-2.5">
                           <span className="relative size-9 shrink-0 overflow-hidden rounded-full bg-surface-muted">
                             <Image
-                              src={order.avatar}
+                              src={safeImageSrc(order.avatar)}
                               alt=""
                               fill
                               sizes="36px"

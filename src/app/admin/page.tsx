@@ -23,7 +23,7 @@ import {
   trafficSources,
 } from '@/lib/data/admin';
 import { products } from '@/lib/data/products';
-import { blurDataURL, formatNumber, formatPrice } from '@/lib/utils';
+import { blurDataURL, formatNumber, formatPrice, safeImageSrc } from '@/lib/utils';
 
 const quickLinks = [
   { label: 'Bekleyen sipariş', value: dashboardStats.pendingOrders, href: '/admin/siparisler', Icon: ShoppingCart },
@@ -161,7 +161,7 @@ export default function AdminDashboard() {
                         <span className="flex items-center gap-2.5">
                           <span className="relative size-8 shrink-0 overflow-hidden rounded-full bg-surface-muted">
                             <Image
-                              src={order.avatar}
+                              src={safeImageSrc(order.avatar)}
                               alt=""
                               fill
                               sizes="32px"
@@ -205,7 +205,7 @@ export default function AdminDashboard() {
                 </span>
                 <span className="relative size-11 shrink-0 overflow-hidden rounded-lg bg-surface-muted">
                   <Image
-                    src={product.image}
+                    src={safeImageSrc(product.image)}
                     alt=""
                     fill
                     sizes="44px"

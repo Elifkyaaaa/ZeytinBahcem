@@ -7,7 +7,7 @@ import { useMemo, useState } from 'react';
 import { deleteReview, setReviewStatus } from '@/app/admin/review-actions';
 import { EmptyState, Panel, StatCard, Status, Toolbar } from '@/components/admin/primitives';
 import { StarRating } from '@/components/ui/StarRating';
-import { blurDataURL, formatDate, slugify } from '@/lib/utils';
+import { blurDataURL, formatDate, safeImageSrc, slugify } from '@/lib/utils';
 import type { ReviewStatus } from '@/types/database';
 
 export interface PanelReview {
@@ -132,7 +132,7 @@ export function ReviewModeration({ reviews }: { reviews: PanelReview[] }) {
                     {review.avatarUrl ? (
                       <span className="relative size-11 shrink-0 overflow-hidden rounded-full bg-surface-muted">
                         <Image
-                          src={review.avatarUrl}
+                          src={safeImageSrc(review.avatarUrl)}
                           alt=""
                           fill
                           sizes="44px"

@@ -18,7 +18,7 @@ import {
   Tr,
 } from '@/components/admin/primitives';
 import { posts } from '@/lib/data/posts';
-import { blurDataURL, formatDate, slugify } from '@/lib/utils';
+import { blurDataURL, formatDate, safeImageSrc, slugify } from '@/lib/utils';
 
 export default function AdminBlogPage() {
   const [search, setSearch] = useState('');
@@ -114,7 +114,7 @@ export default function AdminBlogPage() {
                       <span className="flex items-center gap-3">
                         <span className="relative h-11 w-16 shrink-0 overflow-hidden rounded-lg bg-surface-muted">
                           <Image
-                            src={post.cover}
+                            src={safeImageSrc(post.cover)}
                             alt=""
                             fill
                             sizes="64px"

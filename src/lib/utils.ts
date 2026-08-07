@@ -67,3 +67,39 @@ export function blurDataURL(tone: 'cream' | 'olive' = 'cream') {
   return `data:image/svg+xml;charset=utf-8,${svg}`;
 }
 
+/**
+ * `next/image` yapılandırılmamış bir alan adı gördüğünde render sırasında
+ * hata fırlatır ve tüm sayfa 500 döner. Yönetim panelinden ya da veritabanından
+ * gelen adresler bizim denetimimizde olmadığı için (elle girilmiş, eski bir
+ * kaynaktan kalmış olabilir) buradan geçirilir: tanınmayan bir adres tek bir
+ * bozuk küçük resme dönüşür, sayfayı düşürmez.
+ *
+ * İzin verilen alan adları `next.config.ts` → `images.remotePatterns` ile
+ * aynı listedir; oraya yeni bir kaynak eklenirse buraya da eklenmelidir.
+ */
+const ALLOWED_IMAGE_HOSTS = [
+  'res.cloudinary.com',
+  'lh3.googleusercontent.com',
+] as const;
+
+/** Kırık kayıtlar için yer tutucu. Boş dize dönmüyoruz: `next/image` boş
+ *  `src` gördüğünde de hata fırlatır, yani sorunu çözmek yerine taşırdı. */
+export const IMAGE_FALLBACK = '/gorseller/gorsel-yok.svg';
+
+export function safeImageSrc(src: string | null | undefined, fallback = IMAGE_FALLBACK): string {
+  if (!src) return fallback;
+  // Yerel yollar ve gömülü veri adresleri her zaman güvenli.
+  if (src.startsWith('/') || src.startsWith('data:')) return src;
+
+  try {
+    const { hostname } = new URL(src);
+    const allowed =
+      ALLOWED_IMAGE_HOSTS.includes(hostname as (typeof ALLOWED_IMAGE_HOSTS)[number]) ||
+      hostname.endsWith('.supabase.co');
+    return allowed ? src : fallback;
+  } catch {
+    // Geçersiz URL — kırık bir kayıt.
+    return fallback;
+  }
+}
+

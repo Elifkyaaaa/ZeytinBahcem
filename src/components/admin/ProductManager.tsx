@@ -24,7 +24,7 @@ import {
   Tr,
 } from '@/components/admin/primitives';
 import { FormAlert } from '@/components/auth/FormParts';
-import { blurDataURL, cn, formatNumber, formatPrice, slugify } from '@/lib/utils';
+import { blurDataURL, cn, formatNumber, formatPrice, safeImageSrc, slugify } from '@/lib/utils';
 import type { Category, Product } from '@/types';
 
 const initialState: ProductActionState = {};
@@ -334,7 +334,7 @@ export function ProductManager({
                         <span className="relative size-11 shrink-0 overflow-hidden rounded-lg bg-surface-muted">
                           {product.image && (
                             <Image
-                              src={product.image}
+                              src={safeImageSrc(product.image)}
                               alt=""
                               fill
                               sizes="44px"

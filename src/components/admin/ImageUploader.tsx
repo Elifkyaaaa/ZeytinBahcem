@@ -5,7 +5,7 @@ import { Check, ImagePlus, Link2, TriangleAlert, Trash2, UploadCloud } from 'luc
 import Image from 'next/image';
 import { useCallback, useRef, useState, type DragEvent } from 'react';
 import { useCopy } from '@/hooks';
-import { blurDataURL, cn } from '@/lib/utils';
+import { blurDataURL, cn, safeImageSrc } from '@/lib/utils';
 
 interface Uploaded {
   url: string;
@@ -203,7 +203,7 @@ export function ImageUploader({
             >
               <div className="relative aspect-square">
                 <Image
-                  src={item.url}
+                  src={safeImageSrc(item.url)}
                   alt=""
                   fill
                   sizes="(min-width: 640px) 180px, 45vw"

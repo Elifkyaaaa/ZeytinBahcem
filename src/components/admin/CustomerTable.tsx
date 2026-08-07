@@ -15,7 +15,7 @@ import {
   Tr,
   type StatusTone,
 } from '@/components/admin/primitives';
-import { blurDataURL, formatDate, formatNumber, formatPrice, slugify } from '@/lib/utils';
+import { blurDataURL, formatDate, formatNumber, formatPrice, safeImageSrc, slugify } from '@/lib/utils';
 
 export interface PanelCustomer {
   id: string;
@@ -163,7 +163,7 @@ export function CustomerTable({
                         {customer.avatarUrl ? (
                           <span className="relative size-10 shrink-0 overflow-hidden rounded-full bg-surface-muted">
                             <Image
-                              src={customer.avatarUrl}
+                              src={safeImageSrc(customer.avatarUrl)}
                               alt=""
                               fill
                               sizes="40px"

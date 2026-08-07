@@ -44,7 +44,7 @@ import { useEscape, useLockBodyScroll } from '@/hooks';
 import { dashboardStats } from '@/lib/data/admin';
 import { site } from '@/lib/data/site';
 import { useUi } from '@/lib/store/ui';
-import { cn } from '@/lib/utils';
+import { cn, safeImageSrc } from '@/lib/utils';
 
 interface NavEntry {
   label: string;
@@ -213,7 +213,7 @@ function AdminUserMenu({ user }: { user: AdminUser }) {
       >
         {user.avatarUrl ? (
           <span className="relative size-9 shrink-0 overflow-hidden rounded-full bg-surface-muted">
-            <Image src={user.avatarUrl} alt="" fill sizes="36px" className="object-cover" />
+            <Image src={safeImageSrc(user.avatarUrl)} alt="" fill sizes="36px" className="object-cover" />
           </span>
         ) : (
           <span className="grid size-9 shrink-0 place-items-center rounded-full bg-olive-700 text-xs font-bold text-cream-50 dark:bg-gold-500 dark:text-olive-950">

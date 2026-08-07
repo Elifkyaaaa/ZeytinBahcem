@@ -7,7 +7,7 @@ import { AdminPageHeader } from '@/components/admin/AdminShell';
 import { DemoNotice, Panel, Status, Toggle } from '@/components/admin/primitives';
 import { categories } from '@/lib/data/categories';
 import { products } from '@/lib/data/products';
-import { blurDataURL, formatPrice } from '@/lib/utils';
+import { blurDataURL, formatPrice, safeImageSrc } from '@/lib/utils';
 
 export default function AdminCategoriesPage() {
   const [visible, setVisible] = useState<Record<string, boolean>>(
@@ -52,7 +52,7 @@ export default function AdminCategoriesPage() {
 
                 <span className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-surface-muted">
                   <Image
-                    src={category.image}
+                    src={safeImageSrc(category.image)}
                     alt=""
                     fill
                     sizes="80px"

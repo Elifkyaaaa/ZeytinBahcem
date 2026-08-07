@@ -21,7 +21,7 @@ import {
 } from '@/components/admin/primitives';
 import { FormAlert } from '@/components/auth/FormParts';
 import { permissionLabels, permissionMatrix } from '@/lib/data/admin';
-import { blurDataURL, cn, formatDate } from '@/lib/utils';
+import { blurDataURL, cn, formatDate, safeImageSrc } from '@/lib/utils';
 import type { UserRole } from '@/types/database';
 
 export interface PanelUser {
@@ -118,7 +118,7 @@ export function UserRoleTable({ users }: { users: PanelUser[] }) {
                         {user.avatarUrl ? (
                           <span className="relative size-10 shrink-0 overflow-hidden rounded-full bg-surface-muted">
                             <Image
-                              src={user.avatarUrl}
+                              src={safeImageSrc(user.avatarUrl)}
                               alt=""
                               fill
                               sizes="40px"
