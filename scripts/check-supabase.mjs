@@ -167,11 +167,19 @@ async function main() {
   }
 
   /* -- Tablolar ----------------------------------------------------------- */
-  console.log(`\n${c.bold('Tablolar')} ${c.dim('(public şeması)')}`);
+  // Sayım servis anahtarıyla yapılır. Anon anahtarla RLS korumalı tablolar
+  // (users, orders, addresses…) 403 değil, 200 + 0 satır döner; bu da dolu
+  // bir tabloyu "0 kayıt" gibi gösterip yanıltır.
+  const countKey = service ?? anon;
+  console.log(
+    `\n${c.bold('Tablolar')} ${c.dim(
+      service ? '(public şeması)' : '(public şeması — anon anahtar: RLS arkasındaki satırlar sayılmaz)',
+    )}`,
+  );
 
   const results = await Promise.all(
     TABLES.map(async (table) => {
-      const r = await head(`${url}/rest/v1/${table}?select=*&limit=1`, anon);
+      const r = await head(`${url}/rest/v1/${table}?select=*&limit=1`, countKey);
       return { table, ...r };
     }),
   );
