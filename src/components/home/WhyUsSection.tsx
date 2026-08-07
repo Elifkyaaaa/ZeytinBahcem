@@ -38,7 +38,7 @@ export function WhyUsSection() {
                     <Icon className="size-6.5" strokeWidth={1.5} />
                   </span>
 
-                  <h3 className="relative mt-5 font-serif text-xl text-foreground">
+                  <h3 className="relative mt-5 font-display text-xl text-foreground">
                     {feature.title}
                   </h3>
                   <p className="relative mt-2.5 text-sm leading-relaxed text-muted-foreground">

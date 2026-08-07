@@ -342,7 +342,7 @@ export function AdminShell({ children, user }: { children: ReactNode; user: Admi
             <OliveBranchIcon className="size-5" />
           </span>
           <span className="flex flex-col leading-none">
-            <span className="font-serif text-[0.98rem] font-semibold text-foreground">
+            <span className="font-display text-[0.98rem] font-semibold text-foreground">
               {site.name}
             </span>
             <span className="mt-0.5 text-[0.58rem] font-medium tracking-[0.2em] text-gold-600 uppercase dark:text-gold-400/90">
@@ -377,7 +377,7 @@ export function AdminShell({ children, user }: { children: ReactNode; user: Admi
               className="fixed inset-y-0 left-0 z-[75] flex w-[min(17rem,86vw)] flex-col border-r border-border bg-background lg:hidden"
             >
               <div className="flex h-16 items-center justify-between border-b border-border px-5">
-                <span className="font-serif text-lg font-semibold">Yönetim</span>
+                <span className="font-display text-lg font-semibold">Yönetim</span>
                 <button
                   onClick={() => setMobileOpen(false)}
                   aria-label="Menüyü kapat"
@@ -452,7 +452,7 @@ export function AdminPageHeader({
             Geri
           </Link>
         )}
-        <h1 className="font-serif text-2xl text-foreground sm:text-3xl">{title}</h1>
+        <h1 className="font-display text-2xl text-foreground sm:text-3xl">{title}</h1>
         {description && (
           <p className="mt-1.5 text-sm text-muted-foreground">{description}</p>
         )}

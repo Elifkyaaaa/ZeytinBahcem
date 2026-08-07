@@ -214,7 +214,7 @@ function TourOverlay() {
             </button>
           </div>
 
-          <h3 className="mt-3 font-serif text-lg text-foreground">{step.title}</h3>
+          <h3 className="mt-3 font-display text-lg text-foreground">{step.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
 
           {/* İlerleme noktaları */}

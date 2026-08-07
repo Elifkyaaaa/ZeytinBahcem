@@ -13,11 +13,11 @@ export default function NotFound() {
           <OliveBranchIcon className="size-10" />
         </span>
 
-        <p className="mt-8 font-serif text-[5rem] leading-none font-semibold text-gold-600/25 tabular-nums sm:text-[7rem] dark:text-gold-400/25">
+        <p className="mt-8 font-display text-[5rem] leading-none font-semibold text-gold-600/25 tabular-nums sm:text-[7rem] dark:text-gold-400/25">
           404
         </p>
 
-        <h1 className="mt-2 font-serif text-3xl text-foreground sm:text-4xl">
+        <h1 className="mt-2 font-display text-3xl text-foreground sm:text-4xl">
           Bu dal boş çıktı
         </h1>
         <p className="mx-auto mt-4 max-w-md leading-relaxed text-muted-foreground">

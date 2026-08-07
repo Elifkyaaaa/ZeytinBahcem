@@ -32,7 +32,7 @@ export default async function PaymentResultPage({
                 <Check className="size-9" strokeWidth={2.8} />
               </span>
 
-              <h1 className="mt-7 font-serif text-3xl text-foreground sm:text-4xl">
+              <h1 className="mt-7 font-display text-3xl text-foreground sm:text-4xl">
                 Ödemeniz alındı
               </h1>
               <p className="mt-3 leading-relaxed text-muted-foreground">
@@ -48,7 +48,7 @@ export default async function PaymentResultPage({
               </p>
 
               <div className="mt-8 rounded-2xl border border-border bg-surface p-6 text-left shadow-soft">
-                <h2 className="flex items-center gap-2.5 font-serif text-lg text-foreground">
+                <h2 className="flex items-center gap-2.5 font-display text-lg text-foreground">
                   <Package className="size-5 text-olive-600 dark:text-gold-400" strokeWidth={1.8} />
                   Bundan sonra ne olacak?
                 </h2>
@@ -88,7 +88,7 @@ export default async function PaymentResultPage({
                 <TriangleAlert className="size-9" strokeWidth={2} />
               </span>
 
-              <h1 className="mt-7 font-serif text-3xl text-foreground sm:text-4xl">
+              <h1 className="mt-7 font-display text-3xl text-foreground sm:text-4xl">
                 Ödeme tamamlanamadı
               </h1>
               <p className="mt-3 leading-relaxed text-muted-foreground">

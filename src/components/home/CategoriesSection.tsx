@@ -59,7 +59,7 @@ export function CategoriesSection() {
                     </p>
                     <h3
                       className={cn(
-                        'mt-2 font-serif text-cream-50',
+                        'mt-2 font-display text-cream-50',
                         wide ? 'text-3xl sm:text-4xl' : 'text-2xl',
                       )}
                     >

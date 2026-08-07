@@ -34,7 +34,7 @@ export function Panel({
       {(title || actions) && (
         <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4">
           <div className="min-w-0">
-            {title && <h2 className="font-serif text-lg text-foreground">{title}</h2>}
+            {title && <h2 className="font-display text-lg text-foreground">{title}</h2>}
             {description && (
               <p className="mt-0.5 text-xs text-muted-foreground">{description}</p>
             )}
@@ -341,7 +341,7 @@ export function Toolbar({
 export function EmptyState({ title, description }: { title: string; description: string }) {
   return (
     <div className="px-5 py-16 text-center">
-      <p className="font-serif text-lg text-foreground">{title}</p>
+      <p className="font-display text-lg text-foreground">{title}</p>
       <p className="mt-1.5 text-sm text-muted-foreground">{description}</p>
     </div>
   );

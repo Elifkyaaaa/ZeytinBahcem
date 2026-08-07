@@ -55,7 +55,7 @@ export function BlogSection() {
                     </span>
                   </div>
 
-                  <h3 className="mt-3 font-serif text-xl leading-snug text-foreground">
+                  <h3 className="mt-3 font-display text-xl leading-snug text-foreground">
                     <Link
                       href={`/blog/${post.slug}`}
                       className="transition-colors duration-300 after:absolute after:inset-0 hover:text-gold-700 dark:hover:text-gold-400"

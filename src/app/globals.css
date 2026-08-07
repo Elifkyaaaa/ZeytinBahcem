@@ -38,7 +38,7 @@
   --color-gold-900: #59451b;
 
   /*
-    Gövde yazısı Bahnschrift ile açılır.
+    Hem gövde hem başlıklar Bahnschrift ile açılır.
 
     Bahnschrift, Windows ile birlikte gelen tescilli bir Microsoft fontudur;
     font dosyasını sunucudan dağıtmak lisansa aykırı olurdu. Bu yüzden sistem
@@ -53,7 +53,14 @@
   --font-sans:
     'Bahnschrift', 'DIN Alternate', var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     'Segoe UI', sans-serif;
-  --font-serif: var(--font-cormorant), ui-serif, Georgia, 'Times New Roman', serif;
+
+  /*
+    Başlık fontu. Gövdeyle aynı aileyi kullanır; ayrım artık font değişiminden
+    değil, ağırlık ve harf aralığından geliyor (aşağıdaki h1–h4 kuralı).
+    Ayrı bir token olarak duruyor ki ileride başlık ailesi tek satırda
+    değiştirilebilsin — `font-display` yardımcı sınıfı bundan üretilir.
+  */
+  --font-display: var(--font-sans);
 
   --shadow-soft: 0 1px 2px -1px rgb(35 43 24 / 0.06), 0 4px 16px -6px rgb(35 43 24 / 0.1);
   --shadow-lift: 0 8px 20px -8px rgb(35 43 24 / 0.16), 0 24px 48px -20px rgb(35 43 24 / 0.22);
@@ -171,9 +178,11 @@
   h2,
   h3,
   h4 {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    letter-spacing: -0.015em;
+    font-family: var(--font-display);
+    /* Bahnschrift, serif Cormorant'a göre daha ince görünür; başlıklarda
+       ağırlık 600'e çıkarılıp harf aralığı biraz daha kısılıyor. */
+    font-weight: 600;
+    letter-spacing: -0.022em;
     text-wrap: balance;
   }
 

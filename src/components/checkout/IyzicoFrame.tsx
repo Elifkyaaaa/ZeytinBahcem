@@ -25,7 +25,7 @@ export function IyzicoFrame({ content }: { content: string }) {
   return (
     <div className="mx-auto max-w-3xl py-10">
       <div className="mb-6 text-center">
-        <h2 className="font-serif text-2xl text-foreground">Güvenli Ödeme</h2>
+        <h2 className="font-display text-2xl text-foreground">Güvenli Ödeme</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           Bankanızın 3D Secure doğrulama ekranına yönlendiriliyorsunuz. Bu sayfayı kapatmayın.
         </p>

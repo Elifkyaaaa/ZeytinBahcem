@@ -32,7 +32,7 @@ export function Logo({
       <span className={cn('flex flex-col leading-none', compact && 'sr-only sm:not-sr-only sm:flex')}>
         <span
           className={cn(
-            'font-serif text-[1.08rem] font-semibold tracking-tight',
+            'font-display text-[1.08rem] font-semibold tracking-tight',
             // --foreground kullanılıyor ki şeffaf header koyu hero üzerindeyken
             // otomatik olarak açık tona dönsün.
             tone === 'inverted' ? 'text-cream-50' : 'text-foreground',

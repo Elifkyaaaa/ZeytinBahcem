@@ -79,7 +79,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             <Badge tone="gold">{post.category}</Badge>
 
-            <h1 className="mt-4 max-w-4xl font-serif text-3xl leading-[1.12] text-cream-50 sm:text-5xl lg:text-[3.4rem]">
+            <h1 className="mt-4 max-w-4xl font-display text-3xl leading-[1.12] text-cream-50 sm:text-5xl lg:text-[3.4rem]">
               {post.title}
             </h1>
 
@@ -121,7 +121,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {/* Gövde */}
         <Container className="py-14 lg:py-20">
           <div className="mx-auto max-w-2xl">
-            <p className="border-l-2 border-gold-500/50 pl-6 font-serif text-xl leading-relaxed text-foreground/90 sm:text-2xl">
+            <p className="border-l-2 border-gold-500/50 pl-6 font-display text-xl leading-relaxed text-foreground/90 sm:text-2xl">
               {post.excerpt}
             </p>
 
@@ -130,7 +130,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 if (block.type === 'h2') {
                   return (
                     <Reveal key={i} y={16}>
-                      <h2 className="pt-6 font-serif text-2xl text-foreground sm:text-3xl">
+                      <h2 className="pt-6 font-display text-2xl text-foreground sm:text-3xl">
                         {block.text}
                       </h2>
                     </Reveal>
@@ -140,7 +140,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 if (block.type === 'quote') {
                   return (
                     <Reveal key={i} y={16}>
-                      <blockquote className="my-8 rounded-2xl bg-surface-muted p-7 font-serif text-xl leading-relaxed text-foreground/90 sm:text-2xl">
+                      <blockquote className="my-8 rounded-2xl bg-surface-muted p-7 font-display text-xl leading-relaxed text-foreground/90 sm:text-2xl">
                         <span className="mb-3 block text-3xl leading-none text-gold-500" aria-hidden>
                           “
                         </span>
@@ -195,7 +195,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="font-serif text-lg text-foreground">{post.author.name}</p>
+                <p className="font-display text-lg text-foreground">{post.author.name}</p>
                 <p className="mt-0.5 text-xs font-semibold tracking-[0.14em] text-gold-600 uppercase dark:text-gold-400">
                   {post.author.role}
                 </p>
@@ -219,7 +219,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 className="group flex max-w-xs flex-col items-end text-right"
               >
                 <span className="text-xs text-muted-foreground">Sonraki yazı</span>
-                <span className="mt-1 flex items-center gap-2 font-serif text-lg text-foreground transition-colors group-hover:text-gold-700 dark:group-hover:text-gold-400">
+                <span className="mt-1 flex items-center gap-2 font-display text-lg text-foreground transition-colors group-hover:text-gold-700 dark:group-hover:text-gold-400">
                   {nextPost.title}
                   <ArrowRight
                     className="size-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1"
@@ -235,7 +235,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       {/* Diğer yazılar */}
       <section className="border-t border-border bg-surface-muted py-16 lg:py-20" aria-label="Diğer yazılar">
         <Container>
-          <h2 className="font-serif text-3xl text-foreground">Bunları da Okuyun</h2>
+          <h2 className="font-display text-3xl text-foreground">Bunları da Okuyun</h2>
 
           <div className="mt-9 grid gap-5 md:grid-cols-3">
             {others.map((item, i) => (
@@ -256,7 +256,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     <Badge tone="gold" className="w-fit">
                       {item.category}
                     </Badge>
-                    <h3 className="mt-3 font-serif text-lg leading-snug text-foreground">
+                    <h3 className="mt-3 font-display text-lg leading-snug text-foreground">
                       <Link
                         href={`/blog/${item.slug}`}
                         className="transition-colors after:absolute after:inset-0 hover:text-gold-700 dark:hover:text-gold-400"

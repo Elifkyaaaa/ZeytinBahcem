@@ -152,7 +152,7 @@ export function ProductCard({
       <div className="flex flex-1 flex-col p-4 sm:p-5">
         <StarRating rating={product.rating} count={product.reviewCount} />
 
-        <h3 className="mt-2.5 font-serif text-[1.05rem] leading-snug text-foreground">
+        <h3 className="mt-2.5 font-display text-[1.05rem] leading-snug text-foreground">
           <Link
             href={`/urunler/${product.slug}`}
             className="transition-colors duration-300 after:absolute after:inset-0 hover:text-gold-700 dark:hover:text-gold-400"

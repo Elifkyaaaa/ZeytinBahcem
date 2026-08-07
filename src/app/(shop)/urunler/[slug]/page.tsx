@@ -67,7 +67,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-gold-600 uppercase dark:text-gold-400">
                 Bunları da beğenebilirsiniz
               </p>
-              <h2 className="mt-3 font-serif text-3xl text-foreground sm:text-4xl">Benzer Ürünler</h2>
+              <h2 className="mt-3 font-display text-3xl text-foreground sm:text-4xl">Benzer Ürünler</h2>
             </div>
           </div>
 

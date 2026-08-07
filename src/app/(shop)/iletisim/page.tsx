@@ -112,7 +112,7 @@ export default function ContactPage() {
 
           <div className="mt-14 grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
             <Reveal>
-              <h2 className="font-serif text-3xl text-foreground sm:text-4xl">Mesaj Gönderin</h2>
+              <h2 className="font-display text-3xl text-foreground sm:text-4xl">Mesaj Gönderin</h2>
               <p className="mt-3 leading-relaxed text-muted-foreground">
                 Formu doldurun; en geç bir iş günü içinde size dönüş yapalım. Acil konular için
                 WhatsApp hattımız daha hızlıdır.
@@ -135,7 +135,7 @@ export default function ContactPage() {
               </div>
 
               <div className="mt-6 rounded-2xl bg-surface-muted p-6">
-                <h3 className="flex items-center gap-2.5 font-serif text-lg text-foreground">
+                <h3 className="flex items-center gap-2.5 font-display text-lg text-foreground">
                   <Clock className="size-5 text-olive-600 dark:text-gold-400" strokeWidth={1.8} />
                   Ziyaret ve Tadım
                 </h3>
@@ -171,7 +171,7 @@ export default function ContactPage() {
 
       <Section tone="muted" className="py-16 lg:py-20">
         <Container>
-          <h2 className="text-center font-serif text-3xl text-foreground sm:text-4xl">
+          <h2 className="text-center font-display text-3xl text-foreground sm:text-4xl">
             Sık Sorulan Sorular
           </h2>
 

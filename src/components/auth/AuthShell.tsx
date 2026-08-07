@@ -50,7 +50,7 @@ export function AuthShell({
               <OliveBranchIcon className="size-6" />
             </span>
             <span className="flex flex-col leading-none">
-              <span className="font-serif text-lg font-semibold text-cream-50">{site.name}</span>
+              <span className="font-display text-lg font-semibold text-cream-50">{site.name}</span>
               <span className="mt-1 text-[0.6rem] font-medium tracking-[0.24em] text-cream-200/70 uppercase">
                 Est. {site.founded}
               </span>
@@ -60,7 +60,7 @@ export function AuthShell({
           {quote && (
             <figure className="max-w-md">
               <span className="hairline-gold mb-6 block h-px w-16" aria-hidden />
-              <blockquote className="font-serif text-2xl leading-relaxed text-cream-50">
+              <blockquote className="font-display text-2xl leading-relaxed text-cream-50">
                 “{quote.text}”
               </blockquote>
               <figcaption className="mt-4 text-sm text-cream-200/65">{quote.author}</figcaption>
@@ -80,13 +80,13 @@ export function AuthShell({
             <span className="grid size-10 place-items-center rounded-full bg-olive-600/8 text-olive-600 ring-1 ring-olive-600/20 dark:bg-gold-400/10 dark:text-gold-400">
               <OliveBranchIcon className="size-5" />
             </span>
-            <span className="font-serif text-lg font-semibold text-foreground">{site.name}</span>
+            <span className="font-display text-lg font-semibold text-foreground">{site.name}</span>
           </Link>
 
           <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-gold-600 uppercase dark:text-gold-400">
             {eyebrow}
           </p>
-          <h1 className="mt-3 font-serif text-3xl leading-tight text-foreground sm:text-4xl">
+          <h1 className="mt-3 font-display text-3xl leading-tight text-foreground sm:text-4xl">
             {title}
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{description}</p>

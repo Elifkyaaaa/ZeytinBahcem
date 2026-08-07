@@ -55,7 +55,7 @@ export function CartDrawer() {
             <header className="flex items-center justify-between border-b border-border px-5 py-4">
               <div className="flex items-center gap-2.5">
                 <ShoppingBag className="size-5 text-gold-600 dark:text-gold-400" strokeWidth={1.8} />
-                <h2 className="font-serif text-xl text-foreground">Sepetim</h2>
+                <h2 className="font-display text-xl text-foreground">Sepetim</h2>
                 {count > 0 && (
                   <span className="rounded-full bg-foreground/8 px-2 py-0.5 text-xs font-semibold tabular-nums">
                     {count}
@@ -102,7 +102,7 @@ export function CartDrawer() {
                   <span className="grid size-20 place-items-center rounded-full bg-surface-muted">
                     <ShoppingBag className="size-8 text-muted-foreground" strokeWidth={1.3} />
                   </span>
-                  <p className="mt-5 font-serif text-xl text-foreground">Sepetiniz boş</p>
+                  <p className="mt-5 font-display text-xl text-foreground">Sepetiniz boş</p>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     Ege’nin en iyi zeytinyağlarını keşfetmeye ne dersiniz?
                   </p>
@@ -183,7 +183,7 @@ export function CartDrawer() {
               <footer className="border-t border-border bg-surface px-5 py-5">
                 <div className="flex items-baseline justify-between">
                   <span className="text-sm text-muted-foreground">Ara toplam</span>
-                  <span className="font-serif text-2xl text-foreground tabular-nums">
+                  <span className="font-display text-2xl text-foreground tabular-nums">
                     {formatPrice(subtotal)}
                   </span>
                 </div>

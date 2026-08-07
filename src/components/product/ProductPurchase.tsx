@@ -95,7 +95,7 @@ export function ProductPurchase({ product }: { product: Product }) {
         )}
       </div>
 
-      <h1 className="mt-4 font-serif text-3xl leading-tight text-foreground sm:text-4xl lg:text-[2.7rem]">
+      <h1 className="mt-4 font-display text-3xl leading-tight text-foreground sm:text-4xl lg:text-[2.7rem]">
         {product.name}
       </h1>
 
@@ -115,7 +115,7 @@ export function ProductPurchase({ product }: { product: Product }) {
       </p>
 
       <div className="mt-7 flex items-end gap-3.5">
-        <span className="font-serif text-4xl leading-none font-semibold text-foreground tabular-nums">
+        <span className="font-display text-4xl leading-none font-semibold text-foreground tabular-nums">
           {formatPrice(variant.price)}
         </span>
         {variant.oldPrice && (

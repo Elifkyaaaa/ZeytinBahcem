@@ -444,7 +444,7 @@ export function ProductManager({
               onClick={(e) => e.stopPropagation()}
               className="w-full max-w-sm rounded-2xl border border-border bg-background p-6 shadow-lift"
             >
-              <h3 className="font-serif text-xl text-foreground">Ürünü sil</h3>
+              <h3 className="font-display text-xl text-foreground">Ürünü sil</h3>
               <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
                 <strong className="text-foreground">
                   {products.find((p) => p.id === confirmId)?.name}

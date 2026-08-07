@@ -63,7 +63,7 @@ export default async function AccountPage() {
       </div>
 
       <section className="rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-7">
-        <h2 className="font-serif text-xl text-foreground">Profil Bilgileri</h2>
+        <h2 className="font-display text-xl text-foreground">Profil Bilgileri</h2>
         <p className="mt-1.5 text-sm text-muted-foreground">
           Bu bilgiler siparişlerinizde ve kargo bildirimlerinde kullanılır.
         </p>
@@ -80,7 +80,7 @@ export default async function AccountPage() {
       </section>
 
       <section className="rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-7">
-        <h2 className="flex items-center gap-2.5 font-serif text-xl text-foreground">
+        <h2 className="flex items-center gap-2.5 font-display text-xl text-foreground">
           <ShieldCheck className="size-5 text-olive-600 dark:text-gold-400" strokeWidth={1.8} />
           Hesap Güvenliği
         </h2>

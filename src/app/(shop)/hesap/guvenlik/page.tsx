@@ -30,7 +30,7 @@ export default async function SecurityPage() {
       {!isSupabaseConfigured && <SupabaseNotice />}
 
       <section className="rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-7">
-        <h2 className="flex items-center gap-2.5 font-serif text-xl text-foreground">
+        <h2 className="flex items-center gap-2.5 font-display text-xl text-foreground">
           <ShieldCheck className="size-5 text-olive-600 dark:text-gold-400" strokeWidth={1.8} />
           İki Adımlı Doğrulama
         </h2>
@@ -76,7 +76,7 @@ export default async function SecurityPage() {
       </section>
 
       <section className="rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-7">
-        <h3 className="flex items-center gap-2.5 font-serif text-lg text-foreground">
+        <h3 className="flex items-center gap-2.5 font-display text-lg text-foreground">
           <ShieldAlert className="size-5 text-gold-600 dark:text-gold-400" strokeWidth={1.8} />
           Telefonunuzu kaybederseniz
         </h3>

@@ -127,7 +127,7 @@ export default function AdminSliderPage() {
 
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-start justify-between gap-2">
-                      <h3 className="font-serif text-lg leading-snug text-foreground">
+                      <h3 className="font-display text-lg leading-snug text-foreground">
                         {slide.title}
                       </h3>
                       <div className="flex shrink-0 items-center gap-1">

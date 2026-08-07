@@ -190,7 +190,7 @@ export function AddressManager({
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="flex items-center justify-between gap-4">
-              <h2 className="font-serif text-xl text-foreground">
+              <h2 className="font-display text-xl text-foreground">
                 Kayıtlı Adresler
                 <span className="ml-2 text-sm font-normal text-muted-foreground tabular-nums">
                   ({addresses.length})
@@ -210,7 +210,7 @@ export function AddressManager({
                 <span className="grid size-16 place-items-center rounded-full bg-surface-muted">
                   <MapPin className="size-7 text-muted-foreground" strokeWidth={1.3} />
                 </span>
-                <h3 className="mt-5 font-serif text-xl text-foreground">Kayıtlı adresiniz yok</h3>
+                <h3 className="mt-5 font-display text-xl text-foreground">Kayıtlı adresiniz yok</h3>
                 <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
                   Adres eklediğinizde ödeme adımında tek dokunuşla seçebilirsiniz.
                 </p>
@@ -302,7 +302,7 @@ export function AddressManager({
             className="rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-7"
           >
             <div className="mb-6 flex items-center justify-between gap-4">
-              <h2 className="font-serif text-xl text-foreground">
+              <h2 className="font-display text-xl text-foreground">
                 {editing ? 'Adresi Düzenle' : 'Yeni Adres'}
               </h2>
               <button

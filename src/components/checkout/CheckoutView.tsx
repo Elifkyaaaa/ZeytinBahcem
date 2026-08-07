@@ -251,7 +251,7 @@ export function CheckoutView() {
           <Check className="size-9" strokeWidth={2.8} />
         </motion.span>
 
-        <h2 className="mt-7 font-serif text-3xl text-foreground sm:text-4xl">
+        <h2 className="mt-7 font-display text-3xl text-foreground sm:text-4xl">
           Siparişiniz alındı
         </h2>
         <p className="mt-3 text-muted-foreground">
@@ -311,7 +311,7 @@ export function CheckoutView() {
         <span className="grid size-24 place-items-center rounded-full bg-surface-muted">
           <ShoppingBag className="size-10 text-muted-foreground" strokeWidth={1.2} />
         </span>
-        <h2 className="mt-7 font-serif text-3xl text-foreground">Ödenecek ürün yok</h2>
+        <h2 className="mt-7 font-display text-3xl text-foreground">Ödenecek ürün yok</h2>
         <p className="mt-3 max-w-md text-sm text-muted-foreground">
           Ödeme adımına geçmek için önce sepetinize ürün ekleyin.
         </p>
@@ -327,7 +327,7 @@ export function CheckoutView() {
       <div className="space-y-6">
         {/* Teslimat bilgileri */}
         <section className="rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-7">
-          <h2 className="flex items-center gap-2.5 font-serif text-xl text-foreground">
+          <h2 className="flex items-center gap-2.5 font-display text-xl text-foreground">
             <span className="grid size-9 place-items-center rounded-full bg-olive-600/8 text-olive-600 dark:bg-gold-400/10 dark:text-gold-400">
               <User className="size-4.5" strokeWidth={1.8} />
             </span>
@@ -451,7 +451,7 @@ export function CheckoutView() {
 
         {/* Kargo seçimi */}
         <section className="rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-7">
-          <h2 className="flex items-center gap-2.5 font-serif text-xl text-foreground">
+          <h2 className="flex items-center gap-2.5 font-display text-xl text-foreground">
             <span className="grid size-9 place-items-center rounded-full bg-olive-600/8 text-olive-600 dark:bg-gold-400/10 dark:text-gold-400">
               <Truck className="size-4.5" strokeWidth={1.8} />
             </span>
@@ -499,7 +499,7 @@ export function CheckoutView() {
 
         {/* Ödeme yöntemi */}
         <section className="rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-7">
-          <h2 className="flex items-center gap-2.5 font-serif text-xl text-foreground">
+          <h2 className="flex items-center gap-2.5 font-display text-xl text-foreground">
             <span className="grid size-9 place-items-center rounded-full bg-olive-600/8 text-olive-600 dark:bg-gold-400/10 dark:text-gold-400">
               <CreditCard className="size-4.5" strokeWidth={1.8} />
             </span>
@@ -700,7 +700,7 @@ export function CheckoutView() {
       {/* Sipariş özeti */}
       <aside className="lg:sticky lg:top-24 lg:self-start">
         <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
-          <h2 className="flex items-center gap-2.5 font-serif text-xl text-foreground">
+          <h2 className="flex items-center gap-2.5 font-display text-xl text-foreground">
             <MapPin className="size-5 text-gold-600 dark:text-gold-400" strokeWidth={1.8} />
             Sipariş Özeti
           </h2>
@@ -793,7 +793,7 @@ export function CheckoutView() {
 
             <div className="flex items-baseline justify-between border-t border-border pt-4">
               <dt className="font-semibold text-foreground">Genel Toplam</dt>
-              <dd className="font-serif text-2xl font-semibold text-foreground tabular-nums">
+              <dd className="font-display text-2xl font-semibold text-foreground tabular-nums">
                 {formatPrice(total)}
               </dd>
             </div>

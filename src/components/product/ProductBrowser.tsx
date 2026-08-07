@@ -242,7 +242,7 @@ export function ProductBrowser() {
             <span className="inline-grid size-16 place-items-center rounded-full bg-surface-muted">
               <LayoutGrid className="size-7 text-muted-foreground" strokeWidth={1.4} />
             </span>
-            <p className="mt-5 font-serif text-2xl text-foreground">Sonuç bulunamadı</p>
+            <p className="mt-5 font-display text-2xl text-foreground">Sonuç bulunamadı</p>
             <p className="mt-2 text-sm text-muted-foreground">
               Filtreleri gevşetmeyi veya farklı bir kelime denemeyi öneririz.
             </p>
@@ -297,7 +297,7 @@ export function ProductBrowser() {
               className="fixed inset-y-0 left-0 z-[75] flex w-[min(20rem,88vw)] flex-col border-r border-border bg-background shadow-lift lg:hidden"
             >
               <div className="flex items-center justify-between border-b border-border px-5 py-4">
-                <h2 className="font-serif text-xl">Filtreler</h2>
+                <h2 className="font-display text-xl">Filtreler</h2>
                 <button
                   onClick={() => setFiltersOpen(false)}
                   aria-label="Filtreleri kapat"

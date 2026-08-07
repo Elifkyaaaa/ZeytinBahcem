@@ -87,7 +87,7 @@ export function MobileMenu() {
                         href={item.href}
                         onClick={handleClose}
                         className={cn(
-                          'flex items-center justify-between rounded-xl px-4 py-3.5 font-serif text-xl transition-colors',
+                          'flex items-center justify-between rounded-xl px-4 py-3.5 font-display text-xl transition-colors',
                           active
                             ? 'bg-olive-600/8 text-olive-800 dark:bg-gold-400/10 dark:text-gold-300'
                             : 'text-foreground/85 hover:bg-foreground/5',

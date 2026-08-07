@@ -45,7 +45,7 @@ export function OrderTracker() {
   return (
     <div className="mx-auto max-w-2xl">
       <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-8">
-        <h2 className="flex items-center gap-2.5 font-serif text-xl text-foreground">
+        <h2 className="flex items-center gap-2.5 font-display text-xl text-foreground">
           <PackageSearch className="size-5 text-olive-600 dark:text-gold-400" strokeWidth={1.8} />
           Sipariş Sorgula
         </h2>
@@ -99,7 +99,7 @@ export function OrderTracker() {
           className="mt-6 rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-8"
         >
           <div className="flex flex-wrap items-baseline justify-between gap-3">
-            <h3 className="font-serif text-xl text-foreground">
+            <h3 className="font-display text-xl text-foreground">
               Sipariş {result.orderNo}
             </h3>
             <span className="text-sm text-muted-foreground">

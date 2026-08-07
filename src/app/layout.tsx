@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Cormorant_Garamond, Inter } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { Providers } from '@/components/providers/Providers';
 import { site } from '@/lib/data/site';
@@ -9,13 +9,6 @@ import './globals.css';
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],
   variable: '--font-inter',
-  display: 'swap',
-});
-
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-cormorant',
   display: 'swap',
 });
 
@@ -88,7 +81,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html
       lang="tr"
       suppressHydrationWarning
-      className={`${inter.variable} ${cormorant.variable}`}
+      className={inter.variable}
     >
       <body className="min-h-dvh bg-background text-foreground antialiased">
         <Providers>{children}</Providers>

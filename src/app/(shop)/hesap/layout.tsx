@@ -22,7 +22,7 @@ export default async function AccountLayout({ children }: { children: ReactNode 
         />
 
         <div className="mt-6 flex flex-col gap-2">
-          <h1 className="font-serif text-4xl text-foreground sm:text-5xl">Hesabım</h1>
+          <h1 className="font-display text-4xl text-foreground sm:text-5xl">Hesabım</h1>
           <p className="text-muted-foreground">
             Merhaba <strong className="font-medium text-foreground">{displayName}</strong> — sipariş,
             adres ve güvenlik ayarlarınız burada.

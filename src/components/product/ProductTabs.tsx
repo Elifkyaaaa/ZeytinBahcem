@@ -116,7 +116,7 @@ export function ProductTabs({ product }: { product: Product }) {
                 <div>
                   <p className="text-base leading-[1.85] text-foreground/85">{product.description}</p>
 
-                  <h3 className="mt-9 font-serif text-xl text-foreground">Öne çıkan özellikler</h3>
+                  <h3 className="mt-9 font-display text-xl text-foreground">Öne çıkan özellikler</h3>
                   <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
                     {product.highlights.map((h) => (
                       <li
@@ -131,7 +131,7 @@ export function ProductTabs({ product }: { product: Product }) {
                 </div>
 
                 <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
-                  <h3 className="font-serif text-lg text-foreground">Ürün künyesi</h3>
+                  <h3 className="font-display text-lg text-foreground">Ürün künyesi</h3>
                   <dl className="mt-4 divide-y divide-border">
                     {product.specs.map((spec, i) => (
                       <div key={`${spec.label}-${i}`} className="flex justify-between gap-4 py-3">
@@ -260,7 +260,7 @@ export function ProductTabs({ product }: { product: Product }) {
                 className="grid gap-10 lg:grid-cols-[18rem_1fr]"
               >
                 <div className="rounded-2xl border border-border bg-surface p-6 text-center shadow-soft lg:sticky lg:top-24 lg:self-start">
-                  <p className="font-serif text-5xl font-semibold text-foreground tabular-nums">
+                  <p className="font-display text-5xl font-semibold text-foreground tabular-nums">
                     {product.rating.toFixed(1)}
                   </p>
                   <StarRating rating={product.rating} size="lg" className="mt-3 justify-center" />

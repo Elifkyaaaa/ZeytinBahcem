@@ -33,7 +33,7 @@ export function FavoritesView() {
         <span className="grid size-20 place-items-center rounded-full bg-surface-muted">
           <Heart className="size-8 text-muted-foreground" strokeWidth={1.3} />
         </span>
-        <h2 className="mt-6 font-serif text-2xl text-foreground">Favori listeniz boş</h2>
+        <h2 className="mt-6 font-display text-2xl text-foreground">Favori listeniz boş</h2>
         <p className="mt-2.5 max-w-sm text-sm leading-relaxed text-muted-foreground">
           Beğendiğiniz ürünlerin kalp simgesine dokunun; buraya eklensin ve sonra kolayca bulun.
         </p>

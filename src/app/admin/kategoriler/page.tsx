@@ -65,7 +65,7 @@ export default function AdminCategoriesPage() {
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-start justify-between gap-2">
                     <div className="min-w-0">
-                      <h3 className="font-serif text-lg text-foreground">{category.name}</h3>
+                      <h3 className="font-display text-lg text-foreground">{category.name}</h3>
                       <p className="mt-0.5 text-xs text-muted-foreground">
                         /urunler?kategori={category.slug}
                       </p>

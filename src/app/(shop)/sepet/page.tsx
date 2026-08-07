@@ -20,7 +20,7 @@ export default function CartPage() {
             { name: 'Sepetim', path: '/sepet' },
           ]}
         />
-        <h1 className="mt-6 font-serif text-4xl text-foreground sm:text-5xl">Sepetim</h1>
+        <h1 className="mt-6 font-display text-4xl text-foreground sm:text-5xl">Sepetim</h1>
         <p className="mt-3 text-muted-foreground">
           Siparişinizi tamamlamadan önce ürünlerinizi kontrol edin.
         </p>

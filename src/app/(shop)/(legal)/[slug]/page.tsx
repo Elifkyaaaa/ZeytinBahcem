@@ -89,7 +89,7 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
                 {doc.eyebrow}
               </p>
 
-              <h1 className="mt-3 font-serif text-4xl leading-tight text-foreground sm:text-5xl">
+              <h1 className="mt-3 font-display text-4xl leading-tight text-foreground sm:text-5xl">
                 {doc.title}
               </h1>
 
@@ -106,7 +106,7 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
               <div className="mt-9 space-y-10">
                 {doc.sections.map((section) => (
                   <section key={section.title}>
-                    <h2 className="font-serif text-xl text-foreground sm:text-2xl">
+                    <h2 className="font-display text-xl text-foreground sm:text-2xl">
                       {section.title}
                     </h2>
 

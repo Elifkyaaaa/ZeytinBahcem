@@ -75,7 +75,7 @@ export default function BlogPage() {
                   <span className="text-xs text-muted-foreground">Öne çıkan yazı</span>
                 </div>
 
-                <h2 className="mt-5 font-serif text-3xl leading-tight text-foreground sm:text-4xl">
+                <h2 className="mt-5 font-display text-3xl leading-tight text-foreground sm:text-4xl">
                   <Link
                     href={`/blog/${featured.slug}`}
                     className="transition-colors duration-300 after:absolute after:inset-0 hover:text-gold-700 dark:hover:text-gold-400"
@@ -145,7 +145,7 @@ export default function BlogPage() {
                       </span>
                     </div>
 
-                    <h3 className="mt-3 font-serif text-xl leading-snug text-foreground">
+                    <h3 className="mt-3 font-display text-xl leading-snug text-foreground">
                       <Link
                         href={`/blog/${post.slug}`}
                         className="transition-colors duration-300 after:absolute after:inset-0 hover:text-gold-700 dark:hover:text-gold-400"

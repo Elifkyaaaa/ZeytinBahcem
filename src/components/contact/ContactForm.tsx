@@ -70,7 +70,7 @@ export function ContactForm() {
         <span className="inline-grid size-14 place-items-center rounded-full bg-olive-600 text-cream-50">
           <Check className="size-7" strokeWidth={2.8} />
         </span>
-        <h3 className="mt-5 font-serif text-2xl text-foreground">Mesajınız alındı</h3>
+        <h3 className="mt-5 font-display text-2xl text-foreground">Mesajınız alındı</h3>
         <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
           En geç bir iş günü içinde <strong className="text-foreground">{values.email}</strong>{' '}
           adresine dönüş yapacağız.

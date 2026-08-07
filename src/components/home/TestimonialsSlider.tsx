@@ -82,7 +82,7 @@ export function TestimonialsSlider() {
               >
                 <StarRating rating={active.rating} size="lg" />
 
-                <blockquote className="mt-6 font-serif text-xl leading-relaxed text-cream-50 text-balance sm:text-2xl lg:text-[1.7rem]">
+                <blockquote className="mt-6 font-display text-xl leading-relaxed text-cream-50 text-balance sm:text-2xl lg:text-[1.7rem]">
                   “{active.comment}”
                 </blockquote>
 

@@ -24,7 +24,7 @@ export default function ChangePasswordPage() {
       {!isSupabaseConfigured && <SupabaseNotice />}
 
       <section className="rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-7">
-        <h2 className="flex items-center gap-2.5 font-serif text-xl text-foreground">
+        <h2 className="flex items-center gap-2.5 font-display text-xl text-foreground">
           <KeyRound className="size-5 text-olive-600 dark:text-gold-400" strokeWidth={1.8} />
           Şifre Değiştir
         </h2>

@@ -51,7 +51,7 @@ export function NewsletterSection() {
               <Mail className="size-6" strokeWidth={1.6} />
             </span>
 
-            <h2 className="mt-6 font-serif text-3xl text-cream-50 sm:text-4xl lg:text-[2.75rem]">
+            <h2 className="mt-6 font-display text-3xl text-cream-50 sm:text-4xl lg:text-[2.75rem]">
               Kampanyaları Kaçırmayın
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-cream-200/72 sm:text-base">

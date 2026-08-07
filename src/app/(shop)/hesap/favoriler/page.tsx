@@ -11,7 +11,7 @@ export const metadata = buildMetadata({
 export default function AccountFavoritesPage() {
   return (
     <div>
-      <h2 className="mb-5 font-serif text-xl text-foreground">Favorilerim</h2>
+      <h2 className="mb-5 font-display text-xl text-foreground">Favorilerim</h2>
       <FavoritesView />
     </div>
   );

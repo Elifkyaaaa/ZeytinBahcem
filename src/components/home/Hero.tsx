@@ -84,7 +84,7 @@ export function Hero() {
             </span>
           </motion.div>
 
-          <h1 className="max-w-[15ch] font-serif text-[2.65rem] leading-[1.04] font-medium text-cream-50 sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem]">
+          <h1 className="max-w-[15ch] font-display text-[2.65rem] leading-[1.04] font-semibold text-cream-50 sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem]">
             {title.map((word, i) => (
               <motion.span
                 key={word}

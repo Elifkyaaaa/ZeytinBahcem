@@ -60,7 +60,7 @@ export function VideoSection() {
               <p className="mt-8 text-[0.68rem] font-semibold tracking-[0.24em] text-gold-300 uppercase">
                 Bahçeden
               </p>
-              <h2 className="mt-3 max-w-2xl font-serif text-3xl leading-tight text-cream-50 sm:text-4xl lg:text-5xl">
+              <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight text-cream-50 sm:text-4xl lg:text-5xl">
                 Bir Sezon, Üç Hafta, Tek Bir Amaç
               </h2>
               <p className="mt-4 max-w-lg text-sm leading-relaxed text-cream-200/75 sm:text-base">

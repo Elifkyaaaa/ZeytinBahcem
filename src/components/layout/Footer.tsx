@@ -50,7 +50,7 @@ export function Footer() {
 
           {footerNav.map((group) => (
             <nav key={group.title} aria-label={group.title}>
-              <h3 className="font-serif text-base text-cream-50">{group.title}</h3>
+              <h3 className="font-display text-base text-cream-50">{group.title}</h3>
               <span className="hairline-gold mt-3 block h-px w-10" aria-hidden />
               <ul className="mt-4 space-y-2.5">
                 {group.items.map((item) => (
@@ -69,7 +69,7 @@ export function Footer() {
           ))}
 
           <div>
-            <h3 className="font-serif text-base text-cream-50">İletişim</h3>
+            <h3 className="font-display text-base text-cream-50">İletişim</h3>
             <span className="hairline-gold mt-3 block h-px w-10" aria-hidden />
             <ul className="mt-4 space-y-3.5 text-sm">
               <li className="flex gap-3">

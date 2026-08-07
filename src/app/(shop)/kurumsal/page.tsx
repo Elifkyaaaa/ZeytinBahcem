@@ -86,7 +86,7 @@ export default function CorporatePage() {
                     <Icon className="size-6" strokeWidth={1.6} />
                   </span>
                   <div>
-                    <h3 className="font-serif text-xl text-foreground">{title}</h3>
+                    <h3 className="font-display text-xl text-foreground">{title}</h3>
                     <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{text}</p>
                   </div>
                 </article>
@@ -105,7 +105,7 @@ export default function CorporatePage() {
                 {facts.map((fact) => (
                   <div key={fact.label} className="rounded-2xl border border-border bg-surface p-6">
                     <dt className="text-sm text-muted-foreground">{fact.label}</dt>
-                    <dd className="mt-2 font-serif text-3xl font-semibold text-foreground tabular-nums">
+                    <dd className="mt-2 font-display text-3xl font-semibold text-foreground tabular-nums">
                       {fact.value}
                     </dd>
                   </div>
@@ -145,7 +145,7 @@ export default function CorporatePage() {
               className="pointer-events-none absolute -top-24 -right-16 size-72 rounded-full bg-gold-500/10 blur-3xl"
             />
 
-            <h2 className="relative font-serif text-3xl text-cream-50 sm:text-4xl">
+            <h2 className="relative font-display text-3xl text-cream-50 sm:text-4xl">
               Fiyat Listesi ve Numune Talebi
             </h2>
             <p className="relative mx-auto mt-4 max-w-xl leading-relaxed text-cream-200/75">

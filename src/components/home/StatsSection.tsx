@@ -28,7 +28,7 @@ function StatCard({ stat, active, delay }: { stat: Stat; active: boolean; delay:
           <Icon className="size-6" strokeWidth={1.6} />
         </span>
 
-        <p className="relative mt-5 font-serif text-[2rem] leading-none font-semibold text-foreground tabular-nums sm:text-[2.6rem]">
+        <p className="relative mt-5 font-display text-[2rem] leading-none font-semibold text-foreground tabular-nums sm:text-[2.6rem]">
           {stat.prefix}
           {formatNumber(value)}
           <span className="text-gold-600 dark:text-gold-400">{stat.suffix}</span>

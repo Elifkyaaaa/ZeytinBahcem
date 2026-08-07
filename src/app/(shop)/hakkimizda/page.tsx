@@ -222,16 +222,16 @@ export default function AboutPage() {
                   }`}
                 >
                   <span
-                    className={`relative z-10 grid size-11 shrink-0 place-items-center rounded-full border-2 border-gold-500/40 bg-background font-serif text-xs font-semibold text-gold-700 sm:absolute sm:top-1 sm:left-1/2 sm:-translate-x-1/2 dark:text-gold-400`}
+                    className={`relative z-10 grid size-11 shrink-0 place-items-center rounded-full border-2 border-gold-500/40 bg-background font-display text-xs font-semibold text-gold-700 sm:absolute sm:top-1 sm:left-1/2 sm:-translate-x-1/2 dark:text-gold-400`}
                   >
                     {String(i + 1).padStart(2, '0')}
                   </span>
 
                   <div className={`min-w-0 flex-1 sm:w-1/2 sm:flex-none ${i % 2 === 0 ? 'sm:pr-14 sm:text-right' : 'sm:pl-14'}`}>
-                    <p className="font-serif text-2xl font-semibold text-gold-700 dark:text-gold-400">
+                    <p className="font-display text-2xl font-semibold text-gold-700 dark:text-gold-400">
                       {item.year}
                     </p>
-                    <h3 className="mt-1 font-serif text-xl text-foreground">{item.title}</h3>
+                    <h3 className="mt-1 font-display text-xl text-foreground">{item.title}</h3>
                     <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
                       {item.text}
                     </p>
@@ -260,7 +260,7 @@ export default function AboutPage() {
                     <Icon className="size-6" strokeWidth={1.6} />
                   </span>
                   <div>
-                    <h3 className="font-serif text-xl text-foreground">{title}</h3>
+                    <h3 className="font-display text-xl text-foreground">{title}</h3>
                     <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{text}</p>
                   </div>
                 </article>
@@ -294,7 +294,7 @@ export default function AboutPage() {
                       className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                     />
                   </div>
-                  <h3 className="mt-5 font-serif text-xl text-foreground">{member.name}</h3>
+                  <h3 className="mt-5 font-display text-xl text-foreground">{member.name}</h3>
                   <p className="mt-1 text-xs font-semibold tracking-[0.16em] text-gold-600 uppercase dark:text-gold-400">
                     {member.role}
                   </p>
@@ -312,7 +312,7 @@ export default function AboutPage() {
                 <Users className="size-6" strokeWidth={1.6} />
               </span>
               <div className="min-w-0 flex-1">
-                <h3 className="font-serif text-xl text-foreground">Bahçemizi ziyaret edin</h3>
+                <h3 className="font-display text-xl text-foreground">Bahçemizi ziyaret edin</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
                   Ekim–Kasım aylarında hasada katılabilir, sıkım sürecini yerinde izleyebilir ve
                   tadım yapabilirsiniz. Randevu için bize yazmanız yeterli.

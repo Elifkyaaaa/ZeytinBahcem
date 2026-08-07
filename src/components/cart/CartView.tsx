@@ -79,7 +79,7 @@ export function CartView() {
         <span className="grid size-24 place-items-center rounded-full bg-surface-muted">
           <ShoppingBag className="size-10 text-muted-foreground" strokeWidth={1.2} />
         </span>
-        <h2 className="mt-7 font-serif text-3xl text-foreground">Sepetiniz henüz boş</h2>
+        <h2 className="mt-7 font-display text-3xl text-foreground">Sepetiniz henüz boş</h2>
         <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
           Ege’nin asırlık bahçelerinden gelen zeytinyağlarımıza ve doğal salamura zeytinlerimize
           göz atın.
@@ -127,7 +127,7 @@ export function CartView() {
         </div>
 
         <div className="mt-5 flex items-center justify-between">
-          <h2 className="font-serif text-xl text-foreground">
+          <h2 className="font-display text-xl text-foreground">
             Ürünler
             <span className="ml-2 text-sm font-normal text-muted-foreground tabular-nums">
               ({items.length} kalem)
@@ -174,7 +174,7 @@ export function CartView() {
                   <div className="min-w-0 flex-1">
                     <Link
                       href={`/urunler/${item.slug}`}
-                      className="font-serif text-lg leading-snug text-foreground transition-colors hover:text-gold-700 dark:hover:text-gold-400"
+                      className="font-display text-lg leading-snug text-foreground transition-colors hover:text-gold-700 dark:hover:text-gold-400"
                     >
                       {item.name}
                     </Link>
@@ -220,7 +220,7 @@ export function CartView() {
       {/* Özet */}
       <aside className="lg:sticky lg:top-24 lg:self-start">
         <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
-          <h2 className="font-serif text-xl text-foreground">Sipariş Özeti</h2>
+          <h2 className="font-display text-xl text-foreground">Sipariş Özeti</h2>
 
           {/* Kupon */}
           <div className="mt-5">
@@ -335,7 +335,7 @@ export function CartView() {
 
             <div className="flex items-baseline justify-between border-t border-border pt-4">
               <dt className="font-semibold text-foreground">Toplam</dt>
-              <dd className="font-serif text-2xl font-semibold text-foreground tabular-nums">
+              <dd className="font-display text-2xl font-semibold text-foreground tabular-nums">
                 {formatPrice(totals.total)}
               </dd>
             </div>
