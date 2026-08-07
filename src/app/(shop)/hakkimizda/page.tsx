@@ -18,26 +18,31 @@ const trail = [
 export const metadata = buildMetadata({
   title: 'Hakkımızda',
   description:
-    '1963’ten bu yana Orhangazi’de zeytin yetiştiriyor, her sezon dalından topladığımız meyveyi soğuk sıkım yöntemiyle zeytinyağına dönüştürüyoruz.',
+    '1889’dan bu yana Orhangazi’de zeytin yetiştiriyor, her sezon dalından topladığımız meyveyi soğuk sıkım yöntemiyle zeytinyağına dönüştürüyoruz.',
   path: '/hakkimizda',
   image: IMG.groveHill,
 });
 
 const timeline = [
   {
-    year: '1963',
+    year: '1889',
     title: 'İlk ağaçlar',
-    text: 'Dedemiz Hüseyin Aydoğan, Orhangazi Ortaköy’de İznik Gölü’ne bakan yamaca ilk 120 zeytin fidanını dikti. O ağaçların bir kısmı bugün hâlâ meyve veriyor.',
+    text: 'Kurucumuz Hüseyin Karabesimoğlu, Orhangazi Ortaköy’de İznik Gölü’ne bakan yamaca ilk 120 zeytin fidanını dikti. O ağaçların bir kısmı bugün hâlâ meyve veriyor.',
   },
   {
-    year: '1978',
+    year: '1928',
     title: 'Kendi değirmenimiz',
-    text: 'Zeytinlerimizi başkasının fabrikasında sıktırmayı bıraktık. Granit taş değirmeni kurduk; taş baskı üretimimiz o gün başladı.',
+    text: 'Zeytinlerimizi başkasının değirmeninde sıktırmayı bıraktık. Granit taş değirmenini kurduk; taş baskı üretimimiz o gün başladı.',
+  },
+  {
+    year: '1963',
+    title: 'Üçüncü kuşak',
+    text: 'Bahçe altmış dönüme genişledi. Ayvalık ve Gemlik çeşitleri yan yana dikildi; bugünkü harmanımızın temeli o yıllarda atıldı.',
   },
   {
     year: '1996',
-    title: 'İkinci kuşak',
-    text: 'Nesrin ve Kerem Aydoğan işi devraldı. Soğuk sıkım hattı kuruldu, hasat–sıkım arası süre sekiz saate indirildi.',
+    title: 'Soğuk sıkım hattı',
+    text: 'Nesrin ve Kerem Karabesimoğlu işi devraldı. Soğuk sıkım hattı kuruldu, hasat–sıkım arası süre sekiz saate indirildi.',
   },
   {
     year: '2011',
@@ -81,13 +86,13 @@ const values = [
 
 const team = [
   {
-    name: 'Nesrin Aydoğan',
+    name: 'Nesrin Karabesimoğlu',
     role: 'Kurucu Ortak',
     avatar: AVATAR.a1,
-    bio: 'İkinci kuşağın büyük kızı. Bahçe planlaması ve organik geçiş sürecini yürüttü.',
+    bio: 'Dördüncü kuşağın büyük kızı. Bahçe planlaması ve organik geçiş sürecini yürüttü.',
   },
   {
-    name: 'Kerem Aydoğan',
+    name: 'Kerem Karabesimoğlu',
     role: 'Üretim Sorumlusu',
     avatar: AVATAR.a7,
     bio: 'Hasat takvimi, sıkım süreci ve kalite kontrolden sorumlu. Her partiyi kendisi tadar.',
@@ -105,7 +110,7 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow={`Est. ${site.founded}`}
-        title="Üç Kuşaktır Aynı Yamaçtayız"
+        title="Beş Kuşaktır Aynı Yamaçtayız"
         description="Orhangazi’de, İznik Gölü’ne bakan altmış dönümlük bir bahçede başlayan hikâye. Değişen çok şey oldu; zeytini ne zaman toplayacağımıza karar verme biçimimiz hariç."
         image={IMG.groveHill}
         trail={trail}
@@ -129,7 +134,7 @@ export default function AboutPage() {
                   Sıkım sıcaklığı beş derece artarsa aroma buharlaşır.
                 </p>
                 <p>
-                  Bu üç kararın hiçbirinde bize kolaylık sağlayacak tarafı seçmedik. 1963’ten bu
+                  Bu üç kararın hiçbirinde bize kolaylık sağlayacak tarafı seçmedik. 1889’dan bu
                   yana aynı yamaçta, aynı ağaçlarla çalışıyoruz ve her yıl aynı soruyu soruyoruz:
                   bu sezon meyve ne zaman hazır?
                 </p>

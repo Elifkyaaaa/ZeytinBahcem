@@ -1,19 +1,19 @@
 import type { NavItem } from '@/types';
 
 export const site = {
-  name: 'Zeytin Bahçem',
-  legalName: 'Zeytin Bahçem Tarım Ürünleri Ltd. Şti.',
+  name: 'Karabesimoğlu Zeytincilik',
+  legalName: 'Karabesimoğlu Zeytincilik Tarım Ürünleri Ltd. Şti.',
   tagline: 'Doğadan Sofranıza Gerçek Zeytinyağı',
   description:
     'Ege’nin asırlık zeytinliklerinden, dalından özenle toplanan zeytinlerle soğuk sıkım üretilen naturel sızma zeytinyağı ve sofralık zeytin çeşitleri.',
-  url: 'https://zeytinbahcem.com',
+  url: 'https://karabesimoglu.com',
   locale: 'tr_TR',
-  founded: 1963,
+  founded: 1889,
   phone: '+90 232 555 04 12',
   phoneHref: 'tel:+902325550412',
   whatsapp: '+90 532 555 04 12',
   whatsappHref: 'https://wa.me/905325550412',
-  email: 'merhaba@zeytinbahcem.com',
+  email: 'merhaba@karabesimoglu.com',
   address: {
     street: 'Ortaköy Mah. Hasat Cad. No: 12',
     district: 'Orhangazi',
@@ -45,7 +45,7 @@ export const site = {
     mersis: '0000000000000000',
     tradeRegistryNo: '00000',
     chamber: 'Bursa Ticaret ve Sanayi Odası',
-    kepAddress: 'zeytinbahcem@hs01.kep.tr',
+    kepAddress: 'karabesimoglu@hs01.kep.tr',
   },
 
   /** Ödeme altyapısı — footer ve ödeme sayfasında belirtilir. */

@@ -3,12 +3,12 @@ import { AVATAR, IMG } from '@/lib/images';
 
 const authors = {
   kerem: {
-    name: 'Kerem Aydoğan',
+    name: 'Kerem Karabesimoğlu',
     role: 'Üretim Sorumlusu',
     avatar: AVATAR.a7,
   },
   nesrin: {
-    name: 'Nesrin Aydoğan',
+    name: 'Nesrin Karabesimoğlu',
     role: 'Kurucu Ortak',
     avatar: AVATAR.a1,
   },

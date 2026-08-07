@@ -40,6 +40,10 @@ const nextConfig: NextConfig = {
     // Kaynak görseller 1920 px ile sınırlı; daha büyük varyant istemek anlamsız.
     deviceSizes: [360, 480, 640, 750, 828, 1080, 1200, 1440, 1920],
     imageSizes: [64, 96, 128, 192, 256, 384],
+    // Next 16 yalnızca burada sayılan kalite değerlerine izin verir; listede
+    // olmayan bir `quality` istendiğinde /_next/image 400 döner. Kodda geçen
+    // tüm değerler burada yer almalıdır (72 hero fonu, 74 kart, 86 portre).
+    qualities: [72, 74, 75, 86],
   },
   // iyzipay ve cloudinary dinamik require kullanır; bundle'a alınmayıp
   // çalışma anında Node tarafından yüklenmeleri gerekir.

@@ -156,11 +156,11 @@ export interface AdminUser {
 }
 
 export const adminUsers: AdminUser[] = [
-  { id: 'U-01', name: 'Nesrin Aydoğan', email: 'nesrin@zeytinbahcem.com', avatar: AVATAR.a1, role: 'Yönetici', lastActive: '2 dakika önce', status: 'aktif' },
-  { id: 'U-02', name: 'Kerem Aydoğan', email: 'kerem@zeytinbahcem.com', avatar: AVATAR.a7, role: 'Yönetici', lastActive: '1 saat önce', status: 'aktif' },
-  { id: 'U-03', name: 'Tolga Bayram', email: 'tolga@zeytinbahcem.com', avatar: AVATAR.a5, role: 'Editör', lastActive: 'Dün', status: 'aktif' },
-  { id: 'U-04', name: 'Sibel Korkmaz', email: 'sibel@zeytinbahcem.com', avatar: AVATAR.a2, role: 'Sipariş Sorumlusu', lastActive: '3 saat önce', status: 'aktif' },
-  { id: 'U-05', name: 'Emre Duran', email: 'emre@zeytinbahcem.com', avatar: AVATAR.a3, role: 'Depo', lastActive: '5 gün önce', status: 'pasif' },
+  { id: 'U-01', name: 'Nesrin Karabesimoğlu', email: 'nesrin@karabesimoglu.com', avatar: AVATAR.a1, role: 'Yönetici', lastActive: '2 dakika önce', status: 'aktif' },
+  { id: 'U-02', name: 'Kerem Karabesimoğlu', email: 'kerem@karabesimoglu.com', avatar: AVATAR.a7, role: 'Yönetici', lastActive: '1 saat önce', status: 'aktif' },
+  { id: 'U-03', name: 'Tolga Bayram', email: 'tolga@karabesimoglu.com', avatar: AVATAR.a5, role: 'Editör', lastActive: 'Dün', status: 'aktif' },
+  { id: 'U-04', name: 'Sibel Korkmaz', email: 'sibel@karabesimoglu.com', avatar: AVATAR.a2, role: 'Sipariş Sorumlusu', lastActive: '3 saat önce', status: 'aktif' },
+  { id: 'U-05', name: 'Emre Duran', email: 'emre@karabesimoglu.com', avatar: AVATAR.a3, role: 'Depo', lastActive: '5 gün önce', status: 'pasif' },
 ];
 
 export const permissionMatrix = [

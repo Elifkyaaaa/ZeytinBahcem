@@ -16,9 +16,18 @@ const PHOTO = {
   hasat: '/gorseller/hasat.jpg',
   /** Avuçta iri siyah zeytinler, arkada dolu kasa */
   zeytin: '/gorseller/siyah-zeytin.jpg',
+  /**
+   * Kurucumuzun sepya portresi (1122×1402, dikey).
+   * Marka adı ve "Since 1889" ibaresi görselin altına basılıdır —
+   * bu yüzden asla kırpılmadan, 4/5 oranında gösterilmelidir.
+   */
+  kurucuPortre: '/gorseller/kurucu-portre.jpg',
 } as const;
 
 export const IMG = {
+  // Kurucu portresi — üzerindeki yazı nedeniyle yalnızca 4/5 oranında kullanılır
+  founderPortrait: PHOTO.kurucuPortre,
+
   // Bahçe & manzara
   heroGrove: PHOTO.bahce,
   groveHill: PHOTO.bahce,

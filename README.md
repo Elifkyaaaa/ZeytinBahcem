@@ -1,4 +1,4 @@
-# Zeytin Bahçem
+# Karabesimoğlu Zeytincilik
 
 Premium zeytin ve zeytinyağı e-ticaret uygulaması. Next.js App Router üzerine kurulu,
 tam responsive, koyu tema destekli ve SEO odaklı bir vitrin; yanında müşteri paneli,

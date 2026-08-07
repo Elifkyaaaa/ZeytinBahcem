@@ -6,7 +6,7 @@ import { buildMetadata } from '@/lib/seo';
 
 export const metadata = buildMetadata({
   title: 'Üye Ol',
-  description: 'Zeytin Bahçem üyeliği oluşturun; ilk siparişinize özel indirim ve hasat duyuruları.',
+  description: 'Karabesimoğlu Zeytincilik üyeliği oluşturun; ilk siparişinize özel indirim ve hasat duyuruları.',
   path: '/kayit',
   noIndex: true,
 });
@@ -20,7 +20,7 @@ export default function RegisterPage() {
       image={IMG.branchOlives}
       quote={{
         text: 'Hasat, bizim için yılın en yorucu ve en güzel üç haftasıdır.',
-        author: 'Nesrin Aydoğan · Kurucu Ortak',
+        author: 'Nesrin Karabesimoğlu · Kurucu Ortak',
       }}
       footer={
         <span className="text-muted-foreground">

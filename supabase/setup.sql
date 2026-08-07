@@ -1,5 +1,5 @@
 -- =============================================================================
---  Zeytin Bahçem — tek seferlik kurulum
+--  Karabesimoğlu Zeytincilik — tek seferlik kurulum
 --  Supabase Dashboard → SQL Editor → bu dosyanın tamamını yapıştırıp çalıştırın.
 --
 --  İçerik:
@@ -15,7 +15,7 @@
 -- ─── supabase/migrations/20260804000001_initial_schema.sql ───────────────────────────────────────────────────────────
 
 -- =============================================================================
---  Zeytin Bahçem — Başlangıç şeması
+--  Karabesimoğlu Zeytincilik — Başlangıç şeması
 --  11 tablo: users, categories, products, orders, order_items, addresses,
 --            favorites, cart, coupons, reviews, blogs, settings
 -- =============================================================================
@@ -486,7 +486,7 @@ create trigger settings_set_updated_at
   for each row execute function public.set_updated_at();
 
 insert into public.settings (key, value) values
-  ('store', '{"name":"Zeytin Bahçem","phone":"+90 232 555 04 12","email":"merhaba@zeytinbahcem.com","free_shipping_threshold":500}'::jsonb),
+  ('store', '{"name":"Karabesimoğlu Zeytincilik","phone":"+90 232 555 04 12","email":"merhaba@karabesimoglu.com","free_shipping_threshold":500}'::jsonb),
   ('shipping', '{"standard":79.9,"express":149.9,"cod_fee":39.9}'::jsonb),
   ('payment', '{"vat_rate":0.20,"transfer_discount":0.03,"installments":true}'::jsonb),
   ('slider', '[]'::jsonb)
@@ -702,11 +702,11 @@ on conflict (code) do update
 
 insert into public.settings (key, value) values
   ('store', jsonb_build_object(
-     'name', 'Zeytin Bahçem',
-     'legal_name', 'Zeytin Bahçem Tarım Ürünleri Ltd. Şti.',
+     'name', 'Karabesimoğlu Zeytincilik',
+     'legal_name', 'Karabesimoğlu Zeytincilik Tarım Ürünleri Ltd. Şti.',
      'phone', '+90 232 555 04 12',
      'whatsapp', '+90 532 555 04 12',
-     'email', 'merhaba@zeytinbahcem.com',
+     'email', 'merhaba@karabesimoglu.com',
      'address', 'Ortaköy Mah. Hasat Cad. No: 12, Orhangazi / Bursa',
      'free_shipping_threshold', 500
    )),

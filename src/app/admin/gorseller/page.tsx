@@ -7,10 +7,10 @@ import { ImageUploader } from '@/components/admin/ImageUploader';
 import { AdminField, adminInput, DemoNotice, Panel, StatCard } from '@/components/admin/primitives';
 
 const folders = [
-  { value: 'zeytin-store/urunler', label: 'Ürün görselleri' },
-  { value: 'zeytin-store/kategoriler', label: 'Kategori görselleri' },
-  { value: 'zeytin-store/blog', label: 'Blog kapakları' },
-  { value: 'zeytin-store/slider', label: 'Slider görselleri' },
+  { value: 'karabesimoglu/urunler', label: 'Ürün görselleri' },
+  { value: 'karabesimoglu/kategoriler', label: 'Kategori görselleri' },
+  { value: 'karabesimoglu/blog', label: 'Blog kapakları' },
+  { value: 'karabesimoglu/slider', label: 'Slider görselleri' },
 ];
 
 const pipeline = [
