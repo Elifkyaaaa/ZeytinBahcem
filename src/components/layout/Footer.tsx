@@ -1,4 +1,4 @@
-import { Clock, Mail, MapPin, Phone } from 'lucide-react';
+import { Clock, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import { Logo } from '@/components/layout/Logo';
 import {
@@ -138,16 +138,59 @@ export function Footer() {
         </div>
       </div>
 
+      {/* Ticari künye — 6563 sayılı E-Ticaret Kanunu gereği erişilebilir olmalı */}
       <div className="border-t border-cream-200/10">
-        <div className="container-x flex flex-col items-center justify-between gap-5 py-6 sm:flex-row">
-          <p className="order-2 text-center text-xs text-cream-200/55 sm:order-1 sm:text-left">
+        <div className="container-x py-7">
+          <dl className="grid gap-x-8 gap-y-3 text-xs text-cream-200/55 sm:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <dt className="text-cream-200/40">Ünvan</dt>
+              <dd className="mt-0.5 text-cream-200/75">{site.legalName}</dd>
+            </div>
+            <div>
+              <dt className="text-cream-200/40">Vergi Dairesi / No</dt>
+              <dd className="mt-0.5 text-cream-200/75 tabular-nums">
+                {site.legal.taxOffice} / {site.legal.taxNumber}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-cream-200/40">MERSİS No</dt>
+              <dd className="mt-0.5 text-cream-200/75 tabular-nums">{site.legal.mersis}</dd>
+            </div>
+            <div>
+              <dt className="text-cream-200/40">Ticaret Sicil No</dt>
+              <dd className="mt-0.5 text-cream-200/75 tabular-nums">
+                {site.legal.tradeRegistryNo}
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div className="border-t border-cream-200/10">
+        <div className="container-x flex flex-col items-center justify-between gap-5 py-6 lg:flex-row">
+          <p className="order-3 text-center text-xs text-cream-200/55 lg:order-1 lg:text-left">
             © {year} {site.legalName}. Tüm hakları saklıdır.
           </p>
 
-          <div className="order-1 flex items-center gap-3 sm:order-2">
+          {/* Ödeme altyapısı beyanı — ödeme kuruluşu başvurusunda aranır */}
+          <p className="order-2 flex items-center gap-2 text-center text-xs text-cream-200/55">
+            <ShieldCheck className="size-3.5 shrink-0 text-gold-400/70" strokeWidth={2} />
+            Ödeme altyapısı{' '}
+            <a
+              href={site.paymentProvider.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-gold-300 underline-offset-2 hover:underline"
+            >
+              {site.paymentProvider.name}
+            </a>{' '}
+            tarafından sağlanmaktadır.
+          </p>
+
+          <div className="order-1 flex items-center gap-3 lg:order-3">
             <OliveBranchIcon className="size-4 text-gold-400/50" />
             <div className="flex items-center gap-1.5 text-cream-200/50">
-              {['VISA', 'MASTER', 'TROY', '3D'].map((label) => (
+              {['VISA', 'MASTER', 'TROY', 'AMEX', '3D'].map((label) => (
                 <PaymentMark key={label} label={label} className="h-6 w-10" />
               ))}
             </div>

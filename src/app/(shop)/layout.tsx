@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { FloatingActions } from '@/components/layout/FloatingActions';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
+import { CookieConsent } from '@/components/legal/CookieConsent';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { organizationJsonLd, websiteJsonLd } from '@/lib/seo';
 
@@ -20,6 +21,7 @@ export default function ShopLayout({ children }: { children: ReactNode }) {
       <main id="icerik">{children}</main>
       <Footer />
       <FloatingActions />
+      <CookieConsent />
 
       <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
     </>

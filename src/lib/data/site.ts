@@ -31,6 +31,29 @@ export const site = {
   /** Ücretsiz kargo eşiği (TL) */
   freeShippingThreshold: 500,
   workingHours: 'Hafta içi 09:00 – 18:00 · Cumartesi 10:00 – 15:00',
+
+  /**
+   * Ticari künye — 6563 sayılı Elektronik Ticaret Kanunu ve Mesafeli
+   * Sözleşmeler Yönetmeliği uyarınca sitede erişilebilir olmalıdır.
+   * Ödeme kuruluşu başvurularında da bu bilgiler doğrulanır.
+   *
+   * ⚠ Aşağıdaki değerleri kendi ticari kayıtlarınızla değiştirin.
+   */
+  legal: {
+    taxOffice: 'Orhangazi Vergi Dairesi',
+    taxNumber: '0000000000',
+    mersis: '0000000000000000',
+    tradeRegistryNo: '00000',
+    chamber: 'Bursa Ticaret ve Sanayi Odası',
+    kepAddress: 'zeytinbahcem@hs01.kep.tr',
+  },
+
+  /** Ödeme altyapısı — footer ve ödeme sayfasında belirtilir. */
+  paymentProvider: {
+    name: 'iyzico',
+    url: 'https://www.iyzico.com',
+    note: 'Ödeme işlemleri lisanslı ödeme kuruluşu iyzico altyapısı üzerinden gerçekleştirilir.',
+  },
 } as const;
 
 export const mainNav: NavItem[] = [
@@ -55,9 +78,12 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
     title: 'Müşteri Hizmetleri',
     items: [
       { label: 'Sipariş Takibi', href: '/siparis-takibi' },
+      { label: 'Teslimat ve Kargo', href: '/teslimat-ve-kargo' },
       { label: 'İade Politikası', href: '/iade-politikasi' },
-      { label: 'Mesafeli Satış', href: '/mesafeli-satis' },
+      { label: 'Ön Bilgilendirme Formu', href: '/on-bilgilendirme-formu' },
+      { label: 'Mesafeli Satış Sözleşmesi', href: '/mesafeli-satis' },
       { label: 'Gizlilik', href: '/gizlilik' },
+      { label: 'Çerez Politikası', href: '/cerez-politikasi' },
       { label: 'KVKK', href: '/kvkk' },
     ],
   },

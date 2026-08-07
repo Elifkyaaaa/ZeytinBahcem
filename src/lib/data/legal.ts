@@ -17,7 +17,208 @@ export interface LegalDocument {
 
 const address = `${site.address.street}, ${site.address.district} / ${site.address.city}`;
 
+/** Satıcı künyesi — birden çok belgede tekrarlandığı için tek yerden. */
+const sellerBlock = [
+  `Ünvan: ${site.legalName}`,
+  `Adres: ${address}`,
+  `Telefon: ${site.phone}`,
+  `E-posta: ${site.email}`,
+  `Vergi Dairesi / No: ${site.legal.taxOffice} / ${site.legal.taxNumber}`,
+  `MERSİS No: ${site.legal.mersis}`,
+  `Ticaret Sicil No: ${site.legal.tradeRegistryNo}`,
+  `KEP Adresi: ${site.legal.kepAddress}`,
+].join('\n');
+
 export const legalDocuments: Record<string, LegalDocument> = {
+  'on-bilgilendirme-formu': {
+    slug: 'on-bilgilendirme-formu',
+    title: 'Ön Bilgilendirme Formu',
+    eyebrow: 'Yasal Bilgilendirme',
+    summary:
+      'Mesafeli Sözleşmeler Yönetmeliği uyarınca, siparişinizi onaylamadan önce satıcı, ürün, ödeme ve teslimat koşulları hakkında bilgilendirilmeniz gerekir.',
+    updated: '2026-08-07',
+    sections: [
+      {
+        title: '1. Satıcı Bilgileri',
+        paragraphs: [sellerBlock],
+      },
+      {
+        title: '2. Alıcı Bilgileri',
+        paragraphs: [
+          'Sipariş formunda beyan ettiğiniz ad-soyad, teslimat adresi, telefon ve e-posta bilgileri bu formun ayrılmaz parçasıdır. Siparişi onayladığınızda bu bilgilerin doğruluğunu kabul etmiş olursunuz.',
+        ],
+      },
+      {
+        title: '3. Sözleşme Konusu Ürün ve Bedel',
+        paragraphs: [
+          'Sipariş özetinde listelenen ürünlerin adı, adedi, gramajı ve KDV dâhil satış fiyatı bu formun konusudur. Ödeme sayfasındaki “Sipariş Özeti” bölümünde ara toplam, indirim, KDV, kargo bedeli ve genel toplam ayrı ayrı gösterilir.',
+          'Listelenen tüm fiyatlar Türk Lirası cinsinden ve KDV dâhildir. Kargo bedeli, ödeme adımında ayrıca belirtilir.',
+        ],
+      },
+      {
+        title: '4. Ödeme Şekli',
+        list: [
+          'Kredi / banka kartı — 3D Secure doğrulamalı, taksit seçenekleri ödeme adımında görüntülenir',
+          'Havale / EFT — ürün tutarına %3 ek indirim uygulanır',
+          'Kapıda ödeme — 39,90 ₺ hizmet bedeli eklenir',
+        ],
+        paragraphs: [
+          site.paymentProvider.note +
+            ' Kart bilgileriniz hiçbir aşamada satıcı sistemlerinde saklanmaz.',
+        ],
+      },
+      {
+        title: '5. Teslimat',
+        list: [
+          `Sipariş, ödemenin onaylanmasının ardından hazırlanır ve ${site.address.district} deposundan kargoya verilir.`,
+          'Standart teslim süresi 1–3 iş günüdür; yasal azami süre 30 gündür.',
+          `Kargo bedeli ${site.freeShippingThreshold} ₺ ve üzeri siparişlerde satıcıya aittir.`,
+          'Teslimat, sipariş formunda belirtilen adrese kargo firması aracılığıyla yapılır.',
+        ],
+      },
+      {
+        title: '6. Cayma Hakkı',
+        paragraphs: [
+          'ALICI, ürünü teslim aldığı tarihten itibaren 14 (on dört) gün içinde hiçbir gerekçe göstermeksizin ve cezai şart ödemeksizin sözleşmeden cayma hakkına sahiptir.',
+          'Cayma bildirimini e-posta veya telefon ile satıcıya iletmeniz yeterlidir. İade kargo bedeli satıcıya aittir. Bedel iadesi, cayma bildiriminin ulaşmasından itibaren 14 gün içinde yapılır.',
+        ],
+      },
+      {
+        title: '7. Cayma Hakkının Kullanılamayacağı Ürünler',
+        paragraphs: [
+          'Mesafeli Sözleşmeler Yönetmeliği m.15 uyarınca aşağıdaki ürünlerde cayma hakkı kullanılamaz:',
+        ],
+        list: [
+          'Tesliminden sonra ambalajı açılmış gıda ürünleri (sağlık ve hijyen gerekçesiyle)',
+          'Çabuk bozulabilen veya son kullanma tarihi geçebilecek ürünler',
+          'Alıcının isteği doğrultusunda kişiselleştirilen ürünler (hediye kutusuna yazdırılan notlar dâhil)',
+        ],
+      },
+      {
+        title: '8. Uyuşmazlık Çözümü',
+        paragraphs: [
+          'Şikâyet ve itirazlar, Ticaret Bakanlığı’nca her yıl ilan edilen parasal sınırlar dâhilinde ALICI’nın yerleşim yerindeki Tüketici Hakem Heyetine veya Tüketici Mahkemesine yapılabilir.',
+        ],
+      },
+      {
+        title: '9. Onay',
+        paragraphs: [
+          'Ödeme adımında bu formu okuduğunuzu ve kabul ettiğinizi onayladığınızda, sipariş vermeden önce yasal olarak bilgilendirilmiş sayılırsınız. Onayınızın bir kopyası sipariş kaydınızda saklanır.',
+        ],
+      },
+    ],
+  },
+
+  'cerez-politikasi': {
+    slug: 'cerez-politikasi',
+    title: 'Çerez Politikası',
+    eyebrow: 'Çerezler',
+    summary:
+      'Sitemizde hangi çerezleri hangi amaçla kullandığımızı, ne kadar süreyle sakladığımızı ve tercihinizi nasıl değiştirebileceğinizi açıklıyoruz.',
+    updated: '2026-08-07',
+    sections: [
+      {
+        title: 'Çerez Nedir?',
+        paragraphs: [
+          'Çerezler, bir web sitesini ziyaret ettiğinizde tarayıcınızda saklanan küçük metin dosyalarıdır. Sitenin sizi hatırlamasını, tercihlerinizi korumasını ve düzgün çalışmasını sağlarlar.',
+        ],
+      },
+      {
+        title: 'Kullandığımız Çerez Türleri',
+        list: [
+          'Zorunlu çerezler — oturum yönetimi, sepet içeriğinin korunması ve güvenlik için gereklidir. Bunlar olmadan site çalışmaz ve devre dışı bırakılamaz.',
+          'Tercih çerezleri — açık/koyu tema seçiminiz gibi ayarlarınızı hatırlar.',
+          'İstatistik çerezleri — hangi sayfaların daha çok görüntülendiğini anlamamıza yardımcı olur. Yalnızca onayınızla kullanılır.',
+        ],
+      },
+      {
+        title: 'Kullandığımız Çerezler',
+        list: [
+          'sb-* — Supabase oturum çerezleri (zorunlu, oturum süresince)',
+          'zb-cart — sepet içeriği (zorunlu, tarayıcı deposunda)',
+          'zb-wishlist — favori ürünler (tercih, tarayıcı deposunda)',
+          'zb-theme — tema tercihi (tercih, tarayıcı deposunda)',
+          'zb-cookie-consent — çerez tercihiniz (zorunlu, 12 ay)',
+        ],
+      },
+      {
+        title: 'Üçüncü Taraf Çerezleri',
+        paragraphs: [
+          'Ödeme adımında iyzico, harita gösteriminde Google Maps ve video oynatımında YouTube kendi çerezlerini yerleştirebilir. Bu hizmetler yalnızca ilgili bölümü kullandığınızda yüklenir; video ve harita, siz etkileşime geçene kadar sayfaya hiçbir üçüncü taraf betiği eklemez.',
+        ],
+      },
+      {
+        title: 'Tercihinizi Değiştirme',
+        paragraphs: [
+          'Site ilk ziyaretinizde çerez tercihinizi sorar. Kararınızı daha sonra tarayıcı ayarlarınızdan site verilerini temizleyerek sıfırlayabilirsiniz. Zorunlu çerezleri engellemeniz hâlinde sepet ve oturum işlevleri çalışmayacaktır.',
+        ],
+      },
+      {
+        title: 'İlgili Metinler',
+        paragraphs: [
+          'Kişisel verilerinizin işlenmesine ilişkin ayrıntılar için KVKK Aydınlatma Metni ve Gizlilik Politikası sayfalarımızı inceleyebilirsiniz.',
+        ],
+      },
+    ],
+  },
+
+  'teslimat-ve-kargo': {
+    slug: 'teslimat-ve-kargo',
+    title: 'Teslimat ve Kargo Koşulları',
+    eyebrow: 'Teslimat',
+    summary:
+      'Siparişinizin ne zaman hazırlandığı, hangi sürede teslim edildiği, kargo bedelleri ve hasarlı teslimat durumunda izlenecek yol.',
+    updated: '2026-08-07',
+    sections: [
+      {
+        title: 'Hazırlık ve Kargoya Teslim',
+        list: [
+          'Saat 14.00’a kadar verilen ve ödemesi onaylanan siparişler aynı iş günü kargoya verilir.',
+          'Sonrasında verilen siparişler ertesi iş günü kargoya teslim edilir.',
+          'Hafta sonu ve resmî tatillerde kargo çıkışı yapılmaz.',
+        ],
+      },
+      {
+        title: 'Teslim Süreleri',
+        list: [
+          'Marmara ve Ege: 1 iş günü',
+          'İç Anadolu ve Akdeniz: 2 iş günü',
+          'Karadeniz: 2–3 iş günü',
+          'Doğu ve Güneydoğu Anadolu: 3–4 iş günü',
+          'Yasal azami teslim süresi 30 gündür.',
+        ],
+      },
+      {
+        title: 'Kargo Bedelleri',
+        list: [
+          `Standart kargo: 79,90 ₺ — ${site.freeShippingThreshold} ₺ ve üzeri siparişlerde ücretsiz`,
+          'Hızlı kargo: 149,90 ₺ — ertesi iş günü teslim',
+          `Mağazadan teslim: ücretsiz — ${site.address.district} mağazamızdan`,
+          'Kapıda ödeme hizmet bedeli: 39,90 ₺',
+        ],
+      },
+      {
+        title: 'Paketleme',
+        paragraphs: [
+          'Cam şişeler çift katmanlı köpük içinde, ayrı bölmeli kutularda gönderilir. Dolgu malzemelerinin tamamı geri dönüştürülebilir niteliktedir.',
+        ],
+      },
+      {
+        title: 'Hasarlı veya Eksik Teslimat',
+        paragraphs: [
+          'Ürünü teslim alırken paketi kargo görevlisinin yanında kontrol etmenizi öneririz. Pakette ezilme, ıslanma veya açılma varsa teslim almadan kargo görevlisine tutanak tutturun.',
+          'Hasarlı ürün teslim aldıysanız, teslimattan itibaren 3 gün içinde fotoğrafla birlikte bize bildirin. Ürün ücretsiz olarak yenilenir; iade kargo süreci başlatmanıza gerek kalmaz.',
+        ],
+      },
+      {
+        title: 'Sipariş Takibi',
+        paragraphs: [
+          'Siparişiniz kargoya verildiğinde takip numarası e-posta ile iletilir. Sipariş numaranız ve e-posta adresinizle Sipariş Takibi sayfasından da durumu sorgulayabilirsiniz.',
+        ],
+      },
+    ],
+  },
+
   kvkk: {
     slug: 'kvkk',
     title: 'KVKK Aydınlatma Metni',

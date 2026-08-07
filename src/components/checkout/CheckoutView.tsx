@@ -91,6 +91,7 @@ export function CheckoutView() {
   const [values, setValues] = useState<FormValues>(emptyForm);
   const [errors, setErrors] = useState<FormErrors>({});
   const [agreed, setAgreed] = useState(false);
+  const [preInfoAgreed, setPreInfoAgreed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [orderNo, setOrderNo] = useState<string | null>(null);
   const [serverError, setServerError] = useState<string | null>(null);
@@ -132,8 +133,18 @@ export function CheckoutView() {
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!preInfoAgreed) {
+      setErrors((prev) => ({
+        ...prev,
+        note: 'Ön Bilgilendirme Formu’nu okuduğunuzu onaylamanız gerekiyor.',
+      }));
+      return;
+    }
     if (!agreed) {
-      setErrors((prev) => ({ ...prev, note: 'Sözleşmeleri onaylamanız gerekiyor.' }));
+      setErrors((prev) => ({
+        ...prev,
+        note: 'Mesafeli Satış Sözleşmesi’ni onaylamanız gerekiyor.',
+      }));
       return;
     }
     if (!validate()) {
@@ -788,27 +799,61 @@ export function CheckoutView() {
             </div>
           </dl>
 
-          <label className="mt-5 flex cursor-pointer items-start gap-2.5 text-xs leading-relaxed text-muted-foreground">
-            <input
-              type="checkbox"
-              checked={agreed}
-              onChange={(e) => {
-                setAgreed(e.target.checked);
-                setErrors((prev) => ({ ...prev, note: undefined }));
-              }}
-              className="mt-0.5 size-4 shrink-0 rounded accent-gold-500"
-            />
-            <span>
-              <Link href="/mesafeli-satis" className="text-gold-700 underline underline-offset-2 dark:text-gold-400">
-                Mesafeli Satış Sözleşmesi
-              </Link>
-              ’ni ve{' '}
-              <Link href="/gizlilik" className="text-gold-700 underline underline-offset-2 dark:text-gold-400">
-                Gizlilik Politikası
-              </Link>
-              ’nı okudum, onaylıyorum.
-            </span>
-          </label>
+          {/* Mesafeli Sözleşmeler Yönetmeliği: ön bilgilendirme ve sözleşme
+              onayı ayrı ayrı alınmalıdır. */}
+          <div className="mt-5 space-y-3 border-t border-border pt-4">
+            <label className="flex cursor-pointer items-start gap-2.5 text-xs leading-relaxed text-muted-foreground">
+              <input
+                type="checkbox"
+                checked={preInfoAgreed}
+                onChange={(e) => {
+                  setPreInfoAgreed(e.target.checked);
+                  setErrors((prev) => ({ ...prev, note: undefined }));
+                }}
+                className="mt-0.5 size-4 shrink-0 rounded accent-gold-500"
+              />
+              <span>
+                <Link
+                  href="/on-bilgilendirme-formu"
+                  target="_blank"
+                  className="text-gold-700 underline underline-offset-2 dark:text-gold-400"
+                >
+                  Ön Bilgilendirme Formu
+                </Link>
+                ’nu okudum ve bilgilendirildim.
+              </span>
+            </label>
+
+            <label className="flex cursor-pointer items-start gap-2.5 text-xs leading-relaxed text-muted-foreground">
+              <input
+                type="checkbox"
+                checked={agreed}
+                onChange={(e) => {
+                  setAgreed(e.target.checked);
+                  setErrors((prev) => ({ ...prev, note: undefined }));
+                }}
+                className="mt-0.5 size-4 shrink-0 rounded accent-gold-500"
+              />
+              <span>
+                <Link
+                  href="/mesafeli-satis"
+                  target="_blank"
+                  className="text-gold-700 underline underline-offset-2 dark:text-gold-400"
+                >
+                  Mesafeli Satış Sözleşmesi
+                </Link>
+                ’ni ve{' '}
+                <Link
+                  href="/gizlilik"
+                  target="_blank"
+                  className="text-gold-700 underline underline-offset-2 dark:text-gold-400"
+                >
+                  Gizlilik Politikası
+                </Link>
+                ’nı okudum, onaylıyorum.
+              </span>
+            </label>
+          </div>
           {errors.note && (
             <p className="mt-2 text-xs text-red-600 dark:text-red-400">{errors.note}</p>
           )}
@@ -838,10 +883,14 @@ export function CheckoutView() {
           </Button>
 
           <div className="mt-5 flex items-center justify-center gap-1.5 text-muted-foreground/70">
-            {['VISA', 'MASTER', 'TROY', '3D'].map((label) => (
+            {['VISA', 'MASTER', 'TROY', 'AMEX', '3D'].map((label) => (
               <PaymentMark key={label} label={label} className="h-6 w-10" />
             ))}
           </div>
+
+          <p className="mt-3 text-center text-[0.68rem] leading-relaxed text-muted-foreground">
+            {site.paymentProvider.note} Kart bilgileriniz tarafımızda saklanmaz.
+          </p>
         </div>
       </aside>
     </form>
