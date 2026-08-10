@@ -84,7 +84,7 @@ const ALLOWED_IMAGE_HOSTS = [
 
 /** Kırık kayıtlar için yer tutucu. Boş dize dönmüyoruz: `next/image` boş
  *  `src` gördüğünde de hata fırlatır, yani sorunu çözmek yerine taşırdı. */
-export const IMAGE_FALLBACK = '/gorseller/gorsel-yok.svg';
+export const IMAGE_FALLBACK = '/images/gorsel-yok.svg';
 
 export function safeImageSrc(src: string | null | undefined, fallback = IMAGE_FALLBACK): string {
   if (!src) return fallback;
