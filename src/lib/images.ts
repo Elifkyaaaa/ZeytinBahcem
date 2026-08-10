@@ -16,6 +16,8 @@ const PHOTO = {
   hasat: '/images/hasat.jpg',
   /** A handful of large black olives, full crate behind */
   zeytin: '/images/siyah-zeytin.jpg',
+  /** Olive-laden branches against a clear blue sky, shot from below */
+  dal: '/images/olive-branch.jpg',
   /**
    * Brand logo (1049×947, transparent PNG).
    * The vignette from the source image was removed and the background made
@@ -28,6 +30,8 @@ const PHOTO = {
 export const IMG = {
   // Brand logo — shown at its own aspect ratio on a light surface
   brandLogo: PHOTO.logo,
+  // Olive branch against the sky — fills the hero's brand panel
+  heroBranch: PHOTO.dal,
 
   // Grove and landscape
   heroGrove: PHOTO.bahce,
