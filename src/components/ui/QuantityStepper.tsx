@@ -2,6 +2,7 @@
 
 import { Minus, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { quantityStepperText } from '@/lib/data/text/shop';
 
 export function QuantityStepper({
   value,
@@ -36,7 +37,7 @@ export function QuantityStepper({
         type="button"
         onClick={() => onChange(Math.max(min, value - 1))}
         disabled={value <= min}
-        aria-label="Adet azalt"
+        aria-label={quantityStepperText.decreaseLabel}
         className={cn(
           dim,
           'grid place-items-center rounded-full text-foreground/70 transition-all',
@@ -55,7 +56,7 @@ export function QuantityStepper({
         type="button"
         onClick={() => onChange(Math.min(max, value + 1))}
         disabled={value >= max}
-        aria-label="Adet artır"
+        aria-label={quantityStepperText.increaseLabel}
         className={cn(
           dim,
           'grid place-items-center rounded-full text-foreground/70 transition-all',

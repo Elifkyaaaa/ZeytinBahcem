@@ -5,6 +5,7 @@ import { Check, Send } from 'lucide-react';
 import Link from 'next/link';
 import { useState, type FormEvent } from 'react';
 import { Field, Input, Textarea } from '@/components/ui/Input';
+import { contactFormText } from '@/lib/data/text/shop';
 
 const subjects = [
   'Sipariş hakkında',
@@ -70,10 +71,11 @@ export function ContactForm() {
         <span className="inline-grid size-14 place-items-center rounded-full bg-olive-600 text-cream-50">
           <Check className="size-7" strokeWidth={2.8} />
         </span>
-        <h3 className="mt-5 font-display text-2xl text-foreground">Mesajınız alındı</h3>
+        <h3 className="mt-5 font-display text-2xl text-foreground">{contactFormText.sentTitle}</h3>
         <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
-          En geç bir iş günü içinde <strong className="text-foreground">{values.email}</strong>{' '}
-          adresine dönüş yapacağız.
+          {contactFormText.sentBefore}{' '}
+          <strong className="text-foreground">{values.email}</strong>{' '}
+          {contactFormText.sentAfter}
         </p>
         <button
           onClick={() => {
@@ -83,7 +85,7 @@ export function ContactForm() {
           }}
           className="mt-6 text-sm font-medium text-gold-700 underline-offset-4 hover:underline dark:text-gold-400"
         >
-          Yeni mesaj gönder
+          {contactFormText.newMessage}
         </button>
       </motion.div>
     );
@@ -115,7 +117,7 @@ export function ContactForm() {
           />
         </Field>
 
-        <Field label="Telefon" htmlFor="phone" hint="İsteğe bağlı">
+        <Field label="Telefon" htmlFor="phone" hint={contactFormText.phoneHint}>
           <Input
             id="phone"
             type="tel"
@@ -143,12 +145,12 @@ export function ContactForm() {
         </Field>
       </div>
 
-      <Field label="Mesajınız" htmlFor="message" required error={errors.message}>
+      <Field label={contactFormText.messageLabel} htmlFor="message" required error={errors.message}>
         <Textarea
           id="message"
           value={values.message}
           onChange={(e) => set('message')(e.target.value)}
-          placeholder="Size nasıl yardımcı olabiliriz?"
+          placeholder={contactFormText.messagePlaceholder}
           aria-invalid={Boolean(errors.message)}
         />
       </Field>
@@ -164,11 +166,11 @@ export function ContactForm() {
           className="mt-0.5 size-4 shrink-0 rounded accent-gold-500"
         />
         <span>
-          Kişisel verilerimin{' '}
+          {contactFormText.consentBefore}{' '}
           <Link href="/kvkk" className="text-gold-700 underline underline-offset-2 dark:text-gold-400">
-            KVKK Aydınlatma Metni
+            {contactFormText.consentLinkLabel}
           </Link>{' '}
-          kapsamında, yalnızca bu talebe yanıt vermek amacıyla işlenmesini kabul ediyorum.
+          {contactFormText.consentAfter}
         </span>
       </label>
       {errors.phone && (
@@ -181,7 +183,7 @@ export function ContactForm() {
         type="submit"
         className="sheen group inline-flex h-13 items-center justify-center gap-2 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 px-9 text-sm font-semibold text-olive-950 transition-all duration-300 hover:shadow-glow active:scale-[0.98]"
       >
-        Mesajı Gönder
+        {contactFormText.submitCta}
         <Send
           className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
           strokeWidth={2.2}

@@ -25,6 +25,7 @@ import { useCart } from '@/lib/store/cart';
 import { calcTotals, useCheckout } from '@/lib/store/checkout';
 import { useUi } from '@/lib/store/ui';
 import { blurDataURL, cn, formatPrice } from '@/lib/utils';
+import { cartText } from '@/lib/data/text/shop';
 
 export function CartView() {
   const hydrated = useHydrated();
@@ -54,7 +55,7 @@ export function CartView() {
     if (result.ok) {
       setCodeError(null);
       setCodeInput('');
-      toast({ variant: 'success', title: 'Kupon uygulandı', description: result.message });
+      toast({ variant: 'success', title: cartText.couponAppliedToast, description: result.message });
     } else {
       setCodeError(result.message);
     }
@@ -79,14 +80,13 @@ export function CartView() {
         <span className="grid size-24 place-items-center rounded-full bg-surface-muted">
           <ShoppingBag className="size-10 text-muted-foreground" strokeWidth={1.2} />
         </span>
-        <h2 className="mt-7 font-display text-3xl text-foreground">Sepetiniz henüz boş</h2>
+        <h2 className="mt-7 font-display text-3xl text-foreground">{cartText.emptyTitle}</h2>
         <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
-          Ege’nin asırlık bahçelerinden gelen zeytinyağlarımıza ve doğal salamura zeytinlerimize
-          göz atın.
+          {cartText.emptyBody}
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button href="/urunler" variant="gold" size="lg">
-            Ürünleri İncele
+            {cartText.emptyCta}
             <ArrowRight className="size-4" strokeWidth={2.2} />
           </Button>
           <Button href="/favoriler" variant="outline" size="lg">
@@ -106,13 +106,13 @@ export function CartView() {
             <Truck className="size-4.5 shrink-0 text-olive-600 dark:text-gold-400" strokeWidth={1.8} />
             {remaining > 0 ? (
               <span className="text-foreground/85">
-                Ücretsiz kargoya{' '}
+                {cartText.freeShippingBefore}{' '}
                 <strong className="font-semibold text-foreground">{formatPrice(remaining)}</strong>{' '}
-                kaldı
+                {cartText.freeShippingAfter}
               </span>
             ) : (
               <span className="font-medium text-olive-700 dark:text-olive-300">
-                Kargonuz ücretsiz — tebrikler!
+                {cartText.freeShippingReached}
               </span>
             )}
           </div>
@@ -128,19 +128,19 @@ export function CartView() {
 
         <div className="mt-5 flex items-center justify-between">
           <h2 className="font-display text-xl text-foreground">
-            Ürünler
+            {cartText.itemsHeading}
             <span className="ml-2 text-sm font-normal text-muted-foreground tabular-nums">
-              ({items.length} kalem)
+              {cartText.itemCount(items.length)}
             </span>
           </h2>
           <button
             onClick={() => {
               clear();
-              toast({ variant: 'info', title: 'Sepet boşaltıldı' });
+              toast({ variant: 'info', title: cartText.clearedToast });
             }}
             className="text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-red-600 hover:underline"
           >
-            Sepeti boşalt
+            {cartText.clearCart}
           </button>
         </div>
 
@@ -195,7 +195,7 @@ export function CartView() {
                       </span>
                       <button
                         onClick={() => remove(item.key)}
-                        aria-label={`${item.name} ürününü sil`}
+                        aria-label={cartText.removeItemLabel(item.name)}
                         className="inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-red-500/8 hover:text-red-600"
                       >
                         <Trash2 className="size-3.5" strokeWidth={1.9} />
@@ -212,7 +212,7 @@ export function CartView() {
         <div className="mt-7">
           <Button href="/urunler" variant="outline" size="md">
             <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" strokeWidth={2} />
-            Alışverişe Devam Et
+            {cartText.continueShopping}
           </Button>
         </div>
       </div>
@@ -220,7 +220,7 @@ export function CartView() {
       {/* Özet */}
       <aside className="lg:sticky lg:top-24 lg:self-start">
         <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
-          <h2 className="font-display text-xl text-foreground">Sipariş Özeti</h2>
+          <h2 className="font-display text-xl text-foreground">{cartText.summaryHeading}</h2>
 
           {/* Kupon */}
           <div className="mt-5">
@@ -247,9 +247,9 @@ export function CartView() {
                 <button
                   onClick={() => {
                     clearCoupon();
-                    toast({ variant: 'info', title: 'Kupon kaldırıldı' });
+                    toast({ variant: 'info', title: cartText.couponRemovedToast });
                   }}
-                  aria-label="Kuponu kaldır"
+                  aria-label={cartText.removeCouponLabel}
                   className="-m-1 rounded-lg p-1 text-muted-foreground transition-colors hover:text-red-600"
                 >
                   <X className="size-4" strokeWidth={2} />
@@ -269,7 +269,7 @@ export function CartView() {
                       setCodeError(null);
                     }}
                     onKeyDown={(e) => e.key === 'Enter' && handleApply()}
-                    placeholder="Örn. HASAT10"
+                    placeholder={cartText.couponPlaceholder}
                     className="h-11 min-w-0 flex-1 rounded-xl border border-border bg-background px-3.5 text-sm tracking-wide uppercase transition-all placeholder:normal-case placeholder:text-muted-foreground/70 focus:border-gold-500 focus:ring-4 focus:ring-gold-500/12 focus:outline-none"
                   />
                   <button
@@ -310,7 +310,7 @@ export function CartView() {
 
             {totals.discount > 0 && (
               <div className="flex justify-between">
-                <dt className="text-muted-foreground">İndirim</dt>
+                <dt className="text-muted-foreground">{cartText.discountLabel}</dt>
                 <dd className="font-medium text-red-600 tabular-nums dark:text-red-400">
                   −{formatPrice(totals.discount)}
                 </dd>
@@ -321,7 +321,7 @@ export function CartView() {
               <dt className="text-muted-foreground">Kargo</dt>
               <dd className="font-medium tabular-nums">
                 {totals.shipping === 0 ? (
-                  <span className="text-olive-700 dark:text-olive-300">Ücretsiz</span>
+                  <span className="text-olive-700 dark:text-olive-300">{cartText.freeLabel}</span>
                 ) : (
                   <span className="text-foreground">{formatPrice(totals.shipping)}</span>
                 )}
@@ -342,21 +342,23 @@ export function CartView() {
           </dl>
 
           <Button href="/odeme" variant="gold" size="lg" className="mt-6 w-full">
-            Ödemeye Geç
+            {cartText.checkoutCta}
             <ArrowRight className="size-4" strokeWidth={2.2} />
           </Button>
 
           <ul className="mt-5 space-y-2 border-t border-border pt-5">
-            {[
-              { Icon: ShieldCheck, text: '256-bit SSL ile güvenli ödeme' },
-              { Icon: Check, text: '14 gün koşulsuz iade' },
-              { Icon: Truck, text: 'Aynı gün kargoya teslim' },
-            ].map(({ Icon, text }) => (
-              <li key={text} className="flex items-center gap-2.5 text-xs text-muted-foreground">
-                <Icon className="size-4 shrink-0 text-olive-600 dark:text-gold-400" strokeWidth={1.9} />
-                {text}
-              </li>
-            ))}
+            {[ShieldCheck, Check, Truck].map((Icon, i) => {
+              const text = cartText.trustNotes[i];
+              return (
+                <li key={text} className="flex items-center gap-2.5 text-xs text-muted-foreground">
+                  <Icon
+                    className="size-4 shrink-0 text-olive-600 dark:text-gold-400"
+                    strokeWidth={1.9}
+                  />
+                  {text}
+                </li>
+              );
+            })}
           </ul>
 
           <div className="mt-5 flex items-center gap-1.5 text-muted-foreground/70">
