@@ -7,10 +7,9 @@ import { useRef } from 'react';
 import { Button } from '@/components/ui/Button';
 import { OliveBranchIcon } from '@/components/ui/icons';
 import { useMediaQuery } from '@/hooks';
+import { heroText } from '@/lib/data/text/home';
 import { IMG } from '@/lib/images';
 import { blurDataURL } from '@/lib/utils';
-
-const title = ['Doğadan', 'Sofranıza', 'Gerçek', 'Zeytinyağı'];
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -36,7 +35,7 @@ export function Hero() {
       ref={ref}
       data-dark-hero
       className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-olive-950"
-      aria-label="Giriş"
+      aria-label={heroText.regionLabel}
     >
       <motion.div
         className="absolute inset-0 -z-10"
@@ -44,7 +43,7 @@ export function Hero() {
       >
         <Image
           src={IMG.heroGrove}
-          alt="Orhangazi’de sabah güneşi altında sıra sıra uzanan asırlık zeytin ağaçları"
+          alt={heroText.backgroundAlt}
           fill
           priority
           fetchPriority="high"
@@ -80,12 +79,12 @@ export function Hero() {
           >
             <OliveBranchIcon className="size-4 text-gold-300" />
             <span className="text-[0.7rem] font-medium tracking-[0.2em] text-cream-100/90 uppercase">
-              1889’dan beri Orhangazi
+              {heroText.badge}
             </span>
           </motion.div>
 
           <h1 className="max-w-[15ch] font-display text-[2.65rem] leading-[1.04] font-semibold text-cream-50 sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem]">
-            {title.map((word, i) => (
+            {heroText.titleWords.map((word, i) => (
               <motion.span
                 key={word}
                 initial={{ opacity: 0, y: 34, filter: 'blur(6px)' }}
@@ -97,7 +96,11 @@ export function Hero() {
                 }}
                 className="mr-[0.28em] inline-block"
               >
-                {i === 3 ? <span className="text-gradient-gold">{word}</span> : word}
+                {i === heroText.accentWordIndex ? (
+                  <span className="text-gradient-gold">{word}</span>
+                ) : (
+                  word
+                )}
               </motion.span>
             ))}
           </h1>
@@ -108,7 +111,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.62, ease: [0.22, 1, 0.36, 1] }}
             className="mt-7 max-w-xl text-base leading-relaxed text-cream-100/78 sm:text-lg"
           >
-            Dalından özenle toplanan zeytinlerden soğuk sıkım olarak üretilmiştir.
+            {heroText.subtitle}
           </motion.p>
 
           <motion.div
@@ -118,12 +121,12 @@ export function Hero() {
             className="mt-10 flex w-full flex-col gap-3.5 sm:w-auto sm:flex-row sm:gap-4"
           >
             <Button href="/urunler" variant="gold" size="xl">
-              Ürünleri İncele
+              {heroText.primaryCta}
               <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2.2} />
             </Button>
             <Button href="/urunler?siralama=populer" variant="glass" size="xl">
               <ShoppingBag className="size-5" strokeWidth={2} />
-              Hemen Sipariş Ver
+              {heroText.secondaryCta}
             </Button>
           </motion.div>
 
@@ -133,7 +136,7 @@ export function Hero() {
             transition={{ duration: 1, delay: 1.2 }}
             className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[0.72rem] tracking-[0.16em] text-cream-100/55 uppercase lg:justify-start"
           >
-            {['Soğuk Sıkım', '%100 Doğal', 'Katkısız', 'Ücretsiz Kargo'].map((item) => (
+            {heroText.trustMarks.map((item) => (
               <span key={item} className="flex items-center gap-2.5">
                 <span className="size-1 rounded-full bg-gold-400/70" aria-hidden />
                 {item}
@@ -155,7 +158,7 @@ export function Hero() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-[1.35rem]">
               <Image
                 src={IMG.founderPortrait}
-                alt="Karabesimoğlu ailesinin kurucusu — zeytin dalıyla çekilmiş sepya portre, altında “Karabesimoğlu Zeytincilik · Since 1889” yazısı"
+                alt={heroText.portraitAlt}
                 fill
                 priority
                 sizes="(min-width: 1024px) 25rem, (min-width: 640px) 19rem, 16rem"
@@ -173,20 +176,20 @@ export function Hero() {
           </div>
 
           <figcaption className="mt-5 text-center text-[0.7rem] tracking-[0.22em] text-cream-100/60 uppercase">
-            Kurucumuz · Beş kuşaktır aynı yamaçta
+            {heroText.portraitCaption}
           </figcaption>
         </motion.figure>
       </motion.div>
 
       <motion.a
         href="#istatistikler"
-        aria-label="Aşağı kaydır"
+        aria-label={heroText.scrollAriaLabel}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.5 }}
         className="absolute bottom-7 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2.5 sm:flex"
       >
-        <span className="text-[0.62rem] tracking-[0.24em] text-cream-100/45 uppercase">Keşfet</span>
+        <span className="text-[0.62rem] tracking-[0.24em] text-cream-100/45 uppercase">{heroText.scrollLabel}</span>
         <span className="relative h-11 w-6 rounded-full border border-cream-100/25">
           <motion.span
             animate={{ y: [5, 18, 5], opacity: [0, 1, 0] }}

@@ -8,6 +8,7 @@ import { useState, type FormEvent } from 'react';
 import { Container } from '@/components/ui/Section';
 import { IMG } from '@/lib/images';
 import { blurDataURL } from '@/lib/utils';
+import { newsletterText } from '@/lib/data/text/home';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -28,7 +29,7 @@ export function NewsletterSection() {
   };
 
   return (
-    <section className="relative" aria-label="E-bülten">
+    <section className="relative" aria-label={newsletterText.regionLabel}>
       <Container className="py-16 sm:py-20 lg:py-24">
         <div className="relative overflow-hidden rounded-3xl border border-olive-800/30 shadow-lift">
           <Image
@@ -52,11 +53,10 @@ export function NewsletterSection() {
             </span>
 
             <h2 className="mt-6 font-display text-3xl text-cream-50 sm:text-4xl lg:text-[2.75rem]">
-              Kampanyaları Kaçırmayın
+              {newsletterText.title}
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-cream-200/72 sm:text-base">
-              Yeni hasat duyuruları, sınırlı üretim serileri ve aboneye özel indirimler —
-              ayda en fazla iki e-posta.
+              {newsletterText.description}
             </p>
 
             {status === 'done' ? (
@@ -71,9 +71,9 @@ export function NewsletterSection() {
                   <Check className="size-5" strokeWidth={2.8} />
                 </span>
                 <p className="text-left text-sm text-cream-100">
-                  <strong className="font-semibold">Aramıza hoş geldiniz.</strong>
+                  <strong className="font-semibold">{newsletterText.successTitle}</strong>
                   <br />
-                  İlk bültenimiz kısa süre içinde kutunuzda olacak.
+                  {newsletterText.successBody}
                 </p>
               </motion.div>
             ) : (
@@ -93,7 +93,7 @@ export function NewsletterSection() {
                         setEmail(e.target.value);
                         if (status === 'error') setStatus('idle');
                       }}
-                      placeholder="ornek@eposta.com"
+                      placeholder={newsletterText.emailPlaceholder}
                       aria-invalid={status === 'error'}
                       aria-describedby={status === 'error' ? 'newsletter-error' : undefined}
                       className="h-14 w-full rounded-full border border-cream-200/20 bg-white/8 px-6 text-[0.95rem] text-cream-50 backdrop-blur-md transition-all placeholder:text-cream-200/45 focus:border-gold-400/70 focus:bg-white/12 focus:ring-4 focus:ring-gold-400/15 focus:outline-none"
@@ -103,7 +103,7 @@ export function NewsletterSection() {
                     type="submit"
                     className="sheen group inline-flex h-14 shrink-0 items-center justify-center gap-2 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 px-8 font-semibold text-olive-950 transition-all duration-300 hover:shadow-glow active:scale-[0.97]"
                   >
-                    Abone Ol
+                    {newsletterText.submitCta}
                     <Send
                       className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                       strokeWidth={2.2}
@@ -113,7 +113,7 @@ export function NewsletterSection() {
 
                 {status === 'error' && (
                   <p id="newsletter-error" className="mt-3 text-sm text-red-300" role="alert">
-                    Lütfen geçerli bir e-posta adresi girin.
+                    {newsletterText.invalidEmail}
                   </p>
                 )}
 
@@ -125,11 +125,11 @@ export function NewsletterSection() {
                     className="mt-0.5 size-4 shrink-0 rounded border-cream-200/30 bg-white/10 accent-gold-500"
                   />
                   <span className="max-w-md text-left">
-                    Kişisel verilerimin{' '}
+                    {newsletterText.consentBefore}{' '}
                     <Link href="/kvkk" className="text-gold-300 underline underline-offset-2">
-                      KVKK Aydınlatma Metni
+                      {newsletterText.consentLinkLabel}
                     </Link>{' '}
-                    kapsamında işlenmesini kabul ediyorum.
+                    {newsletterText.consentAfter}
                   </span>
                 </label>
               </form>

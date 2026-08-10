@@ -5,15 +5,16 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Container, Section, SectionHeading } from '@/components/ui/Section';
 import { categories } from '@/lib/data/categories';
 import { blurDataURL, cn } from '@/lib/utils';
+import { categoriesText } from '@/lib/data/text/home';
 
 export function CategoriesSection() {
   return (
     <Section id="kategoriler" tone="muted">
       <Container>
         <SectionHeading
-          eyebrow="Koleksiyon"
-          title="Her Sofraya Bir Zeytin Hikâyesi"
-          description="Aynı bahçenin farklı yüzleri. Hasat zamanı, sıkım yöntemi ve olgunlaştırma süresi değiştikçe ortaya bambaşka karakterler çıkıyor."
+          eyebrow={categoriesText.eyebrow}
+          title={categoriesText.title}
+          description={categoriesText.description}
         />
 
         <div className="mt-14 grid gap-4 sm:gap-5 lg:grid-cols-3 lg:grid-rows-2">
@@ -73,7 +74,7 @@ export function CategoriesSection() {
                     )}
 
                     <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-cream-100">
-                      Ürünleri gör
+                      {categoriesText.cardCta}
                       <ArrowRight
                         className="size-4 transition-transform duration-400 group-hover:translate-x-1.5"
                         strokeWidth={2}

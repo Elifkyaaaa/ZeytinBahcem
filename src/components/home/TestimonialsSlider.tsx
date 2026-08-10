@@ -8,6 +8,7 @@ import { StarRating } from '@/components/ui/StarRating';
 import { Container, Section, SectionHeading } from '@/components/ui/Section';
 import { testimonials } from '@/lib/data/content';
 import { blurDataURL, cn } from '@/lib/utils';
+import { testimonialsText } from '@/lib/data/text/home';
 
 const AUTOPLAY_MS = 6500;
 
@@ -43,9 +44,9 @@ export function TestimonialsSlider() {
 
       <Container>
         <SectionHeading
-          eyebrow="Müşteri Yorumları"
-          title="On İki Binden Fazla Sofrada"
-          description="Ürünlerimizi deneyen müşterilerimizin kendi cümleleri."
+          eyebrow={testimonialsText.eyebrow}
+          title={testimonialsText.title}
+          description={testimonialsText.description}
           tone="inverted"
         />
 
@@ -112,19 +113,19 @@ export function TestimonialsSlider() {
           <div className="mt-10 flex items-center justify-center gap-5">
             <button
               onClick={() => go(-1)}
-              aria-label="Önceki yorum"
+              aria-label={testimonialsText.previousLabel}
               className="grid size-11 place-items-center rounded-full border border-cream-200/20 text-cream-100/80 transition-all duration-300 hover:-translate-x-0.5 hover:border-gold-400/60 hover:text-gold-300"
             >
               <ChevronLeft className="size-5" strokeWidth={1.8} />
             </button>
 
-            <div className="flex items-center gap-2" role="tablist" aria-label="Yorum seçimi">
+            <div className="flex items-center gap-2" role="tablist" aria-label={testimonialsText.dotsLabel}>
               {testimonials.map((t, i) => (
                 <button
                   key={t.id}
                   role="tab"
                   aria-selected={i === index}
-                  aria-label={`${i + 1}. yorum`}
+                  aria-label={testimonialsText.dotLabel(i + 1)}
                   onClick={() => goTo(i)}
                   className={cn(
                     'h-1.5 rounded-full transition-all duration-400',
@@ -138,7 +139,7 @@ export function TestimonialsSlider() {
 
             <button
               onClick={() => go(1)}
-              aria-label="Sonraki yorum"
+              aria-label={testimonialsText.nextLabel}
               className="grid size-11 place-items-center rounded-full border border-cream-200/20 text-cream-100/80 transition-all duration-300 hover:translate-x-0.5 hover:border-gold-400/60 hover:text-gold-300"
             >
               <ChevronRight className="size-5" strokeWidth={1.8} />

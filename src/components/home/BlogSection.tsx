@@ -7,6 +7,7 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Container, Section, SectionHeading } from '@/components/ui/Section';
 import { latestPosts } from '@/lib/data/posts';
 import { blurDataURL, formatDate } from '@/lib/utils';
+import { blogSectionText } from '@/lib/data/text/home';
 
 export function BlogSection() {
   return (
@@ -14,14 +15,14 @@ export function BlogSection() {
       <Container>
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
-            eyebrow="Blog"
-            title="Zeytinin Peşinde"
-            description="Üretimden mutfağa, bahçeden sofraya — bildiklerimizi paylaşıyoruz."
+            eyebrow={blogSectionText.eyebrow}
+            title={blogSectionText.title}
+            description={blogSectionText.description}
             align="left"
             className="max-w-xl"
           />
           <Button href="/blog" variant="outline" size="md" className="shrink-0 self-start sm:self-end">
-            Tüm Yazılar
+            {blogSectionText.allCta}
             <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2} />
           </Button>
         </div>
@@ -69,7 +70,7 @@ export function BlogSection() {
                   </p>
 
                   <span className="mt-5 inline-flex items-center gap-2 pt-1 text-sm font-medium text-gold-700 dark:text-gold-400">
-                    Devamını Oku
+                    {blogSectionText.readCta}
                     <ArrowRight
                       className="size-4 transition-transform duration-400 group-hover:translate-x-1.5"
                       strokeWidth={2}

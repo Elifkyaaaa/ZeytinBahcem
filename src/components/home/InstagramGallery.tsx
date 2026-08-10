@@ -6,16 +6,17 @@ import { Container, Section, SectionHeading } from '@/components/ui/Section';
 import { instagramPosts } from '@/lib/data/content';
 import { site } from '@/lib/data/site';
 import { blurDataURL, formatNumber } from '@/lib/utils';
+import { instagramText } from '@/lib/data/text/home';
 
 export function InstagramGallery() {
   return (
     <Section tone="muted">
       <Container>
         <SectionHeading
-          eyebrow="Instagram"
+          eyebrow={instagramText.eyebrow}
           title={
             <>
-              Bahçeden Kareler{' '}
+              {instagramText.titlePrefix}{' '}
               <a
                 href={site.social.instagram}
                 target="_blank"
@@ -26,7 +27,7 @@ export function InstagramGallery() {
               </a>
             </>
           }
-          description="Hasat sabahları, sıkım günleri ve uzun sofralar — hepsi profilimizde."
+          description={instagramText.description}
         />
 
         <div className="mt-12 grid grid-cols-2 gap-2.5 sm:grid-cols-4 sm:gap-3">

@@ -2,6 +2,7 @@ import { Droplets, Leaf, Lock, ShieldCheck, Sprout, Truck, type LucideIcon } fro
 import { Reveal } from '@/components/ui/Reveal';
 import { Container, Section, SectionHeading } from '@/components/ui/Section';
 import { features } from '@/lib/data/content';
+import { whyUsText } from '@/lib/data/text/home';
 
 const icons: Record<string, LucideIcon> = {
   Leaf,
@@ -17,9 +18,9 @@ export function WhyUsSection() {
     <Section id="neden-biz" tone="muted">
       <Container>
         <SectionHeading
-          eyebrow="Neden Biz?"
-          title="Altmış Yıllık Bir Alışkanlık: Kestirmeden Gitmemek"
-          description="Zeytinyağı üretiminde hızlandırılabilecek çok adım var. Biz bir buçuk asırdır hiçbirini hızlandırmıyoruz."
+          eyebrow={whyUsText.eyebrow}
+          title={whyUsText.title}
+          description={whyUsText.description}
         />
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
