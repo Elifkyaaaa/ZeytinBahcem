@@ -17,6 +17,7 @@ import { useCopy } from '@/hooks';
 import { isSupabaseConfigured } from '@/utils/env';
 import { createClient } from '@/utils/supabase/client';
 import { cn } from '@/lib/utils';
+import { twoFactorText } from '@/lib/data/text/account';
 
 interface Factor {
   id: string;
@@ -53,7 +54,7 @@ export function TwoFactorSetup() {
 
     const verified = (data?.totp ?? []).map((f) => ({
       id: f.id,
-      friendlyName: f.friendly_name ?? 'Doğrulayıcı uygulama',
+      friendlyName: f.friendly_name ?? twoFactorText.defaultFactorName,
       createdAt: f.created_at,
     }));
 
@@ -75,7 +76,7 @@ export function TwoFactorSetup() {
 
       const verified = (data?.totp ?? []).map((f) => ({
         id: f.id,
-        friendlyName: f.friendly_name ?? 'Doğrulayıcı uygulama',
+        friendlyName: f.friendly_name ?? twoFactorText.defaultFactorName,
         createdAt: f.created_at,
       }));
 
@@ -108,13 +109,13 @@ export function TwoFactorSetup() {
 
     const { data, error: enrollError } = await supabase.auth.mfa.enroll({
       factorType: 'totp',
-      friendlyName: `Doğrulayıcı ${new Date().toLocaleDateString('tr-TR')}`,
+      friendlyName: `${twoFactorText.factorNamePrefix} ${new Date().toLocaleDateString('tr-TR')}`,
     });
 
     setBusy(false);
 
     if (enrollError || !data) {
-      setError(enrollError?.message ?? 'QR kod oluşturulamadı.');
+      setError(enrollError?.message ?? twoFactorText.qrError);
       return;
     }
 
@@ -137,7 +138,7 @@ export function TwoFactorSetup() {
 
     if (challengeError || !challenge) {
       setBusy(false);
-      setError(challengeError?.message ?? 'Doğrulama başlatılamadı.');
+      setError(challengeError?.message ?? twoFactorText.challengeError);
       return;
     }
 
@@ -150,13 +151,13 @@ export function TwoFactorSetup() {
     setBusy(false);
 
     if (verifyError) {
-      setError('Kod doğrulanamadı. Uygulamadaki güncel 6 haneli kodu girin.');
+      setError(twoFactorText.wrongCode);
       setCode('');
       return;
     }
 
     setQr(null);
-    setSuccess('İki adımlı doğrulama etkinleştirildi.');
+    setSuccess(twoFactorText.enabledMessage);
     await refresh();
   };
 
@@ -173,12 +174,12 @@ export function TwoFactorSetup() {
 
     if (unenrollError) {
       setError(
-        'Kaldırılamadı. Bu işlem için oturumunuzun iki adımlı doğrulamadan geçmiş olması gerekir — çıkış yapıp kodla yeniden giriş yapın.',
+        twoFactorText.removeError,
       );
       return;
     }
 
-    setSuccess('İki adımlı doğrulama kapatıldı.');
+    setSuccess(twoFactorText.disabledMessage);
     await refresh();
   };
 
@@ -188,7 +189,7 @@ export function TwoFactorSetup() {
     return (
       <div className="flex items-center gap-3 rounded-2xl bg-surface-muted p-6 text-sm text-muted-foreground">
         <Loader2 className="size-4 animate-spin" strokeWidth={2} />
-        Güvenlik ayarları okunuyor…
+        {twoFactorText.loading}
       </div>
     );
   }
@@ -232,11 +233,9 @@ export function TwoFactorSetup() {
               <Smartphone className="size-5" strokeWidth={1.8} />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="font-medium text-foreground">İki adımlı doğrulama kapalı</p>
+              <p className="font-medium text-foreground">{twoFactorText.offTitle}</p>
               <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                Etkinleştirdiğinizde giriş sırasında şifrenize ek olarak telefonunuzdaki
-                doğrulayıcı uygulamanın ürettiği 6 haneli kod istenir. Şifreniz ele geçse bile
-                hesabınıza girilemez.
+                {twoFactorText.offBody}
               </p>
             </div>
           </div>
@@ -251,7 +250,7 @@ export function TwoFactorSetup() {
             ) : (
               <ShieldCheck className="size-4" strokeWidth={2} />
             )}
-            İki Adımlı Doğrulamayı Aç
+            {twoFactorText.enableCta}
           </button>
         </div>
       )}
@@ -269,10 +268,9 @@ export function TwoFactorSetup() {
                 1
               </span>
               <div className="min-w-0 flex-1">
-                <p className="font-medium text-foreground">Doğrulayıcı uygulamayı açın</p>
+                <p className="font-medium text-foreground">{twoFactorText.appStepTitle}</p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Google Authenticator, Microsoft Authenticator veya Authy — hangisi
-                  kuruluysa. Yoksa uygulama mağazasından ücretsiz kurabilirsiniz.
+                  {twoFactorText.appStepBody}
                 </p>
               </div>
             </li>
@@ -289,7 +287,7 @@ export function TwoFactorSetup() {
                   <span className="rounded-xl border border-border bg-white p-3">
                     <Image
                       src={qr.svg}
-                      alt="İki adımlı doğrulama QR kodu"
+                      alt={twoFactorText.qrAlt}
                       width={176}
                       height={176}
                       unoptimized
@@ -299,7 +297,7 @@ export function TwoFactorSetup() {
 
                   <div className="min-w-0 flex-1">
                     <p className="text-sm text-muted-foreground">
-                      QR okutamıyorsanız bu anahtarı uygulamaya elle girin:
+                      {twoFactorText.manualKeyHint}
                     </p>
                     <button
                       onClick={() => copy(qr.secret)}
@@ -338,7 +336,7 @@ export function TwoFactorSetup() {
                     inputMode="numeric"
                     autoComplete="one-time-code"
                     placeholder="000000"
-                    aria-label="Doğrulama kodu"
+                    aria-label={twoFactorText.codeLabel}
                     className="h-12 w-40 rounded-xl border border-border bg-background px-4 text-center font-mono text-lg tracking-[0.4em] transition-all focus:border-gold-500 focus:ring-4 focus:ring-gold-500/12 focus:outline-none"
                   />
                   <button
@@ -347,7 +345,7 @@ export function TwoFactorSetup() {
                     className="inline-flex h-12 items-center gap-2 rounded-full bg-olive-700 px-6 text-sm font-semibold text-cream-50 transition-all hover:bg-olive-600 active:scale-[0.98] disabled:opacity-40 dark:bg-gold-500 dark:text-olive-950"
                   >
                     {busy && <Loader2 className="size-4 animate-spin" strokeWidth={2} />}
-                    Doğrula ve Etkinleştir
+                    {twoFactorText.verifyCta}
                   </button>
                   <button
                     onClick={() => {
@@ -357,7 +355,7 @@ export function TwoFactorSetup() {
                     }}
                     className="text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
                   >
-                    Vazgeç
+                    {twoFactorText.cancel}
                   </button>
                 </div>
               </div>
@@ -374,9 +372,9 @@ export function TwoFactorSetup() {
               <ShieldCheck className="size-5" strokeWidth={2} />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="font-medium text-foreground">İki adımlı doğrulama etkin</p>
+              <p className="font-medium text-foreground">{twoFactorText.onTitle}</p>
               <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                Girişte şifrenizin ardından doğrulayıcı uygulamanızdaki kod istenir.
+                {twoFactorText.onBody}
               </p>
             </div>
           </div>
@@ -407,7 +405,7 @@ export function TwoFactorSetup() {
                   className="inline-flex h-9 items-center gap-1.5 rounded-full border border-border px-4 text-xs font-medium transition-colors hover:border-red-400/60 hover:text-red-600 disabled:opacity-50"
                 >
                   <Trash2 className="size-3.5" strokeWidth={1.9} />
-                  Kaldır
+                  {twoFactorText.remove}
                 </button>
               </li>
             ))}
@@ -418,7 +416,7 @@ export function TwoFactorSetup() {
             disabled={busy}
             className="mt-4 text-sm font-medium text-gold-700 underline-offset-4 transition-colors hover:underline disabled:opacity-50 dark:text-gold-400"
           >
-            Başka bir cihaz ekle
+            {twoFactorText.addDevice}
           </button>
         </div>
       )}

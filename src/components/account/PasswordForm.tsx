@@ -4,6 +4,7 @@ import { useActionState, useState } from 'react';
 import { changePassword, type ActionState } from '@/app/(shop)/hesap/actions';
 import { AuthField, FormAlert, PasswordInput, SubmitButton } from '@/components/auth/FormParts';
 import { cn } from '@/lib/utils';
+import { passwordFormText } from '@/lib/data/text/account';
 
 const initialState: ActionState = {};
 
@@ -18,7 +19,7 @@ function strengthOf(value: string) {
   return Math.min(score, 4);
 }
 
-const labels = ['Çok zayıf', 'Zayıf', 'Orta', 'İyi', 'Güçlü'];
+const labels = passwordFormText.strengthLabels;
 const colors = ['bg-red-500', 'bg-red-500', 'bg-amber-500', 'bg-olive-500', 'bg-emerald-500'];
 
 export function PasswordForm() {
@@ -30,7 +31,7 @@ export function PasswordForm() {
     <form action={formAction} className="max-w-md space-y-5">
       <FormAlert error={state.error} success={state.success} />
 
-      <AuthField label="Mevcut Şifre" id="currentPassword">
+      <AuthField label={passwordFormText.currentLabel} id="currentPassword">
         <PasswordInput
           id="currentPassword"
           name="currentPassword"
@@ -41,7 +42,7 @@ export function PasswordForm() {
 
       <div className="space-y-2">
         <label htmlFor="password" className="block text-sm font-medium text-foreground/85">
-          Yeni Şifre
+          {passwordFormText.newLabel}
         </label>
         <PasswordInput
           id="password"
@@ -72,7 +73,7 @@ export function PasswordForm() {
         )}
       </div>
 
-      <AuthField label="Yeni Şifre Tekrar" id="passwordConfirm">
+      <AuthField label={passwordFormText.confirmLabel} id="passwordConfirm">
         <PasswordInput
           id="passwordConfirm"
           name="passwordConfirm"
@@ -83,7 +84,7 @@ export function PasswordForm() {
         />
       </AuthField>
 
-      <SubmitButton>Şifreyi Güncelle</SubmitButton>
+      <SubmitButton>{passwordFormText.submit}</SubmitButton>
     </form>
   );
 }

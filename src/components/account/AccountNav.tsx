@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signOut } from '@/app/(auth)/actions';
 import { blurDataURL, cn } from '@/lib/utils';
+import { accountNavText } from '@/lib/data/text/account';
 
 const items = [
   { label: 'Profil', href: '/hesap', Icon: User },
@@ -63,7 +64,7 @@ export function AccountNav({
           </span>
         </div>
 
-        <nav aria-label="Hesap menüsü" className="mt-5 border-t border-border pt-4">
+        <nav aria-label={accountNavText.menuLabel} className="mt-5 border-t border-border pt-4">
           <ul className="space-y-0.5">
             {items.map(({ label, href, Icon }) => {
               const active = href === '/hesap' ? pathname === '/hesap' : pathname.startsWith(href);
@@ -100,7 +101,7 @@ export function AccountNav({
               className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-red-500/8 hover:text-red-600"
             >
               <LogOut className="size-4.5 shrink-0" strokeWidth={1.8} />
-              Çıkış Yap
+              {accountNavText.signOut}
             </button>
           </form>
         </nav>

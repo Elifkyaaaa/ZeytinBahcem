@@ -8,11 +8,10 @@ import { useState, type FormEvent } from 'react';
 import { Field, Input } from '@/components/ui/Input';
 import { site } from '@/lib/data/site';
 import { cn } from '@/lib/utils';
+import { orderTrackerText } from '@/lib/data/text/account';
 
 const steps = [
-  { id: 'received', label: 'Sipariş alındı', detail: 'Ödemeniz onaylandı' },
-  { id: 'preparing', label: 'Hazırlanıyor', detail: 'Ürünleriniz paketleniyor' },
-  { id: 'shipped', label: 'Kargoda', detail: 'Kargo firmasına teslim edildi' },
+  ...orderTrackerText.steps,
   { id: 'delivered', label: 'Teslim edildi', detail: 'Afiyet olsun' },
 ];
 
@@ -28,11 +27,11 @@ export function OrderTracker() {
     setError(null);
 
     if (!/^ZB-/i.test(orderNo.trim())) {
-      setError('Sipariş numarası ZB- ile başlamalıdır. Onay e-postanızda yer alır.');
+      setError(orderTrackerText.invalidOrderNo);
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim())) {
-      setError('Siparişte kullandığınız e-posta adresini girin.');
+      setError(orderTrackerText.emailRequired);
       return;
     }
 
@@ -47,12 +46,17 @@ export function OrderTracker() {
       <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-8">
         <h2 className="flex items-center gap-2.5 font-display text-xl text-foreground">
           <PackageSearch className="size-5 text-olive-600 dark:text-gold-400" strokeWidth={1.8} />
-          Sipariş Sorgula
+          {orderTrackerText.submit}
         </h2>
 
         <form onSubmit={submit} noValidate className="mt-6 space-y-5">
           <div className="grid gap-5 sm:grid-cols-2">
-            <Field label="Sipariş numarası" htmlFor="orderNo" required hint="Örn. ZB-260804-0128">
+            <Field
+              label={orderTrackerText.orderNoLabel}
+              htmlFor="orderNo"
+              required
+              hint={orderTrackerText.orderNoHint}
+            >
               <Input
                 id="orderNo"
                 value={orderNo}
@@ -100,7 +104,7 @@ export function OrderTracker() {
         >
           <div className="flex flex-wrap items-baseline justify-between gap-3">
             <h3 className="font-display text-xl text-foreground">
-              Sipariş {result.orderNo}
+              {orderTrackerText.orderHeading(result.orderNo)}
             </h3>
             <span className="text-sm text-muted-foreground">
               {steps[result.step - 1]?.label}
@@ -163,29 +167,29 @@ export function OrderTracker() {
             <div className="mt-6 flex items-center gap-3 rounded-xl bg-surface-muted p-4">
               <Truck className="size-5 shrink-0 text-olive-600 dark:text-gold-400" strokeWidth={1.8} />
               <p className="text-sm text-muted-foreground">
-                Kargo takip numarası, kargoya verildiğinde e-posta ile iletilir.
+                {orderTrackerText.trackingNote}
               </p>
             </div>
           )}
 
           <p className="mt-6 text-sm text-muted-foreground">
-            Siparişinizle ilgili bir sorun mu var?{' '}
+            {orderTrackerText.helpBefore}{' '}
             <a
               href={site.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium text-gold-700 underline underline-offset-4 dark:text-gold-400"
             >
-              WhatsApp’tan yazın
+              {orderTrackerText.whatsappCta}
             </a>{' '}
-            veya{' '}
+            {orderTrackerText.helpBetween}{' '}
             <Link
               href="/iletisim"
               className="font-medium text-gold-700 underline underline-offset-4 dark:text-gold-400"
             >
-              iletişim formunu
+              {orderTrackerText.contactCta}
             </Link>{' '}
-            kullanın.
+            {orderTrackerText.helpAfter}
           </p>
         </motion.div>
       )}

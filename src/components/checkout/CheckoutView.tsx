@@ -473,7 +473,7 @@ export function CheckoutView() {
                   </div>
                   <span className="shrink-0 text-sm font-semibold tabular-nums">
                     {free ? (
-                      <span className="text-olive-700 dark:text-olive-300">Ücretsiz</span>
+                      <span className="text-olive-700 dark:text-olive-300">{checkoutText.freeLabel}</span>
                     ) : (
                       <span className="text-foreground">{formatPrice(method.price)}</span>
                     )}
@@ -769,7 +769,7 @@ export function CheckoutView() {
               <dt className="text-muted-foreground">Kargo</dt>
               <dd className="font-medium tabular-nums">
                 {base.shipping === 0 ? (
-                  <span className="text-olive-700 dark:text-olive-300">Ücretsiz</span>
+                  <span className="text-olive-700 dark:text-olive-300">{checkoutText.freeLabel}</span>
                 ) : (
                   <span className="text-foreground">{formatPrice(base.shipping)}</span>
                 )}

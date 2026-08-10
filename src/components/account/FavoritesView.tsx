@@ -8,6 +8,7 @@ import { useHydrated } from '@/hooks';
 import { products } from '@/lib/data/products';
 import { useUi } from '@/lib/store/ui';
 import { useWishlist } from '@/lib/store/wishlist';
+import { favoritesText } from '@/lib/data/text/account';
 
 export function FavoritesView() {
   const hydrated = useHydrated();
@@ -33,12 +34,12 @@ export function FavoritesView() {
         <span className="grid size-20 place-items-center rounded-full bg-surface-muted">
           <Heart className="size-8 text-muted-foreground" strokeWidth={1.3} />
         </span>
-        <h2 className="mt-6 font-display text-2xl text-foreground">Favori listeniz boş</h2>
+        <h2 className="mt-6 font-display text-2xl text-foreground">{favoritesText.emptyTitle}</h2>
         <p className="mt-2.5 max-w-sm text-sm leading-relaxed text-muted-foreground">
-          Beğendiğiniz ürünlerin kalp simgesine dokunun; buraya eklensin ve sonra kolayca bulun.
+          {favoritesText.emptyBody}
         </p>
         <Button href="/urunler" variant="gold" size="lg" className="mt-7">
-          Ürünleri İncele
+          {favoritesText.emptyCta}
           <ArrowRight className="size-4" strokeWidth={2.2} />
         </Button>
       </div>
@@ -49,8 +50,8 @@ export function FavoritesView() {
     <div>
       <div className="mb-5 flex items-center justify-between gap-4">
         <p className="text-sm text-muted-foreground">
-          <strong className="font-semibold text-foreground tabular-nums">{items.length}</strong> ürün
-          favorilerinizde
+          <strong className="font-semibold text-foreground tabular-nums">{items.length}</strong>{' '}
+          {favoritesText.countAfter}
         </p>
         <button
           onClick={() => {
@@ -60,7 +61,7 @@ export function FavoritesView() {
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-red-600 hover:underline"
         >
           <Trash2 className="size-3.5" strokeWidth={1.9} />
-          Tümünü kaldır
+          {favoritesText.clearAll}
         </button>
       </div>
 

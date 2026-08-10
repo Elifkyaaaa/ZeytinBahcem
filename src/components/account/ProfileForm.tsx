@@ -4,6 +4,7 @@ import { useActionState } from 'react';
 import { updateProfile, type ActionState } from '@/app/(shop)/hesap/actions';
 import { AuthField, FormAlert, SubmitButton, authInput } from '@/components/auth/FormParts';
 import { cn } from '@/lib/utils';
+import { profileFormText } from '@/lib/data/text/account';
 
 const initialState: ActionState = {};
 
@@ -57,7 +58,7 @@ export function ProfileForm({
         <AuthField
           label="E-posta"
           id="email"
-          hint="E-posta adresi değiştirilemez. Değişiklik için bizimle iletişime geçin."
+          hint={profileFormText.emailHint}
           className="sm:col-span-2"
         >
           <input
@@ -78,10 +79,10 @@ export function ProfileForm({
           disabled={disabled}
           className="mt-0.5 size-4 shrink-0 rounded accent-gold-500"
         />
-        Kampanya ve yeni hasat duyurularından e-posta ile haberdar olmak istiyorum.
+        {profileFormText.marketingOptIn}
       </label>
 
-      <SubmitButton className="sm:w-auto sm:px-10">Değişiklikleri Kaydet</SubmitButton>
+      <SubmitButton className="sm:w-auto sm:px-10">{profileFormText.submit}</SubmitButton>
     </form>
   );
 }

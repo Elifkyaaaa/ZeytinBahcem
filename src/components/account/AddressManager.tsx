@@ -14,6 +14,7 @@ import { Badge } from '@/components/ui/Badge';
 import { cities, cityNames } from '@/lib/data/cities';
 import { cn } from '@/lib/utils';
 import type { AddressRow } from '@/types/database';
+import { addressManagerText } from '@/lib/data/text/account';
 
 const initialState: ActionState = {};
 
@@ -43,7 +44,11 @@ function AddressForm({
       <FormAlert error={state.error} success={state.success} />
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <AuthField label="Adres başlığı" id="title" hint="Örn. Ev, İş">
+        <AuthField
+          label={addressManagerText.titleLabel}
+          id="title"
+          hint={addressManagerText.titleHint}
+        >
           <input
             id="title"
             name="title"
@@ -86,7 +91,7 @@ function AddressForm({
           />
         </AuthField>
 
-        <AuthField label="İl" id="city">
+        <AuthField label={addressManagerText.cityLabel} id="city">
           <select
             id="city"
             name="city"
@@ -95,7 +100,7 @@ function AddressForm({
             onChange={(e) => setCity(e.target.value)}
             className={authInput}
           >
-            <option value="">İl seçin</option>
+            <option value="">{addressManagerText.cityPlaceholder}</option>
             {cityNames.map((c) => (
               <option key={c} value={c}>
                 {c}
@@ -104,7 +109,7 @@ function AddressForm({
           </select>
         </AuthField>
 
-        <AuthField label="İlçe" id="district">
+        <AuthField label={addressManagerText.districtLabel} id="district">
           <select
             id="district"
             name="district"
@@ -113,7 +118,11 @@ function AddressForm({
             disabled={!city}
             className={cn(authInput, 'disabled:opacity-55')}
           >
-            <option value="">{city ? 'İlçe seçin' : 'Önce il seçin'}</option>
+            <option value="">
+              {city
+                ? addressManagerText.districtPlaceholder
+                : addressManagerText.districtDisabledPlaceholder}
+            </option>
             {districts.map((d) => (
               <option key={d} value={d}>
                 {d}
@@ -122,7 +131,7 @@ function AddressForm({
           </select>
         </AuthField>
 
-        <AuthField label="Açık adres" id="address" className="sm:col-span-2">
+        <AuthField label={addressManagerText.addressLabel} id="address" className="sm:col-span-2">
           <textarea
             id="address"
             name="address"
@@ -130,7 +139,7 @@ function AddressForm({
             minLength={10}
             rows={3}
             defaultValue={address?.address ?? ''}
-            placeholder="Mahalle, cadde, sokak, bina ve daire numarası"
+            placeholder={addressManagerText.addressPlaceholder}
             className={cn(authInput, 'h-auto resize-y py-3')}
           />
         </AuthField>
@@ -143,19 +152,19 @@ function AddressForm({
           defaultChecked={address?.is_default ?? false}
           className="size-4 rounded accent-gold-500"
         />
-        Varsayılan teslimat adresim olsun
+        {addressManagerText.makeDefault}
       </label>
 
       <div className="flex flex-wrap gap-3">
         <SubmitButton className="sm:w-auto sm:px-10">
-          {address ? 'Adresi Güncelle' : 'Adresi Kaydet'}
+          {address ? addressManagerText.update : addressManagerText.save}
         </SubmitButton>
         <button
           type="button"
           onClick={onDone}
           className="inline-flex h-12 items-center justify-center rounded-full border border-border px-8 text-sm font-medium transition-colors hover:border-gold-500/50"
         >
-          Vazgeç
+          {addressManagerText.cancel}
         </button>
       </div>
     </form>
@@ -191,7 +200,7 @@ export function AddressManager({
           >
             <div className="flex items-center justify-between gap-4">
               <h2 className="font-display text-xl text-foreground">
-                Kayıtlı Adresler
+                {addressManagerText.listHeading}
                 <span className="ml-2 text-sm font-normal text-muted-foreground tabular-nums">
                   ({addresses.length})
                 </span>
@@ -210,16 +219,16 @@ export function AddressManager({
                 <span className="grid size-16 place-items-center rounded-full bg-surface-muted">
                   <MapPin className="size-7 text-muted-foreground" strokeWidth={1.3} />
                 </span>
-                <h3 className="mt-5 font-display text-xl text-foreground">Kayıtlı adresiniz yok</h3>
+                <h3 className="mt-5 font-display text-xl text-foreground">{addressManagerText.emptyTitle}</h3>
                 <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                  Adres eklediğinizde ödeme adımında tek dokunuşla seçebilirsiniz.
+                  {addressManagerText.emptyBody}
                 </p>
                 <button
                   onClick={() => setMode({ kind: 'new' })}
                   className="mt-6 inline-flex h-11 items-center gap-2 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 px-7 text-sm font-semibold text-olive-950 transition-all hover:shadow-glow active:scale-95"
                 >
                   <Plus className="size-4" strokeWidth={2.4} />
-                  İlk Adresimi Ekle
+                  {addressManagerText.emptyCta}
                 </button>
               </div>
             ) : (
@@ -239,7 +248,7 @@ export function AddressManager({
                           {address.is_default && (
                             <Badge tone="gold">
                               <Star className="size-3 fill-current" strokeWidth={0} />
-                              Varsayılan
+                              {addressManagerText.defaultBadge}
                             </Badge>
                           )}
                         </div>
@@ -250,7 +259,7 @@ export function AddressManager({
                       <div className="flex shrink-0 items-center gap-1">
                         <button
                           onClick={() => setMode({ kind: 'edit', id: address.id })}
-                          aria-label={`${address.title} adresini düzenle`}
+                          aria-label={addressManagerText.editLabel(address.title)}
                           className="grid size-8 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-foreground/6 hover:text-gold-600"
                         >
                           <Pencil className="size-4" strokeWidth={1.9} />
@@ -283,7 +292,7 @@ export function AddressManager({
                           className="inline-flex items-center gap-1.5 text-xs font-medium text-gold-700 underline-offset-4 transition-colors hover:underline dark:text-gold-400"
                         >
                           <Check className="size-3.5" strokeWidth={2.6} />
-                          Varsayılan yap
+                          {addressManagerText.setDefault}
                         </button>
                       </form>
                     )}
@@ -303,7 +312,7 @@ export function AddressManager({
           >
             <div className="mb-6 flex items-center justify-between gap-4">
               <h2 className="font-display text-xl text-foreground">
-                {editing ? 'Adresi Düzenle' : 'Yeni Adres'}
+                {editing ? addressManagerText.editHeading : addressManagerText.newHeading}
               </h2>
               <button
                 onClick={() => setMode({ kind: 'list' })}
