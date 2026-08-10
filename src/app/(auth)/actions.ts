@@ -13,7 +13,7 @@ export interface AuthState {
 const DEMO_MESSAGE =
   'Kimlik doğrulama için Supabase bağlantısı gerekiyor. .env.local dosyasına NEXT_PUBLIC_SUPABASE_URL ve NEXT_PUBLIC_SUPABASE_ANON_KEY ekleyin.';
 
-/** Tarayıcının gördüğü kök adres — OAuth ve e-posta dönüş adresleri için. */
+/** The origin as the browser sees it, used for OAuth and email return URLs. */
 async function siteOrigin() {
   const headerList = await headers();
   const host = headerList.get('x-forwarded-host') ?? headerList.get('host');
@@ -27,7 +27,7 @@ function readString(formData: FormData, key: string) {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  E-posta + şifre ile giriş                                                  */
+/*  Sign in with email and password                                            */
 /* -------------------------------------------------------------------------- */
 
 export async function signInWithPassword(
@@ -57,7 +57,7 @@ export async function signInWithPassword(
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Kayıt — e-posta doğrulaması ile                                            */
+/*  Sign up, with email verification                                           */
 /* -------------------------------------------------------------------------- */
 
 export async function signUpWithPassword(
@@ -109,7 +109,7 @@ export async function signUpWithPassword(
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Google ile giriş                                                           */
+/*  Sign in with Google                                                        */
 /* -------------------------------------------------------------------------- */
 
 export async function signInWithGoogle(formData: FormData): Promise<void> {
@@ -137,7 +137,7 @@ export async function signInWithGoogle(formData: FormData): Promise<void> {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Şifremi unuttum / sıfırlama                                                */
+/*  Forgot password and reset                                                  */
 /* -------------------------------------------------------------------------- */
 
 export async function requestPasswordReset(
@@ -157,7 +157,7 @@ export async function requestPasswordReset(
     redirectTo: `${origin}/auth/callback?next=/hesap/sifre-degistir`,
   });
 
-  // Hesabın var olup olmadığını sızdırmamak için her durumda aynı yanıt verilir.
+  // Always answer the same way so we do not leak whether the account exists.
   return {
     success:
       'Eğer bu adrese kayıtlı bir hesap varsa, şifre sıfırlama bağlantısını gönderdik. Gelen kutunuzu kontrol edin.',
@@ -181,7 +181,7 @@ export async function updatePassword(_prev: AuthState, formData: FormData): Prom
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Doğrulama e-postasını yeniden gönder                                       */
+/*  Resend the verification email                                              */
 /* -------------------------------------------------------------------------- */
 
 export async function resendVerification(
@@ -206,7 +206,7 @@ export async function resendVerification(
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Çıkış                                                                      */
+/*  Sign out                                                                   */
 /* -------------------------------------------------------------------------- */
 
 export async function signOut() {

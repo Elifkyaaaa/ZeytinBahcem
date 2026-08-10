@@ -43,7 +43,7 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
           <Breadcrumbs trail={trail} />
 
           <div className="mt-8 grid gap-12 lg:grid-cols-[15rem_1fr] lg:gap-16">
-            {/* Diğer belgeler */}
+            {/* Other documents */}
             <aside className="lg:sticky lg:top-24 lg:self-start">
               <p className="text-[0.68rem] font-semibold tracking-[0.2em] text-muted-foreground uppercase">
                 Yasal Belgeler

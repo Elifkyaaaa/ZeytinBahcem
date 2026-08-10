@@ -8,7 +8,7 @@ import { createClient } from '@/utils/supabase/server';
 export const metadata = { title: 'Müşteri Yönetimi' };
 export const dynamic = 'force-dynamic';
 
-/** Sipariş sayısı ve harcamaya göre segment. */
+/** Segment derived from order count and total spend. */
 function segmentOf(orders: number, spent: number): PanelCustomer['segment'] {
   if (spent >= 20000 || orders >= 15) return 'VIP';
   if (orders >= 5) return 'Sadık';
@@ -23,7 +23,7 @@ export default async function AdminCustomersPage() {
   let live = false;
 
   if (supabase) {
-    // RLS: admin/staff tüm profilleri görebilir.
+    // RLS: admin and staff can see every profile.
     const { data: users } = await supabase
       .from('users')
       .select('id, email, full_name, phone, avatar_url, created_at, role')
@@ -32,8 +32,8 @@ export default async function AdminCustomersPage() {
     if (users) {
       live = true;
 
-      // Sipariş toplamlarını tek sorguda çekip bellekte grupluyoruz —
-      // müşteri başına ayrı sorgu atmak N+1 olurdu.
+      // Fetch order totals in one query and group them in memory; a query
+      // per customer would be an N+1.
       const { data: orders } = await supabase
         .from('orders')
         .select('user_id, total, status, shipping_address');

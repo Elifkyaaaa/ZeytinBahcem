@@ -50,14 +50,14 @@ function badRequest(message: string) {
 }
 
 /**
- * Sipariş akışı:
- *   1) Gövde doğrulanır, tutarlar sunucuda yeniden hesaplanır
- *   2) `orders` + `order_items` kaydı `pending` olarak açılır
- *   3) Kart ödemesiyse iyzico Checkout Form başlatılır → iframe içeriği döner
- *   4) Havale/kapıda ödemede sipariş doğrudan onaylanır ve mailler gönderilir
+ * Order flow:
+ *   1) Validate the body and recompute every total on the server
+ *   2) Insert `orders` and `order_items` with status `pending`
+ *   3) For card payments, start the iyzico Checkout Form and return its iframe
+ *   4) For transfer or cash on delivery, confirm the order and send the emails
  */
 export async function POST(request: Request) {
-  // Sipariş oluşturma pahalı bir işlem; dakikada 10 denemeyle sınırlı.
+  // Creating an order is expensive, so it is capped at ten attempts per minute.
   const limit = checkRateLimit(clientKey(request, 'checkout'), {
     limit: 10,
     windowMs: 60_000,
@@ -81,7 +81,7 @@ export async function POST(request: Request) {
     return badRequest('Teslimat adresi eksik.');
   }
 
-  // Tutarlar istemciden geldiği gibi kabul edilmez; kalem toplamı burada yeniden hesaplanır.
+  // Client-supplied totals are never trusted; the line sum is recomputed here.
   const computedSubtotal = body.items.reduce(
     (sum, item) => sum + item.unitPrice * item.quantity,
     0,
@@ -95,7 +95,7 @@ export async function POST(request: Request) {
   const fullAddress = `${body.address.address}, ${body.address.district} / ${body.address.city}`;
 
   /* ---------------------------------------------------------------------- */
-  /*  1) Siparişi veritabanına yaz                                           */
+  /*  1) Write the order to the database                                     */
   /* ---------------------------------------------------------------------- */
 
   let orderId: string | null = null;
@@ -167,7 +167,7 @@ export async function POST(request: Request) {
   }
 
   /* ---------------------------------------------------------------------- */
-  /*  2) Kart ödemesi → iyzico                                               */
+  /*  2) Card payment goes to iyzico                                         */
   /* ---------------------------------------------------------------------- */
 
   if (body.paymentMethod === 'card') {
@@ -185,7 +185,7 @@ export async function POST(request: Request) {
     const forwarded = request.headers.get('x-forwarded-for');
     const ip = forwarded?.split(',')[0]?.trim() || '85.34.78.112';
 
-    // iyzico sepet kalemleri toplamı `price` ile birebir eşleşmelidir.
+    // iyzico requires the basket items to sum to `price` exactly.
     const basketItems = body.items.map((item, index) => ({
       id: item.productId || `item-${index}`,
       name: `${item.name} — ${item.variantLabel}`,
@@ -239,7 +239,7 @@ export async function POST(request: Request) {
   }
 
   /* ---------------------------------------------------------------------- */
-  /*  3) Havale / kapıda ödeme → doğrudan onay + mail                        */
+  /*  3) Transfer or cash on delivery: confirm directly and send mail        */
   /* ---------------------------------------------------------------------- */
 
   const mailPayload = {
@@ -258,7 +258,7 @@ export async function POST(request: Request) {
     })),
   };
 
-  // Mail gönderimi siparişi bloke etmemeli; hata olsa da sipariş geçerlidir.
+  // Sending mail must not block the order; it stays valid even if mail fails.
   const [customerMail] = await Promise.all([
     sendOrderConfirmation(mailPayload),
     sendAdminOrderNotice(mailPayload),

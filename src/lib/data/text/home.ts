@@ -1,21 +1,21 @@
 /**
- * Ana sayfa bölümlerinin metinleri.
+ * Copy for the home page sections.
  *
- * UI bileşenlerinin içine doğrudan metin yazılmaz; kullanıcıya görünen her
- * ifade buradan okunur. Böylece bir cümleyi değiştirmek için bileşen dosyası
- * açılmaz ve aynı metin iki yerde farklı yazılmaz.
+ * UI components never hold literal text: every user-visible phrase is read
+ * from here. Changing a sentence does not mean opening a component, and the
+ * same phrase cannot end up worded two different ways.
  *
- * Ürün, kategori, blog gibi alan verileri `@/lib/data` altındaki kendi
- * modüllerinde; burası yalnızca arayüz metni.
+ * Domain data (products, categories, posts) lives in its own modules under
+ * `@/lib/data`; this file is interface copy only.
  */
 
 export const heroText = {
-  /** Bölümün erişilebilirlik adı — ekran okuyucu bunu duyurur */
+  /** Accessible name for the section, announced by screen readers */
   regionLabel: 'Giriş',
   badge: '1889’dan beri Orhangazi',
-  /** Başlık kelime kelime animasyonlu açıldığı için dizi olarak tutulur */
+  /** Kept as an array because the heading animates in word by word */
   titleWords: ['Doğadan', 'Sofranıza', 'Gerçek', 'Zeytinyağı'],
-  /** Yukarıdaki dizide altın renge boyanacak kelimenin sırası */
+  /** Index of the word in the array above that gets the gold treatment */
   accentWordIndex: 3,
   subtitle: 'Dalından özenle toplanan zeytinlerden soğuk sıkım olarak üretilmiştir.',
   primaryCta: 'Ürünleri İncele',
@@ -71,7 +71,7 @@ export const testimonialsText = {
   previousLabel: 'Önceki yorum',
   nextLabel: 'Sonraki yorum',
   dotsLabel: 'Yorum seçimi',
-  /** Nokta düğmelerinin erişilebilirlik adı — sıra numarasıyla birleşir */
+  /** Accessible name for the dot buttons, combined with the slide number */
   dotLabel: (index: number) => `${index}. yorum`,
 } as const;
 
@@ -99,7 +99,7 @@ export const newsletterText = {
   invalidEmail: 'Lütfen geçerli bir e-posta adresi girin.',
   successTitle: 'Aramıza hoş geldiniz.',
   successBody: 'İlk bültenimiz kısa süre içinde kutunuzda olacak.',
-  /** KVKK onay cümlesi bağlantı içerdiği için üç parçaya bölünmüştür */
+  /** The consent sentence contains a link, so it is split into three parts */
   consentBefore: 'Kişisel verilerimin',
   consentLinkLabel: 'KVKK Aydınlatma Metni',
   consentAfter: 'kapsamında işlenmesini kabul ediyorum.',

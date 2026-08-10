@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        // Kişisel ve işlem sayfaları arama sonuçlarında yer almamalı.
+        // Personal and transactional pages must stay out of search results.
         disallow: [
           '/admin',
           '/hesap',

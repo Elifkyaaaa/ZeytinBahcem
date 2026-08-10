@@ -1,12 +1,12 @@
 /**
- * Ödeme sayfasının metinleri.
+ * Copy for the checkout page.
  *
- * Doğrulama mesajları `validation` altında alan adına göre toplanmıştır;
- * bileşen artık her kural için ayrı bir dize taşımıyor.
+ * Validation messages are grouped under `validation` by field name, so the
+ * component no longer carries a string per rule.
  *
- * Yasal onay cümleleri iki bağlantı içerdiği için parçalıdır. Mesafeli
- * Satış ve Ön Bilgilendirme onayları mevzuat gereği ayrı kutulardır —
- * metinleri birleştirmeyin.
+ * The legal consent sentences contain links and are split into parts. Turkish
+ * law requires the distance sales contract and the pre-information form to be
+ * two separate checkboxes — do not merge their copy.
  */
 
 import { commonText } from '@/lib/data/text/layout';
@@ -31,7 +31,7 @@ export const checkoutText = {
   networkError: 'Sunucuya ulaşılamadı. İnternet bağlantınızı kontrol edip tekrar deneyin.',
 
   successTitle: 'Siparişiniz alındı',
-  /** Sipariş numarası cümlenin ortasında kalın yazıyla görünür */
+  /** The order number appears in bold in the middle of the sentence */
   successBefore: 'Sipariş numaranız',
   successAfter: '. Onay e-postası kısa süre içinde kutunuzda olacak.',
   paymentMethodLabel: 'Ödeme yöntemi',

@@ -1,10 +1,10 @@
 /**
- * Çerçeve bileşenlerinin metinleri: başlık, mobil menü, arama, sepet çekmecesi,
- * alt bilgi ve yüzen düğmeler.
+ * Copy for the chrome: header, mobile menu, search, cart drawer, footer and
+ * floating actions.
  *
- * `commonText` birden fazla bileşende geçen ifadeler içindir. Giriş/çıkış gibi
- * eylemler hem masaüstü menüsünde hem mobil menüde göründüğü için, aynı
- * eylemin iki yerde farklı yazılmasını bu paylaşılan blok engelliyor.
+ * `commonText` holds phrases used by more than one component. Actions such as
+ * sign in and sign out appear in both the desktop and the mobile menu, and
+ * this shared block stops the same action being worded differently in each.
  */
 
 export const commonText = {
@@ -25,7 +25,7 @@ export const headerText = {
 export const mobileMenuText = {
   regionLabel: 'Mobil menü',
   closeLabel: 'Menüyü kapat',
-  /** Yönetim bağlantısının kısa başlığı — mobilde yer dar */
+  /** Short label for the admin link, because space is tight on mobile */
   adminShort: 'Yönetim',
 } as const;
 
@@ -42,7 +42,7 @@ export const searchOverlayText = {
 } as const;
 
 export const cartDrawerText = {
-  /** Ücretsiz kargoya kalan tutar cümlesi; tutar araya kalın yazıyla girer */
+  /** Free-shipping-remaining sentence; the amount goes in the middle, in bold */
   freeShippingBefore: 'Ücretsiz kargoya',
   freeShippingAfter: 'kaldı',
   emptyTitle: 'Sepetiniz boş',

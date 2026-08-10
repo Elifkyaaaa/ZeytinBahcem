@@ -11,7 +11,7 @@ export interface ReviewActionState {
 
 const VALID: ReviewStatus[] = ['pending', 'approved', 'rejected'];
 
-/** Yorum yönetimi admin/staff rolüne açıktır. */
+/** Review moderation is open to the admin and staff roles. */
 async function requireStaff() {
   const supabase = await createClient();
   if (!supabase) return { error: 'Supabase bağlantısı gerekiyor.' } as const;
@@ -35,9 +35,9 @@ async function requireStaff() {
 }
 
 /**
- * Yorum durumunu değiştirir.
- * Onaylanan yorumlar ürünün puan ortalamasını ve yorum sayısını veritabanı
- * trigger'ı (`refresh_product_rating`) üzerinden otomatik günceller.
+ * Changes a review's status.
+ * Approving one automatically refreshes the product's average rating and
+ * review count through the `refresh_product_rating` database trigger.
  */
 export async function setReviewStatus(form: FormData) {
   const auth = await requireStaff();

@@ -25,7 +25,7 @@ export default async function PaymentResultPage({
         <div className="mx-auto max-w-xl text-center">
           {success ? (
             <>
-              {/* Ödeme onaylandığında sepet temizlenir */}
+              {/* Clear the cart once payment is confirmed */}
               <CartCleaner />
 
               <span className="inline-grid size-20 place-items-center rounded-full bg-olive-600 text-cream-50">

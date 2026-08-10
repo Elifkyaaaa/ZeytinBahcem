@@ -47,7 +47,7 @@ export async function updateProfile(_prev: ActionState, form: FormData): Promise
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Şifre                                                                      */
+/*  Password                                                                    */
 /* -------------------------------------------------------------------------- */
 
 export async function changePassword(_prev: ActionState, form: FormData): Promise<ActionState> {
@@ -66,7 +66,7 @@ export async function changePassword(_prev: ActionState, form: FormData): Promis
   } = await supabase.auth.getUser();
   if (!user?.email) return { error: 'Oturumunuz sona ermiş. Lütfen yeniden giriş yapın.' };
 
-  // Mevcut şifre doğrulanmadan değişikliğe izin verilmez.
+  // No change is allowed until the current password is verified.
   if (current) {
     const { error: signInError } = await supabase.auth.signInWithPassword({
       email: user.email,

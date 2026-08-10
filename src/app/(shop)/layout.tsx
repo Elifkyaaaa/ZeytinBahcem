@@ -6,7 +6,7 @@ import { CookieConsent } from '@/components/legal/CookieConsent';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { organizationJsonLd, websiteJsonLd } from '@/lib/seo';
 
-/** Vitrin (mağaza) düzeni — admin paneli bu kabuğun dışında kalır. */
+/** Storefront layout; the admin panel lives outside this shell. */
 export default function ShopLayout({ children }: { children: ReactNode }) {
   return (
     <>

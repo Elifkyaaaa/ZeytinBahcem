@@ -81,9 +81,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html
       lang="tr"
       suppressHydrationWarning
-      // globals.css'te `scroll-behavior: smooth` tanımlı. Next bunu bilmezse
-      // rota geçişlerinde sayfayı yumuşak kaydırıp konumu şaşırtıyor; bu
-      // öznitelik Next'e durumu bildirir ve geçişlerde anlık konumlandırır.
+      // globals.css sets `scroll-behavior: smooth`. Without this attribute Next
+      // does not know, animates the scroll on route changes and lands in the
+      // wrong place; declaring it makes transitions jump instantly instead.
       data-scroll-behavior="smooth"
       className={inter.variable}
     >

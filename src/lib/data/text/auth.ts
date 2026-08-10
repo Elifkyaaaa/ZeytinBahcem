@@ -1,8 +1,8 @@
 /**
- * Giriş, kayıt ve iki adımlı doğrulama ekranlarının metinleri.
+ * Copy for the sign-in, sign-up and two-factor screens.
  *
- * Yasal onay cümleleri iki bağlantı içerdiği için parçalıdır; bileşen
- * parçaları sırayla birleştirir.
+ * The legal consent sentences contain two links each, so they are split into
+ * parts that the component joins in order.
  */
 
 import { commonText } from '@/lib/data/text/layout';
@@ -17,7 +17,7 @@ export const loginFormText = {
   forgotPassword: 'Şifremi unuttum',
   rememberMe: 'Beni hatırla',
   submit: commonText.signIn,
-  /** Adres çubuğundaki hata koduna karşılık gelen açıklamalar */
+  /** Messages keyed by the error code in the address bar */
   errors: {
     'dogrulama-basarisiz': 'Doğrulama bağlantısı geçersiz veya süresi dolmuş. Yeniden deneyin.',
     'supabase-yapilandirilmadi': 'Kimlik doğrulama henüz yapılandırılmadı.',

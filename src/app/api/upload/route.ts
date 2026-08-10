@@ -7,18 +7,19 @@ import { isSupabaseConfigured } from '@/utils/env';
 export const runtime = 'nodejs';
 
 /**
- * İmzalı Cloudinary yükleme parametreleri.
- * Yalnızca admin/staff rolü çağırabilir — imza sızarsa keyfi yükleme yapılabilirdi.
+ * Signed Cloudinary upload parameters.
+ * Only the admin and staff roles may call this: a leaked signature would allow
+ * arbitrary uploads.
  */
 export async function POST(request: Request) {
-  // İmza üretimi ucuz ama kötüye kullanılabilir; dakikada 30 istek.
+  // Signing is cheap but abusable, so thirty requests per minute.
   const limit = checkRateLimit(clientKey(request, 'upload'), {
     limit: 30,
     windowMs: 60_000,
   });
   if (!limit.ok) return tooManyRequests(limit.retryAfter);
 
-  // Supabase bağlıysa yetki denetimi zorunludur.
+  // When Supabase is connected, the authorisation check is mandatory.
   if (isSupabaseConfigured) {
     const supabase = await createClient();
     const {
@@ -45,7 +46,7 @@ export async function POST(request: Request) {
     const body = (await request.json()) as { folder?: string };
     folder = typeof body.folder === 'string' ? body.folder : undefined;
   } catch {
-    // Gövde göndermek zorunlu değil; varsayılan klasör kullanılır.
+    // A body is optional; the default folder is used when it is missing.
   }
 
   const signature = createUploadSignature(folder);

@@ -1,6 +1,6 @@
 /**
- * Müşteri paneli metinleri: profil, adresler, favoriler, sipariş takibi,
- * şifre değiştirme ve iki adımlı doğrulama.
+ * Copy for the customer area: profile, addresses, favourites, order tracking,
+ * password change and two-factor setup.
  */
 
 import { commonText } from '@/lib/data/text/layout';
@@ -40,7 +40,7 @@ export const favoritesText = {
   emptyBody:
     'Beğendiğiniz ürünlerin kalp simgesine dokunun; buraya eklensin ve sonra kolayca bulun.',
   emptyCta: commonText.browseProducts,
-  /** Sayı kalın yazıyla cümlenin ortasında kalır */
+  /** The count sits in bold in the middle of the sentence */
   countAfter: 'ürün favorilerinizde',
   clearAll: 'Tümünü kaldır',
 } as const;
@@ -58,7 +58,7 @@ export const orderTrackerText = {
   orderNoHint: 'Örn. ZB-260804-0128',
   orderHeading: (orderNo: string) => `Sipariş ${orderNo}`,
   trackingNote: 'Kargo takip numarası, kargoya verildiğinde e-posta ile iletilir.',
-  /** Yardım satırı iki bağlantı içerdiği için parçalı */
+  /** The help line contains two links, so it is split into parts */
   helpBefore: 'Siparişinizle ilgili bir sorun mu var?',
   whatsappCta: 'WhatsApp’tan yazın',
   helpBetween: 'veya',
@@ -67,7 +67,7 @@ export const orderTrackerText = {
 } as const;
 
 export const passwordFormText = {
-  /** Şifre gücü göstergesinin etiketleri — zayıftan güçlüye */
+  /** Password strength labels, from weakest to strongest */
   strengthLabels: ['Çok zayıf', 'Zayıf', 'Orta', 'İyi', 'Güçlü'],
   currentLabel: 'Mevcut Şifre',
   newLabel: 'Yeni Şifre',
@@ -83,7 +83,7 @@ export const profileFormText = {
 
 export const supabaseNoticeText = {
   title: 'Hesap sistemi henüz bağlanmadı',
-  /** Cümle dört kod parçası içerdiği için bölündü */
+  /** Split because the sentence contains four inline code fragments */
   bodyBefore: 'Bu ekranlar Supabase’e bağlanmaya hazır durumda. Şema',
   migrationsPath: 'supabase/migrations',
   bodyMiddle: 'altında hazır;',

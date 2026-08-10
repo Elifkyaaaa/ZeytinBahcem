@@ -7,7 +7,7 @@ import { createClient, getCurrentUser } from '@/utils/supabase/server';
 
 export const metadata = { title: 'Kullanıcı Yetkileri' };
 
-/** Rol değişiklikleri anında yansımalı; bu sayfa önbelleğe alınmaz. */
+/** Role changes must show up immediately, so this page is never cached. */
 export const dynamic = 'force-dynamic';
 
 export default async function AdminPermissionsPage() {
@@ -18,7 +18,7 @@ export default async function AdminPermissionsPage() {
   let liveData = false;
 
   if (supabase && session) {
-    // RLS: yalnızca admin/staff tüm kullanıcıları görebilir.
+    // RLS: only admin and staff can list every user.
     const { data } = await supabase
       .from('users')
       .select('id, email, full_name, avatar_url, role, created_at')
@@ -39,7 +39,7 @@ export default async function AdminPermissionsPage() {
     }
   }
 
-  // Supabase bağlı değilken panelin nasıl göründüğünü koruyoruz.
+  // Keeps the panel looking right when Supabase is not connected.
   if (!liveData) {
     users = adminUsers.map((user) => ({
       id: user.id,

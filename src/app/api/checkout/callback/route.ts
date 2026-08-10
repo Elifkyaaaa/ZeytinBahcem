@@ -8,9 +8,9 @@ import type { OrderItemRow, OrderRow } from '@/types/database';
 export const runtime = 'nodejs';
 
 /**
- * iyzico 3D Secure dönüş noktası.
- * iyzico buraya POST atar; sonucu **kendimiz** sorgulayarak doğrularız —
- * form gövdesindeki duruma tek başına güvenilmez.
+ * iyzico 3D Secure return point.
+ * iyzico POSTs here, and we verify the result by querying iyzico **ourselves**
+ * — the status in the form body is not trusted on its own.
  */
 export async function POST(request: NextRequest) {
   const form = await request.formData();
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
           })),
         };
 
-        // Mail hataları ödeme sonucunu etkilememeli.
+        // Mail failures must not affect the payment result.
         await Promise.allSettled([
           sendOrderConfirmation(payload),
           sendAdminOrderNotice(payload),
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
     ? `${env.siteUrl}/odeme/sonuc?durum=hata&mesaj=${encodeURIComponent(result.errorMessage ?? 'Ödeme tamamlanamadı.')}`
     : `${env.siteUrl}/odeme/sonuc?durum=basarili&no=${encodeURIComponent(conversationId ?? '')}`;
 
-  // 303: POST → GET yönlendirmesi
+  // 303 turns the POST into a GET redirect
   return NextResponse.redirect(target, { status: 303 });
 }
 

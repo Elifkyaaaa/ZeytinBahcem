@@ -118,7 +118,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </Container>
         </div>
 
-        {/* Gövde */}
+        {/* Body */}
         <Container className="py-14 lg:py-20">
           <div className="mx-auto max-w-2xl">
             <p className="border-l-2 border-gold-500/50 pl-6 font-display text-xl leading-relaxed text-foreground/90 sm:text-2xl">
@@ -232,7 +232,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </Container>
       </article>
 
-      {/* Diğer yazılar */}
+      {/* Other posts */}
       <section className="border-t border-border bg-surface-muted py-16 lg:py-20" aria-label="Diğer yazılar">
         <Container>
           <h2 className="font-display text-3xl text-foreground">Bunları da Okuyun</h2>

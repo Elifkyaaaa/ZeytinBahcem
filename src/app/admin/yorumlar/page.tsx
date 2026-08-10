@@ -26,7 +26,7 @@ export default async function AdminReviewsPage() {
     if (!error && data) {
       live = true;
 
-      // Ürün adlarını tek sorguda eşliyoruz (gömülü ilişki yerine).
+      // Join product names with one query instead of an embedded relation.
       const { data: products } = await supabase.from('products').select('id, name, slug');
       const byId = new Map((products ?? []).map((p) => [p.id, p]));
 

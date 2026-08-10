@@ -1,9 +1,8 @@
 /**
- * Sepet, iletişim formu ve çerez bandı metinleri.
+ * Copy for the cart, the contact form and the cookie banner.
  *
- * KVKK onay cümleleri bağlantı içerdiği için parçalara bölünmüştür; bileşen
- * bunları `{' '}` ile birleştirir. Cümleyi değiştirirken parçaların sırasını
- * koruyun.
+ * Consent sentences contain links, so they are split into parts that the
+ * component joins with `{' '}`. Keep the parts in order when rewording them.
  */
 
 import { commonText } from '@/lib/data/text/layout';
@@ -25,13 +24,13 @@ export const cartText = {
   couponPlaceholder: 'Örn. HASAT10',
   couponAppliedToast: 'Kupon uygulandı',
   couponRemovedToast: 'Kupon kaldırıldı',
-  /** Ücretsiz kargoya kalan tutar cümlesi; tutar araya girer */
+  /** Free-shipping-remaining sentence; the amount goes in the middle */
   freeShippingBefore: 'Ücretsiz kargoya',
   freeShippingAfter: 'kaldı',
   itemsHeading: 'Ürünler',
   itemCount: (count: number) => `(${count} kalem)`,
   removeItemLabel: (name: string) => `${name} ürününü sil`,
-  /** Özetin altındaki güven rozetleri — sıra ekrandaki sırayla aynı */
+  /** Trust notes under the summary, in the order they appear on screen */
   trustNotes: [
     '256-bit SSL ile güvenli ödeme',
     '14 gün koşulsuz iade',
@@ -41,7 +40,7 @@ export const cartText = {
 
 export const contactFormText = {
   sentTitle: 'Mesajınız alındı',
-  /** Onay cümlesi e-posta adresini araya alır */
+  /** The confirmation sentence wraps around the email address */
   sentBefore: 'En geç bir iş günü içinde',
   sentAfter: 'adresine dönüş yapacağız.',
   newMessage: 'Yeni mesaj gönder',

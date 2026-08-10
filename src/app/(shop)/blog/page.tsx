@@ -53,7 +53,7 @@ export default function BlogPage() {
             ))}
           </div>
 
-          {/* Öne çıkan yazı */}
+          {/* Featured post */}
           <Reveal className="mt-10">
             <article className="group grid overflow-hidden rounded-3xl border border-border bg-surface shadow-soft transition-shadow duration-500 hover:shadow-lift lg:grid-cols-2">
               <div className="relative aspect-16/10 overflow-hidden bg-surface-muted lg:aspect-auto lg:min-h-[24rem]">
@@ -115,7 +115,7 @@ export default function BlogPage() {
             </article>
           </Reveal>
 
-          {/* Diğer yazılar */}
+          {/* Other posts */}
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {rest.map((post, i) => (
               <Reveal key={post.slug} delay={(i % 3) * 0.07} className="h-full">

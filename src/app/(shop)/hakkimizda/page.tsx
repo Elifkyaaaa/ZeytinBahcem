@@ -116,7 +116,7 @@ export default function AboutPage() {
         trail={trail}
       />
 
-      {/* Giriş */}
+      {/* Intro */}
       <Section>
         <Container>
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
@@ -198,7 +198,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      {/* Zaman çizelgesi */}
+      {/* Timeline */}
       <Section tone="muted">
         <Container>
           <SectionHeading
@@ -243,7 +243,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      {/* Değerler */}
+      {/* Values */}
       <Section>
         <Container>
           <SectionHeading

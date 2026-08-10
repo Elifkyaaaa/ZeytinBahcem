@@ -1,9 +1,9 @@
 /**
- * Ürün listesi, kartı, galerisi, satın alma paneli ve sekmelerinin metinleri.
+ * Copy for the product list, card, gallery, purchase panel and tabs.
  *
- * Sayı veya ürün adı içeren ifadeler dize birleştirme yerine parametreli
- * fonksiyon olarak duruyor; böylece cümlenin tamamı — sıralaması dahil —
- * bu dosyada kalıyor.
+ * Phrases that contain a number or a product name are parameterised functions
+ * rather than string concatenation, so the whole sentence — word order
+ * included — stays in this file.
  */
 
 export const productBrowserText = {
@@ -32,7 +32,7 @@ export const productCardText = {
   removedToast: 'Favorilerden çıkarıldı',
   addToCart: 'Sepete Ekle',
   outOfStock: 'Stokta Yok',
-  /** Sepete eklendikten sonra düğmede kısa süre görünen onay */
+  /** Brief confirmation shown on the button after adding to the cart */
   added: 'Eklendi',
   addedToCartToast: 'Sepete eklendi',
 } as const;
@@ -62,7 +62,7 @@ export const productPurchaseText = {
   shareFacebook: 'Facebook’ta paylaş',
   copyLink: 'Bağlantıyı kopyala',
   viewCart: 'Sepeti Görüntüle',
-  /** Fiyatın altındaki üç güvence rozeti — ekrandaki sırayla */
+  /** The three assurance badges under the price, in screen order */
   assurances: [
     { text: 'Ücretsiz kargo', hint: (threshold: number) => `${threshold} ₺ üzeri` },
     { text: '14 gün iade', hint: () => 'Koşulsuz' },
@@ -82,7 +82,7 @@ export const productTabsText = {
   },
   highlightsHeading: 'Öne çıkan özellikler',
   specsHeading: 'Ürün künyesi',
-  /** Besin değerleri girişi "100 g" ibaresini kalın yazıyla araya alır */
+  /** The nutrition intro wraps "100 g" in bold in the middle of the sentence */
   nutritionIntroBefore: 'Aşağıdaki değerler',
   nutritionPortion: '100 g',
   nutritionIntroAfter:
@@ -90,7 +90,7 @@ export const productTabsText = {
   nutritionColumn: 'Besin öğesi',
   nutritionFootnote:
     'RA: Referans alım. Değerler hasat sezonuna göre küçük farklılıklar gösterebilir.',
-  /** Kargo seçenekleri — ücretsiz kargo eşiği çalışma anında yerleşir */
+  /** Shipping options; the free shipping threshold is filled in at runtime */
   shippingOptions: [
     {
       title: 'Standart Kargo',
@@ -116,7 +116,7 @@ export const productTabsText = {
     'Teslimattan itibaren 14 gün içinde, ambalajı açılmamış ürünlerde koşulsuz iade hakkınız vardır. İade kargo ücreti tarafımıza aittir. Detaylar için İade Politikası sayfamıza bakabilirsiniz.',
   reviewCount: (count: number) => `${count} değerlendirme`,
   verifiedPurchase: 'Doğrulanmış alışveriş',
-  /** SSS altındaki iletişim satırı bağlantıyı araya alır */
+  /** The contact line under the FAQ wraps around a link */
   faqContactBefore: 'Başka bir sorunuz mu var?',
   whatsappCta: 'WhatsApp’tan yazın',
   faqContactAfter: ', ortalama 12 dakikada dönüyoruz.',

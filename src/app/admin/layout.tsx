@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-/** Oturum yoksa (yalnızca Supabase bağlı değilken mümkün) gösterilecek yer tutucu. */
+/** Placeholder shown when there is no session, which only happens without Supabase. */
 const demoUser: AdminUser = {
   name: 'Demo Yönetici',
   email: 'supabase-baglanmadi@local',
@@ -25,7 +25,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
 
   const user: AdminUser = session
     ? {
-        // Profilde ad yoksa e-postanın kullanıcı adı kısmına düşeriz.
+        // Fall back to the local part of the email when the profile has no name.
         name:
           session.profile?.full_name?.trim() ||
           session.user.email?.split('@')[0] ||

@@ -13,7 +13,7 @@ const NEEDS_DB =
   'Ürün yönetimi için Supabase bağlantısı gerekiyor. Katalog şu an yerel dosyadan okunuyor — ' +
   'önce `npm run db:seed` ile ürünleri veritabanına aktarın.';
 
-/** Yazma işlemleri yalnızca admin/staff rolüne açık. */
+/** Write operations are limited to the admin and staff roles. */
 async function requireStaff() {
   const supabase = await createClient();
   if (!supabase) return { error: NEEDS_DB } as const;
@@ -48,7 +48,7 @@ function str(form: FormData, key: string) {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Oluştur / güncelle                                                         */
+/*  Create and update                                                          */
 /* -------------------------------------------------------------------------- */
 
 export async function saveProduct(
@@ -73,7 +73,7 @@ export async function saveProduct(
     return { error: 'Eski fiyat, güncel fiyattan yüksek olmalıdır.' };
   }
 
-  // Kategori slug'ından kimliği bul.
+  // Resolve the category id from its slug.
   let categoryId: string | null = null;
   if (categorySlug) {
     const { data } = await auth.supabase
@@ -100,8 +100,8 @@ export async function saveProduct(
     is_active: form.get('isActive') !== null,
   };
 
-  // Yeni kayıtta jsonb/dizi sütunlarının varsayılanlarını açıkça veriyoruz;
-  // varyant ve künye bilgisi sonradan ürün detayından zenginleştirilir.
+  // On insert we set the jsonb and array column defaults explicitly; variant
+  // and spec data is filled in later from the product detail screen.
   const { error } = id
     ? await auth.supabase.from('products').update(payload).eq('id', id)
     : await auth.supabase.from('products').insert({
@@ -145,7 +145,7 @@ export async function deleteProduct(form: FormData) {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Yayın durumu / stok — hızlı işlemler                                       */
+/*  Publish state and stock — quick actions                                    */
 /* -------------------------------------------------------------------------- */
 
 export async function toggleProductActive(form: FormData) {

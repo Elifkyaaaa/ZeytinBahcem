@@ -12,7 +12,7 @@ export interface AdminActionState {
 const NEEDS_SUPABASE = 'Bu işlem için Supabase bağlantısı gerekiyor.';
 const VALID_ROLES: UserRole[] = ['customer', 'staff', 'admin'];
 
-/** Çağıranın gerçekten yönetici olduğunu sunucuda doğrular. */
+/** Verifies on the server that the caller really is an admin. */
 async function requireAdmin() {
   const supabase = await createClient();
   if (!supabase) return { error: NEEDS_SUPABASE } as const;
@@ -36,7 +36,7 @@ async function requireAdmin() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Rol değiştirme                                                             */
+/*  Role changes                                                               */
 /* -------------------------------------------------------------------------- */
 
 export async function updateUserRole(
@@ -52,7 +52,7 @@ export async function updateUserRole(
   if (!targetId) return { error: 'Kullanıcı bulunamadı.' };
   if (!VALID_ROLES.includes(role)) return { error: 'Geçersiz rol.' };
 
-  // Kendini yetkisizleştirip panelden kilitlenmeyi engelle.
+  // Stop an admin demoting themselves and locking their way out of the panel.
   if (targetId === auth.userId && role !== 'admin') {
     return {
       error:
@@ -60,7 +60,7 @@ export async function updateUserRole(
     };
   }
 
-  // Sistemde en az bir yönetici kalmalı.
+  // At least one admin must remain.
   if (role !== 'admin') {
     const { count } = await auth.supabase
       .from('users')
@@ -80,7 +80,7 @@ export async function updateUserRole(
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Davet — servis rolü gerektirir                                             */
+/*  Invitations, which require the service role                                */
 /* -------------------------------------------------------------------------- */
 
 export async function invitePanelUser(
@@ -99,7 +99,7 @@ export async function invitePanelUser(
   }
   if (!VALID_ROLES.includes(role)) return { error: 'Geçersiz rol.' };
 
-  // Kayıtlı bir kullanıcıysa yalnızca rolünü yükseltmek yeterli.
+  // For an existing user, raising the role is enough.
   const { data: existing } = await auth.supabase
     .from('users')
     .select('id')
@@ -113,7 +113,7 @@ export async function invitePanelUser(
     return { success: `${email} adresine ${role} yetkisi verildi.` };
   }
 
-  // Yeni kişi: davet e-postası göndermek servis rolü anahtarı ister.
+  // New person: sending an invitation email needs the service role key.
   const service = createServiceClient();
   if (!service) {
     return {
@@ -128,7 +128,7 @@ export async function invitePanelUser(
 
   if (error) return { error: `Davet gönderilemedi: ${error.message}` };
 
-  // Davet kabul edilince trigger profili oluşturur; rolü şimdiden işaretleyemeyiz.
+  // The trigger creates the profile once the invite is accepted, so we cannot set the role yet.
   revalidatePath('/admin/yetkiler');
   return {
     success: `${email} adresine davet gönderildi. Üyelik tamamlandığında rolünü buradan yükseltebilirsiniz.`,
