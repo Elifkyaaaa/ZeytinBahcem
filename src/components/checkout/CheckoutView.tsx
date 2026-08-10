@@ -30,6 +30,7 @@ import { site } from '@/lib/data/site';
 import { useCart } from '@/lib/store/cart';
 import { calcTotals, useCheckout } from '@/lib/store/checkout';
 import { blurDataURL, cn, formatPrice } from '@/lib/utils';
+import { checkoutText } from '@/lib/data/text/checkout';
 
 /** Yöntem başına simge — metin ve tutarlar `@/lib/data/payment` içinde. */
 const paymentIcons: Record<PaymentMethod, typeof CreditCard> = {
@@ -88,21 +89,21 @@ export function CheckoutView() {
 
   const validate = () => {
     const next: FormErrors = {};
-    if (values.firstName.trim().length < 2) next.firstName = 'Adınızı girin.';
-    if (values.lastName.trim().length < 2) next.lastName = 'Soyadınızı girin.';
+    if (values.firstName.trim().length < 2) next.firstName = checkoutText.validation.firstName;
+    if (values.lastName.trim().length < 2) next.lastName = checkoutText.validation.lastName;
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.email.trim()))
-      next.email = 'Geçerli bir e-posta girin.';
-    if (values.phone.replace(/\D/g, '').length < 10) next.phone = 'Geçerli bir telefon girin.';
-    if (!values.city) next.city = 'İl seçin.';
-    if (!values.district) next.district = 'İlçe seçin.';
-    if (values.address.trim().length < 10) next.address = 'Açık adresi girin (en az 10 karakter).';
+      next.email = checkoutText.validation.email;
+    if (values.phone.replace(/\D/g, '').length < 10) next.phone = checkoutText.validation.phone;
+    if (!values.city) next.city = checkoutText.validation.city;
+    if (!values.district) next.district = checkoutText.validation.district;
+    if (values.address.trim().length < 10) next.address = checkoutText.validation.address;
 
     if (payment === 'card') {
-      if (values.cardName.trim().length < 4) next.cardName = 'Kart üzerindeki adı girin.';
+      if (values.cardName.trim().length < 4) next.cardName = checkoutText.validation.cardName;
       if (values.cardNumber.replace(/\s/g, '').length !== 16)
-        next.cardNumber = '16 haneli kart numarasını girin.';
-      if (!/^\d{2}\/\d{2}$/.test(values.cardExpiry)) next.cardExpiry = 'AA/YY biçiminde girin.';
-      if (!/^\d{3,4}$/.test(values.cardCvc)) next.cardCvc = 'CVC girin.';
+        next.cardNumber = checkoutText.validation.cardNumber;
+      if (!/^\d{2}\/\d{2}$/.test(values.cardExpiry)) next.cardExpiry = checkoutText.validation.cardExpiry;
+      if (!/^\d{3,4}$/.test(values.cardCvc)) next.cardCvc = checkoutText.validation.cardCvc;
     }
 
     setErrors(next);
@@ -114,14 +115,14 @@ export function CheckoutView() {
     if (!preInfoAgreed) {
       setErrors((prev) => ({
         ...prev,
-        note: 'Ön Bilgilendirme Formu’nu okuduğunuzu onaylamanız gerekiyor.',
+        note: checkoutText.validation.preInfoRequired,
       }));
       return;
     }
     if (!agreed) {
       setErrors((prev) => ({
         ...prev,
-        note: 'Mesafeli Satış Sözleşmesi’ni onaylamanız gerekiyor.',
+        note: checkoutText.validation.termsRequired,
       }));
       return;
     }
@@ -185,7 +186,7 @@ export function CheckoutView() {
       };
 
       if (!response.ok || !data.ok) {
-        setServerError(data.error ?? 'Sipariş oluşturulamadı. Lütfen tekrar deneyin.');
+        setServerError(data.error ?? checkoutText.serverError);
         setSubmitting(false);
         return;
       }
@@ -203,7 +204,7 @@ export function CheckoutView() {
       setSubmitting(false);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch {
-      setServerError('Sunucuya ulaşılamadı. İnternet bağlantınızı kontrol edip tekrar deneyin.');
+      setServerError(checkoutText.networkError);
       setSubmitting(false);
     }
   };
@@ -230,18 +231,18 @@ export function CheckoutView() {
         </motion.span>
 
         <h2 className="mt-7 font-display text-3xl text-foreground sm:text-4xl">
-          Siparişiniz alındı
+          {checkoutText.successTitle}
         </h2>
         <p className="mt-3 text-muted-foreground">
-          Sipariş numaranız{' '}
-          <strong className="font-semibold text-foreground tabular-nums">{orderNo}</strong>.
-          Onay e-postası kısa süre içinde kutunuzda olacak.
+          {checkoutText.successBefore}{' '}
+          <strong className="font-semibold text-foreground tabular-nums">{orderNo}</strong>
+          {checkoutText.successAfter}
         </p>
 
         <div className="mt-8 rounded-2xl border border-border bg-surface p-6 text-left">
           <dl className="space-y-3 text-sm">
             <div className="flex justify-between">
-              <dt className="text-muted-foreground">Ödeme yöntemi</dt>
+              <dt className="text-muted-foreground">{checkoutText.paymentMethodLabel}</dt>
               <dd className="font-medium text-foreground">
                 {paymentMethodMeta[payment].name}
               </dd>
@@ -261,10 +262,10 @@ export function CheckoutView() {
 
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Button href="/siparis-takibi" variant="gold" size="lg">
-            Siparişimi Takip Et
+            {checkoutText.trackOrder}
           </Button>
           <Button href="/urunler" variant="outline" size="lg">
-            Alışverişe Devam Et
+            {checkoutText.continueShopping}
           </Button>
         </div>
       </motion.div>
@@ -289,12 +290,12 @@ export function CheckoutView() {
         <span className="grid size-24 place-items-center rounded-full bg-surface-muted">
           <ShoppingBag className="size-10 text-muted-foreground" strokeWidth={1.2} />
         </span>
-        <h2 className="mt-7 font-display text-3xl text-foreground">Ödenecek ürün yok</h2>
+        <h2 className="mt-7 font-display text-3xl text-foreground">{checkoutText.emptyTitle}</h2>
         <p className="mt-3 max-w-md text-sm text-muted-foreground">
-          Ödeme adımına geçmek için önce sepetinize ürün ekleyin.
+          {checkoutText.emptyBody}
         </p>
         <Button href="/urunler" variant="gold" size="lg" className="mt-8">
-          Ürünleri İncele
+          {checkoutText.emptyCta}
         </Button>
       </div>
     );
@@ -355,7 +356,7 @@ export function CheckoutView() {
                 aria-invalid={Boolean(errors.phone)}
               />
             </Field>
-            <Field label="İl" htmlFor="city" required error={errors.city}>
+            <Field label={checkoutText.cityLabel} htmlFor="city" required error={errors.city}>
               <select
                 id="city"
                 value={values.city}
@@ -366,7 +367,7 @@ export function CheckoutView() {
                 aria-invalid={Boolean(errors.city)}
                 className="h-12 w-full rounded-xl border border-border bg-surface px-4 text-[0.95rem] text-foreground transition-all hover:border-gold-500/45 focus:border-gold-500 focus:ring-4 focus:ring-gold-500/12 focus:outline-none"
               >
-                <option value="">İl seçin</option>
+                <option value="">{checkoutText.cityPlaceholder}</option>
                 {cityNames.map((c) => (
                   <option key={c} value={c}>
                     {c}
@@ -374,7 +375,7 @@ export function CheckoutView() {
                 ))}
               </select>
             </Field>
-            <Field label="İlçe" htmlFor="district" required error={errors.district}>
+            <Field label={checkoutText.districtLabel} htmlFor="district" required error={errors.district}>
               <select
                 id="district"
                 value={values.district}
@@ -383,7 +384,11 @@ export function CheckoutView() {
                 aria-invalid={Boolean(errors.district)}
                 className="h-12 w-full rounded-xl border border-border bg-surface px-4 text-[0.95rem] text-foreground transition-all hover:border-gold-500/45 focus:border-gold-500 focus:ring-4 focus:ring-gold-500/12 focus:outline-none disabled:opacity-55"
               >
-                <option value="">{values.city ? 'İlçe seçin' : 'Önce il seçin'}</option>
+                <option value="">
+                  {values.city
+                    ? checkoutText.districtPlaceholder
+                    : checkoutText.districtDisabledPlaceholder}
+                </option>
                 {districts.map((d) => (
                   <option key={d} value={d}>
                     {d}
@@ -392,12 +397,12 @@ export function CheckoutView() {
               </select>
             </Field>
             <Field
-              label="Açık Adres"
+              label={checkoutText.addressLabel}
               htmlFor="address"
               required
               error={errors.address}
               className="sm:col-span-2"
-              hint="Mahalle, cadde, sokak, bina ve daire numarası"
+              hint={checkoutText.addressHint}
             >
               <Textarea
                 id="address"
@@ -417,7 +422,11 @@ export function CheckoutView() {
                 onChange={(e) => set('postalCode')(e.target.value)}
               />
             </Field>
-            <Field label="Sipariş Notu" htmlFor="note" hint="Teslimatla ilgili eklemek istedikleriniz">
+            <Field
+              label={checkoutText.noteLabel}
+              htmlFor="note"
+              hint={checkoutText.noteHint}
+            >
               <Input
                 id="note"
                 value={values.note}
@@ -433,7 +442,7 @@ export function CheckoutView() {
             <span className="grid size-9 place-items-center rounded-full bg-olive-600/8 text-olive-600 dark:bg-gold-400/10 dark:text-gold-400">
               <Truck className="size-4.5" strokeWidth={1.8} />
             </span>
-            Kargo Seçimi
+            {checkoutText.shippingHeading}
           </h2>
 
           <div className="mt-6 space-y-3">
@@ -481,7 +490,7 @@ export function CheckoutView() {
             <span className="grid size-9 place-items-center rounded-full bg-olive-600/8 text-olive-600 dark:bg-gold-400/10 dark:text-gold-400">
               <CreditCard className="size-4.5" strokeWidth={1.8} />
             </span>
-            Ödeme Yöntemi
+            {checkoutText.paymentHeading}
           </h2>
 
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
@@ -537,7 +546,7 @@ export function CheckoutView() {
               >
                 <div className="mt-6 grid gap-5 sm:grid-cols-2">
                   <Field
-                    label="Kart Üzerindeki İsim"
+                    label={checkoutText.cardNameLabel}
                     htmlFor="cardName"
                     required
                     error={errors.cardName}
@@ -552,7 +561,7 @@ export function CheckoutView() {
                     />
                   </Field>
                   <Field
-                    label="Kart Numarası"
+                    label={checkoutText.cardNumberLabel}
                     htmlFor="cardNumber"
                     required
                     error={errors.cardNumber}
@@ -610,7 +619,7 @@ export function CheckoutView() {
 
                 <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
                   <Lock className="size-3.5 shrink-0 text-olive-600 dark:text-gold-400" strokeWidth={2} />
-                  Kart bilgileriniz 256-bit SSL ile şifrelenir ve tarafımızda saklanmaz.
+                  {checkoutText.cardSecurityNote}
                 </p>
               </motion.div>
             )}
@@ -628,21 +637,24 @@ export function CheckoutView() {
                   <p className="font-semibold text-foreground">{site.legalName}</p>
                   <dl className="mt-3 space-y-1.5 text-muted-foreground">
                     <div className="flex gap-2">
-                      <dt className="w-20 shrink-0">Banka</dt>
-                      <dd className="font-medium text-foreground">Ziraat Bankası</dd>
+                      <dt className="w-20 shrink-0">{checkoutText.transfer.bankLabel}</dt>
+                      <dd className="font-medium text-foreground">
+                        {checkoutText.transfer.bankName}
+                      </dd>
                     </div>
                     <div className="flex gap-2">
                       <dt className="w-20 shrink-0">IBAN</dt>
                       <dd className="font-medium text-foreground tabular-nums">
-                        TR00 0000 0000 0000 0000 0000 00
+                        {checkoutText.transfer.iban}
                       </dd>
                     </div>
                   </dl>
                   <p className="mt-4 text-xs leading-relaxed">
-                    Açıklama kısmına sipariş numaranızı yazmanız yeterli. Ödemeniz ulaştığında
-                    siparişiniz aynı gün kargoya verilir. Havale ile ödemelerde ürün tutarına
-                    <strong className="font-semibold text-olive-700 dark:text-olive-300"> %3 ek indirim</strong>{' '}
-                    uygulanır.
+                    {checkoutText.transfer.noteBefore}
+                    <strong className="font-semibold text-olive-700 dark:text-olive-300">
+                      {checkoutText.transfer.noteHighlight}
+                    </strong>{' '}
+                    {checkoutText.transfer.noteAfter}
                   </p>
                 </div>
               </motion.div>
@@ -658,10 +670,11 @@ export function CheckoutView() {
                 className="overflow-hidden"
               >
                 <div className="mt-6 rounded-xl bg-surface-muted p-5 text-sm leading-relaxed text-muted-foreground">
-                  Ürünü teslim alırken kurye taşıyıcısına nakit veya kredi kartıyla ödeme
-                  yapabilirsiniz. Kapıda ödeme hizmeti için{' '}
-                  <strong className="font-semibold text-foreground">39,90 ₺</strong> hizmet bedeli
-                  eklenir. Bu seçenek yalnızca 5.000 ₺ altındaki siparişlerde geçerlidir.
+                  {checkoutText.cod.noteBefore}{' '}
+                  <strong className="font-semibold text-foreground">
+                    {checkoutText.cod.noteFee}
+                  </strong>{' '}
+                  {checkoutText.cod.noteAfter}
                 </div>
               </motion.div>
             )}
@@ -671,7 +684,7 @@ export function CheckoutView() {
         <div>
           <Button href="/sepet" variant="outline" size="md">
             <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" strokeWidth={2} />
-            Sepete Dön
+            {checkoutText.backToCart}
           </Button>
         </div>
       </div>
@@ -681,7 +694,7 @@ export function CheckoutView() {
         <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
           <h2 className="flex items-center gap-2.5 font-display text-xl text-foreground">
             <MapPin className="size-5 text-gold-600 dark:text-gold-400" strokeWidth={1.8} />
-            Sipariş Özeti
+            {checkoutText.summaryHeading}
           </h2>
 
           <ul className="mt-5 max-h-64 space-y-3 overflow-y-auto pr-1">
@@ -729,7 +742,9 @@ export function CheckoutView() {
 
             {base.discount > 0 && (
               <div className="flex justify-between">
-                <dt className="text-muted-foreground">İndirim {couponCode && `(${couponCode})`}</dt>
+                <dt className="text-muted-foreground">
+                    {checkoutText.discountLabel(couponCode)}
+                  </dt>
                 <dd className="font-medium text-red-600 tabular-nums dark:text-red-400">
                   −{formatPrice(base.discount)}
                 </dd>
@@ -763,7 +778,7 @@ export function CheckoutView() {
 
             {surcharge > 0 && (
               <div className="flex justify-between">
-                <dt className="text-muted-foreground">Kapıda ödeme bedeli</dt>
+                <dt className="text-muted-foreground">{checkoutText.codFeeLabel}</dt>
                 <dd className="font-medium text-foreground tabular-nums">
                   {formatPrice(surcharge)}
                 </dd>
@@ -797,9 +812,9 @@ export function CheckoutView() {
                   target="_blank"
                   className="text-gold-700 underline underline-offset-2 dark:text-gold-400"
                 >
-                  Ön Bilgilendirme Formu
+                  {checkoutText.preInfoLinkLabel}
                 </Link>
-                ’nu okudum ve bilgilendirildim.
+                {checkoutText.preInfoConsentAfter}
               </span>
             </label>
 
@@ -819,17 +834,17 @@ export function CheckoutView() {
                   target="_blank"
                   className="text-gold-700 underline underline-offset-2 dark:text-gold-400"
                 >
-                  Mesafeli Satış Sözleşmesi
+                  {checkoutText.termsLinkLabel}
                 </Link>
-                ’ni ve{' '}
+                {checkoutText.termsConsentBetween}{' '}
                 <Link
                   href="/gizlilik"
                   target="_blank"
                   className="text-gold-700 underline underline-offset-2 dark:text-gold-400"
                 >
-                  Gizlilik Politikası
+                  {checkoutText.privacyLinkLabel}
                 </Link>
-                ’nı okudum, onaylıyorum.
+                {checkoutText.termsConsentAfter}
               </span>
             </label>
           </div>
@@ -851,12 +866,12 @@ export function CheckoutView() {
             {submitting ? (
               <>
                 <span className="size-4 animate-spin rounded-full border-2 border-olive-950/30 border-t-olive-950" />
-                İşleniyor…
+                {checkoutText.submitting}
               </>
             ) : (
               <>
                 <ShieldCheck className="size-5" strokeWidth={2} />
-                Siparişi Tamamla
+                {checkoutText.submit}
               </>
             )}
           </Button>
@@ -868,7 +883,7 @@ export function CheckoutView() {
           </div>
 
           <p className="mt-3 text-center text-[0.68rem] leading-relaxed text-muted-foreground">
-            {site.paymentProvider.note} Kart bilgileriniz tarafımızda saklanmaz.
+            {site.paymentProvider.note} {checkoutText.cardStorageNote}
           </p>
         </div>
       </aside>
