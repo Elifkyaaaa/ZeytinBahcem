@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useCallback, useRef, useState, type MouseEvent } from 'react';
 import { useEscape, useLockBodyScroll, useMediaQuery } from '@/hooks';
 import { blurDataURL, cn } from '@/lib/utils';
+import { productGalleryText } from '@/lib/data/text/product';
 
 const ZOOM = 2.4;
 
@@ -58,7 +59,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
             >
               <Image
                 src={images[active]}
-                alt={`${name} — görsel ${active + 1}`}
+                alt={productGalleryText.imageAlt(name, active + 1)}
                 fill
                 priority={active === 0}
                 sizes="(min-width: 1024px) 46vw, 94vw"
@@ -87,7 +88,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
             )}
           >
             <ZoomIn className="size-3.5" strokeWidth={2} />
-            {canHover ? 'Yakınlaştırmak için üzerine gelin' : 'Büyütmek için dokunun'}
+            {canHover ? productGalleryText.hoverHint : productGalleryText.touchHint}
           </span>
 
           <button
@@ -96,7 +97,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
               e.stopPropagation();
               setLightbox(true);
             }}
-            aria-label="Görseli tam ekran aç"
+            aria-label={productGalleryText.openFullscreen}
             className="absolute top-4 right-4 grid size-10 place-items-center rounded-full bg-olive-950/55 text-cream-50 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100"
           >
             <Expand className="size-4" strokeWidth={2} />
@@ -110,7 +111,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
                   e.stopPropagation();
                   step(-1);
                 }}
-                aria-label="Önceki görsel"
+                aria-label={productGalleryText.previous}
                 className="absolute top-1/2 left-3 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-cream-50/85 text-olive-900 opacity-0 shadow-soft backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 hover:bg-cream-50 dark:bg-olive-900/80 dark:text-cream-50"
               >
                 <ChevronLeft className="size-5" strokeWidth={2} />
@@ -121,7 +122,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
                   e.stopPropagation();
                   step(1);
                 }}
-                aria-label="Sonraki görsel"
+                aria-label={productGalleryText.next}
                 className="absolute top-1/2 right-3 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-cream-50/85 text-olive-900 opacity-0 shadow-soft backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 hover:bg-cream-50 dark:bg-olive-900/80 dark:text-cream-50"
               >
                 <ChevronRight className="size-5" strokeWidth={2} />
@@ -136,7 +137,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
               key={src}
               type="button"
               onClick={() => setActive(i)}
-              aria-label={`${i + 1}. görseli göster`}
+              aria-label={productGalleryText.thumbLabel(i + 1)}
               aria-current={i === active}
               className={cn(
                 'relative aspect-square overflow-hidden rounded-xl border-2 bg-surface-muted transition-all duration-300',
@@ -169,7 +170,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
             onClick={closeLightbox}
             role="dialog"
             aria-modal="true"
-            aria-label={`${name} görselleri`}
+            aria-label={productGalleryText.galleryLabel(name)}
             className="fixed inset-0 z-[95] grid place-items-center bg-olive-950/94 p-4 backdrop-blur-md sm:p-8"
           >
             <button
@@ -190,7 +191,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
             >
               <Image
                 src={images[active]}
-                alt={`${name} — büyütülmüş görsel ${active + 1}`}
+                alt={productGalleryText.zoomedAlt(name, active + 1)}
                 fill
                 sizes="(min-width: 768px) 48rem, 92vw"
                 className="object-contain"
@@ -205,7 +206,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
                 <button
                   key={src}
                   onClick={() => setActive(i)}
-                  aria-label={`${i + 1}. görsel`}
+                  aria-label={productGalleryText.dotLabel(i + 1)}
                   className={cn(
                     'h-1.5 rounded-full transition-all duration-300',
                     i === active ? 'w-8 bg-gold-400' : 'w-1.5 bg-cream-200/35 hover:bg-cream-200/60',

@@ -9,37 +9,24 @@ import { Badge } from '@/components/ui/Badge';
 import { site } from '@/lib/data/site';
 import { blurDataURL, cn, formatDate } from '@/lib/utils';
 import type { Product } from '@/types';
+import { productTabsText } from '@/lib/data/text/product';
 
-const tabs = [
-  { id: 'aciklama', label: 'Ürün Açıklaması' },
-  { id: 'besin', label: 'Besin Değerleri' },
-  { id: 'kargo', label: 'Kargo Bilgisi' },
-  { id: 'yorumlar', label: 'Yorumlar' },
-  { id: 'sss', label: 'Sık Sorulan Sorular' },
-] as const;
+const tabs = (['aciklama', 'besin', 'kargo', 'yorumlar', 'sss'] as const).map((id) => ({
+  id,
+  label: productTabsText.tabs[id],
+}));
 
 type TabId = (typeof tabs)[number]['id'];
 
-const shippingOptions = [
-  {
-    Icon: Truck,
-    title: 'Standart Kargo',
-    detail: '1–3 iş günü',
-    price: `${site.freeShippingThreshold} ₺ üzeri ücretsiz, altında 79,90 ₺`,
-  },
-  {
-    Icon: Clock,
-    title: 'Hızlı Kargo',
-    detail: 'Ertesi iş günü',
-    price: '149,90 ₺ — saat 14.00’a kadar verilen siparişlerde',
-  },
-  {
-    Icon: MapPin,
-    title: 'Mağazadan Teslim',
-    detail: 'Aynı gün',
-    price: 'Ücretsiz — Orhangazi mağazamızdan',
-  },
-];
+const shippingOptions = [Truck, Clock, MapPin].map((Icon, i) => {
+  const option = productTabsText.shippingOptions[i];
+  return {
+    Icon,
+    title: option.title,
+    detail: option.detail,
+    price: option.price(site.freeShippingThreshold),
+  };
+});
 
 function Panel({ children }: { children: React.ReactNode }) {
   return (
@@ -66,10 +53,10 @@ export function ProductTabs({ product }: { product: Product }) {
   const bucketTotal = ratingBuckets.reduce((s, b) => s + b.percent, 0) || 1;
 
   return (
-    <section id="yorumlar" className="mt-20 lg:mt-28" aria-label="Ürün detayları">
+    <section id="yorumlar" className="mt-20 lg:mt-28" aria-label={productTabsText.panelLabel}>
       <div
         role="tablist"
-        aria-label="Ürün bilgisi sekmeleri"
+        aria-label={productTabsText.tabsLabel}
         className="-mx-5 flex gap-1 overflow-x-auto border-b border-border px-5 sm:mx-0 sm:px-0"
       >
         {tabs.map((t) => {
@@ -116,7 +103,7 @@ export function ProductTabs({ product }: { product: Product }) {
                 <div>
                   <p className="text-base leading-[1.85] text-foreground/85">{product.description}</p>
 
-                  <h3 className="mt-9 font-display text-xl text-foreground">Öne çıkan özellikler</h3>
+                  <h3 className="mt-9 font-display text-xl text-foreground">{productTabsText.highlightsHeading}</h3>
                   <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
                     {product.highlights.map((h) => (
                       <li
@@ -131,7 +118,7 @@ export function ProductTabs({ product }: { product: Product }) {
                 </div>
 
                 <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
-                  <h3 className="font-display text-lg text-foreground">Ürün künyesi</h3>
+                  <h3 className="font-display text-lg text-foreground">{productTabsText.specsHeading}</h3>
                   <dl className="mt-4 divide-y divide-border">
                     {product.specs.map((spec, i) => (
                       <div key={`${spec.label}-${i}`} className="flex justify-between gap-4 py-3">
@@ -151,9 +138,11 @@ export function ProductTabs({ product }: { product: Product }) {
             <Panel key="besin">
               <div role="tabpanel" id="panel-besin" aria-labelledby="tab-besin">
                 <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                  Aşağıdaki değerler <strong className="font-semibold text-foreground">100 g</strong>{' '}
-                  ürün içindir. Yüzdeler, günlük 8400 kJ / 2000 kcal referans alım değerine göre
-                  hesaplanmıştır.
+                  {productTabsText.nutritionIntroBefore}{' '}
+                  <strong className="font-semibold text-foreground">
+                    {productTabsText.nutritionPortion}
+                  </strong>{' '}
+                  {productTabsText.nutritionIntroAfter}
                 </p>
 
                 <div className="mt-6 overflow-hidden rounded-2xl border border-border">
@@ -161,7 +150,7 @@ export function ProductTabs({ product }: { product: Product }) {
                     <thead className="bg-surface-muted">
                       <tr>
                         <th scope="col" className="px-5 py-3.5 text-left font-semibold text-foreground">
-                          Besin öğesi
+                          {productTabsText.nutritionColumn}
                         </th>
                         <th scope="col" className="px-5 py-3.5 text-right font-semibold text-foreground">
                           100 g’da
@@ -198,7 +187,7 @@ export function ProductTabs({ product }: { product: Product }) {
                 </div>
 
                 <p className="mt-4 text-xs text-muted-foreground">
-                  RA: Referans alım. Değerler hasat sezonuna göre küçük farklılıklar gösterebilir.
+                  {productTabsText.nutritionFootnote}
                 </p>
               </div>
             </Panel>
@@ -227,23 +216,19 @@ export function ProductTabs({ product }: { product: Product }) {
                   <div className="rounded-2xl bg-surface-muted p-6">
                     <h3 className="flex items-center gap-2.5 font-semibold text-foreground">
                       <PackageCheck className="size-5 text-olive-600 dark:text-gold-400" strokeWidth={1.8} />
-                      Paketleme
+                      {productTabsText.packagingHeading}
                     </h3>
                     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                      Cam şişeler çift katmanlı köpük içinde, ayrı bölmeli kutularda gönderilir.
-                      Kırılma durumunda ürün ücretsiz olarak yenilenir. Dolgu malzemelerimizin
-                      tamamı geri dönüştürülebilir.
+                      {productTabsText.packagingNote}
                     </p>
                   </div>
                   <div className="rounded-2xl bg-surface-muted p-6">
                     <h3 className="flex items-center gap-2.5 font-semibold text-foreground">
                       <RotateCcw className="size-5 text-olive-600 dark:text-gold-400" strokeWidth={1.8} />
-                      İade
+                      {productTabsText.returnHeading}
                     </h3>
                     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                      Teslimattan itibaren 14 gün içinde, ambalajı açılmamış ürünlerde koşulsuz
-                      iade hakkınız vardır. İade kargo ücreti tarafımıza aittir. Detaylar için
-                      İade Politikası sayfamıza bakabilirsiniz.
+                      {productTabsText.returnNote}
                     </p>
                   </div>
                 </div>
@@ -265,7 +250,7 @@ export function ProductTabs({ product }: { product: Product }) {
                   </p>
                   <StarRating rating={product.rating} size="lg" className="mt-3 justify-center" />
                   <p className="mt-2 text-sm text-muted-foreground">
-                    {product.reviewCount} değerlendirme
+                    {productTabsText.reviewCount(product.reviewCount)}
                   </p>
 
                   <div className="mt-6 space-y-2">
@@ -308,7 +293,7 @@ export function ProductTabs({ product }: { product: Product }) {
                           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
                             <span className="font-semibold text-foreground">{review.name}</span>
                             {review.verified && (
-                              <Badge tone="success">Doğrulanmış alışveriş</Badge>
+                              <Badge tone="success">{productTabsText.verifiedPurchase}</Badge>
                             )}
                             <time
                               dateTime={review.date}
@@ -380,16 +365,16 @@ export function ProductTabs({ product }: { product: Product }) {
                 </ul>
 
                 <p className="mt-6 text-center text-sm text-muted-foreground">
-                  Başka bir sorunuz mu var?{' '}
+                  {productTabsText.faqContactBefore}{' '}
                   <a
                     href={site.whatsappHref}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-medium text-gold-700 underline underline-offset-4 dark:text-gold-400"
                   >
-                    WhatsApp’tan yazın
+                    {productTabsText.whatsappCta}
                   </a>
-                  , ortalama 12 dakikada dönüyoruz.
+                  {productTabsText.faqContactAfter}
                 </p>
               </div>
             </Panel>

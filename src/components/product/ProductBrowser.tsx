@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button';
 import { categories } from '@/lib/data/categories';
 import { products } from '@/lib/data/products';
 import { cn, formatPrice, slugify } from '@/lib/utils';
+import { productBrowserText } from '@/lib/data/text/product';
 
 const sortOptions = [
   { value: 'populer', label: 'Önerilen' },
@@ -106,7 +107,7 @@ export function ProductBrowser() {
                   : 'text-muted-foreground hover:bg-foreground/5 hover:text-foreground',
               )}
             >
-              Tüm Ürünler
+              {productBrowserText.heading}
               <span className="text-xs tabular-nums opacity-60">{products.length}</span>
             </button>
           </li>
@@ -133,20 +134,20 @@ export function ProductBrowser() {
       </div>
 
       <div>
-        <h3 className="text-sm font-semibold text-foreground">Ürün ara</h3>
+        <h3 className="text-sm font-semibold text-foreground">{productBrowserText.searchHeading}</h3>
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="İsim veya açıklamada ara…"
-          aria-label="Ürünlerde ara"
+          placeholder={productBrowserText.searchPlaceholder}
+          aria-label={productBrowserText.searchLabel}
           className="mt-3.5 h-11 w-full rounded-xl border border-border bg-surface px-4 text-sm transition-all placeholder:text-muted-foreground/70 focus:border-gold-500 focus:ring-4 focus:ring-gold-500/12 focus:outline-none"
         />
       </div>
 
       <div>
         <div className="flex items-baseline justify-between">
-          <h3 className="text-sm font-semibold text-foreground">Üst fiyat</h3>
+          <h3 className="text-sm font-semibold text-foreground">{productBrowserText.maxPriceHeading}</h3>
           <span className="text-sm text-muted-foreground tabular-nums">{formatPrice(maxPrice)}</span>
         </div>
         <input
@@ -156,13 +157,13 @@ export function ProductBrowser() {
           step={50}
           value={maxPrice}
           onChange={(e) => setMaxPrice(Number(e.target.value))}
-          aria-label="En yüksek fiyat"
+          aria-label={productBrowserText.maxPriceLabel}
           className="mt-4 w-full accent-gold-500"
         />
       </div>
 
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-foreground">Diğer</h3>
+        <h3 className="text-sm font-semibold text-foreground">{productBrowserText.otherHeading}</h3>
         <label className="flex cursor-pointer items-center gap-2.5 text-sm text-muted-foreground">
           <input
             type="checkbox"
@@ -170,7 +171,7 @@ export function ProductBrowser() {
             onChange={(e) => setInStockOnly(e.target.checked)}
             className="size-4 rounded accent-gold-500"
           />
-          Yalnızca stoktakiler
+          {productBrowserText.inStockOnly}
         </label>
         <label className="flex cursor-pointer items-center gap-2.5 text-sm text-muted-foreground">
           <input
@@ -179,7 +180,7 @@ export function ProductBrowser() {
             onChange={(e) => setDiscountOnly(e.target.checked)}
             className="size-4 rounded accent-gold-500"
           />
-          İndirimli ürünler
+          {productBrowserText.discountedOnly}
         </label>
       </div>
 
@@ -202,7 +203,7 @@ export function ProductBrowser() {
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-5">
           <p className="text-sm text-muted-foreground">
             <strong className="font-semibold text-foreground tabular-nums">{results.length}</strong>{' '}
-            ürün listeleniyor
+            {productBrowserText.countSuffix}
           </p>
 
           <div className="flex items-center gap-2.5">
@@ -220,7 +221,7 @@ export function ProductBrowser() {
             </button>
 
             <label className="sr-only" htmlFor="sort">
-              Sıralama
+              {productBrowserText.sortHeading}
             </label>
             <select
               id="sort"
@@ -242,9 +243,9 @@ export function ProductBrowser() {
             <span className="inline-grid size-16 place-items-center rounded-full bg-surface-muted">
               <LayoutGrid className="size-7 text-muted-foreground" strokeWidth={1.4} />
             </span>
-            <p className="mt-5 font-display text-2xl text-foreground">Sonuç bulunamadı</p>
+            <p className="mt-5 font-display text-2xl text-foreground">{productBrowserText.emptyTitle}</p>
             <p className="mt-2 text-sm text-muted-foreground">
-              Filtreleri gevşetmeyi veya farklı bir kelime denemeyi öneririz.
+              {productBrowserText.emptyBody}
             </p>
             <Button onClick={reset} variant="primary" size="md" className="mt-6">
               Filtreleri temizle
@@ -309,7 +310,7 @@ export function ProductBrowser() {
               <div className="flex-1 overflow-y-auto p-5">{filterPanel}</div>
               <div className="border-t border-border p-5">
                 <Button onClick={() => setFiltersOpen(false)} variant="primary" size="md" className="w-full">
-                  {results.length} ürünü göster
+                  {productBrowserText.showResults(results.length)}
                 </Button>
               </div>
             </motion.div>

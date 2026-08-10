@@ -13,6 +13,7 @@ import { useUi } from '@/lib/store/ui';
 import { useWishlist } from '@/lib/store/wishlist';
 import { blurDataURL, cn, discountPercent, formatPrice } from '@/lib/utils';
 import type { Product } from '@/types';
+import { productCardText } from '@/lib/data/text/product';
 
 export function ProductCard({
   product,
@@ -41,7 +42,7 @@ export function ProductCard({
     window.setTimeout(() => setAdded(false), 1600);
     toast({
       variant: 'success',
-      title: 'Sepete eklendi',
+      title: productCardText.addedToCartToast,
       description: `${product.name} — ${defaultVariant.label}`,
     });
     openCart();
@@ -51,7 +52,7 @@ export function ProductCard({
     toggleWish(product.id);
     toast({
       variant: 'info',
-      title: wished ? 'Favorilerden çıkarıldı' : 'Favorilere eklendi',
+      title: wished ? productCardText.removedToast : productCardText.addedToast,
       description: product.name,
     });
   };
@@ -92,17 +93,17 @@ export function ProductCard({
         />
 
         <div className="pointer-events-none absolute top-3 left-3 flex flex-col items-start gap-1.5">
-          {discount > 0 && <Badge tone="discount">%{discount} İNDİRİM</Badge>}
+          {discount > 0 && <Badge tone="discount">{productCardText.discountBadge(discount)}</Badge>}
           {product.badge && <Badge tone="gold">{product.badge}</Badge>}
           {product.stockCount <= 5 && product.inStock && (
-            <Badge tone="warning">Son {product.stockCount} ürün</Badge>
+            <Badge tone="warning">{productCardText.lowStockBadge(product.stockCount)}</Badge>
           )}
         </div>
 
         <button
           type="button"
           onClick={handleWish}
-          aria-label={wished ? 'Favorilerden çıkar' : 'Favorilere ekle'}
+          aria-label={wished ? productCardText.removeFromWishlist : productCardText.addToWishlist}
           aria-pressed={hydrated ? wished : undefined}
           className={cn(
             'absolute top-3 right-3 z-20 grid size-10 place-items-center rounded-full',
@@ -143,12 +144,12 @@ export function ProductCard({
             {added ? (
               <>
                 <Check className="size-4" strokeWidth={2.6} />
-                Eklendi
+                {productCardText.added}
               </>
             ) : (
               <>
                 <ShoppingBag className="size-4" strokeWidth={2.1} />
-                {product.inStock ? 'Sepete Ekle' : 'Stokta Yok'}
+                {product.inStock ? productCardText.addToCart : productCardText.outOfStock}
               </>
             )}
           </button>

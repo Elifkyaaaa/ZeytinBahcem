@@ -27,12 +27,13 @@ import { useUi } from '@/lib/store/ui';
 import { useWishlist } from '@/lib/store/wishlist';
 import { cn, discountPercent, formatPrice } from '@/lib/utils';
 import type { Product } from '@/types';
+import { productCardText, productPurchaseText } from '@/lib/data/text/product';
 
-const trustPoints = [
-  { Icon: Truck, text: 'Ücretsiz kargo', hint: `${site.freeShippingThreshold} ₺ üzeri` },
-  { Icon: PackageCheck, text: '14 gün iade', hint: 'Koşulsuz' },
-  { Icon: ShieldCheck, text: 'Güvenli ödeme', hint: '3D Secure' },
-];
+const trustPoints = [Truck, PackageCheck, ShieldCheck].map((Icon, i) => ({
+  Icon,
+  text: productPurchaseText.assurances[i].text,
+  hint: productPurchaseText.assurances[i].hint(site.freeShippingThreshold),
+}));
 
 export function ProductPurchase({ product }: { product: Product }) {
   const router = useRouter();
@@ -82,7 +83,7 @@ export function ProductPurchase({ product }: { product: Product }) {
           product.stockCount <= 5 ? (
             <Badge tone="warning">
               <TriangleAlert className="size-3" strokeWidth={2.4} />
-              Son {product.stockCount} ürün
+              {productPurchaseText.lowStock(product.stockCount)}
             </Badge>
           ) : (
             <Badge tone="success">
@@ -105,9 +106,9 @@ export function ProductPurchase({ product }: { product: Product }) {
           href="#yorumlar"
           className="text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-gold-600 hover:underline"
         >
-          {product.reviewCount} değerlendirme
+          {productPurchaseText.reviewCount(product.reviewCount)}
         </a>
-        <span className="text-sm text-muted-foreground">Ürün kodu: {product.id.toUpperCase()}</span>
+        <span className="text-sm text-muted-foreground">{productPurchaseText.sku(product.id.toUpperCase())}</span>
       </div>
 
       <p className="mt-5 text-base leading-relaxed text-muted-foreground">
@@ -129,7 +130,7 @@ export function ProductPurchase({ product }: { product: Product }) {
           </span>
         )}
       </div>
-      <p className="mt-1.5 text-xs text-muted-foreground">KDV dâhil · Kargo ödemede hesaplanır</p>
+      <p className="mt-1.5 text-xs text-muted-foreground">{productPurchaseText.vatNote}</p>
 
       {/* Gramaj seçimi */}
       <fieldset className="mt-8">
@@ -164,7 +165,7 @@ export function ProductPurchase({ product }: { product: Product }) {
                   {v.label}
                 </span>
                 <span className="mt-0.5 text-[0.7rem] text-muted-foreground tabular-nums">
-                  {v.inStock ? formatPrice(v.price) : 'Tükendi'}
+                  {v.inStock ? formatPrice(v.price) : productPurchaseText.outOfStock}
                 </span>
                 {selected && (
                   <motion.span
@@ -222,7 +223,7 @@ export function ProductPurchase({ product }: { product: Product }) {
           className="w-full"
         >
           <CreditCard className="size-5" strokeWidth={2} />
-          Hemen Satın Al
+          {productPurchaseText.buyNow}
         </Button>
       </div>
 
@@ -233,7 +234,7 @@ export function ProductPurchase({ product }: { product: Product }) {
             toggleWish(product.id);
             toast({
               variant: 'info',
-              title: wished ? 'Favorilerden çıkarıldı' : 'Favorilere eklendi',
+              title: wished ? productCardText.removedToast : productCardText.addedToast,
               description: product.name,
             });
           }}
@@ -257,7 +258,7 @@ export function ProductPurchase({ product }: { product: Product }) {
             className="inline-flex h-11 items-center gap-2 rounded-full border border-border px-5 text-sm font-medium text-foreground/80 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold-500/50"
           >
             <Share2 className="size-4" strokeWidth={1.9} />
-            Paylaş
+            {productPurchaseText.share}
           </button>
 
           <AnimatePresence>
@@ -273,7 +274,7 @@ export function ProductPurchase({ product }: { product: Product }) {
                   href={`https://wa.me/?text=${encodeURIComponent(`${product.name} — ${shareUrl}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="WhatsApp'ta paylaş"
+                  aria-label={productPurchaseText.shareWhatsapp}
                   className="grid size-10 place-items-center rounded-xl text-muted-foreground transition-colors hover:bg-foreground/6 hover:text-[#25D366]"
                 >
                   <WhatsAppIcon className="size-[1.15rem]" />
@@ -282,7 +283,7 @@ export function ProductPurchase({ product }: { product: Product }) {
                   href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Facebook'ta paylaş"
+                  aria-label={productPurchaseText.shareFacebook}
                   className="grid size-10 place-items-center rounded-xl text-muted-foreground transition-colors hover:bg-foreground/6 hover:text-[#1877F2]"
                 >
                   <FacebookIcon className="size-[1.15rem]" />
@@ -290,7 +291,7 @@ export function ProductPurchase({ product }: { product: Product }) {
                 <button
                   type="button"
                   onClick={() => copy(shareUrl)}
-                  aria-label="Bağlantıyı kopyala"
+                  aria-label={productPurchaseText.copyLink}
                   className="grid size-10 place-items-center rounded-xl text-muted-foreground transition-colors hover:bg-foreground/6 hover:text-gold-600"
                 >
                   {copied ? (
@@ -305,7 +306,7 @@ export function ProductPurchase({ product }: { product: Product }) {
         </div>
 
         <Button onClick={openCart} variant="ghost" size="sm" className="ml-auto">
-          Sepeti Görüntüle
+          {productPurchaseText.viewCart}
         </Button>
       </div>
 
