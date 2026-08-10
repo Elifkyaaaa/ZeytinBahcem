@@ -17,6 +17,7 @@ import {
   Tr,
 } from '@/components/admin/primitives';
 import { orderStatusMeta, orders, type OrderStatus } from '@/lib/data/admin';
+import { paymentMethodMeta } from '@/lib/data/payment';
 import { blurDataURL, formatDate, formatNumber, formatPrice, safeImageSrc, slugify } from '@/lib/utils';
 import { CheckCircle2, Clock, PackageOpen, Truck } from 'lucide-react';
 
@@ -169,7 +170,7 @@ export default function AdminOrdersPage() {
                         <span className="text-sm whitespace-nowrap">{formatDate(order.date)}</span>
                       </Td>
                       <Td>
-                        <span className="text-sm whitespace-nowrap">{order.payment}</span>
+                        <span className="text-sm whitespace-nowrap">{paymentMethodMeta[order.payment].shortName}</span>
                       </Td>
                       <Td>
                         <Status tone={meta.tone}>{meta.label}</Status>

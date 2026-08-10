@@ -1,3 +1,4 @@
+import type { PaymentMethod } from '@/lib/data/payment';
 import { AVATAR } from '@/lib/images';
 
 export type OrderStatus = 'bekliyor' | 'hazirlaniyor' | 'kargoda' | 'teslim' | 'iptal';
@@ -11,7 +12,7 @@ export interface AdminOrder {
   items: number;
   total: number;
   status: OrderStatus;
-  payment: 'Kredi Kartı' | 'Havale' | 'Kapıda Ödeme';
+  payment: PaymentMethod;
   city: string;
 }
 
@@ -27,16 +28,16 @@ export const orderStatusMeta: Record<
 };
 
 export const orders: AdminOrder[] = [
-  { id: 'ZB-10428', customer: 'Elif Yıldırım', email: 'elif.y@example.com', avatar: AVATAR.a1, date: '2026-08-04', items: 3, total: 1847.5, status: 'hazirlaniyor', payment: 'Kredi Kartı', city: 'İzmir' },
-  { id: 'ZB-10427', customer: 'Mert Aksoy', email: 'mert.aksoy@example.com', avatar: AVATAR.a3, date: '2026-08-04', items: 1, total: 649, status: 'bekliyor', payment: 'Havale', city: 'Ankara' },
-  { id: 'ZB-10426', customer: 'Ayşe Demirtaş', email: 'ayse.d@example.com', avatar: AVATAR.a2, date: '2026-08-04', items: 5, total: 2394, status: 'kargoda', payment: 'Kredi Kartı', city: 'İstanbul' },
-  { id: 'ZB-10425', customer: 'Burak Şen', email: 'burak.sen@example.com', avatar: AVATAR.a4, date: '2026-08-03', items: 2, total: 1128, status: 'teslim', payment: 'Kredi Kartı', city: 'Bursa' },
-  { id: 'ZB-10424', customer: 'Zeynep Karaca', email: 'zeynep.k@example.com', avatar: AVATAR.a6, date: '2026-08-03', items: 1, total: 599, status: 'teslim', payment: 'Kapıda Ödeme', city: 'Antalya' },
-  { id: 'ZB-10423', customer: 'Onur Bilgin', email: 'onur.b@example.com', avatar: AVATAR.a5, date: '2026-08-02', items: 4, total: 1976.4, status: 'kargoda', payment: 'Kredi Kartı', city: 'Eskişehir' },
-  { id: 'ZB-10422', customer: 'Kaan Erdem', email: 'kaan.e@example.com', avatar: AVATAR.a7, date: '2026-08-02', items: 8, total: 4210, status: 'teslim', payment: 'Havale', city: 'İzmir' },
-  { id: 'ZB-10421', customer: 'Selin Aydın', email: 'selin.a@example.com', avatar: AVATAR.a2, date: '2026-08-01', items: 2, total: 878, status: 'iptal', payment: 'Kredi Kartı', city: 'Muğla' },
-  { id: 'ZB-10420', customer: 'Deniz Uçar', email: 'deniz.u@example.com', avatar: AVATAR.a1, date: '2026-08-01', items: 3, total: 1533, status: 'teslim', payment: 'Kredi Kartı', city: 'Kocaeli' },
-  { id: 'ZB-10419', customer: 'Hakan Türkmen', email: 'hakan.t@example.com', avatar: AVATAR.a4, date: '2026-07-31', items: 6, total: 3120, status: 'teslim', payment: 'Havale', city: 'Balıkesir' },
+  { id: 'ZB-10428', customer: 'Elif Yıldırım', email: 'elif.y@example.com', avatar: AVATAR.a1, date: '2026-08-04', items: 3, total: 1847.5, status: 'hazirlaniyor', payment: 'card', city: 'İzmir' },
+  { id: 'ZB-10427', customer: 'Mert Aksoy', email: 'mert.aksoy@example.com', avatar: AVATAR.a3, date: '2026-08-04', items: 1, total: 649, status: 'bekliyor', payment: 'transfer', city: 'Ankara' },
+  { id: 'ZB-10426', customer: 'Ayşe Demirtaş', email: 'ayse.d@example.com', avatar: AVATAR.a2, date: '2026-08-04', items: 5, total: 2394, status: 'kargoda', payment: 'card', city: 'İstanbul' },
+  { id: 'ZB-10425', customer: 'Burak Şen', email: 'burak.sen@example.com', avatar: AVATAR.a4, date: '2026-08-03', items: 2, total: 1128, status: 'teslim', payment: 'card', city: 'Bursa' },
+  { id: 'ZB-10424', customer: 'Zeynep Karaca', email: 'zeynep.k@example.com', avatar: AVATAR.a6, date: '2026-08-03', items: 1, total: 599, status: 'teslim', payment: 'cod', city: 'Antalya' },
+  { id: 'ZB-10423', customer: 'Onur Bilgin', email: 'onur.b@example.com', avatar: AVATAR.a5, date: '2026-08-02', items: 4, total: 1976.4, status: 'kargoda', payment: 'card', city: 'Eskişehir' },
+  { id: 'ZB-10422', customer: 'Kaan Erdem', email: 'kaan.e@example.com', avatar: AVATAR.a7, date: '2026-08-02', items: 8, total: 4210, status: 'teslim', payment: 'transfer', city: 'İzmir' },
+  { id: 'ZB-10421', customer: 'Selin Aydın', email: 'selin.a@example.com', avatar: AVATAR.a2, date: '2026-08-01', items: 2, total: 878, status: 'iptal', payment: 'card', city: 'Muğla' },
+  { id: 'ZB-10420', customer: 'Deniz Uçar', email: 'deniz.u@example.com', avatar: AVATAR.a1, date: '2026-08-01', items: 3, total: 1533, status: 'teslim', payment: 'card', city: 'Kocaeli' },
+  { id: 'ZB-10419', customer: 'Hakan Türkmen', email: 'hakan.t@example.com', avatar: AVATAR.a4, date: '2026-07-31', items: 6, total: 3120, status: 'teslim', payment: 'transfer', city: 'Balıkesir' },
 ];
 
 export interface AdminCustomer {

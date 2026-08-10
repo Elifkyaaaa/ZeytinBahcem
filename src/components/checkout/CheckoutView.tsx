@@ -25,40 +25,18 @@ import { PaymentMark } from '@/components/ui/icons';
 import { useHydrated } from '@/hooks';
 import { cities, cityNames } from '@/lib/data/cities';
 import { shippingMethods, type ShippingMethodId } from '@/lib/data/coupons';
+import { paymentMethodMeta, paymentMethods, type PaymentMethod } from '@/lib/data/payment';
 import { site } from '@/lib/data/site';
 import { useCart } from '@/lib/store/cart';
 import { calcTotals, useCheckout } from '@/lib/store/checkout';
 import { blurDataURL, cn, formatPrice } from '@/lib/utils';
 
-type PaymentMethod = 'kart' | 'havale' | 'kapida';
-
-const paymentMethods: {
-  id: PaymentMethod;
-  name: string;
-  detail: string;
-  Icon: typeof CreditCard;
-  surcharge?: number;
-}[] = [
-  {
-    id: 'kart',
-    name: 'Kredi / Banka Kartı',
-    detail: '3D Secure ile korumalı, tek çekim veya taksitli',
-    Icon: CreditCard,
-  },
-  {
-    id: 'havale',
-    name: 'Havale / EFT',
-    detail: 'Havale ile ödemelerde %3 ek indirim',
-    Icon: Banknote,
-  },
-  {
-    id: 'kapida',
-    name: 'Kapıda Ödeme',
-    detail: 'Teslimatta nakit veya kart · 39,90 ₺ hizmet bedeli',
-    Icon: Package,
-    surcharge: 39.9,
-  },
-];
+/** Yöntem başına simge — metin ve tutarlar `@/lib/data/payment` içinde. */
+const paymentIcons: Record<PaymentMethod, typeof CreditCard> = {
+  card: CreditCard,
+  transfer: Banknote,
+  cod: Package,
+};
 
 const emptyForm = {
   firstName: '',
@@ -87,7 +65,7 @@ export function CheckoutView() {
   const shippingMethod = useCheckout((s) => s.shippingMethod);
   const setShippingMethod = useCheckout((s) => s.setShippingMethod);
 
-  const [payment, setPayment] = useState<PaymentMethod>('kart');
+  const [payment, setPayment] = useState<PaymentMethod>('card');
   const [values, setValues] = useState<FormValues>(emptyForm);
   const [errors, setErrors] = useState<FormErrors>({});
   const [agreed, setAgreed] = useState(false);
@@ -98,8 +76,8 @@ export function CheckoutView() {
   const [iyzicoForm, setIyzicoForm] = useState<string | null>(null);
 
   const base = calcTotals(items, couponCode, shippingMethod);
-  const surcharge = paymentMethods.find((m) => m.id === payment)?.surcharge ?? 0;
-  const bankDiscount = payment === 'havale' ? (base.subtotal - base.discount) * 0.03 : 0;
+  const surcharge = paymentMethodMeta[payment].surcharge;
+  const bankDiscount = (base.subtotal - base.discount) * paymentMethodMeta[payment].discountRate;
   const total = Math.max(0, base.total + surcharge - bankDiscount);
   const districts = values.city ? (cities[values.city] ?? []) : [];
 
@@ -119,7 +97,7 @@ export function CheckoutView() {
     if (!values.district) next.district = 'İlçe seçin.';
     if (values.address.trim().length < 10) next.address = 'Açık adresi girin (en az 10 karakter).';
 
-    if (payment === 'kart') {
+    if (payment === 'card') {
       if (values.cardName.trim().length < 4) next.cardName = 'Kart üzerindeki adı girin.';
       if (values.cardNumber.replace(/\s/g, '').length !== 16)
         next.cardNumber = '16 haneli kart numarasını girin.';
@@ -193,7 +171,7 @@ export function CheckoutView() {
           },
           couponCode,
           shippingMethod: shippingMethods.find((m) => m.id === shippingMethod)?.name ?? 'Standart Kargo',
-          paymentMethod: payment === 'kart' ? 'card' : payment === 'havale' ? 'transfer' : 'cod',
+          paymentMethod: payment,
           note: values.note,
         }),
       });
@@ -265,7 +243,7 @@ export function CheckoutView() {
             <div className="flex justify-between">
               <dt className="text-muted-foreground">Ödeme yöntemi</dt>
               <dd className="font-medium text-foreground">
-                {paymentMethods.find((m) => m.id === payment)?.name}
+                {paymentMethodMeta[payment].name}
               </dd>
             </div>
             <div className="flex justify-between">
@@ -507,7 +485,8 @@ export function CheckoutView() {
           </h2>
 
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            {paymentMethods.map(({ id, name, detail, Icon }) => {
+            {paymentMethods.map(({ id, name, detail }) => {
+              const Icon = paymentIcons[id];
               const selected = payment === id;
               return (
                 <button
@@ -547,7 +526,7 @@ export function CheckoutView() {
           </div>
 
           <AnimatePresence mode="wait">
-            {payment === 'kart' && (
+            {payment === 'card' && (
               <motion.div
                 key="kart"
                 initial={{ opacity: 0, height: 0 }}
@@ -636,7 +615,7 @@ export function CheckoutView() {
               </motion.div>
             )}
 
-            {payment === 'havale' && (
+            {payment === 'transfer' && (
               <motion.div
                 key="havale"
                 initial={{ opacity: 0, height: 0 }}
@@ -669,7 +648,7 @@ export function CheckoutView() {
               </motion.div>
             )}
 
-            {payment === 'kapida' && (
+            {payment === 'cod' && (
               <motion.div
                 key="kapida"
                 initial={{ opacity: 0, height: 0 }}

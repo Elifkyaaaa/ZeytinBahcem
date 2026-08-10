@@ -23,6 +23,7 @@ import {
   trafficSources,
 } from '@/lib/data/admin';
 import { products } from '@/lib/data/products';
+import { paymentMethodMeta } from '@/lib/data/payment';
 import { blurDataURL, formatNumber, formatPrice, safeImageSrc } from '@/lib/utils';
 
 const quickLinks = [
@@ -175,7 +176,7 @@ export default function AdminDashboard() {
                               {order.customer}
                             </span>
                             <span className="block truncate text-xs text-muted-foreground">
-                              {order.payment}
+                              {paymentMethodMeta[order.payment].shortName}
                             </span>
                           </span>
                         </span>
