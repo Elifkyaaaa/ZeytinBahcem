@@ -13,6 +13,7 @@ import {
   authInput,
 } from '@/components/auth/FormParts';
 import { GoogleButton } from '@/components/auth/GoogleButton';
+import { loginFormText } from '@/lib/data/text/auth';
 
 const initialState: AuthState = {};
 
@@ -35,11 +36,7 @@ export function LoginForm() {
         <FormAlert
           error={
             state.error ??
-            (urlError === 'dogrulama-basarisiz'
-              ? 'Doğrulama bağlantısı geçersiz veya süresi dolmuş. Yeniden deneyin.'
-              : urlError === 'supabase-yapilandirilmadi'
-                ? 'Kimlik doğrulama henüz yapılandırılmadı.'
-                : (urlError ?? undefined))
+            (urlError ? (loginFormText.errors[urlError] ?? urlError) : undefined)
           }
         />
 
@@ -59,13 +56,13 @@ export function LoginForm() {
         <div className="space-y-2">
           <div className="flex items-baseline justify-between gap-3">
             <label htmlFor="password" className="block text-sm font-medium text-foreground/85">
-              Şifre
+              {loginFormText.passwordLabel}
             </label>
             <Link
               href="/sifremi-unuttum"
               className="text-xs text-gold-700 underline-offset-4 transition-colors hover:underline dark:text-gold-400"
             >
-              Şifremi unuttum
+              {loginFormText.forgotPassword}
             </Link>
           </div>
           <PasswordInput
@@ -84,22 +81,22 @@ export function LoginForm() {
             defaultChecked
             className="size-4 rounded accent-gold-500"
           />
-          Beni hatırla
+          {loginFormText.rememberMe}
         </label>
 
-        <SubmitButton>Giriş Yap</SubmitButton>
+        <SubmitButton>{loginFormText.submit}</SubmitButton>
       </form>
 
       <p className="text-center text-xs leading-relaxed text-muted-foreground">
-        Giriş yaparak{' '}
+        {loginFormText.consentBefore}{' '}
         <Link href="/gizlilik" className="underline underline-offset-2 hover:text-foreground">
-          Gizlilik Politikası
+          {loginFormText.privacyLinkLabel}
         </Link>{' '}
-        ve{' '}
+        {loginFormText.consentBetween}{' '}
         <Link href="/kvkk" className="underline underline-offset-2 hover:text-foreground">
-          KVKK Aydınlatma Metni
+          {loginFormText.kvkkLinkLabel}
         </Link>
-        ’ni kabul etmiş olursunuz.
+        {loginFormText.consentAfter}
       </p>
     </div>
   );

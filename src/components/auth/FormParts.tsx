@@ -5,6 +5,7 @@ import { AlertCircle, CheckCircle2, Eye, EyeOff } from 'lucide-react';
 import { useState, type InputHTMLAttributes } from 'react';
 import { useFormStatus } from 'react-dom';
 import { cn } from '@/lib/utils';
+import { formPartsText } from '@/lib/data/text/auth';
 
 export const authInput =
   'h-12 w-full rounded-xl border border-border bg-surface px-4 text-[0.95rem] text-foreground ' +
@@ -52,7 +53,7 @@ export function PasswordInput({
       <button
         type="button"
         onClick={() => setVisible((v) => !v)}
-        aria-label={visible ? 'Şifreyi gizle' : 'Şifreyi göster'}
+        aria-label={visible ? formPartsText.hidePassword : formPartsText.showPassword}
         className="absolute top-1/2 right-3 grid size-8 -translate-y-1/2 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-foreground/6 hover:text-foreground"
       >
         {visible ? (

@@ -12,6 +12,7 @@ import {
   authInput,
 } from '@/components/auth/FormParts';
 import { GoogleButton } from '@/components/auth/GoogleButton';
+import { registerFormText } from '@/lib/data/text/auth';
 
 const initialState: AuthState = {};
 
@@ -24,20 +25,20 @@ export function RegisterForm() {
       <div className="space-y-6">
         <FormAlert success={state.success} />
         <div className="rounded-2xl bg-surface-muted p-5 text-sm leading-relaxed text-muted-foreground">
-          <p className="font-medium text-foreground">E-posta gelmedi mi?</p>
+          <p className="font-medium text-foreground">{registerFormText.noEmailHeading}</p>
           <p className="mt-1.5">
-            Spam klasörünü kontrol edin. Birkaç dakika içinde ulaşmazsa{' '}
+            {registerFormText.noEmailBefore}{' '}
             <Link href="/giris" className="text-gold-700 underline underline-offset-2 dark:text-gold-400">
-              giriş sayfasından
+              {registerFormText.noEmailLinkLabel}
             </Link>{' '}
-            yeniden gönderebilirsiniz.
+            {registerFormText.noEmailAfter}
           </p>
         </div>
         <Link
           href="/giris"
           className="inline-flex h-12 w-full items-center justify-center rounded-full border border-border text-sm font-medium transition-colors hover:border-gold-500/50"
         >
-          Giriş Sayfasına Dön
+          {registerFormText.backToLogin}
         </Link>
       </div>
     );
@@ -59,7 +60,7 @@ export function RegisterForm() {
             autoComplete="name"
             required
             minLength={3}
-            placeholder="Adınız ve soyadınız"
+            placeholder={registerFormText.namePlaceholder}
             className={authInput}
           />
         </AuthField>
@@ -77,7 +78,11 @@ export function RegisterForm() {
           />
         </AuthField>
 
-        <AuthField label="Telefon" id="phone" hint="Kargo bilgilendirmesi için kullanılır">
+        <AuthField
+          label={registerFormText.phoneLabel}
+          id="phone"
+          hint={registerFormText.phoneHint}
+        >
           <input
             id="phone"
             name="phone"
@@ -89,7 +94,11 @@ export function RegisterForm() {
           />
         </AuthField>
 
-        <AuthField label="Şifre" id="password" hint="En az 8 karakter">
+        <AuthField
+          label={registerFormText.passwordLabel}
+          id="password"
+          hint={registerFormText.passwordHint}
+        >
           <PasswordInput
             id="password"
             name="password"
@@ -100,7 +109,7 @@ export function RegisterForm() {
           />
         </AuthField>
 
-        <AuthField label="Şifre Tekrar" id="passwordConfirm">
+        <AuthField label={registerFormText.passwordConfirmLabel} id="passwordConfirm">
           <PasswordInput
             id="passwordConfirm"
             name="passwordConfirm"
@@ -121,13 +130,13 @@ export function RegisterForm() {
             />
             <span>
               <Link href="/mesafeli-satis" className="text-gold-700 underline underline-offset-2 dark:text-gold-400">
-                Üyelik Sözleşmesi
+                {registerFormText.termsLinkLabel}
               </Link>{' '}
-              ve{' '}
+              {registerFormText.consentBetween}{' '}
               <Link href="/kvkk" className="text-gold-700 underline underline-offset-2 dark:text-gold-400">
-                KVKK Aydınlatma Metni
+                {registerFormText.kvkkLinkLabel}
               </Link>
-              ’ni okudum, onaylıyorum.
+              {registerFormText.consentAfter}
             </span>
           </label>
 
@@ -137,11 +146,11 @@ export function RegisterForm() {
               name="marketing"
               className="mt-0.5 size-4 shrink-0 rounded accent-gold-500"
             />
-            <span>Kampanya ve yeni hasat duyurularından e-posta ile haberdar olmak istiyorum.</span>
+            <span>{registerFormText.marketingOptIn}</span>
           </label>
         </div>
 
-        <SubmitButton>Üye Ol</SubmitButton>
+        <SubmitButton>{registerFormText.submit}</SubmitButton>
       </form>
     </div>
   );

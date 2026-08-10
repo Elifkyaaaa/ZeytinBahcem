@@ -4,6 +4,7 @@ import { AlertCircle, Loader2, ShieldCheck } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { createClient } from '@/utils/supabase/client';
+import { mfaChallengeText } from '@/lib/data/text/auth';
 
 const CODE_LENGTH = 6;
 
@@ -67,7 +68,7 @@ export function MfaChallenge() {
 
     if (challengeError || !challenge) {
       setBusy(false);
-      setError('Doğrulama başlatılamadı. Sayfayı yenileyip tekrar deneyin.');
+      setError(mfaChallengeText.startError);
       return;
     }
 
@@ -79,7 +80,7 @@ export function MfaChallenge() {
 
     if (verifyError) {
       setBusy(false);
-      setError('Kod hatalı veya süresi dolmuş. Uygulamadaki güncel kodu girin.');
+      setError(mfaChallengeText.wrongCode);
       setCode('');
       return;
     }
@@ -106,8 +107,7 @@ export function MfaChallenge() {
           strokeWidth={1.8}
         />
         <p className="text-sm leading-relaxed text-muted-foreground">
-          Doğrulayıcı uygulamanızı açın ve hesabınız için görünen 6 haneli kodu girin.
-          Kod 30 saniyede bir yenilenir.
+          {mfaChallengeText.intro}
         </p>
       </div>
 
@@ -123,7 +123,7 @@ export function MfaChallenge() {
 
       <div>
         <label htmlFor="mfa-code" className="mb-2 block text-sm font-medium text-foreground/85">
-          Doğrulama kodu
+          {mfaChallengeText.codeLabel}
         </label>
         <input
           id="mfa-code"
@@ -147,7 +147,7 @@ export function MfaChallenge() {
         className="sheen inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 text-sm font-semibold text-olive-950 transition-all hover:shadow-glow active:scale-[0.98] disabled:opacity-50"
       >
         {busy && <Loader2 className="size-4 animate-spin" strokeWidth={2} />}
-        Doğrula ve Devam Et
+        {mfaChallengeText.submit}
       </button>
     </div>
   );
