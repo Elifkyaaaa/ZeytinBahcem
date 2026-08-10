@@ -30,7 +30,7 @@ export const env = {
     cloudName: clean(process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME),
     apiKey: clean(process.env.CLOUDINARY_API_KEY),
     apiSecret: clean(process.env.CLOUDINARY_API_SECRET),
-    folder: clean(process.env.CLOUDINARY_FOLDER) ?? 'karabesimoglu',
+    folder: clean(process.env.CLOUDINARY_FOLDER) ?? 'elmora',
   },
 
   iyzico: {
@@ -41,7 +41,7 @@ export const env = {
 
   resend: {
     apiKey: clean(process.env.RESEND_API_KEY),
-    from: clean(process.env.RESEND_FROM) ?? 'Karabesimoğlu Zeytincilik <siparis@karabesimoglu.com>',
+    from: clean(process.env.RESEND_FROM) ?? 'Elmora Zeytincilik <siparis@elmora.com>',
     adminTo: clean(process.env.ADMIN_NOTIFY_EMAIL),
   },
 } as const;

@@ -23,7 +23,7 @@ export function InstagramGallery() {
                 rel="noopener noreferrer"
                 className="text-gradient-gold underline-offset-8 transition-opacity hover:opacity-80"
               >
-                @karabesimoglu
+                @elmora
               </a>
             </>
           }

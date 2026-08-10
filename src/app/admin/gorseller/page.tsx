@@ -7,10 +7,10 @@ import { ImageUploader } from '@/components/admin/ImageUploader';
 import { AdminField, adminInput, DemoNotice, Panel, StatCard } from '@/components/admin/primitives';
 
 const folders = [
-  { value: 'karabesimoglu/urunler', label: 'Ürün görselleri' },
-  { value: 'karabesimoglu/kategoriler', label: 'Kategori görselleri' },
-  { value: 'karabesimoglu/blog', label: 'Blog kapakları' },
-  { value: 'karabesimoglu/slider', label: 'Slider görselleri' },
+  { value: 'elmora/urunler', label: 'Ürün görselleri' },
+  { value: 'elmora/kategoriler', label: 'Kategori görselleri' },
+  { value: 'elmora/blog', label: 'Blog kapakları' },
+  { value: 'elmora/slider', label: 'Slider görselleri' },
 ];
 
 const pipeline = [

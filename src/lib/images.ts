@@ -17,16 +17,16 @@ const PHOTO = {
   /** Avuçta iri siyah zeytinler, arkada dolu kasa */
   zeytin: '/images/siyah-zeytin.jpg',
   /**
-   * Kurucumuzun sepya portresi (1122×1402, dikey).
-   * Marka adı ve "Since 1889" ibaresi görselin altına basılıdır —
-   * bu yüzden asla kırpılmadan, 4/5 oranında gösterilmelidir.
+   * Marka logosu (1049×947, saydam PNG).
+   * Kaynak görseldeki vinyet temizlenip arka plan saydam yapıldı; koyu
+   * zeminde yazılar okunmadığı için daima açık renk bir yüzeyde gösterilir.
    */
-  kurucuPortre: '/images/kurucu-portre.jpg',
+  logo: '/images/elmora-logo.png',
 } as const;
 
 export const IMG = {
-  // Kurucu portresi — üzerindeki yazı nedeniyle yalnızca 4/5 oranında kullanılır
-  founderPortrait: PHOTO.kurucuPortre,
+  // Marka logosu — açık zeminde, kendi oranında gösterilir
+  brandLogo: PHOTO.logo,
 
   // Bahçe & manzara
   heroGrove: PHOTO.bahce,

@@ -145,7 +145,7 @@ export default function AdminPaymentSettingsPage() {
                 <input className={adminInput} defaultValue="Ziraat Bankası" />
               </AdminField>
               <AdminField label="Hesap sahibi">
-                <input className={adminInput} defaultValue="Karabesimoğlu Zeytincilik Tarım Ürünleri Ltd. Şti." />
+                <input className={adminInput} defaultValue="Elmora Zeytincilik Tarım Ürünleri Ltd. Şti." />
               </AdminField>
               <AdminField label="IBAN">
                 <input

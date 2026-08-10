@@ -27,7 +27,7 @@ const timeline = [
   {
     year: '1889',
     title: 'İlk ağaçlar',
-    text: 'Kurucumuz Hüseyin Karabesimoğlu, Orhangazi Ortaköy’de İznik Gölü’ne bakan yamaca ilk 120 zeytin fidanını dikti. O ağaçların bir kısmı bugün hâlâ meyve veriyor.',
+    text: 'Kurucumuz Hüseyin Elmora, Orhangazi Ortaköy’de İznik Gölü’ne bakan yamaca ilk 120 zeytin fidanını dikti. O ağaçların bir kısmı bugün hâlâ meyve veriyor.',
   },
   {
     year: '1928',
@@ -42,7 +42,7 @@ const timeline = [
   {
     year: '1996',
     title: 'Soğuk sıkım hattı',
-    text: 'Nesrin ve Kerem Karabesimoğlu işi devraldı. Soğuk sıkım hattı kuruldu, hasat–sıkım arası süre sekiz saate indirildi.',
+    text: 'Nesrin ve Kerem Elmora işi devraldı. Soğuk sıkım hattı kuruldu, hasat–sıkım arası süre sekiz saate indirildi.',
   },
   {
     year: '2011',
@@ -86,13 +86,13 @@ const values = [
 
 const team = [
   {
-    name: 'Nesrin Karabesimoğlu',
+    name: 'Nesrin Elmora',
     role: 'Kurucu Ortak',
     avatar: AVATAR.a1,
     bio: 'Dördüncü kuşağın büyük kızı. Bahçe planlaması ve organik geçiş sürecini yürüttü.',
   },
   {
-    name: 'Kerem Karabesimoğlu',
+    name: 'Kerem Elmora',
     role: 'Üretim Sorumlusu',
     avatar: AVATAR.a7,
     bio: 'Hasat takvimi, sıkım süreci ve kalite kontrolden sorumlu. Her partiyi kendisi tadar.',

@@ -1,6 +1,6 @@
 # iyzico Üye İşyeri Onay Kontrol Listesi
 
-**Site:** Karabesimoğlu Zeytincilik · **Hazırlık tarihi:** 7 Ağustos 2026
+**Site:** Elmora Zeytincilik · **Hazırlık tarihi:** 7 Ağustos 2026
 
 iyzico üye işyeri başvurusunda site, 6502 sayılı Tüketicinin Korunması Hakkında Kanun,
 6563 sayılı Elektronik Ticaret Kanunu ve Mesafeli Sözleşmeler Yönetmeliği açısından

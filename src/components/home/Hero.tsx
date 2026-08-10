@@ -145,38 +145,37 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Kurucu portresi — üzerindeki marka yazısı kırpılmasın diye
-            görselin kendi oranında (4/5) ve object-contain ile gösterilir. */}
+        {/* Marka logosu. Logonun yazıları koyu yeşil olduğu için hero'nun koyu
+            zemininde okunmaz; bu yüzden krem bir kartın üzerine yerleştiriliyor.
+            Kart, logonun kendi oranını (1049×947) koruyor — hiçbir kenarı
+            kırpılmıyor. */}
         <motion.figure
           initial={{ opacity: 0, y: 30, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1.1, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
           style={enabled ? { y: portraitY } : undefined}
-          className="order-1 mx-auto w-full max-w-[16rem] sm:max-w-[19rem] lg:order-2 lg:max-w-[25rem]"
+          className="order-1 mx-auto w-full max-w-[17rem] sm:max-w-[21rem] lg:order-2 lg:max-w-[27rem]"
         >
-          <div className="relative rounded-[1.75rem] border border-gold-400/30 bg-olive-950/45 p-2.5 shadow-[0_28px_70px_-24px_rgba(0,0,0,0.75)] backdrop-blur-sm sm:p-3">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.35rem]">
-              <Image
-                src={IMG.founderPortrait}
-                alt={heroText.portraitAlt}
-                fill
-                priority
-                sizes="(min-width: 1024px) 25rem, (min-width: 640px) 19rem, 16rem"
-                quality={86}
-                placeholder="blur"
-                blurDataURL={blurDataURL('cream')}
-                className="object-contain"
-              />
-            </div>
+          <div className="relative rounded-[1.75rem] border border-gold-400/35 bg-cream-50 p-5 shadow-[0_28px_70px_-24px_rgba(0,0,0,0.75)] sm:p-7">
+            <Image
+              src={IMG.brandLogo}
+              alt={heroText.logoAlt}
+              width={1049}
+              height={947}
+              priority
+              sizes="(min-width: 1024px) 27rem, (min-width: 640px) 21rem, 17rem"
+              quality={86}
+              className="h-auto w-full"
+            />
             {/* İnce altın iç çerçeve */}
             <span
               aria-hidden
-              className="pointer-events-none absolute inset-2 rounded-[1.35rem] ring-1 ring-gold-300/25 sm:inset-3"
+              className="pointer-events-none absolute inset-2.5 rounded-[1.25rem] ring-1 ring-gold-500/20 sm:inset-3.5"
             />
           </div>
 
           <figcaption className="mt-5 text-center text-[0.7rem] tracking-[0.22em] text-cream-100/60 uppercase">
-            {heroText.portraitCaption}
+            {heroText.logoCaption}
           </figcaption>
         </motion.figure>
       </motion.div>

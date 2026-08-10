@@ -20,7 +20,7 @@ export default function MfaVerifyPage() {
       image={IMG.groveHill}
       quote={{
         text: 'Güven, doğrulanabilir bilgiyle başlar.',
-        author: 'Kerem Karabesimoğlu · Üretim Sorumlusu',
+        author: 'Kerem Elmora · Üretim Sorumlusu',
       }}
     >
       <Suspense fallback={<div className="skeleton h-64 rounded-2xl" />}>

@@ -7,7 +7,7 @@ import { buildMetadata } from '@/lib/seo';
 
 export const metadata = buildMetadata({
   title: 'Giriş Yap',
-  description: 'Karabesimoğlu Zeytincilik hesabınıza giriş yapın; siparişlerinizi takip edin, favorilerinize ulaşın.',
+  description: 'Elmora Zeytincilik hesabınıza giriş yapın; siparişlerinizi takip edin, favorilerinize ulaşın.',
   path: '/giris',
   noIndex: true,
 });
@@ -21,7 +21,7 @@ export default function LoginPage() {
       image={IMG.groveHill}
       quote={{
         text: 'Zeytinyağı almak, aslında bir üreticiye güvenmektir. Güven ise doğrulanabilir bilgiyle başlar.',
-        author: 'Kerem Karabesimoğlu · Üretim Sorumlusu',
+        author: 'Kerem Elmora · Üretim Sorumlusu',
       }}
       footer={
         <span className="text-muted-foreground">

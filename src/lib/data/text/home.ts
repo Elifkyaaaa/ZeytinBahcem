@@ -22,9 +22,9 @@ export const heroText = {
   secondaryCta: 'Hemen Sipariş Ver',
   trustMarks: ['Soğuk Sıkım', '%100 Doğal', 'Katkısız', 'Ücretsiz Kargo'],
   backgroundAlt: 'Orhangazi’de sabah güneşi altında sıra sıra uzanan asırlık zeytin ağaçları',
-  portraitAlt:
-    'Karabesimoğlu ailesinin kurucusu — zeytin dalıyla çekilmiş sepya portre, altında “Karabesimoğlu Zeytincilik · Since 1889” yazısı',
-  portraitCaption: 'Kurucumuz · Beş kuşaktır aynı yamaçta',
+  logoAlt:
+    'Elmora Olive & Gift logosu — zeytin dalı, yeşil ve siyah zeytinler, altında “From Olive Trees, With Love.” yazısı',
+  logoCaption: 'Beş kuşaktır aynı yamaçta',
   scrollLabel: 'Keşfet',
   scrollAriaLabel: 'Aşağı kaydır',
 } as const;

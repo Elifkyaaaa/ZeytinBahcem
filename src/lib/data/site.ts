@@ -1,19 +1,19 @@
 import type { NavItem } from '@/types';
 
 export const site = {
-  name: 'Karabesimoğlu Zeytincilik',
-  legalName: 'Karabesimoğlu Zeytincilik Tarım Ürünleri Ltd. Şti.',
+  name: 'Elmora Zeytincilik',
+  legalName: 'Elmora Zeytincilik Tarım Ürünleri Ltd. Şti.',
   tagline: 'Doğadan Sofranıza Gerçek Zeytinyağı',
   description:
     'Ege’nin asırlık zeytinliklerinden, dalından özenle toplanan zeytinlerle soğuk sıkım üretilen naturel sızma zeytinyağı ve sofralık zeytin çeşitleri.',
-  url: 'https://karabesimoglu.com',
+  url: 'https://elmora.com',
   locale: 'tr_TR',
   founded: 1889,
   phone: '+90 232 555 04 12',
   phoneHref: 'tel:+902325550412',
   whatsapp: '+90 532 555 04 12',
   whatsappHref: 'https://wa.me/905325550412',
-  email: 'merhaba@karabesimoglu.com',
+  email: 'merhaba@elmora.com',
   address: {
     street: 'Ortaköy Mah. Hasat Cad. No: 12',
     district: 'Orhangazi',
@@ -45,7 +45,7 @@ export const site = {
     mersis: '0000000000000000',
     tradeRegistryNo: '00000',
     chamber: 'Bursa Ticaret ve Sanayi Odası',
-    kepAddress: 'karabesimoglu@hs01.kep.tr',
+    kepAddress: 'elmora@hs01.kep.tr',
   },
 
   /** Ödeme altyapısı — footer ve ödeme sayfasında belirtilir. */

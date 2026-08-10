@@ -39,11 +39,11 @@ on conflict (code) do update
 
 insert into public.settings (key, value) values
   ('store', jsonb_build_object(
-     'name', 'Karabesimoğlu Zeytincilik',
-     'legal_name', 'Karabesimoğlu Zeytincilik Tarım Ürünleri Ltd. Şti.',
+     'name', 'Elmora Zeytincilik',
+     'legal_name', 'Elmora Zeytincilik Tarım Ürünleri Ltd. Şti.',
      'phone', '+90 232 555 04 12',
      'whatsapp', '+90 532 555 04 12',
-     'email', 'merhaba@karabesimoglu.com',
+     'email', 'merhaba@elmora.com',
      'address', 'Ortaköy Mah. Hasat Cad. No: 12, Orhangazi / Bursa',
      'free_shipping_threshold', 500
    )),
