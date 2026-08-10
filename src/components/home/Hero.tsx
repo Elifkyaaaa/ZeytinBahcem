@@ -7,6 +7,7 @@ import { useRef } from 'react';
 import { Button } from '@/components/ui/Button';
 import { OliveBranchIcon } from '@/components/ui/icons';
 import { useMediaQuery } from '@/hooks';
+import { site } from '@/lib/data/site';
 import { heroText } from '@/lib/data/text/home';
 import { IMG } from '@/lib/images';
 import { blurDataURL } from '@/lib/utils';
@@ -23,12 +24,13 @@ export function Hero() {
     offset: ['start start', 'end start'],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
+  const photoY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
+  const photoScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
+  // The watermark drifts slower than the photo, which separates the layers.
+  const markY = useTransform(scrollYProgress, [0, 1], ['0%', '8%']);
+  const markScale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, -60]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
-  // The logo drifts a little slower than the text, for a layered sense of depth.
-  const portraitY = useTransform(scrollYProgress, [0, 1], [0, -24]);
 
   return (
     <section
@@ -37,9 +39,10 @@ export function Hero() {
       className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-olive-950"
       aria-label={heroText.regionLabel}
     >
+      {/* Base layer: the grove photograph, held well back so the mark reads */}
       <motion.div
-        className="absolute inset-0 -z-10"
-        style={enabled ? { y: imageY, scale: imageScale } : undefined}
+        className="absolute inset-0 -z-20"
+        style={enabled ? { y: photoY, scale: photoScale } : undefined}
       >
         <Image
           src={IMG.heroGrove}
@@ -58,125 +61,143 @@ export function Hero() {
       {/* Layered scrim so the text stays readable */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-olive-950/72 via-olive-950/48 to-olive-950/88"
+        className="absolute inset-0 -z-20 bg-gradient-to-b from-olive-950/86 via-olive-950/76 to-olive-950/94"
       />
-      <div
+
+      {/*
+        The brand logo as a watermark. Its artwork is dark green, which would
+        disappear against this ground, so the filter flattens it to pure white
+        and opacity brings it back to a whisper. Decorative only — the brand
+        name is written as real text below, so this carries an empty alt.
+      */}
+      <motion.div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,transparent_28%,rgba(18,21,14,0.62)_100%)]"
-      />
+        className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center"
+        style={enabled ? { y: markY, scale: markScale } : undefined}
+        initial={{ opacity: 0, scale: 1.04 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <Image
+          src={IMG.brandLogo}
+          alt=""
+          width={1049}
+          height={947}
+          priority
+          sizes="(min-width: 1024px) 62rem, 120vw"
+          quality={86}
+          className="w-[124%] max-w-none opacity-[0.10] brightness-0 invert sm:w-[92%] lg:w-[62rem]"
+        />
+      </motion.div>
 
       <motion.div
         style={enabled ? { y: contentY, opacity: contentOpacity } : undefined}
-        className="container-x relative z-10 grid grid-cols-1 items-center gap-12 pt-28 pb-28 sm:gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pt-24"
+        className="container-x relative z-10 flex flex-col items-center py-28 text-center"
       >
-        {/* Copy — below the logo on mobile, to the left on desktop */}
-        <div className="order-2 flex flex-col items-center text-center lg:order-1 lg:items-start lg:text-left">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-white/18 bg-white/8 px-4 py-1.5 backdrop-blur-md"
-          >
-            <OliveBranchIcon className="size-4 text-gold-300" />
-            <span className="text-[0.7rem] font-medium tracking-[0.2em] text-cream-100/90 uppercase">
-              {heroText.badge}
-            </span>
-          </motion.div>
-
-          <h1 className="max-w-[15ch] font-display text-[2.65rem] leading-[1.04] font-semibold text-cream-50 sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem]">
-            {heroText.titleWords.map((word, i) => (
-              <motion.span
-                key={word}
-                initial={{ opacity: 0, y: 34, filter: 'blur(6px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                transition={{
-                  duration: 0.9,
-                  delay: 0.12 + i * 0.11,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="mr-[0.28em] inline-block"
-              >
-                {i === heroText.accentWordIndex ? (
-                  <span className="text-gradient-gold">{word}</span>
-                ) : (
-                  word
-                )}
-              </motion.span>
-            ))}
-          </h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.62, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-7 max-w-xl text-base leading-relaxed text-cream-100/78 sm:text-lg"
-          >
-            {heroText.subtitle}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.76, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-10 flex w-full flex-col gap-3.5 sm:w-auto sm:flex-row sm:gap-4"
-          >
-            <Button href="/urunler" variant="gold" size="xl">
-              {heroText.primaryCta}
-              <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2.2} />
-            </Button>
-            <Button href="/urunler?siralama=populer" variant="glass" size="xl">
-              <ShoppingBag className="size-5" strokeWidth={2} />
-              {heroText.secondaryCta}
-            </Button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.2 }}
-            className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[0.72rem] tracking-[0.16em] text-cream-100/55 uppercase lg:justify-start"
-          >
-            {heroText.trustMarks.map((item) => (
-              <span key={item} className="flex items-center gap-2.5">
-                <span className="size-1 rounded-full bg-gold-400/70" aria-hidden />
-                {item}
-              </span>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Brand logo. Its lettering is dark green and would be unreadable on the
-            hero's dark ground, so it sits on a cream card. The card keeps the
-            logo's own aspect ratio (1049×947), so no edge is cropped. */}
-        <motion.figure
-          initial={{ opacity: 0, y: 30, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1.1, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
-          style={enabled ? { y: portraitY } : undefined}
-          className="order-1 mx-auto w-full max-w-[17rem] sm:max-w-[21rem] lg:order-2 lg:max-w-[27rem]"
+        {/* Olive branch, sitting above the brand name */}
+        <motion.div
+          initial={{ opacity: 0, y: -12, rotate: -8 }}
+          animate={{ opacity: 1, y: 0, rotate: 0 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="relative rounded-[1.75rem] border border-gold-400/35 bg-cream-50 p-5 shadow-[0_28px_70px_-24px_rgba(0,0,0,0.75)] sm:p-7">
-            <Image
-              src={IMG.brandLogo}
-              alt={heroText.logoAlt}
-              width={1049}
-              height={947}
-              priority
-              sizes="(min-width: 1024px) 27rem, (min-width: 640px) 21rem, 17rem"
-              quality={86}
-              className="h-auto w-full"
-            />
-            {/* Thin gold inner frame */}
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-2.5 rounded-[1.25rem] ring-1 ring-gold-500/20 sm:inset-3.5"
-            />
-          </div>
+          <OliveBranchIcon className="size-14 text-gold-300 sm:size-16" />
+        </motion.div>
 
-          <figcaption className="mt-5 text-center text-[0.7rem] tracking-[0.22em] text-cream-100/60 uppercase">
-            {heroText.logoCaption}
-          </figcaption>
-        </motion.figure>
+        {/* Brand name, written out rather than read from the logo artwork */}
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-5 font-display text-[1.6rem] leading-none font-semibold tracking-[0.16em] text-cream-50 uppercase sm:text-[2.1rem] sm:tracking-[0.2em] lg:text-[2.5rem]"
+        >
+          {site.name}
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.28 }}
+          className="mt-4 flex items-center gap-3.5"
+        >
+          <span aria-hidden className="h-px w-10 bg-gold-400/45 sm:w-16" />
+          <span className="text-[0.62rem] tracking-[0.24em] text-gold-200/80 uppercase sm:text-[0.68rem]">
+            {heroText.badge}
+          </span>
+          <span aria-hidden className="h-px w-10 bg-gold-400/45 sm:w-16" />
+        </motion.div>
+
+        <h1 className="mt-9 max-w-[18ch] font-display text-[2.4rem] leading-[1.06] font-semibold text-cream-50 sm:text-5xl lg:text-[3.9rem]">
+          {heroText.titleWords.map((word, i) => (
+            <motion.span
+              key={word}
+              initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{
+                duration: 0.9,
+                delay: 0.42 + i * 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="mr-[0.28em] inline-block"
+            >
+              {i === heroText.accentWordIndex ? (
+                <span className="text-gradient-gold">{word}</span>
+              ) : (
+                word
+              )}
+            </motion.span>
+          ))}
+        </h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.86, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-6 max-w-xl text-base leading-relaxed text-cream-100/78 sm:text-lg"
+        >
+          {heroText.subtitle}
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.98, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-10 flex w-full flex-col gap-3.5 sm:w-auto sm:flex-row sm:gap-4"
+        >
+          <Button href="/urunler" variant="gold" size="xl">
+            {heroText.primaryCta}
+            <ArrowRight
+              className="size-5 transition-transform duration-300 group-hover:translate-x-1"
+              strokeWidth={2.2}
+            />
+          </Button>
+          <Button href="/urunler?siralama=populer" variant="glass" size="xl">
+            <ShoppingBag className="size-5" strokeWidth={2} />
+            {heroText.secondaryCta}
+          </Button>
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.2 }}
+          className="mt-9 text-[0.68rem] tracking-[0.2em] text-cream-100/45 uppercase"
+        >
+          {heroText.brandTagline}
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.32 }}
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[0.72rem] tracking-[0.16em] text-cream-100/55 uppercase"
+        >
+          {heroText.trustMarks.map((item) => (
+            <span key={item} className="flex items-center gap-2.5">
+              <span className="size-1 rounded-full bg-gold-400/70" aria-hidden />
+              {item}
+            </span>
+          ))}
+        </motion.div>
       </motion.div>
 
       <motion.a
@@ -187,7 +208,9 @@ export function Hero() {
         transition={{ duration: 1, delay: 1.5 }}
         className="absolute bottom-7 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2.5 sm:flex"
       >
-        <span className="text-[0.62rem] tracking-[0.24em] text-cream-100/45 uppercase">{heroText.scrollLabel}</span>
+        <span className="text-[0.62rem] tracking-[0.24em] text-cream-100/45 uppercase">
+          {heroText.scrollLabel}
+        </span>
         <span className="relative h-11 w-6 rounded-full border border-cream-100/25">
           <motion.span
             animate={{ y: [5, 18, 5], opacity: [0, 1, 0] }}

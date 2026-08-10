@@ -22,9 +22,8 @@ export const heroText = {
   secondaryCta: 'Hemen Sipariş Ver',
   trustMarks: ['Soğuk Sıkım', '%100 Doğal', 'Katkısız', 'Ücretsiz Kargo'],
   backgroundAlt: 'Orhangazi’de sabah güneşi altında sıra sıra uzanan asırlık zeytin ağaçları',
-  logoAlt:
-    'Elmora Olive & Gift logosu — zeytin dalı, yeşil ve siyah zeytinler, altında “From Olive Trees, With Love.” yazısı',
-  logoCaption: 'Beş kuşaktır aynı yamaçta',
+  /** Sits under the brand name, above the headline */
+  brandTagline: 'Olive & Gift · From Olive Trees, With Love.',
   scrollLabel: 'Keşfet',
   scrollAriaLabel: 'Aşağı kaydır',
 } as const;
