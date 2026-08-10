@@ -280,7 +280,7 @@ export const adminInput =
   'transition-all placeholder:text-muted-foreground/70 hover:border-gold-500/45 ' +
   'focus:border-gold-500 focus:ring-4 focus:ring-gold-500/12 focus:outline-none';
 
-/** Filtre çubuğu — tablolarda arama ve sekme filtresi. */
+/** Toolbar with search and tab filters, used above tables. */
 export function Toolbar({
   search,
   onSearch,
@@ -347,7 +347,7 @@ export function EmptyState({ title, description }: { title: string; description:
   );
 }
 
-/** Panelde kalıcı kayıt olmadığını dürüstçe belirten not. */
+/** Notice that states plainly when a panel does not persist changes. */
 export function DemoNotice({ children }: { children: ReactNode }) {
   const [dismissed, setDismissed] = useState(false);
   if (dismissed) return null;

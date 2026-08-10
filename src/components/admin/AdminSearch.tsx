@@ -19,7 +19,7 @@ interface Result {
   Icon: LucideIcon;
 }
 
-/** Panel içi hızlı gezinme hedefleri. */
+/** Quick navigation targets inside the panel. */
 const pages: { label: string; href: string }[] = [
   { label: 'Dashboard', href: '/admin' },
   { label: 'Ürün Yönetimi', href: '/admin/urunler' },
@@ -62,7 +62,7 @@ export function AdminSearch() {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
-  // Dışarı tıklayınca kapan
+  // Close on outside click
   useEffect(() => {
     if (!open) return;
     const onClick = (e: MouseEvent) => {
@@ -124,7 +124,7 @@ export function AdminSearch() {
         Icon: Search,
       }));
 
-    // Aynı müşteri birden çok siparişten gelebilir; tekilleştir.
+    // One customer can appear in several orders, so de-duplicate.
     const seen = new Set<string>();
     return [...pageHits, ...productHits, ...orderHits, ...customerHits].filter((r) => {
       if (seen.has(r.id)) return false;
@@ -168,7 +168,7 @@ export function AdminSearch() {
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
-            // Sorgu değişince vurgulanan satır başa döner.
+            // Reset the highlighted row whenever the query changes.
             setActive(0);
             setOpen(true);
           }}

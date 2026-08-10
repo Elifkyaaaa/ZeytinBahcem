@@ -48,7 +48,7 @@ export function CategoriesSection() {
                     aria-hidden
                     className="absolute inset-0 bg-gradient-to-t from-olive-950/88 via-olive-950/28 to-transparent transition-opacity duration-500 group-hover:from-olive-950/92"
                   />
-                  {/* Hover'da beliren altın çerçeve */}
+                  {/* Gold frame that appears on hover */}
                   <span
                     aria-hidden
                     className="absolute inset-0 rounded-3xl ring-1 ring-gold-400/0 ring-inset transition-all duration-500 group-hover:ring-2 group-hover:ring-gold-400/45"

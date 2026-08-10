@@ -5,7 +5,7 @@ import { useId, useState } from 'react';
 import { cn, formatNumber } from '@/lib/utils';
 
 /* -------------------------------------------------------------------------- */
-/*  Alan grafiği — aylık ciro                                                  */
+/*  Area chart — monthly revenue                                               */
 /* -------------------------------------------------------------------------- */
 
 const W = 720;
@@ -54,7 +54,7 @@ export function AreaChart({
           </linearGradient>
         </defs>
 
-        {/* Yatay kılavuzlar */}
+        {/* Horizontal guides */}
         {ticks.map((t, i) => (
           <g key={i}>
             <line
@@ -130,7 +130,7 @@ export function AreaChart({
               className="transition-all duration-200"
             />
 
-            {/* Görünmez isabet alanı */}
+            {/* Invisible hit area */}
             <rect
               x={x(i) - innerW / data.length / 2}
               y={PAD.top}
@@ -163,7 +163,7 @@ export function AreaChart({
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Sütun grafiği — aylık sipariş adedi                                        */
+/*  Bar chart — monthly order count                                            */
 /* -------------------------------------------------------------------------- */
 
 export function BarChart({ data }: { data: { month: string; orders: number }[] }) {
@@ -190,7 +190,7 @@ export function BarChart({ data }: { data: { month: string; orders: number }[] }
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Halka grafiği — kategori payları                                           */
+/*  Donut chart — category share                                               */
 /* -------------------------------------------------------------------------- */
 
 export function DonutChart({
@@ -206,7 +206,7 @@ export function DonutChart({
   const radius = 62;
   const circumference = 2 * Math.PI * radius;
 
-  // Dilim uzunlukları ve başlangıç noktaları render'dan önce hesaplanır.
+  // Arc lengths and offsets are computed before render.
   const arcs = data.reduce<{ item: (typeof data)[number]; length: number; offset: number }[]>(
     (acc, item) => {
       const previous = acc.at(-1);
@@ -273,7 +273,7 @@ export function DonutChart({
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Yatay çubuklar — trafik kaynakları                                         */
+/*  Horizontal bars — traffic sources                                          */
 /* -------------------------------------------------------------------------- */
 
 export function ProgressList({

@@ -4,7 +4,7 @@ import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
-/** Sitedeki ortak hareket dili: 24px aşağıdan yukarı + fade. */
+/** The site's shared motion language: 24px up plus a fade. */
 export const revealVariants: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: {
@@ -48,7 +48,7 @@ export function Reveal({
   );
 }
 
-/** Çocuklarını sırayla açan sarmalayıcı — kart ızgaraları için. */
+/** Wrapper that reveals its children in sequence, for card grids. */
 export function RevealGroup({
   children,
   className,

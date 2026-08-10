@@ -11,9 +11,9 @@ const STORAGE_KEY = 'zb-cookie-consent';
 type Choice = 'all' | 'necessary';
 
 /**
- * Tercih localStorage'da tutulur. React'e dışarıdan bir kaynak olarak
- * bağlıyoruz ki efekt içinde setState çağırmak gerekmesin ve sunucu
- * render'ında bant hiç basılmasın.
+ * The preference lives in localStorage. We expose it to React as an external
+ * store so no setState is needed inside an effect and the banner is never
+ * emitted during server rendering.
  */
 let listeners: (() => void)[] = [];
 
@@ -24,16 +24,16 @@ const consentStore = {
       listeners = listeners.filter((l) => l !== listener);
     };
   },
-  /** Karar verilmiş mi? */
+  /** Has a choice been made? */
   getSnapshot() {
     try {
       return window.localStorage.getItem(STORAGE_KEY) !== null;
     } catch {
-      // Gizli sekmede depo kapalı olabilir; bandı göstermiyoruz.
+      // Storage may be blocked in a private tab; in that case we skip the banner.
       return true;
     }
   },
-  /** Sunucuda karar bilinemez; bant basılmaz, hydration uyuşmazlığı olmaz. */
+  /** The choice is unknowable on the server, so nothing renders and hydration matches. */
   getServerSnapshot() {
     return true;
   },
@@ -44,17 +44,18 @@ const consentStore = {
         JSON.stringify({ choice, at: new Date().toISOString() }),
       );
     } catch {
-      // Kaydedilemese de kullanıcıyı engellemiyoruz.
+      // Even if it cannot be saved, we do not block the user.
     }
     listeners.forEach((l) => l());
   },
 };
 
 /**
- * KVKK ve Çerez Politikası kapsamında ilk ziyarette gösterilen onay bandı.
+ * Consent banner shown on the first visit, as required by Turkish data
+ * protection law and our cookie policy.
  *
- * Zorunlu çerezler (oturum, sepet) her hâlükârda çalışır; bant yalnızca
- * isteğe bağlı istatistik çerezleri için onay toplar.
+ * Strictly necessary cookies (session, cart) work regardless; the banner only
+ * collects consent for the optional analytics cookies.
  */
 export function CookieConsent() {
   const decided = useSyncExternalStore(

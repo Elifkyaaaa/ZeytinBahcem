@@ -12,7 +12,7 @@ export function ThemeToggle({ className }: { className?: string }) {
   const isDark = resolvedTheme === 'dark';
 
   const toggle = () => {
-    // Tema değişiminde renklerin ani sıçramaması için kısa bir geçiş sınıfı
+    // A short transition class so colours do not jump when the theme changes
     const root = document.documentElement;
     root.classList.add('theme-transition');
     window.setTimeout(() => root.classList.remove('theme-transition'), 360);

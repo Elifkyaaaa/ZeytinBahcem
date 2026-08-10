@@ -8,11 +8,11 @@ import { useUi } from '@/lib/store/ui';
 import { cn } from '@/lib/utils';
 
 interface Step {
-  /** Hedef öğe `data-tour="…"` ile işaretlenir */
+  /** The target element is marked with `data-tour="…"` */
   target: string;
   title: string;
   body: string;
-  /** Balonun hedefe göre tercih edilen konumu */
+  /** Preferred position of the bubble relative to its target */
   place?: 'bottom' | 'right' | 'left';
 }
 
@@ -65,9 +65,9 @@ interface Box {
 const PAD = 8;
 
 /**
- * Dış kabuk yalnızca açık/kapalıyı yönetir. İçerik ayrı bir bileşende olduğu
- * için tur her açılışta sıfırdan monte olur; böylece adım listesini DOM'a
- * bakarak tembel başlatabiliyoruz (efekt içinde setState gerekmiyor).
+ * The outer shell only tracks open/closed. Because the content is a separate
+ * component, the tour mounts fresh every time it opens, which lets us build
+ * the step list lazily from the DOM without calling setState in an effect.
  */
 export function AdminTour() {
   const open = useUi((s) => s.tourOpen);
@@ -81,7 +81,7 @@ function TourOverlay() {
   const [index, setIndex] = useState(0);
   const [box, setBox] = useState<Box | null>(null);
 
-  // Hedefi sayfada bulunmayan adımlar (ör. dashboard dışında grafikler) elenir.
+  // Steps whose target is absent (charts outside the dashboard) are dropped.
   const [available] = useState<Step[]>(() =>
     steps.filter((s) => document.querySelector(`[data-tour="${s.target}"]`)),
   );
@@ -91,7 +91,7 @@ function TourOverlay() {
     try {
       window.localStorage.setItem('zb-admin-tour', 'done');
     } catch {
-      // Gizli sekmede localStorage yazılamayabilir; tur yine de kapanır.
+      // localStorage may be unwritable in a private tab; the tour still closes.
     }
   }, [close]);
 
@@ -99,7 +99,7 @@ function TourOverlay() {
 
   const step = available[index];
 
-  // Hedefin konumunu ölç; boyama öncesi ölçüyoruz ki balon zıplamasın.
+  // Measure the target before paint so the bubble does not jump.
   useLayoutEffect(() => {
     if (!step) return;
 
@@ -113,7 +113,7 @@ function TourOverlay() {
     };
 
     measure();
-    const id = window.setTimeout(measure, 320); // kaydırma bitince yeniden ölç
+    const id = window.setTimeout(measure, 320); // re-measure once scrolling settles
     window.addEventListener('resize', measure);
     window.addEventListener('scroll', measure, true);
 
@@ -137,7 +137,7 @@ function TourOverlay() {
 
   const last = index === available.length - 1;
 
-  /** Balonu hedefe göre konumlandır, ekran dışına taşmasın. */
+  /** Position the bubble against its target, keeping it on screen. */
   const bubble = (() => {
     const W = 320;
     if (!box) return { top: 100, left: 100 };
@@ -172,7 +172,7 @@ function TourOverlay() {
         aria-modal="true"
         aria-label="Tanıtım turu"
       >
-        {/* Karartma + hedefi aydınlatan pencere (dev gölge hilesi) */}
+        {/* Backdrop plus a window that lights the target (huge box-shadow trick) */}
         {box ? (
           <motion.div
             layout
@@ -191,7 +191,7 @@ function TourOverlay() {
           <div onClick={finish} className="absolute inset-0 bg-olive-950/68" />
         )}
 
-        {/* Anlatım balonu */}
+        {/* Narration bubble */}
         <motion.div
           layout
           initial={{ opacity: 0, y: 8 }}
@@ -217,7 +217,7 @@ function TourOverlay() {
           <h3 className="mt-3 font-display text-lg text-foreground">{step.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
 
-          {/* İlerleme noktaları */}
+          {/* Progress dots */}
           <div className="mt-4 flex items-center gap-1.5">
             {available.map((s, i) => (
               <button

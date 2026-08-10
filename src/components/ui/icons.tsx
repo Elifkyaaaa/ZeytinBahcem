@@ -1,8 +1,8 @@
 import type { SVGProps } from 'react';
 
 /**
- * Lucide v1 marka ikonlarını kaldırdığı için sosyal ikonları burada tutuyoruz.
- * Hepsi currentColor kullanır ve size sınıflarıyla ölçeklenir.
+ * Lucide v1 dropped its brand icons, so the social ones live here.
+ * They all use currentColor and scale with the size classes.
  */
 
 export function InstagramIcon(props: SVGProps<SVGSVGElement>) {
@@ -31,7 +31,7 @@ export function WhatsAppIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-/** Zeytin dalı — logoda ve dekoratif ayraçlarda kullanılır. */
+/** Olive branch, used in the logo lockup and as a decorative divider. */
 export function OliveBranchIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 32 32" fill="none" aria-hidden {...props}>
@@ -50,7 +50,7 @@ export function OliveBranchIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-/** Kart ödeme rozetleri — footer ve checkout için sade işaretler. */
+/** Card payment marks, kept plain for the footer and checkout. */
 export function PaymentMark({ label, ...props }: SVGProps<SVGSVGElement> & { label: string }) {
   return (
     <svg viewBox="0 0 48 30" role="img" aria-label={label} {...props}>

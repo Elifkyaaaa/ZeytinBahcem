@@ -5,8 +5,8 @@ import { useCart } from '@/lib/store/cart';
 import { useCheckout } from '@/lib/store/checkout';
 
 /**
- * Ödeme başarıyla döndüğünde sepeti ve uygulanmış kuponu temizler.
- * Sunucu bileşeninden çağrılabilsin diye ayrı bir istemci bileşeni.
+ * Clears the cart and any applied coupon when payment returns successfully.
+ * Kept as its own client component so a server component can render it.
  */
 export function CartCleaner() {
   const clear = useCart((s) => s.clear);

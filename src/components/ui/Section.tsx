@@ -37,7 +37,7 @@ export function Section({
   );
 }
 
-/** Bölüm başlıkları: küçük altın etiket + serif başlık + açıklama. */
+/** Section headings: small gold eyebrow, display title and description. */
 export function SectionHeading({
   eyebrow,
   title,

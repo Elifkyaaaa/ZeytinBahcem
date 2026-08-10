@@ -1,4 +1,4 @@
-/** Yapılandırılmış veri bloklarını tek noktadan sayfaya basar. */
+/** Emits structured data blocks onto the page from one place. */
 export function JsonLd({ data }: { data: object | object[] }) {
   return (
     <script

@@ -4,9 +4,9 @@ import { useEffect, useRef } from 'react';
 import { iyzicoFrameText } from '@/lib/data/text/checkout';
 
 /**
- * iyzico Checkout Form içeriği bir `<script>` bloğudur; `dangerouslySetInnerHTML`
- * ile basıldığında tarayıcı bunu çalıştırmaz. Script etiketlerini yeniden
- * oluşturup DOM'a eklememiz gerekiyor.
+ * The iyzico Checkout Form payload is a `<script>` block, and the browser will
+ * not execute it when inserted through `dangerouslySetInnerHTML`. We have to
+ * recreate the script tags and append them to the DOM ourselves.
  */
 export function IyzicoFrame({ content }: { content: string }) {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -32,7 +32,7 @@ export function IyzicoFrame({ content }: { content: string }) {
         </p>
       </div>
 
-      {/* iyzico kendi formunu bu kabın içine basar */}
+      {/* iyzico renders its own form into this container */}
       <div id="iyzipay-checkout-form" className="responsive rounded-2xl bg-surface p-2">
         <div ref={hostRef} />
       </div>

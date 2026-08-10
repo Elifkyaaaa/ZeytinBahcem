@@ -30,7 +30,7 @@ type Step = 'yukleniyor' | 'kapali' | 'qr' | 'kurulu';
 const CODE_LENGTH = 6;
 
 export function TwoFactorSetup() {
-  // Supabase bağlı değilse beklenecek bir şey yok; doğrudan kapalı durumla açılır.
+  // Nothing to wait for without Supabase; open straight into the disabled state.
   const [step, setStep] = useState<Step>(isSupabaseConfigured ? 'yukleniyor' : 'kapali');
   const [factors, setFactors] = useState<Factor[]>([]);
   const [qr, setQr] = useState<{ factorId: string; svg: string; secret: string } | null>(null);
@@ -40,7 +40,7 @@ export function TwoFactorSetup() {
   const [success, setSuccess] = useState<string | null>(null);
   const { copied, copy } = useCopy();
 
-  /** Kayıtlı ve doğrulanmış faktörleri oku. */
+  /** Read the enrolled and verified factors. */
   const refresh = useCallback(async () => {
     const supabase = createClient();
     if (!supabase) return;
@@ -62,8 +62,8 @@ export function TwoFactorSetup() {
     setStep(verified.length > 0 ? 'kurulu' : 'kapali');
   }, []);
 
-  // İlk okuma. setState yalnızca await sonrasında çağrılır — efekt gövdesinde
-  // senkron durum güncellemesi yok.
+  // First read. setState is only called after an await, so there is no
+  // synchronous state update in the effect body.
   useEffect(() => {
     let cancelled = false;
 
@@ -89,7 +89,7 @@ export function TwoFactorSetup() {
     };
   }, []);
 
-  /* -- Kaydı başlat: QR üret ------------------------------------------- */
+  /* -- Start enrolment: generate the QR ------------------------------- */
   const startEnroll = async () => {
     const supabase = createClient();
     if (!supabase) return;
@@ -98,8 +98,8 @@ export function TwoFactorSetup() {
     setError(null);
     setSuccess(null);
 
-    // Yarım kalmış (doğrulanmamış) faktör varsa temizle — aksi hâlde
-    // "friendly name already exists" hatası alınır.
+    // Clear any half-finished (unverified) factor, otherwise enrolment
+    // fails with "friendly name already exists".
     const { data: existing } = await supabase.auth.mfa.listFactors();
     for (const f of existing?.all ?? []) {
       if (f.status === 'unverified') {
@@ -124,7 +124,7 @@ export function TwoFactorSetup() {
     setStep('qr');
   };
 
-  /* -- Kodu doğrula ----------------------------------------------------- */
+  /* -- Verify the code -------------------------------------------------- */
   const verify = async () => {
     const supabase = createClient();
     if (!supabase || !qr) return;
@@ -161,7 +161,7 @@ export function TwoFactorSetup() {
     await refresh();
   };
 
-  /* -- Kaldır ----------------------------------------------------------- */
+  /* -- Remove ----------------------------------------------------------- */
   const remove = async (factorId: string) => {
     const supabase = createClient();
     if (!supabase) return;
@@ -183,7 +183,7 @@ export function TwoFactorSetup() {
     await refresh();
   };
 
-  /* -- Görünüm ---------------------------------------------------------- */
+  /* -- View ------------------------------------------------------------- */
 
   if (step === 'yukleniyor') {
     return (
@@ -225,7 +225,7 @@ export function TwoFactorSetup() {
         )}
       </AnimatePresence>
 
-      {/* Kurulu değil */}
+      {/* Not enrolled */}
       {step === 'kapali' && (
         <div className="rounded-2xl border border-border bg-surface p-6">
           <div className="flex items-start gap-4">
@@ -255,7 +255,7 @@ export function TwoFactorSetup() {
         </div>
       )}
 
-      {/* QR gösterimi ve doğrulama */}
+      {/* QR display and verification */}
       {step === 'qr' && qr && (
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -283,7 +283,7 @@ export function TwoFactorSetup() {
                 <p className="font-medium text-foreground">QR kodu okutun</p>
 
                 <div className="mt-4 flex flex-col items-start gap-5 sm:flex-row">
-                  {/* Supabase QR'ı SVG veri URI'si olarak döner */}
+                  {/* Supabase returns the QR as an SVG data URI */}
                   <span className="rounded-xl border border-border bg-white p-3">
                     <Image
                       src={qr.svg}

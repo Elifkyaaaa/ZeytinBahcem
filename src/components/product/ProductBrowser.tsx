@@ -275,7 +275,7 @@ export function ProductBrowser() {
         )}
       </div>
 
-      {/* Mobil filtre çekmecesi */}
+      {/* Mobile filter drawer */}
       <AnimatePresence>
         {filtersOpen && (
           <>

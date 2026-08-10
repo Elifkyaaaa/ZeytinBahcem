@@ -427,7 +427,7 @@ export function ProductManager({
         </div>
       )}
 
-      {/* Silme onayı */}
+      {/* Delete confirmation */}
       <AnimatePresence>
         {confirmId && (
           <motion.div

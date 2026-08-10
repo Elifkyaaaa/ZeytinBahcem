@@ -29,7 +29,7 @@ export function WhyUsSection() {
             return (
               <Reveal key={feature.id} delay={(i % 3) * 0.07} className="h-full">
                 <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface p-7 shadow-soft transition-all duration-500 hover:-translate-y-1.5 hover:border-gold-500/35 hover:shadow-lift">
-                  {/* Sol üstten yayılan sıcak parıltı */}
+                  {/* Warm glow spreading from the top left */}
                   <span
                     aria-hidden
                     className="pointer-events-none absolute -top-20 -left-16 size-48 rounded-full bg-gold-400/10 opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-100"

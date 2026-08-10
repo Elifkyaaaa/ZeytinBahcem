@@ -2,8 +2,9 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
 
 /**
- * OAuth ve e-posta bağlantılarının döndüğü nokta.
- * Gelen `code` oturuma çevrilir, ardından kullanıcı hedef sayfaya yollanır.
+ * Return point for OAuth and email links.
+ * The incoming `code` is exchanged for a session, then the user is sent on to
+ * their destination page.
  */
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
@@ -24,13 +25,13 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(`${origin}/giris?hata=supabase-yapilandirilmadi`);
   }
 
-  // OAuth akışı
+  // OAuth flow
   if (code) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) return NextResponse.redirect(`${origin}${next}`);
   }
 
-  // E-posta doğrulama / şifre sıfırlama akışı
+  // Email verification and password reset flow
   if (tokenHash && type) {
     const { error } = await supabase.auth.verifyOtp({
       type: type as 'signup' | 'recovery' | 'email_change' | 'invite' | 'magiclink',

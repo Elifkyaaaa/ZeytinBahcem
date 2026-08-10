@@ -15,21 +15,21 @@ export interface SessionUser {
 
 export interface AuthState {
   user: SessionUser | null;
-  /** İlk okuma tamamlanana kadar true — bu sırada header'da yer tutucu gösterilir. */
+  /** True until the first read completes; the header shows a placeholder meanwhile. */
   loading: boolean;
 }
 
 /**
- * Oturumu istemci tarafında okur.
+ * Reads the session on the client.
  *
- * Neden sunucuda değil: Header, statik üretilen vitrin sayfalarında da
- * görünüyor. Oturumu layout'ta sunucudan okusaydık tüm ürün ve blog
- * sayfaları dinamikleşir, statik üretimin faydası kaybolurdu. Burada
- * hidrasyondan sonra okuyup `onAuthStateChange` ile canlı tutuyoruz —
- * giriş/çıkış anında sayfa yenilemeden güncelleniyor.
+ * Why not on the server: the header also appears on statically generated
+ * storefront pages. Reading the session from the server in the layout would
+ * make every product and blog page dynamic and throw away the benefit of
+ * static generation. Instead we read after hydration and keep it live through
+ * `onAuthStateChange`, so signing in or out updates without a page reload.
  */
 export function useAuth(): AuthState {
-  // Supabase bağlı değilse okunacak oturum yok; beklemeden misafir kabul edilir.
+  // Without Supabase there is no session to read, so treat the visitor as a guest.
   const [state, setState] = useState<AuthState>({
     user: null,
     loading: isSupabaseConfigured,

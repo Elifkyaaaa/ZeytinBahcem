@@ -31,7 +31,7 @@ export function SearchOverlay() {
 
   useEffect(() => {
     if (open) {
-      // Panel animasyonu bitmeden odaklanmak kaydırmayı bozuyor, bir kare bekliyoruz.
+      // Focusing before the panel animation ends breaks scrolling, so wait a frame.
       const id = window.setTimeout(() => inputRef.current?.focus(), 220);
       return () => window.clearTimeout(id);
     }

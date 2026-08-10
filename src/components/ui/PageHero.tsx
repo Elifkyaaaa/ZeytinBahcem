@@ -4,7 +4,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { Container } from '@/components/ui/Section';
 import { blurDataURL, cn } from '@/lib/utils';
 
-/** Alt sayfaların ortak üst bandı: görsel, başlık ve sayfa yolu. */
+/** Shared top band for inner pages: image, title and breadcrumb. */
 export function PageHero({
   eyebrow,
   title,

@@ -19,7 +19,7 @@ const initialState: AuthState = {};
 export function RegisterForm() {
   const [state, formAction] = useActionState(signUpWithPassword, initialState);
 
-  // Kayıt başarılıysa formu gizleyip doğrulama mesajını öne çıkarıyoruz.
+  // On success we hide the form and lead with the verification message.
   if (state.success) {
     return (
       <div className="space-y-6">

@@ -6,7 +6,7 @@ import { site } from '@/lib/data/site';
 import { IMG } from '@/lib/images';
 import { blurDataURL } from '@/lib/utils';
 
-/** Giriş/kayıt sayfalarının iki sütunlu ortak kabuğu. */
+/** Shared two-column shell for the sign-in and sign-up pages. */
 export function AuthShell({
   eyebrow,
   title,
@@ -26,7 +26,7 @@ export function AuthShell({
 }) {
   return (
     <div className="grid min-h-dvh lg:grid-cols-2">
-      {/* Görsel sütunu */}
+      {/* Image column */}
       <div className="relative hidden overflow-hidden bg-olive-950 lg:block">
         <Image
           src={image}
@@ -73,7 +73,7 @@ export function AuthShell({
         </div>
       </div>
 
-      {/* Form sütunu */}
+      {/* Form column */}
       <div className="flex flex-col justify-center px-5 py-16 sm:px-10 lg:px-16 xl:px-24">
         <div className="mx-auto w-full max-w-md">
           <Link href="/" className="mb-10 flex w-fit items-center gap-2.5 lg:hidden">

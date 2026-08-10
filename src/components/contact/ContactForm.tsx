@@ -55,7 +55,7 @@ export function ContactForm() {
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
-    // Form uçtan uca bağlanana kadar yerel geri bildirim veriyoruz.
+    // Local feedback until the form is wired end to end.
     setSent(true);
   };
 

@@ -35,8 +35,8 @@ export function OrderTracker() {
       return;
     }
 
-    // Sipariş sorgusu Supabase bağlandığında canlıya geçer; şimdilik
-    // numaradan türetilen tutarlı bir durum gösteriyoruz.
+    // Order lookup goes live once Supabase is connected; for now we show a
+    // stable status derived from the order number.
     const seed = orderNo.replace(/\D/g, '').slice(-1);
     setResult({ step: (Number(seed) % 4) + 1, orderNo: orderNo.trim().toUpperCase() });
   };

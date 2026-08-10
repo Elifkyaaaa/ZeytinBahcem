@@ -33,7 +33,7 @@ function AddressForm({
   const [city, setCity] = useState(address?.city ?? '');
   const districts = city ? (cities[city] ?? []) : [];
 
-  // Kaydetme başarılıysa formu kapat.
+  // Close the form when the save succeeds.
   if (state.success) {
     queueMicrotask(onDone);
   }

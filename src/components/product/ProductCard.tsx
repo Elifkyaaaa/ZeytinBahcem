@@ -68,8 +68,8 @@ export function ProductCard({
       )}
     >
       <div className="relative aspect-4/5 overflow-hidden bg-surface-muted">
-        {/* `fill` doğrudan ebeveynin konumlandırılmış olmasını ister; bir üstteki
-            sarmalayıcı relative olsa bile araya giren bu bağlantı değil. */}
+        {/* `fill` needs its immediate parent to be positioned; the wrapper one level
+            up being relative does not help when this link sits in between. */}
         <Link
           href={`/urunler/${product.slug}`}
           aria-label={product.name}
@@ -126,7 +126,7 @@ export function ProductCard({
           </motion.span>
         </button>
 
-        {/* Masaüstünde hover ile yükselir; dokunmatikte her zaman görünür */}
+        {/* Rises on hover on desktop; always visible on touch */}
         <div className="absolute inset-x-3 bottom-3 z-20 translate-y-0 opacity-100 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] lg:translate-y-[130%] lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100">
           <button
             type="button"

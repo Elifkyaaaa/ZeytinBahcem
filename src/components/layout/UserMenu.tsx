@@ -32,8 +32,9 @@ function initialsOf(name: string) {
 }
 
 /**
- * Oturum açıksa avatar + menü, kapalıysa Giriş Yap / Üye Ol.
- * Oturum okunana kadar yer tutucu gösterilir ki yerleşim zıplamasın.
+ * Avatar and menu when signed in, sign in / sign up when not.
+ * A placeholder holds the space until the session is read, so the layout
+ * does not jump.
  */
 export function UserMenu({ user, loading }: { user: SessionUser | null; loading: boolean }) {
   const [open, setOpen] = useState(false);

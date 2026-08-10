@@ -32,7 +32,7 @@ import { calcTotals, useCheckout } from '@/lib/store/checkout';
 import { blurDataURL, cn, formatPrice } from '@/lib/utils';
 import { checkoutText } from '@/lib/data/text/checkout';
 
-/** Yöntem başına simge — metin ve tutarlar `@/lib/data/payment` içinde. */
+/** Icon per method; the copy and amounts live in `@/lib/data/payment`. */
 const paymentIcons: Record<PaymentMethod, typeof CreditCard> = {
   card: CreditCard,
   transfer: Banknote,
@@ -191,14 +191,14 @@ export function CheckoutView() {
         return;
       }
 
-      // iyzico Checkout Form: dönen HTML/script sayfaya enjekte edilir,
-      // 3D Secure akışı iyzico tarafında açılır ve callback'e döner.
+      // iyzico Checkout Form: the returned HTML/script is injected into the page,
+      // the 3D Secure flow runs on iyzico's side and returns to our callback.
       if (data.mode === 'iyzico' && data.checkoutFormContent) {
         setIyzicoForm(data.checkoutFormContent);
         return;
       }
 
-      // Sipariş numarasını her zaman sunucu üretir; burada yalnızca güvenli bir yedek var.
+      // The server always generates the order number; this is only a safe fallback.
       setOrderNo(data.orderNo ?? 'ZB-BEKLEMEDE');
       clearCart();
       setSubmitting(false);
@@ -436,7 +436,7 @@ export function CheckoutView() {
           </div>
         </section>
 
-        {/* Kargo seçimi */}
+        {/* Shipping selection */}
         <section className="rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-7">
           <h2 className="flex items-center gap-2.5 font-display text-xl text-foreground">
             <span className="grid size-9 place-items-center rounded-full bg-olive-600/8 text-olive-600 dark:bg-gold-400/10 dark:text-gold-400">
@@ -484,7 +484,7 @@ export function CheckoutView() {
           </div>
         </section>
 
-        {/* Ödeme yöntemi */}
+        {/* Payment method */}
         <section className="rounded-2xl border border-border bg-surface p-6 shadow-soft sm:p-7">
           <h2 className="flex items-center gap-2.5 font-display text-xl text-foreground">
             <span className="grid size-9 place-items-center rounded-full bg-olive-600/8 text-olive-600 dark:bg-gold-400/10 dark:text-gold-400">
@@ -689,7 +689,7 @@ export function CheckoutView() {
         </div>
       </div>
 
-      {/* Sipariş özeti */}
+      {/* Order summary */}
       <aside className="lg:sticky lg:top-24 lg:self-start">
         <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
           <h2 className="flex items-center gap-2.5 font-display text-xl text-foreground">
@@ -793,8 +793,8 @@ export function CheckoutView() {
             </div>
           </dl>
 
-          {/* Mesafeli Sözleşmeler Yönetmeliği: ön bilgilendirme ve sözleşme
-              onayı ayrı ayrı alınmalıdır. */}
+          {/* Turkish Distance Contracts Regulation: the pre-information form and the
+              sales contract must be consented to separately. */}
           <div className="mt-5 space-y-3 border-t border-border pt-4">
             <label className="flex cursor-pointer items-start gap-2.5 text-xs leading-relaxed text-muted-foreground">
               <input

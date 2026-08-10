@@ -16,9 +16,10 @@ interface Uploaded {
 }
 
 /**
- * Cloudinary'ye doğrudan yükleme.
- * İmza sunucudan alınır; dosya tarayıcıdan Cloudinary'ye gider, dönen
- * secure_url Supabase `products.image_url` alanına yazılacak değerdir.
+ * Direct upload to Cloudinary.
+ * The signature comes from our server, the file goes from the browser straight
+ * to Cloudinary, and the returned secure_url is what gets written to Supabase
+ * `products.image_url`.
  */
 export function ImageUploader({
   folder,

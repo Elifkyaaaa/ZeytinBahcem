@@ -23,7 +23,7 @@ export function NewsletterSection() {
       setStatus('error');
       return;
     }
-    // Gerçek bir uçtan uca entegrasyon yerine yerel geri bildirim veriyoruz.
+    // Local feedback stands in for a real end-to-end integration.
     setStatus('done');
     setEmail('');
   };

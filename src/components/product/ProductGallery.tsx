@@ -27,7 +27,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
     [images.length],
   );
 
-  // İmleci takip eden büyüteç: kaynak noktayı yüzde olarak transform-origin'e veriyoruz.
+  // Cursor-following zoom: the source point is fed to transform-origin as a percentage.
   const track = (e: MouseEvent<HTMLDivElement>) => {
     const rect = frameRef.current?.getBoundingClientRect();
     if (!rect) return;

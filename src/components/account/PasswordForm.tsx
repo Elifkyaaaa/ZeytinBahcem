@@ -8,7 +8,7 @@ import { passwordFormText } from '@/lib/data/text/account';
 
 const initialState: ActionState = {};
 
-/** Basit güç göstergesi — uzunluk ve karakter çeşitliliğine bakar. */
+/** Simple strength meter based on length and character variety. */
 function strengthOf(value: string) {
   let score = 0;
   if (value.length >= 8) score++;

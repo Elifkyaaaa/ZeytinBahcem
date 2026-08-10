@@ -9,11 +9,11 @@ import { mfaChallengeText } from '@/lib/data/text/auth';
 const CODE_LENGTH = 6;
 
 /**
- * Giriş sonrası ikinci adım.
+ * Second step after sign-in.
  *
- * Şifre doğrulandıktan sonra oturum AAL1 seviyesindedir; kullanıcının
- * doğrulanmış bir TOTP faktörü varsa burada kod istenir ve oturum AAL2'ye
- * yükseltilir. Yönetim paneli AAL2 ister (middleware).
+ * Once the password is accepted the session sits at AAL1. If the user has a
+ * verified TOTP factor, the code is requested here and the session is raised
+ * to AAL2, which the admin panel requires (see middleware).
  */
 export function MfaChallenge() {
   const router = useRouter();
@@ -26,7 +26,7 @@ export function MfaChallenge() {
   const [factorId, setFactorId] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
 
-  // Doğrulanmış faktörü bul; yoksa kullanıcıyı hedefe geçir.
+  // Find the verified factor; without one, send the user straight on.
   useEffect(() => {
     const supabase = createClient();
     if (!supabase) {
@@ -85,7 +85,7 @@ export function MfaChallenge() {
       return;
     }
 
-    // Oturum AAL2'ye yükseldi; sunucu bileşenleri yeni çerezi görsün.
+    // The session is now AAL2; let server components see the new cookie.
     router.replace(next);
     router.refresh();
   }, [factorId, code, router, next]);

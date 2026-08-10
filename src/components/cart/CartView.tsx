@@ -100,7 +100,7 @@ export function CartView() {
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_23rem] lg:gap-10">
       <div>
-        {/* Ücretsiz kargo ilerlemesi */}
+        {/* Free shipping progress */}
         <div className="rounded-2xl border border-border bg-surface p-5">
           <div className="flex items-center gap-2.5 text-sm">
             <Truck className="size-4.5 shrink-0 text-olive-600 dark:text-gold-400" strokeWidth={1.8} />
@@ -217,7 +217,7 @@ export function CartView() {
         </div>
       </div>
 
-      {/* Özet */}
+      {/* Summary */}
       <aside className="lg:sticky lg:top-24 lg:self-start">
         <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
           <h2 className="font-display text-xl text-foreground">{cartText.summaryHeading}</h2>

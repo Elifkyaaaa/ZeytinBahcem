@@ -132,7 +132,7 @@ export function ProductPurchase({ product }: { product: Product }) {
       </div>
       <p className="mt-1.5 text-xs text-muted-foreground">{productPurchaseText.vatNote}</p>
 
-      {/* Gramaj seçimi */}
+      {/* Size selection */}
       <fieldset className="mt-8">
         <legend className="mb-3 text-sm font-semibold text-foreground">
           Gramaj / Hacim

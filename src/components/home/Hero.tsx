@@ -14,7 +14,7 @@ import { blurDataURL } from '@/lib/utils';
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
-  // Parallax yalnızca geniş ekranlarda; mobilde hem gereksiz hem de maliyetli.
+  // Parallax on wide screens only; on mobile it is both pointless and costly.
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const enabled = isDesktop && !reduce;
 
@@ -27,7 +27,7 @@ export function Hero() {
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, -60]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
-  // Portre metinden biraz daha yavaş kayar; katmanlı derinlik hissi verir.
+  // The logo drifts a little slower than the text, for a layered sense of depth.
   const portraitY = useTransform(scrollYProgress, [0, 1], [0, -24]);
 
   return (
@@ -55,7 +55,7 @@ export function Hero() {
         />
       </motion.div>
 
-      {/* Metnin okunabilirliği için katmanlı karartma */}
+      {/* Layered scrim so the text stays readable */}
       <div
         aria-hidden
         className="absolute inset-0 -z-10 bg-gradient-to-b from-olive-950/72 via-olive-950/48 to-olive-950/88"
@@ -69,7 +69,7 @@ export function Hero() {
         style={enabled ? { y: contentY, opacity: contentOpacity } : undefined}
         className="container-x relative z-10 grid grid-cols-1 items-center gap-12 pt-28 pb-28 sm:gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pt-24"
       >
-        {/* Metin — mobilde portrenin altında, masaüstünde solda */}
+        {/* Copy — below the logo on mobile, to the left on desktop */}
         <div className="order-2 flex flex-col items-center text-center lg:order-1 lg:items-start lg:text-left">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -145,10 +145,9 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Marka logosu. Logonun yazıları koyu yeşil olduğu için hero'nun koyu
-            zemininde okunmaz; bu yüzden krem bir kartın üzerine yerleştiriliyor.
-            Kart, logonun kendi oranını (1049×947) koruyor — hiçbir kenarı
-            kırpılmıyor. */}
+        {/* Brand logo. Its lettering is dark green and would be unreadable on the
+            hero's dark ground, so it sits on a cream card. The card keeps the
+            logo's own aspect ratio (1049×947), so no edge is cropped. */}
         <motion.figure
           initial={{ opacity: 0, y: 30, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -167,7 +166,7 @@ export function Hero() {
               quality={86}
               className="h-auto w-full"
             />
-            {/* İnce altın iç çerçeve */}
+            {/* Thin gold inner frame */}
             <span
               aria-hidden
               className="pointer-events-none absolute inset-2.5 rounded-[1.25rem] ring-1 ring-gold-500/20 sm:inset-3.5"

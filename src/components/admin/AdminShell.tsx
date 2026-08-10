@@ -177,7 +177,7 @@ export interface AdminUser {
   avatarUrl: string | null;
 }
 
-/** Ad soyaddan en fazla iki harflik baş harf üretir. */
+/** Builds initials of at most two letters from a full name. */
 function initialsOf(name: string) {
   return (
     name
@@ -332,7 +332,7 @@ export function AdminShell({ children, user }: { children: ReactNode; user: Admi
 
   return (
     <div className="flex min-h-dvh bg-surface-muted">
-      {/* Masaüstü kenar çubuğu */}
+      {/* Desktop sidebar */}
       <aside
         data-tour="sidebar"
         className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col border-r border-border bg-background lg:flex"
@@ -354,7 +354,7 @@ export function AdminShell({ children, user }: { children: ReactNode; user: Admi
         <SidebarFooter />
       </aside>
 
-      {/* Mobil çekmece */}
+      {/* Mobile drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <>
@@ -428,7 +428,7 @@ export function AdminShell({ children, user }: { children: ReactNode; user: Admi
   );
 }
 
-/** Yönetim sayfalarının ortak başlık bandı. */
+/** Shared page header band for the admin screens. */
 export function AdminPageHeader({
   title,
   description,

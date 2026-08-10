@@ -1,7 +1,7 @@
 import { Info } from 'lucide-react';
 import { supabaseNoticeText } from '@/lib/data/text/account';
 
-/** Supabase bağlı değilken hesap ekranlarında gösterilen dürüst bilgilendirme. */
+/** Honest notice shown on the account screens when Supabase is not connected. */
 export function SupabaseNotice() {
   return (
     <div className="flex items-start gap-3 rounded-2xl border border-gold-500/30 bg-gold-500/8 p-5">

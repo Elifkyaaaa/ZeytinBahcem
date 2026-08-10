@@ -7,7 +7,7 @@ const sizes = {
   lg: 'size-5',
 };
 
-/** Yarım yıldızları da gösterebilen, salt okunur puan göstergesi. */
+/** Read-only rating display that can render half stars. */
 export function StarRating({
   rating,
   size = 'sm',

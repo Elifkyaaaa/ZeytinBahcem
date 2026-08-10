@@ -33,8 +33,8 @@ export function Logo({
         <span
           className={cn(
             'font-display text-[1.08rem] font-semibold tracking-tight',
-            // --foreground kullanılıyor ki şeffaf header koyu hero üzerindeyken
-            // otomatik olarak açık tona dönsün.
+            // Uses --foreground so a transparent header over a dark hero switches to
+            // a light tone automatically.
             tone === 'inverted' ? 'text-cream-50' : 'text-foreground',
           )}
         >

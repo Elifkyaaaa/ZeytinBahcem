@@ -10,7 +10,7 @@ import { IMG } from '@/lib/images';
 import { blurDataURL } from '@/lib/utils';
 import { videoText } from '@/lib/data/text/home';
 
-/** Hasat filmi — yalnızca oynat tıklanınca yüklenir (facade deseni). */
+/** Harvest film, loaded only when play is clicked (facade pattern). */
 const VIDEO_ID = 'ScMzIvxBSi4';
 
 export function VideoSection() {

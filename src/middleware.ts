@@ -8,8 +8,8 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     /*
-     * Statik varlıklar dışındaki tüm istekler:
-     * - _next/static, _next/image, favicon ve görsel uzantıları hariç tutulur
+     * Every request except static assets:
+     * _next/static, _next/image, favicon and image file extensions are excluded.
      */
     '/((?!_next/static|_next/image|favicon.ico|icon.svg|apple-icon.png|robots.txt|sitemap.xml|.*\\.(?:svg|png|jpg|jpeg|gif|webp|avif|ico)$).*)',
   ],

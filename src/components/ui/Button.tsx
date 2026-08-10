@@ -45,7 +45,7 @@ interface CommonProps {
   size?: Size;
   className?: string;
   children: ReactNode;
-  /** Işık süpürme efekti — dolgulu butonlarda öne çıkar */
+  /** Light sweep effect, most visible on filled buttons */
   sheen?: boolean;
 }
 

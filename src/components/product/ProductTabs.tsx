@@ -46,7 +46,7 @@ export function ProductTabs({ product }: { product: Product }) {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const ratingBuckets = [5, 4, 3, 2, 1].map((star) => {
-    // Ortalama puandan makul bir dağılım türetiyoruz (demo veri).
+    // Derive a plausible distribution from the average rating (demo data).
     const weight = Math.max(0, 1 - Math.abs(product.rating - star) / 2.2);
     return { star, percent: Math.round(weight * 100) };
   });

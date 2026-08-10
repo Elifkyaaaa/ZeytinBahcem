@@ -112,7 +112,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Kategori bağlantıları — dahili gezinme ve SEO için düz liste */}
+        {/* Category links — a flat list for internal navigation and SEO */}
         <nav aria-label="Kategoriler" className="mt-12 border-t border-cream-200/10 pt-8">
           <ul className="flex flex-wrap gap-x-6 gap-y-2.5">
             {categories.map((c) => (
@@ -139,7 +139,7 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Ticari künye — 6563 sayılı E-Ticaret Kanunu gereği erişilebilir olmalı */}
+      {/* Commercial identity, which Turkish e-commerce law 6563 requires to be reachable */}
       <div className="border-t border-cream-200/10">
         <div className="container-x py-7">
           <dl className="grid gap-x-8 gap-y-3 text-xs text-cream-200/55 sm:grid-cols-2 lg:grid-cols-4">
@@ -173,7 +173,7 @@ export function Footer() {
             © {year} {site.legalName}. Tüm hakları saklıdır.
           </p>
 
-          {/* Ödeme altyapısı beyanı — ödeme kuruluşu başvurusunda aranır */}
+          {/* Payment provider disclosure, checked during payment provider onboarding */}
           <p className="order-2 flex items-center gap-2 text-center text-xs text-cream-200/55">
             <ShieldCheck className="size-3.5 shrink-0 text-gold-400/70" strokeWidth={2} />
             Ödeme altyapısı{' '}

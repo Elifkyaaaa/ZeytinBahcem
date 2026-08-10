@@ -17,7 +17,7 @@ import { useWishlist } from '@/lib/store/wishlist';
 import { cn } from '@/lib/utils';
 import { headerText } from '@/lib/data/text/layout';
 
-// İlk boyamada gerekmeyen ağır katmanlar istek üzerine yüklenir.
+// Heavy layers not needed for first paint are loaded on demand.
 const SearchOverlay = dynamic(() => import('./SearchOverlay').then((m) => m.SearchOverlay));
 const MobileMenu = dynamic(() => import('./MobileMenu').then((m) => m.MobileMenu));
 const CartDrawer = dynamic(() => import('./CartDrawer').then((m) => m.CartDrawer));
@@ -63,7 +63,7 @@ export function Header() {
         initial={false}
         animate={{ y: hidden ? '-100%' : '0%' }}
         transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-        // Şeffafken ve altında koyu hero varsa renkler globals.css'te açığa çevrilir.
+        // When transparent over a dark hero, globals.css flips the colours to light.
         data-transparent={!scrolled}
         className={cn(
           'fixed inset-x-0 top-0 z-50 isolate transition-[background-color,box-shadow,backdrop-filter] duration-500',
@@ -72,7 +72,7 @@ export function Header() {
             : 'border-b border-transparent bg-transparent',
         )}
       >
-        {/* Kaydırıldığında beliren ince altın hat */}
+        {/* Thin gold line that appears once the page is scrolled */}
         <span
           aria-hidden
           className={cn(
@@ -96,8 +96,8 @@ export function Header() {
                       aria-current={active ? 'page' : undefined}
                       className={cn(
                         'relative block rounded-full px-4 py-2 text-[0.9rem] font-medium transition-colors duration-300',
-                        // Renkler --foreground üzerinden gelir; şeffaf header koyu
-                        // hero üzerindeyken bu değişken açık tona çevrilir.
+                        // Colours come through --foreground; over a dark hero the
+                        // transparent header flips that variable to a light tone.
                         active ? 'text-foreground' : 'text-foreground/70 hover:text-foreground',
                       )}
                     >
@@ -133,7 +133,7 @@ export function Header() {
 
             <ThemeToggle />
 
-            {/* Oturum açıkken avatar + menü, kapalıyken Giriş Yap / Üye Ol */}
+            {/* Avatar and menu when signed in, sign in / sign up when not */}
             <UserMenu user={auth.user} loading={auth.loading} />
 
             <button onClick={openMenu} className={cn(iconButton, 'lg:hidden')} aria-label={headerText.openMenuLabel}>
