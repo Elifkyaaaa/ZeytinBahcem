@@ -1,4 +1,4 @@
-/** Sık kullanılan iller ve ilçeleri — checkout adres seçimi için. */
+/** Common provinces and their districts, for the checkout address picker. */
 export const cities: Record<string, string[]> = {
   Adana: ['Seyhan', 'Çukurova', 'Yüreğir', 'Sarıçam'],
   Ankara: ['Çankaya', 'Keçiören', 'Yenimahalle', 'Etimesgut', 'Mamak', 'Gölbaşı'],

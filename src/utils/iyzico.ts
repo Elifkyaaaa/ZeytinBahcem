@@ -1,11 +1,11 @@
 import { env, isIyzicoConfigured } from '@/utils/env';
 
 /**
- * iyzico Checkout Form entegrasyonu.
+ * iyzico Checkout Form integration.
  *
- * `iyzipay` paketi geri çağırma (callback) tabanlıdır; burada Promise'e
- * sarmalıyoruz. Paket CommonJS olduğu için yalnızca Node.js runtime'ında,
- * route handler içinden dinamik olarak yüklenir.
+ * The `iyzipay` package is callback based, so we wrap it in promises here.
+ * It is CommonJS, so it is loaded dynamically from a route handler and only
+ * on the Node.js runtime.
  */
 
 export interface CheckoutBasketItem {
@@ -47,7 +47,7 @@ export interface CheckoutFormResult {
   errorMessage?: string;
 }
 
-/** iyzipay istemcisi — yalnızca anahtarlar tanımlıysa üretilir. */
+/** iyzipay client, created only when the keys are configured. */
 async function getClient() {
   if (!isIyzicoConfigured) return null;
   const { default: Iyzipay } = await import('iyzipay');
@@ -64,8 +64,8 @@ async function getClient() {
 const money = (value: number) => value.toFixed(2);
 
 /**
- * Ödeme formunu başlatır. Dönen `checkoutFormContent`, ödeme sayfasında
- * iframe olarak gömülür; 3D Secure akışı iyzico tarafında yürür.
+ * Starts the payment form. The returned `checkoutFormContent` is embedded as
+ * an iframe on the checkout page; the 3D Secure flow runs on iyzico's side.
  */
 export async function initCheckoutForm(input: CheckoutInit): Promise<CheckoutFormResult> {
   const loaded = await getClient();
@@ -79,7 +79,7 @@ export async function initCheckoutForm(input: CheckoutInit): Promise<CheckoutFor
 
   const { client, Iyzipay } = loaded;
 
-  // Sepet kalemlerinin toplamı `price` ile birebir eşleşmelidir, aksi hâlde iyzico reddeder.
+  // The basket items must sum to `price` exactly, otherwise iyzico rejects the request.
   const request = {
     locale: Iyzipay.LOCALE.TR,
     conversationId: input.conversationId,
@@ -147,9 +147,9 @@ export interface CheckoutRetrieveResult {
 }
 
 /**
- * Ödeme dönüşünde sonucu doğrular.
- * Tutar ve durum, veritabanına yazmadan önce mutlaka burada teyit edilmelidir —
- * callback'ten gelen veriye tek başına güvenilmez.
+ * Verifies the result when the payment returns.
+ * The amount and status must be confirmed here before anything is written to
+ * the database — the callback body alone is not trustworthy.
  */
 export async function retrieveCheckoutResult(token: string): Promise<CheckoutRetrieveResult> {
   const loaded = await getClient();

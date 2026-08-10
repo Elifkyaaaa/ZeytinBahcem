@@ -42,7 +42,7 @@ export function findCoupon(code: string) {
   return coupons.find((c) => c.code === code.trim().toUpperCase());
 }
 
-/** KDV zaten fiyatlara dâhil; özet için içeriden ayrıştırıyoruz. */
+/** VAT is already included in prices; the summary extracts it back out. */
 export const VAT_RATE = 0.2;
 
 export const shippingMethods = [

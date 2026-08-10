@@ -5,8 +5,8 @@ import { env, hasServiceRole, isSupabaseConfigured } from '@/utils/env';
 import type { Database } from '@/types/database';
 
 /**
- * Sunucu bileşenleri, route handler'lar ve server action'lar için istemci.
- * Oturum çerezleri Next.js cookie deposundan okunur/yazılır.
+ * Client for server components, route handlers and server actions.
+ * Session cookies are read from and written to the Next.js cookie store.
  */
 export async function createClient() {
   if (!isSupabaseConfigured) return null;
@@ -24,8 +24,8 @@ export async function createClient() {
             cookieStore.set(name, value, options);
           });
         } catch {
-          // Server Component içinden çağrıldığında çerez yazılamaz;
-          // oturum yenilemesi middleware tarafından zaten yapılıyor.
+          // Cookies cannot be written from inside a Server Component;
+          // the middleware already handles session refresh.
         }
       },
     },
@@ -33,8 +33,8 @@ export async function createClient() {
 }
 
 /**
- * RLS'i atlayan servis istemcisi. Yalnızca sunucuda, ödeme callback'i ve
- * yönetim işlemleri gibi güvenilen akışlarda kullanılmalıdır.
+ * Service client that bypasses RLS. Server-only, and reserved for trusted
+ * flows such as the payment callback and admin operations.
  */
 export function createServiceClient() {
   if (!hasServiceRole) return null;
@@ -43,7 +43,7 @@ export function createServiceClient() {
   });
 }
 
-/** Oturumdaki kullanıcı ve profil bilgisi. Oturum yoksa null döner. */
+/** The signed-in user and their profile, or null when there is no session. */
 export async function getCurrentUser() {
   const supabase = await createClient();
   if (!supabase) return null;

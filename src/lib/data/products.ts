@@ -2,7 +2,7 @@ import type { FaqItem, NutritionRow, Product, ProductReview, ProductVariant } fr
 import { AVATAR, IMG } from '@/lib/images';
 
 /* -------------------------------------------------------------------------- */
-/*  Paylaşılan şablonlar                                                       */
+/*  Shared templates                                                           */
 /* -------------------------------------------------------------------------- */
 
 const oilNutrition: NutritionRow[] = [
@@ -82,7 +82,7 @@ const oliveFaq: FaqItem[] = [
   },
 ];
 
-/** Fiyat merdiveni: her varyant kendi fiyatını taşır. */
+/** Price ladder: every variant carries its own price. */
 function oilVariants(base: number, discount = 0): ProductVariant[] {
   const ladder: { label: string; value: string; factor: number; stock: boolean }[] = [
     { label: '500 ml', value: '500ml', factor: 1, stock: true },
@@ -122,7 +122,7 @@ function oliveVariants(base: number, discount = 0): ProductVariant[] {
   });
 }
 
-/* Gerçekçi bir yorum havuzu; her ürün buradan dönüşümlü üç yorum alır. */
+/* A pool of realistic reviews; each product takes three from here in rotation. */
 const reviewPool: ProductReview[] = [
   {
     id: 'r1',
@@ -244,14 +244,14 @@ function reviewsFor(index: number, count = 3): ProductReview[] {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Ürünler                                                                    */
+/*  Products                                                                    */
 /* -------------------------------------------------------------------------- */
 
 type Draft = Omit<Product, 'nutrition' | 'faq' | 'reviews' | 'variants' | 'price' | 'oldPrice' | 'volume'> & {
   kind: 'oil' | 'olive';
   basePrice: number;
   discount?: number;
-  /** Varsayılan seçili varyantın indeksi */
+  /** Index of the variant selected by default */
   defaultVariant: number;
 };
 
@@ -832,7 +832,7 @@ export function getProductsByCategory(slug: string) {
   return products.filter((p) => p.category === slug);
 }
 
-/** Aynı kategoriden, kendisi hariç en yüksek puanlı ürünler. */
+/** Highest rated products in the same category, excluding the product itself. */
 export function getRelatedProducts(product: Product, limit = 4) {
   const sameCategory = products.filter(
     (p) => p.category === product.category && p.id !== product.id,

@@ -8,12 +8,12 @@ import type { Category, Product, ProductVariant } from '@/types';
 import type { CategoryRow, ProductRow } from '@/types/database';
 
 /**
- * Katalog okuma katmanı.
+ * Catalog read layer.
  *
- * Supabase bağlıysa ve tabloda kayıt varsa veritabanından okur; aksi hâlde
- * `src/lib/data` altındaki tipli katalogla devam eder. Böylece proje anahtarsız
- * da çalışır, veritabanı doldurulduğunda ise tek satır değişiklik gerekmeden
- * canlı veriye geçer.
+ * Reads from the database when Supabase is configured and the table has rows;
+ * otherwise it falls back to the typed catalog under `src/lib/data`. That way
+ * the project runs without any keys, and switches to live data the moment the
+ * database is seeded — no code change required.
  */
 
 function mapVariants(raw: ProductRow['variants']): ProductVariant[] {
@@ -50,7 +50,7 @@ function rowToProduct(row: ProductRow, categorySlug: string): Product {
     specs: row.specs ?? [],
     nutrition: row.nutrition ?? [],
     faq: row.faq ?? [],
-    // Yorumlar ayrı tabloda; ürün detayında ayrıca çekilir.
+    // Reviews live in their own table and are fetched separately on the detail page.
     reviews: fallback?.reviews ?? [],
     badge: (row.badge as Product['badge']) ?? undefined,
     featured: row.is_featured,
@@ -90,10 +90,10 @@ export async function getCategories(): Promise<Category[]> {
 }
 
 /**
- * Kategori kimliği → slug eşlemesi.
- * Gömülü ilişki sorgusu (`categories(slug)`) yerine ayrı çekip eşliyoruz;
- * kategori sayısı tek haneli olduğu için maliyeti ihmal edilebilir ve
- * şema tipinde ilişki tanımı gerektirmez.
+ * Category id → slug map.
+ * We fetch and join separately instead of using an embedded relation query
+ * (`categories(slug)`): there are single digits worth of categories, so the
+ * cost is negligible and it needs no relationship definition in the schema types.
  */
 async function categorySlugMap(
   supabase: NonNullable<Awaited<ReturnType<typeof createClient>>>,
@@ -121,7 +121,7 @@ export async function getProduct(slug: string): Promise<Product | undefined> {
   return rowToProduct(row, slugs.get(row.category_id ?? '') ?? '');
 }
 
-/** Yönetim paneli için: pasif ürünler dâhil hepsi. */
+/** For the admin panel: everything, including inactive products. */
 export async function getAllProductsForAdmin() {
   return loadProducts({ activeOnly: false });
 }
@@ -135,7 +135,7 @@ async function loadProducts({ activeOnly }: { activeOnly: boolean }) {
   const query = supabase.from('products').select('*').order('created_at', { ascending: false });
   const { data, error } = activeOnly ? await query.eq('is_active', true) : await query;
 
-  // Tablo boşsa yerel katalogla devam — site hiçbir zaman boş görünmez.
+  // Empty table falls back to the local catalog, so the site is never blank.
   if (error || !data?.length) return { products: localProducts, live: false };
 
   const slugs = await categorySlugMap(supabase);

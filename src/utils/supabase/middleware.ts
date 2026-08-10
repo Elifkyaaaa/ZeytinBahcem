@@ -5,15 +5,15 @@ import type { Database } from '@/types/database';
 
 /** Oturum gerektiren yollar */
 const protectedPrefixes = ['/hesap'];
-/** Yalnızca admin/staff rolünün girebileceği yollar */
+/** Paths restricted to the admin and staff roles */
 const adminPrefixes = ['/admin'];
-/** Oturum açıkken girilmemesi gereken yollar */
+/** Paths that a signed-in user should not reach */
 const guestOnlyPrefixes = ['/giris', '/kayit', '/sifremi-unuttum'];
 
 export async function updateSession(request: NextRequest) {
   const response = NextResponse.next({ request });
 
-  // Supabase bağlı değilse site tamamen demo modunda çalışır; yönlendirme yapmayız.
+  // Without Supabase the site runs entirely in demo mode, so we do not redirect.
   if (!isSupabaseConfigured) return response;
 
   const supabase = createServerClient<Database>(env.supabase.url!, env.supabase.anonKey!, {
@@ -30,7 +30,7 @@ export async function updateSession(request: NextRequest) {
     },
   });
 
-  // getUser() çağrısı süresi dolmuş token'ı yeniler — bu satır kaldırılmamalı.
+  // The getUser() call refreshes an expired token — do not remove this line.
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -69,9 +69,9 @@ export async function updateSession(request: NextRequest) {
       return NextResponse.redirect(url);
     }
 
-    // İki adımlı doğrulama kuruluysa yönetim paneli AAL2 ister.
-    // `nextLevel > currentLevel` yalnızca doğrulanmış faktörü olanlarda oluşur;
-    // 2FA açmamış yöneticiler etkilenmez.
+    // When two-factor is enrolled, the admin panel requires AAL2.
+    // `nextLevel > currentLevel` only happens for users with a verified factor,
+    // so admins without 2FA are unaffected.
     const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
 
     if (aal && aal.nextLevel === 'aal2' && aal.nextLevel !== aal.currentLevel) {

@@ -12,7 +12,7 @@ export interface Toast {
 interface UiState {
   searchOpen: boolean;
   menuOpen: boolean;
-  /** Yönetim panelindeki rehberli tanıtım turu açık mı */
+  /** Whether the guided admin tour is open */
   tourOpen: boolean;
   toasts: Toast[];
   openSearch: () => void;
@@ -43,7 +43,7 @@ export const useUi = create<UiState>((set) => ({
   toast: (t) => {
     const id = ++toastId;
     set((state) => ({ toasts: [...state.toasts, { ...t, id }] }));
-    // Bildirimler kendiliğinden kapanır; kullanıcı isterse erken de kapatabilir.
+    // Toasts dismiss themselves; the user can also close one early.
     setTimeout(() => {
       set((state) => ({ toasts: state.toasts.filter((x) => x.id !== id) }));
     }, 3600);

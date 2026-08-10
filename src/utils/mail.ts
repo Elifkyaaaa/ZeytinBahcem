@@ -18,7 +18,7 @@ export interface OrderMailPayload {
 const money = (value: number) =>
   new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(value);
 
-/** Tüm e-postalarda ortak, e-posta istemcilerinde güvenli tablo düzeni. */
+/** Shared table layout that renders safely across email clients. */
 function shell(title: string, preheader: string, body: string) {
   return `<!doctype html>
 <html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -63,7 +63,7 @@ function itemRows(items: OrderMailPayload['items']) {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Müşteriye sipariş onayı                                                    */
+/*  Order confirmation for the customer                                        */
 /* -------------------------------------------------------------------------- */
 
 export async function sendOrderConfirmation(payload: OrderMailPayload) {
@@ -112,7 +112,7 @@ export async function sendOrderConfirmation(payload: OrderMailPayload) {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Yöneticiye yeni sipariş bildirimi                                          */
+/*  New order notification for the admin                                       */
 /* -------------------------------------------------------------------------- */
 
 export async function sendAdminOrderNotice(payload: OrderMailPayload) {

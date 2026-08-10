@@ -64,7 +64,7 @@ export const customers: AdminCustomer[] = [
   { id: 'M-1998', name: 'Selin Aydın', email: 'selin.a@example.com', phone: '0538 555 88 12', avatar: AVATAR.a2, city: 'Muğla', orders: 1, spent: 878, joined: '2024-11-03', segment: 'Pasif' },
 ];
 
-/** Son 12 ayın satış ve sipariş serisi (grafikler için). */
+/** Last twelve months of revenue and order counts, used by the charts. */
 export const monthlySales = [
   { month: 'Eyl', revenue: 184000, orders: 268 },
   { month: 'Eki', revenue: 246000, orders: 341 },
@@ -182,7 +182,7 @@ export const permissionLabels: Record<string, { label: string; tone: string }> =
   yok: { label: '—', tone: 'text-muted-foreground/45' },
 };
 
-/** Dashboard üst kartları */
+/** Top stat cards on the dashboard */
 export const dashboardStats = {
   todayOrders: 27,
   todayOrdersDelta: 12.4,

@@ -1,6 +1,6 @@
 /**
- * `iyzipay` paketi tip tanımı içermiyor.
- * Yalnızca `src/utils/iyzico.ts` içinde kullandığımız yüzeyi tanımlıyoruz.
+ * The `iyzipay` package ships no type definitions, so we declare only the
+ * surface that `src/utils/iyzico.ts` actually uses.
  */
 declare module 'iyzipay' {
   type Callback<T> = (error: unknown, result: T) => void;

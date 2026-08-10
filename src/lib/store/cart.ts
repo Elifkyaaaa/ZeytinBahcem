@@ -63,7 +63,7 @@ export const useCart = create<CartState>()(
     }),
     {
       name: 'zb-cart',
-      // Panelin açık/kapalı durumu kalıcı olmamalı; yalnızca satırlar saklanır.
+      // The drawer's open state must not persist; only the line items are stored.
       partialize: (state) => ({ items: state.items }),
     },
   ),

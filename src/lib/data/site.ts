@@ -28,16 +28,16 @@ export const site = {
     facebook: 'https://facebook.com/',
     youtube: 'https://youtube.com/',
   },
-  /** Ücretsiz kargo eşiği (TL) */
+  /** Free shipping threshold, in Turkish lira */
   freeShippingThreshold: 500,
   workingHours: 'Hafta içi 09:00 – 18:00 · Cumartesi 10:00 – 15:00',
 
   /**
-   * Ticari künye — 6563 sayılı Elektronik Ticaret Kanunu ve Mesafeli
-   * Sözleşmeler Yönetmeliği uyarınca sitede erişilebilir olmalıdır.
-   * Ödeme kuruluşu başvurularında da bu bilgiler doğrulanır.
+   * Commercial identity. Turkish e-commerce law (act 6563) and the Distance
+   * Contracts Regulation require these details to be reachable on the site,
+   * and payment providers verify them during onboarding.
    *
-   * ⚠ Aşağıdaki değerleri kendi ticari kayıtlarınızla değiştirin.
+   * WARNING: replace the placeholders below with your real registry data.
    */
   legal: {
     taxOffice: 'Orhangazi Vergi Dairesi',
@@ -48,7 +48,7 @@ export const site = {
     kepAddress: 'elmora@hs01.kep.tr',
   },
 
-  /** Ödeme altyapısı — footer ve ödeme sayfasında belirtilir. */
+  /** Payment provider, disclosed in the footer and on the checkout page. */
   paymentProvider: {
     name: 'iyzico',
     url: 'https://www.iyzico.com',

@@ -1,7 +1,7 @@
 /**
- * Supabase şemasının TypeScript izdüşümü.
- * `supabase/migrations` altındaki SQL ile birebir örtüşür.
- * Şema değişirse `supabase gen types typescript` çıktısıyla yenilenebilir.
+ * TypeScript projection of the Supabase schema, matching the SQL under
+ * `supabase/migrations` exactly. When the schema changes, regenerate this with
+ * `supabase gen types typescript`.
  */
 
 export type UserRole = 'customer' | 'staff' | 'admin';
@@ -218,18 +218,18 @@ export type SettingRow = {
   updated_at: string;
 }
 
-/** Insert/Update için üretilen yardımcı tipler. */
+/** Helper types used to derive Insert and Update shapes. */
 type Timestamps = 'id' | 'created_at' | 'updated_at';
 
-/** Şemada null kabul eden sütunlar insert sırasında zorunlu değildir. */
+/** Columns that accept null in the schema are optional on insert. */
 type NullableKeys<T> = { [K in keyof T]-?: null extends T[K] ? K : never }[keyof T];
 
 type Insertable<T, Optional extends keyof T> = Omit<T, Optional | NullableKeys<T>> &
   Partial<Pick<T, Optional | NullableKeys<T>>>;
 
 /**
- * postgrest-js `GenericTable` şeklini bekler: Row/Insert/Update/Relationships.
- * İlişkiler sorgu tipinde kullanılmadığı için boş bırakılıyor.
+ * postgrest-js expects the `GenericTable` shape: Row/Insert/Update/Relationships.
+ * We leave relationships empty because the query types do not use them.
  */
 type Table<Row, Insert = Row, Update = Partial<Row>> = {
   Row: Row;

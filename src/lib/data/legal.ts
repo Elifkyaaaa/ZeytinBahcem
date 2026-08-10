@@ -17,7 +17,7 @@ export interface LegalDocument {
 
 const address = `${site.address.street}, ${site.address.district} / ${site.address.city}`;
 
-/** Satıcı künyesi — birden çok belgede tekrarlandığı için tek yerden. */
+/** Seller identity block, kept in one place because several documents repeat it. */
 const sellerBlock = [
   `Ünvan: ${site.legalName}`,
   `Adres: ${address}`,

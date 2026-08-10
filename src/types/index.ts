@@ -11,15 +11,15 @@ export interface Category {
   tagline: string;
   description: string;
   image: string;
-  /** Bento ızgarada geniş yerleşim alan kart */
+  /** Card that spans a wide cell in the bento grid */
   featured?: boolean;
 }
 
-/** Gramaj / hacim seçeneği. Fiyat her varyantta ayrı tanımlıdır. */
+/** Weight / volume option. Each variant carries its own price. */
 export interface ProductVariant {
-  /** Kullanıcıya görünen etiket: "750 ml" */
+  /** Label shown to the customer: "750 ml" */
   label: string;
-  /** URL ve sepet anahtarı için sadeleştirilmiş değer: "750ml" */
+  /** Simplified value for URLs and cart keys: "750ml" */
   value: string;
   price: number;
   oldPrice?: number;
@@ -29,7 +29,7 @@ export interface ProductVariant {
 export interface NutritionRow {
   label: string;
   amount: string;
-  /** Referans alıma göre yüzde — bazı satırlarda anlamsız olduğu için opsiyonel */
+  /** Percentage of reference intake — optional, since some rows have none */
   daily?: string;
 }
 
@@ -54,7 +54,7 @@ export interface Product {
   slug: string;
   name: string;
   category: CategorySlug;
-  /** Varsayılan varyantın fiyatı — liste kartlarında bu gösterilir */
+  /** Price of the default variant — this is what list cards show */
   price: number;
   oldPrice?: number;
   rating: number;
@@ -62,7 +62,7 @@ export interface Product {
   image: string;
   gallery: string[];
   variants: ProductVariant[];
-  /** Varsayılan varyantın etiketi, ör. "1 L" */
+  /** Label of the default variant, e.g. "1 L" */
   volume: string;
   shortDescription: string;
   description: string;
@@ -74,12 +74,12 @@ export interface Product {
   badge?: 'Yeni' | 'Çok Satan' | 'Sınırlı Üretim' | 'Ödüllü';
   featured?: boolean;
   inStock: boolean;
-  /** Stokta kalan adet — "son 3 ürün" uyarısı için */
+  /** Units left in stock — drives the "only 3 left" warning */
   stockCount: number;
 }
 
 export interface CartItem {
-  /** `${productId}:${variantValue}` — aynı ürünün farklı gramajı ayrı satırdır */
+  /** `${productId}:${variantValue}` — different sizes of one product are separate rows */
   key: string;
   id: string;
   slug: string;
@@ -99,7 +99,7 @@ export interface Post {
   date: string;
   readingTime: number;
   author: { name: string; role: string; avatar: string };
-  /** Basit blok listesi — CMS'siz statik içerik */
+  /** Plain block list — static content, no CMS */
   content: { type: 'p' | 'h2' | 'quote' | 'list'; text?: string; items?: string[] }[];
 }
 

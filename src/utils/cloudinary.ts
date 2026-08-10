@@ -2,10 +2,10 @@ import { v2 as cloudinary } from 'cloudinary';
 import { env, isCloudinaryConfigured } from '@/utils/env';
 
 /**
- * Cloudinary yalnızca sunucuda yapılandırılır.
- * Akış: admin görsel seçer → /api/upload imzalı parametre döner →
- * tarayıcı doğrudan Cloudinary'ye yükler → dönen secure_url Supabase'e yazılır.
- * Böylece dosya hiçbir zaman kendi sunucumuzdan geçmez.
+ * Cloudinary is configured on the server only.
+ * Flow: an admin picks an image → /api/upload returns signed parameters →
+ * the browser uploads straight to Cloudinary → the returned secure_url is
+ * written to Supabase. The file never passes through our own server.
  */
 if (isCloudinaryConfigured) {
   cloudinary.config({
@@ -25,7 +25,7 @@ export interface UploadSignature {
   uploadUrl: string;
 }
 
-/** İstemcinin doğrudan yükleme yapabilmesi için imzalı parametre üretir. */
+/** Produces signed parameters so the client can upload directly. */
 export function createUploadSignature(folder = env.cloudinary.folder): UploadSignature | null {
   if (!isCloudinaryConfigured) return null;
 
@@ -45,20 +45,20 @@ export function createUploadSignature(folder = env.cloudinary.folder): UploadSig
   };
 }
 
-/** Ürün görselini siler (Supabase kaydı silinirken çağrılır). */
+/** Deletes a product image; called when the Supabase row is removed. */
 export async function destroyImage(publicId: string) {
   if (!isCloudinaryConfigured) return { ok: false, reason: 'not-configured' as const };
   await cloudinary.uploader.destroy(publicId);
   return { ok: true as const };
 }
 
-/** Kaydedilen URL'den public_id çıkarır. */
+/** Extracts the public_id from a stored URL. */
 export function publicIdFromUrl(url: string) {
   const match = url.match(/\/upload\/(?:v\d+\/)?(.+)\.[a-z]+$/i);
   return match?.[1] ?? null;
 }
 
-/** Görseli istenen ölçüde, otomatik format/kalite ile ister. */
+/** Requests the image at a given size with automatic format and quality. */
 export function cloudinaryUrl(publicId: string, width: number, height: number) {
   if (!env.cloudinary.cloudName) return '';
   return `https://res.cloudinary.com/${env.cloudinary.cloudName}/image/upload/c_fill,g_auto,f_auto,q_auto,w_${width},h_${height}/${publicId}`;

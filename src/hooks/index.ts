@@ -3,13 +3,12 @@
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { useReducedMotion } from 'framer-motion';
 
-/** Aboneliği olmayan store'lar için sabit — her render'da yeni fonksiyon üretmez. */
+/** Constant for stores without a subscription, so no new function per render. */
 const noopSubscribe = () => () => {};
 
 /**
- * localStorage'dan beslenen store'lar sunucuda boş döner.
- * Rozet/sayaç gibi değerleri bu bayrak true olana kadar göstermeyerek
- * hydration uyuşmazlığını önleriz.
+ * Stores backed by localStorage come back empty on the server. Holding badges
+ * and counters until this flag turns true avoids a hydration mismatch.
  */
 export function useHydrated() {
   return useSyncExternalStore(
@@ -19,7 +18,7 @@ export function useHydrated() {
   );
 }
 
-/** Header'ın aşağı kaydırınca gizlenip yukarı kaydırınca dönmesi için. */
+/** Lets the header hide on scroll down and return on scroll up. */
 export function useScrollDirection(threshold = 8) {
   const [direction, setDirection] = useState<'up' | 'down'>('up');
   const [scrolled, setScrolled] = useState(false);
@@ -66,12 +65,12 @@ export function useMediaQuery(query: string) {
   return useSyncExternalStore(
     subscribe,
     () => window.matchMedia(query).matches,
-    // Sunucuda medya sorgusu yoktur; en dar varsayımla başlarız.
+    // There is no media query on the server, so start from the narrowest case.
     () => false,
   );
 }
 
-/** Drawer/overlay açıkken arka planın kaymasını engeller. */
+/** Stops the page behind a drawer or overlay from scrolling. */
 export function useLockBodyScroll(locked: boolean) {
   useEffect(() => {
     if (!locked) return;
@@ -98,8 +97,8 @@ export function useEscape(handler: () => void, active = true) {
 }
 
 /**
- * Görünür alana girince hedef değere sayan sayaç.
- * Hareket tercihi kapalıysa doğrudan son değeri döner.
+ * Counts up to a target once the element enters the viewport.
+ * Returns the final value immediately when reduced motion is preferred.
  */
 export function useCountUp(target: number, duration = 1800, start = false) {
   const reduce = useReducedMotion();
@@ -115,7 +114,7 @@ export function useCountUp(target: number, duration = 1800, start = false) {
 
     const tick = (now: number) => {
       const progress = Math.min((now - begin) / duration, 1);
-      // easeOutExpo: hızlı başlar, sonda yumuşakça durur
+      // easeOutExpo: starts fast, eases to a gentle stop
       const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
       setValue(Math.round(target * eased));
       if (progress < 1) frame = requestAnimationFrame(tick);
@@ -125,11 +124,11 @@ export function useCountUp(target: number, duration = 1800, start = false) {
     return () => cancelAnimationFrame(frame);
   }, [start, target, duration, reduce]);
 
-  // Hareket tercihi kapalıysa animasyon hiç başlamaz, doğrudan son değer gösterilir.
+  // With reduced motion the animation never starts; the final value shows at once.
   return reduce ? target : value;
 }
 
-/** Pano kopyalama — paylaş menüsünde geri bildirim için. */
+/** Clipboard copy, used for feedback in the share menu. */
 export function useCopy(resetAfter = 2000) {
   const [copied, setCopied] = useState(false);
 

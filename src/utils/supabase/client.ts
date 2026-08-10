@@ -5,8 +5,8 @@ import { env, isSupabaseConfigured } from '@/utils/env';
 import type { Database } from '@/types/database';
 
 /**
- * Tarayıcı istemcisi. Supabase yapılandırılmadıysa null döner; çağıran taraf
- * bu durumda demo akışına düşer.
+ * Browser client. Returns null when Supabase is not configured, in which case
+ * the caller falls back to the demo flow.
  */
 export function createClient() {
   if (!isSupabaseConfigured) return null;

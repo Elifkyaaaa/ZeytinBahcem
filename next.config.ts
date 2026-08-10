@@ -4,14 +4,14 @@ import { privateHeaders, securityHeaders } from './src/lib/security-headers';
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
-  // Sunucu sürümünü sızdırmayalım — saldırgana bilgi vermez.
+  // Do not leak the server version; it only helps an attacker.
   poweredByHeader: false,
 
   async headers() {
     return [
       { source: '/:path*', headers: securityHeaders },
-      // Hesap, sepet, ödeme ve yönetim sayfaları önbelleğe alınmamalı ve
-      // arama motorlarında görünmemeli.
+      // Account, cart, checkout and admin pages must not be cached and must
+      // not show up in search engines.
       { source: '/hesap/:path*', headers: privateHeaders },
       { source: '/sepet', headers: privateHeaders },
       { source: '/odeme/:path*', headers: privateHeaders },
@@ -20,36 +20,37 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    // Yerel görseller public/ altından; uzak kaynaklar yalnızca aşağıdakiler.
+    // Local images come from public/; these are the only remote sources.
     remotePatterns: [
-      // Cloudinary — yönetim panelinden yüklenen ürün/blog görselleri
+      // Cloudinary — product and blog images uploaded from the admin panel
       { protocol: 'https', hostname: 'res.cloudinary.com', pathname: '/**' },
-      // Google ile giriş yapan kullanıcıların profil fotoğrafı
+      // Profile photo of users who sign in with Google
       { protocol: 'https', hostname: 'lh3.googleusercontent.com', pathname: '/**' },
-      // Supabase Storage'a geçilirse
+      // In case we move to Supabase Storage
       { protocol: 'https', hostname: '*.supabase.co', pathname: '/storage/v1/object/public/**' },
     ],
     formats: ['image/avif', 'image/webp'],
 
-    // Avatarlar baş harfli SVG rozetlerdir. next/image SVG'yi varsayılan
-    // olarak engeller; aşağıdaki iki ayar Next'in belgelediği azaltmadır:
-    // sunulan SVG sandbox'lanır ve betik çalıştıramaz, indirme olarak işaretlenir.
+    // Avatars are initial-based SVG badges. next/image blocks SVG by default;
+    // the two settings below are Next's documented mitigation: the SVG is
+    // sandboxed, cannot run scripts, and is marked as a download.
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    // Kaynak görseller 1920 px ile sınırlı; daha büyük varyant istemek anlamsız.
+    // Source images cap out at 1920 px, so larger variants are pointless.
     deviceSizes: [360, 480, 640, 750, 828, 1080, 1200, 1440, 1920],
     imageSizes: [64, 96, 128, 192, 256, 384],
-    // Next 16 yalnızca burada sayılan kalite değerlerine izin verir; listede
-    // olmayan bir `quality` istendiğinde /_next/image 400 döner. Kodda geçen
-    // tüm değerler burada yer almalıdır (72 hero fonu, 74 kart, 86 portre).
+    // Next 16 only allows the quality values listed here; requesting a
+    // `quality` that is missing makes /_next/image return 400. Every value
+    // used in the code must appear here (72 hero background, 74 cards,
+    // 86 brand logo).
     qualities: [72, 74, 75, 86],
   },
-  // iyzipay ve cloudinary dinamik require kullanır; bundle'a alınmayıp
-  // çalışma anında Node tarafından yüklenmeleri gerekir.
+  // iyzipay and cloudinary use dynamic require, so they must stay out of the
+  // bundle and be loaded by Node at runtime.
   serverExternalPackages: ['iyzipay', 'cloudinary'],
   experimental: {
-    // Ağaç budama: bu paketlerden yalnızca kullanılan modüller bundle'a girer.
+    // Tree shaking: only the modules actually used from these packages ship.
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
 };

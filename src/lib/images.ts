@@ -1,34 +1,35 @@
 /**
- * Görsel kaynakları.
+ * Image sources.
  *
- * Tüm görseller `public/` altından, kendi çekimlerimizden servis edilir.
- * Dış CDN (Unsplash vb.) kullanılmaz.
+ * Every image is served from `public/` and comes from our own shoots; no
+ * external CDN (Unsplash and friends) is involved.
  *
- * Elde üç fotoğraf var; anahtarlar anlamlarına en yakın kareye eşlenir.
- * Yeni fotoğraf geldiğinde yalnızca aşağıdaki eşleme güncellenir —
- * çağrı yerlerinde hiçbir değişiklik gerekmez.
+ * We have three photographs, so each key maps to the closest matching frame.
+ * When new photos arrive, only the mapping below changes — no call site needs
+ * touching.
  */
 
 const PHOTO = {
-  /** Sıra sıra zeytin ağaçları, sabah güneşi, mavi gökyüzü */
+  /** Rows of olive trees, morning sun, blue sky */
   bahce: '/images/zeytin-bahcesi.jpg',
-  /** Sürülmüş toprakta zeytin ağacı ve hasat kasası */
+  /** Olive tree on ploughed soil with a harvest crate */
   hasat: '/images/hasat.jpg',
-  /** Avuçta iri siyah zeytinler, arkada dolu kasa */
+  /** A handful of large black olives, full crate behind */
   zeytin: '/images/siyah-zeytin.jpg',
   /**
-   * Marka logosu (1049×947, saydam PNG).
-   * Kaynak görseldeki vinyet temizlenip arka plan saydam yapıldı; koyu
-   * zeminde yazılar okunmadığı için daima açık renk bir yüzeyde gösterilir.
+   * Brand logo (1049×947, transparent PNG).
+   * The vignette from the source image was removed and the background made
+   * transparent. Its lettering is dark green, so it must always sit on a
+   * light surface to stay legible.
    */
   logo: '/images/elmora-logo.png',
 } as const;
 
 export const IMG = {
-  // Marka logosu — açık zeminde, kendi oranında gösterilir
+  // Brand logo — shown at its own aspect ratio on a light surface
   brandLogo: PHOTO.logo,
 
-  // Bahçe & manzara
+  // Grove and landscape
   heroGrove: PHOTO.bahce,
   groveHill: PHOTO.bahce,
   groveField: PHOTO.bahce,
@@ -53,7 +54,7 @@ export const IMG = {
   harvestBeans: PHOTO.zeytin,
   harvestFruit: PHOTO.zeytin,
 
-  // Şişe & yağ — elimizde ürün çekimi yok, en yakın kare kullanılıyor
+  // Bottles and oil — we have no product shots yet, so the closest frame is used
   cruetOlives: PHOTO.zeytin,
   bottlePourer: PHOTO.bahce,
   bottleDark: PHOTO.hasat,
@@ -68,13 +69,13 @@ export const IMG = {
   olivesDark: PHOTO.zeytin,
   olivesPile: PHOTO.zeytin,
 
-  // Sofra & yaşam
+  // Table and lifestyle
   ingredients: PHOTO.hasat,
   foodTable: PHOTO.zeytin,
   foodSpread: PHOTO.zeytin,
   mezeTable: PHOTO.zeytin,
 
-  // Bölge
+  // Region
   aegeanPath: PHOTO.bahce,
   aegeanStreet: PHOTO.bahce,
   aegeanTables: PHOTO.hasat,
@@ -83,9 +84,10 @@ export const IMG = {
 } as const;
 
 /**
- * Kişi görselleri.
- * Gerçek portre fotoğrafımız olmadığı için baş harfli, marka renklerinde
- * SVG rozetler kullanılıyor — zeytin fotoğrafını avatar yapmaktan dürüst.
+ * People images.
+ * We have no real portrait photography, so these are initial-based SVG badges
+ * in the brand colours — more honest than passing an olive photo off as an
+ * avatar.
  */
 export const AVATAR = {
   a1: '/avatars/a1.svg',

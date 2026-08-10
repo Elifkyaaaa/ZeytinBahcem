@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-/** Koşullu sınıfları birleştirir ve çakışan Tailwind kurallarını sadeleştirir. */
+/** Merges conditional classes and collapses conflicting Tailwind rules. */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -31,13 +31,13 @@ export function formatDate(iso: string) {
   }).format(new Date(iso));
 }
 
-/** İndirim yüzdesini tam sayıya yuvarlar. 0 dönerse etiket gösterilmez. */
+/** Rounds the discount percentage. A result of 0 hides the badge. */
 export function discountPercent(price: number, oldPrice?: number) {
   if (!oldPrice || oldPrice <= price) return 0;
   return Math.round(((oldPrice - price) / oldPrice) * 100);
 }
 
-/** Türkçe karakterleri koruyan güvenli slug üretimi. */
+/** Safe slug generation that handles Turkish characters correctly. */
 export function slugify(input: string) {
   const map: Record<string, string> = {
     ç: 'c',
@@ -58,8 +58,8 @@ export function slugify(input: string) {
 }
 
 /**
- * next/image için hafif bir blur placeholder.
- * Krem tonlu düz bir SVG — görsel yüklenene kadar zemin boşluğu titremez.
+ * Lightweight blur placeholder for next/image: a flat cream SVG, so the
+ * space does not flicker while the real image loads.
  */
 export function blurDataURL(tone: 'cream' | 'olive' = 'cream') {
   const color = tone === 'cream' ? '%23efe7d8' : '%233a4630';
@@ -68,27 +68,28 @@ export function blurDataURL(tone: 'cream' | 'olive' = 'cream') {
 }
 
 /**
- * `next/image` yapılandırılmamış bir alan adı gördüğünde render sırasında
- * hata fırlatır ve tüm sayfa 500 döner. Yönetim panelinden ya da veritabanından
- * gelen adresler bizim denetimimizde olmadığı için (elle girilmiş, eski bir
- * kaynaktan kalmış olabilir) buradan geçirilir: tanınmayan bir adres tek bir
- * bozuk küçük resme dönüşür, sayfayı düşürmez.
+ * `next/image` throws during render when it sees an unconfigured hostname,
+ * taking the whole page down with a 500. URLs coming from the admin panel or
+ * the database are outside our control (typed by hand, left over from an older
+ * source), so they pass through here: an unrecognised address degrades to a
+ * single broken thumbnail instead of killing the page.
  *
- * İzin verilen alan adları `next.config.ts` → `images.remotePatterns` ile
- * aynı listedir; oraya yeni bir kaynak eklenirse buraya da eklenmelidir.
+ * This list mirrors `next.config.ts` → `images.remotePatterns`; adding a
+ * source there means adding it here too.
  */
 const ALLOWED_IMAGE_HOSTS = [
   'res.cloudinary.com',
   'lh3.googleusercontent.com',
 ] as const;
 
-/** Kırık kayıtlar için yer tutucu. Boş dize dönmüyoruz: `next/image` boş
- *  `src` gördüğünde de hata fırlatır, yani sorunu çözmek yerine taşırdı. */
+/** Placeholder for broken records. We do not return an empty string:
+ *  `next/image` throws on an empty `src` too, which would move the problem
+ *  rather than fix it. */
 export const IMAGE_FALLBACK = '/images/gorsel-yok.svg';
 
 export function safeImageSrc(src: string | null | undefined, fallback = IMAGE_FALLBACK): string {
   if (!src) return fallback;
-  // Yerel yollar ve gömülü veri adresleri her zaman güvenli.
+  // Local paths and inline data URIs are always safe.
   if (src.startsWith('/') || src.startsWith('data:')) return src;
 
   try {
@@ -98,7 +99,7 @@ export function safeImageSrc(src: string | null | undefined, fallback = IMAGE_FA
       hostname.endsWith('.supabase.co');
     return allowed ? src : fallback;
   } catch {
-    // Geçersiz URL — kırık bir kayıt.
+    // Invalid URL — a broken record.
     return fallback;
   }
 }

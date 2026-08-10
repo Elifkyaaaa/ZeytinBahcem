@@ -46,8 +46,8 @@ export interface OrderTotals {
 }
 
 /**
- * Sipariş özetinin tek doğruluk kaynağı.
- * Sepet ve ödeme sayfaları aynı fonksiyonu kullanır ki tutarlar birebir tutsun.
+ * Single source of truth for the order summary. The cart and checkout pages
+ * call the same function so their totals can never disagree.
  */
 export function calcTotals(
   items: CartItem[],
@@ -82,7 +82,7 @@ export function calcTotals(
   const shipping = items.length === 0 || freeShipping ? 0 : method.price;
 
   const total = afterDiscount + shipping;
-  // Fiyatlar KDV dâhil; özet satırı için içeriden ayrıştırılır.
+  // Prices include VAT; the summary line extracts it back out.
   const vat = total - total / (1 + VAT_RATE);
 
   return {

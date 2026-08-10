@@ -1,19 +1,20 @@
 import 'server-only';
 
 /**
- * Basit, bellek içi hız sınırlayıcı (sabit pencere).
+ * Simple in-memory rate limiter (fixed window).
  *
- * Amaç: sipariş, yükleme ve tohumlama uçlarının kaba kuvvet ve kötüye
- * kullanıma karşı korunması.
+ * Purpose: protect the order, upload and seed endpoints from brute force and
+ * abuse.
  *
- * SINIRLARI — bilerek kabul edilen ödünler:
- *  • Sayaç süreç belleğindedir. Birden çok sunucu örneği (Vercel'de her
- *    bölge/lambda) kendi sayacını tutar; toplam sınır örnek sayısıyla çarpılır.
- *  • Sunucu yeniden başlarsa sayaç sıfırlanır.
+ * KNOWN LIMITS — trade-offs accepted on purpose:
+ *  - The counter lives in process memory. Multiple server instances (every
+ *    region/lambda on Vercel) keep their own counter, so the effective limit
+ *    is multiplied by the instance count.
+ *  - Restarting the server resets the counter.
  *
- * Tek örnekli kurulumda ve orta ölçekli trafikte yeterlidir. Dağıtık ve kesin
- * bir sınır gerektiğinde `check()` gövdesini Upstash Redis gibi paylaşımlı bir
- * sayaçla değiştirmek yeterli; çağrı yerleri değişmez.
+ * That is enough for a single-instance deployment at moderate traffic. For a
+ * distributed, exact limit, swap the body of `check()` for a shared counter
+ * such as Upstash Redis; the call sites stay the same.
  */
 
 interface Bucket {
@@ -23,7 +24,7 @@ interface Bucket {
 
 const buckets = new Map<string, Bucket>();
 
-/** Belleğin sınırsız büyümesini önlemek için süresi dolanları ara sıra temizle. */
+/** Sweep expired entries occasionally so memory does not grow without bound. */
 function sweep(now: number) {
   if (buckets.size < 5000) return;
   for (const [key, bucket] of buckets) {
@@ -34,7 +35,7 @@ function sweep(now: number) {
 export interface RateLimitResult {
   ok: boolean;
   remaining: number;
-  /** Sınır aşıldığında kaç saniye sonra tekrar denenebilir */
+  /** Seconds to wait before retrying once the limit is hit */
   retryAfter: number;
 }
 
@@ -66,9 +67,9 @@ export function checkRateLimit(
 }
 
 /**
- * İstemci kimliği. Vercel/Cloudflare arkasında gerçek IP `x-forwarded-for`
- * başlığının ilk değeridir. Başlık taklit edilebilir; bu yüzden hız sınırı
- * tek başına yeterli bir güvenlik katmanı değil, ek bir engeldir.
+ * Client identity. Behind Vercel or Cloudflare the real IP is the first value
+ * of the `x-forwarded-for` header. That header can be spoofed, so rate
+ * limiting is an extra obstacle rather than a security layer on its own.
  */
 export function clientKey(request: Request, scope: string) {
   const forwarded = request.headers.get('x-forwarded-for');
@@ -79,7 +80,7 @@ export function clientKey(request: Request, scope: string) {
   return `${scope}:${ip}`;
 }
 
-/** 429 yanıtı — standart `Retry-After` başlığıyla. */
+/** 429 response with the standard `Retry-After` header. */
 export function tooManyRequests(retryAfter: number) {
   return Response.json(
     {
