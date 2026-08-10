@@ -33,9 +33,29 @@ const csp = {
  * Kritik yönergeler (frame-ancestors, object-src, base-uri, form-action)
  * burada zaten katı tutuluyor — clickjacking ve form kaçırma engelleniyor.
  */
+
+/**
+ * `'unsafe-eval'` YALNIZCA geliştirmede eklenir.
+ *
+ * Turbopack'in sıcak modül değişimi (HMR) güncellenen modülü `eval()` ile
+ * çalıştırır. CSP bunu engellediğinde tarayıcı "eval() is not supported in
+ * this environment" yazar, HMR başarısız olur ve Next her değişiklikte
+ * **tam sayfa yeniden yüklemeye** düşer — sayfa sürekli yeniden render
+ * ediliyormuş gibi görünür. Üretim paketinde eval kullanılmadığı için
+ * bu izin canlıda verilmez; oradaki politika değişmeden katı kalır.
+ */
+const isDev = process.env.NODE_ENV === 'development';
+const scriptSrc = [
+  `'self'`,
+  `'unsafe-inline'`,
+  ...(isDev ? [`'unsafe-eval'`] : []),
+  ...csp.iyzico,
+  ...csp.embeds,
+].join(' ');
+
 const contentSecurityPolicy = [
   `default-src 'self'`,
-  `script-src 'self' 'unsafe-inline' ${csp.iyzico.join(' ')} ${csp.embeds.join(' ')}`,
+  `script-src ${scriptSrc}`,
   `style-src 'self' 'unsafe-inline'`,
   `img-src 'self' data: blob: ${csp.images.join(' ')} ${csp.iyzico.join(' ')}`,
   `font-src 'self' data:`,

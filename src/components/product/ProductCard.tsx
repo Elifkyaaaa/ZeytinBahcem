@@ -67,7 +67,13 @@ export function ProductCard({
       )}
     >
       <div className="relative aspect-4/5 overflow-hidden bg-surface-muted">
-        <Link href={`/urunler/${product.slug}`} aria-label={product.name} className="block size-full">
+        {/* `fill` doğrudan ebeveynin konumlandırılmış olmasını ister; bir üstteki
+            sarmalayıcı relative olsa bile araya giren bu bağlantı değil. */}
+        <Link
+          href={`/urunler/${product.slug}`}
+          aria-label={product.name}
+          className="relative block size-full"
+        >
           <Image
             src={product.image}
             alt={product.name}
