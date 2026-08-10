@@ -15,6 +15,7 @@ import { cartCount, useCart } from '@/lib/store/cart';
 import { useUi } from '@/lib/store/ui';
 import { useWishlist } from '@/lib/store/wishlist';
 import { cn } from '@/lib/utils';
+import { headerText } from '@/lib/data/text/layout';
 
 // İlk boyamada gerekmeyen ağır katmanlar istek üzerine yüklenir.
 const SearchOverlay = dynamic(() => import('./SearchOverlay').then((m) => m.SearchOverlay));
@@ -83,7 +84,7 @@ export function Header() {
         <div className="container-x flex h-16 items-center justify-between gap-4 lg:h-[4.75rem]">
           <Logo compact />
 
-          <nav aria-label="Ana menü" className="hidden lg:block">
+          <nav aria-label={headerText.navLabel} className="hidden lg:block">
             <ul className="flex items-center gap-1">
               {mainNav.map((item) => {
                 const active =
@@ -116,7 +117,7 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-0.5 sm:gap-1">
-            <button onClick={openSearch} className={iconButton} aria-label="Ürün ara">
+            <button onClick={openSearch} className={iconButton} aria-label={headerText.searchLabel}>
               <Search className="size-[1.15rem]" strokeWidth={1.7} />
             </button>
 
@@ -135,7 +136,7 @@ export function Header() {
             {/* Oturum açıkken avatar + menü, kapalıyken Giriş Yap / Üye Ol */}
             <UserMenu user={auth.user} loading={auth.loading} />
 
-            <button onClick={openMenu} className={cn(iconButton, 'lg:hidden')} aria-label="Menüyü aç">
+            <button onClick={openMenu} className={cn(iconButton, 'lg:hidden')} aria-label={headerText.openMenuLabel}>
               <Menu className="size-[1.2rem]" strokeWidth={1.7} />
             </button>
           </div>

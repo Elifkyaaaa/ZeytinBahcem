@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/Button';
 import { useEscape } from '@/hooks';
 import type { SessionUser } from '@/hooks/useAuth';
 import { cn } from '@/lib/utils';
+import { commonText, userMenuText } from '@/lib/data/text/layout';
 
 const items = [
   { label: 'Profilim', href: '/hesap', Icon: User },
@@ -58,10 +59,10 @@ export function UserMenu({ user, loading }: { user: SessionUser | null; loading:
     return (
       <div className="ml-1.5 hidden items-center gap-2 xl:flex">
         <Button href="/giris" variant="ghost" size="sm">
-          Giriş Yap
+          {commonText.signIn}
         </Button>
         <Button href="/kayit" variant="gold" size="sm">
-          Üye Ol
+          {commonText.signUp}
         </Button>
       </div>
     );
@@ -76,7 +77,7 @@ export function UserMenu({ user, loading }: { user: SessionUser | null; loading:
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-haspopup="menu"
-        aria-label="Hesap menüsü"
+        aria-label={userMenuText.menuLabel}
         className="flex items-center gap-2 rounded-full py-1 pr-2 pl-1 transition-colors hover:bg-foreground/6"
       >
         {user.avatarUrl ? (
@@ -129,7 +130,7 @@ export function UserMenu({ user, loading }: { user: SessionUser | null; loading:
                   )}
                 >
                   <LayoutDashboard className="size-4" strokeWidth={1.9} />
-                  Yönetim Paneli
+                  {commonText.adminPanel}
                 </Link>
               )}
 
@@ -139,7 +140,7 @@ export function UserMenu({ user, loading }: { user: SessionUser | null; loading:
                   className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-red-500/8 hover:text-red-600"
                 >
                   <LogOut className="size-4" strokeWidth={1.9} />
-                  Çıkış Yap
+                  {commonText.signOut}
                 </button>
               </form>
             </div>

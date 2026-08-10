@@ -25,6 +25,7 @@ import { categories } from '@/lib/data/categories';
 import { mainNav, site } from '@/lib/data/site';
 import { useUi } from '@/lib/store/ui';
 import { cn } from '@/lib/utils';
+import { commonText, mobileMenuText } from '@/lib/data/text/layout';
 
 export function MobileMenu() {
   const open = useUi((s) => s.menuOpen);
@@ -53,7 +54,7 @@ export function MobileMenu() {
           <motion.div
             role="dialog"
             aria-modal="true"
-            aria-label="Mobil menü"
+            aria-label={mobileMenuText.regionLabel}
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
@@ -64,7 +65,7 @@ export function MobileMenu() {
               <Logo />
               <button
                 onClick={handleClose}
-                aria-label="Menüyü kapat"
+                aria-label={mobileMenuText.closeLabel}
                 className="grid size-10 place-items-center rounded-full text-foreground/70 transition-colors hover:bg-foreground/6 hover:text-foreground"
               >
                 <X className="size-5" strokeWidth={1.8} />
@@ -144,7 +145,7 @@ export function MobileMenu() {
                       onClick={handleClose}
                       className="flex items-center gap-2 rounded-xl border border-border px-4 py-3 text-sm font-medium transition-colors hover:border-gold-500/50"
                     >
-                      <User className="size-4" strokeWidth={1.8} /> Hesabım
+                      <User className="size-4" strokeWidth={1.8} /> {commonText.account}
                     </Link>
                     {(auth.user.role === 'admin' || auth.user.role === 'staff') && (
                       <Link
@@ -152,7 +153,7 @@ export function MobileMenu() {
                         onClick={handleClose}
                         className="flex items-center gap-2 rounded-xl border border-gold-500/40 px-4 py-3 text-sm font-medium text-gold-700 transition-colors hover:bg-gold-500/8 dark:text-gold-400"
                       >
-                        <LayoutDashboard className="size-4" strokeWidth={1.8} /> Yönetim
+                        <LayoutDashboard className="size-4" strokeWidth={1.8} /> {mobileMenuText.adminShort}
                       </Link>
                     )}
                     <form action={signOut} className="col-span-2">
@@ -160,7 +161,7 @@ export function MobileMenu() {
                         type="submit"
                         className="flex w-full items-center justify-center gap-2 rounded-xl border border-border px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:border-red-400/50 hover:text-red-600"
                       >
-                        <LogOut className="size-4" strokeWidth={1.8} /> Çıkış Yap
+                        <LogOut className="size-4" strokeWidth={1.8} /> {commonText.signOut}
                       </button>
                     </form>
                   </>
@@ -171,14 +172,14 @@ export function MobileMenu() {
                       onClick={handleClose}
                       className="flex items-center gap-2 rounded-xl border border-border px-4 py-3 text-sm font-medium transition-colors hover:border-gold-500/50"
                     >
-                      <LogIn className="size-4" strokeWidth={1.8} /> Giriş Yap
+                      <LogIn className="size-4" strokeWidth={1.8} /> {commonText.signIn}
                     </Link>
                     <Link
                       href="/kayit"
                       onClick={handleClose}
                       className="flex items-center gap-2 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 px-4 py-3 text-sm font-semibold text-olive-950"
                     >
-                      <UserPlus className="size-4" strokeWidth={2} /> Üye Ol
+                      <UserPlus className="size-4" strokeWidth={2} /> {commonText.signUp}
                     </Link>
                   </>
                 )}

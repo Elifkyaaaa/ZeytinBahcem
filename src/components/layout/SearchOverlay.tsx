@@ -11,6 +11,7 @@ import { categories } from '@/lib/data/categories';
 import { products } from '@/lib/data/products';
 import { useUi } from '@/lib/store/ui';
 import { blurDataURL, formatPrice, slugify } from '@/lib/utils';
+import { searchOverlayText } from '@/lib/data/text/layout';
 
 const popular = ['Erken hasat', 'Natürel sızma', 'Sofralık zeytin', 'Hediye seti', 'Organik'];
 
@@ -66,7 +67,7 @@ export function SearchOverlay() {
           <motion.div
             role="dialog"
             aria-modal="true"
-            aria-label="Ürün arama"
+            aria-label={searchOverlayText.regionLabel}
             initial={{ opacity: 0, y: -22, scale: 0.985 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -14, scale: 0.99 }}
@@ -80,13 +81,13 @@ export function SearchOverlay() {
                   ref={inputRef}
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Zeytinyağı, sofralık zeytin, hediye seti…"
+                  placeholder={searchOverlayText.placeholder}
                   aria-label="Arama terimi"
                   className="min-w-0 flex-1 bg-transparent text-base text-foreground placeholder:text-muted-foreground/70 focus:outline-none sm:text-lg"
                 />
                 <button
                   onClick={handleClose}
-                  aria-label="Aramayı kapat"
+                  aria-label={searchOverlayText.closeLabel}
                   className="grid size-9 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-foreground/6 hover:text-foreground"
                 >
                   <X className="size-4.5" strokeWidth={1.8} />
@@ -146,7 +147,7 @@ export function SearchOverlay() {
                       “{query}” için sonuç bulunamadı
                     </p>
                     <p className="mt-1.5 text-xs text-muted-foreground">
-                      Farklı bir kelime deneyin veya kategorilere göz atın.
+                      {searchOverlayText.emptyHint}
                     </p>
                   </div>
                 )}
@@ -154,7 +155,7 @@ export function SearchOverlay() {
                 {query.trim().length < 2 && (
                   <div className="p-3">
                     <p className="mb-3 text-[0.68rem] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
-                      Popüler aramalar
+                      {searchOverlayText.popularHeading}
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {popular.map((term) => (

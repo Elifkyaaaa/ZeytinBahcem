@@ -11,6 +11,7 @@ import { useEscape, useLockBodyScroll } from '@/hooks';
 import { site } from '@/lib/data/site';
 import { cartCount, cartTotal, useCart } from '@/lib/store/cart';
 import { blurDataURL, formatPrice } from '@/lib/utils';
+import { cartDrawerText } from '@/lib/data/text/layout';
 
 export function CartDrawer() {
   const open = useCart((s) => s.isOpen);
@@ -77,7 +78,9 @@ export function CartDrawer() {
                   <Truck className="size-4 shrink-0 text-olive-600 dark:text-olive-300" strokeWidth={1.8} />
                   {remaining > 0 ? (
                     <span>
-                      Ücretsiz kargoya <strong className="font-semibold">{formatPrice(remaining)}</strong> kaldı
+                      {cartDrawerText.freeShippingBefore}{' '}
+                      <strong className="font-semibold">{formatPrice(remaining)}</strong>{' '}
+                      {cartDrawerText.freeShippingAfter}
                     </span>
                   ) : (
                     <span className="font-medium text-olive-700 dark:text-olive-300">
@@ -102,12 +105,12 @@ export function CartDrawer() {
                   <span className="grid size-20 place-items-center rounded-full bg-surface-muted">
                     <ShoppingBag className="size-8 text-muted-foreground" strokeWidth={1.3} />
                   </span>
-                  <p className="mt-5 font-display text-xl text-foreground">Sepetiniz boş</p>
+                  <p className="mt-5 font-display text-xl text-foreground">{cartDrawerText.emptyTitle}</p>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Ege’nin en iyi zeytinyağlarını keşfetmeye ne dersiniz?
+                    {cartDrawerText.emptyBody}
                   </p>
                   <Button href="/urunler" variant="primary" size="md" className="mt-6" onClick={handleClose}>
-                    Ürünleri İncele
+                    {cartDrawerText.emptyCta}
                     <ArrowRight className="size-4" strokeWidth={2} />
                   </Button>
                 </div>
@@ -188,15 +191,15 @@ export function CartDrawer() {
                   </span>
                 </div>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  Kargo ve indirimler ödeme adımında hesaplanır.
+                  {cartDrawerText.totalsNote}
                 </p>
                 <div className="mt-4 grid gap-2.5">
                   <Button href="/odeme" variant="gold" size="lg" onClick={handleClose}>
-                    Ödemeye Geç
+                    {cartDrawerText.checkoutCta}
                     <ArrowRight className="size-4" strokeWidth={2.2} />
                   </Button>
                   <Button href="/sepet" variant="outline" size="md" onClick={handleClose}>
-                    Sepeti Görüntüle
+                    {cartDrawerText.viewCartCta}
                   </Button>
                 </div>
               </footer>

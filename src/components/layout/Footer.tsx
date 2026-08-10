@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/icons';
 import { categories } from '@/lib/data/categories';
 import { footerNav, site } from '@/lib/data/site';
+import { footerText } from '@/lib/data/text/layout';
 
 const socials = [
   { Icon: InstagramIcon, href: site.social.instagram, label: 'Instagram' },
@@ -69,7 +70,7 @@ export function Footer() {
           ))}
 
           <div>
-            <h3 className="font-display text-base text-cream-50">İletişim</h3>
+            <h3 className="font-display text-base text-cream-50">{footerText.contactHeading}</h3>
             <span className="hairline-gold mt-3 block h-px w-10" aria-hidden />
             <ul className="mt-4 space-y-3.5 text-sm">
               <li className="flex gap-3">
@@ -143,7 +144,7 @@ export function Footer() {
         <div className="container-x py-7">
           <dl className="grid gap-x-8 gap-y-3 text-xs text-cream-200/55 sm:grid-cols-2 lg:grid-cols-4">
             <div>
-              <dt className="text-cream-200/40">Ünvan</dt>
+              <dt className="text-cream-200/40">{footerText.legalTitleLabel}</dt>
               <dd className="mt-0.5 text-cream-200/75">{site.legalName}</dd>
             </div>
             <div>
@@ -153,7 +154,7 @@ export function Footer() {
               </dd>
             </div>
             <div>
-              <dt className="text-cream-200/40">MERSİS No</dt>
+              <dt className="text-cream-200/40">{footerText.mersisLabel}</dt>
               <dd className="mt-0.5 text-cream-200/75 tabular-nums">{site.legal.mersis}</dd>
             </div>
             <div>
