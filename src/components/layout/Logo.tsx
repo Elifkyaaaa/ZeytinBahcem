@@ -1,54 +1,46 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { OliveBranchIcon } from '@/components/ui/icons';
 import { site } from '@/lib/data/site';
+import { logoText } from '@/lib/data/text/layout';
+import { IMG } from '@/lib/images';
 import { cn } from '@/lib/utils';
 
+/**
+ * The brand mark, in whichever lockup suits the surface.
+ *
+ * The horizontal wordmark is dark green on gold and needs a light ground, so
+ * the footer — which is deep olive — gets the gold lockup instead. Both are
+ * the real artwork rather than type set to look like it, which is why the mark
+ * is an image here and not markup.
+ */
 export function Logo({
   className,
   tone = 'default',
-  compact = false,
 }: {
   className?: string;
   tone?: 'default' | 'inverted';
-  compact?: boolean;
 }) {
+  const inverted = tone === 'inverted';
+
   return (
     <Link
       href="/"
-      aria-label={`${site.name} — ana sayfa`}
-      className={cn('group flex shrink-0 items-center gap-2.5', className)}
+      aria-label={logoText.homeAriaLabel(site.name)}
+      className={cn(
+        'group flex shrink-0 items-center transition-opacity duration-300 hover:opacity-85',
+        className,
+      )}
     >
-      <span
-        className={cn(
-          'grid size-10 place-items-center rounded-full transition-all duration-500',
-          'ring-1 ring-inset group-hover:rotate-[-12deg]',
-          tone === 'inverted'
-            ? 'bg-white/10 text-gold-300 ring-white/25'
-            : 'bg-olive-600/8 text-olive-600 ring-olive-600/20 dark:bg-gold-400/10 dark:text-gold-400 dark:ring-gold-400/25',
-        )}
-      >
-        <OliveBranchIcon className="size-[1.35rem]" />
-      </span>
-      <span className={cn('flex flex-col leading-none', compact && 'sr-only sm:not-sr-only sm:flex')}>
-        <span
-          className={cn(
-            'font-display text-[1.08rem] font-semibold tracking-tight',
-            // Uses --foreground so a transparent header over a dark hero switches to
-            // a light tone automatically.
-            tone === 'inverted' ? 'text-cream-50' : 'text-foreground',
-          )}
-        >
-          {site.name}
-        </span>
-        <span
-          className={cn(
-            'mt-0.5 text-[0.58rem] font-medium tracking-[0.24em] uppercase',
-            tone === 'inverted' ? 'text-cream-200/70' : 'text-gold-600 dark:text-gold-400/90',
-          )}
-        >
-          Est. {site.founded}
-        </span>
-      </span>
+      <Image
+        src={inverted ? IMG.brandEmblem : IMG.brandWordmark}
+        alt=""
+        width={inverted ? 1078 : 1416}
+        height={inverted ? 1024 : 638}
+        priority
+        quality={86}
+        sizes={inverted ? '7rem' : '12rem'}
+        className={cn('w-auto', inverted ? 'h-[5.25rem]' : 'h-[2.35rem] lg:h-[2.7rem]')}
+      />
     </Link>
   );
 }

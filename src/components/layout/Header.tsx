@@ -82,7 +82,7 @@ export function Header() {
         />
 
         <div className="container-x flex h-16 items-center justify-between gap-4 lg:h-[4.75rem]">
-          <Logo compact />
+          <Logo />
 
           <nav aria-label={headerText.navLabel} className="hidden lg:block">
             <ul className="flex items-center gap-1">

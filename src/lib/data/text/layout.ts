@@ -16,6 +16,11 @@ export const commonText = {
   browseProducts: 'Ürünleri İncele',
 } as const;
 
+export const logoText = {
+  /** Accessible name for the mark, which links back to the home page */
+  homeAriaLabel: (brand: string) => `${brand} — ana sayfa`,
+} as const;
+
 export const headerText = {
   navLabel: 'Ana menü',
   searchLabel: 'Ürün ara',
