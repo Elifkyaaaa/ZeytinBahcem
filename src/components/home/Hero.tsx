@@ -167,7 +167,7 @@ export function Hero() {
             height={638}
             priority
             sizes="(min-width: 1024px) 30rem, (min-width: 640px) 26rem, 84vw"
-            quality={90}
+            quality={86}
             className="h-auto w-[86%] max-w-[26rem] drop-shadow-[0_2px_16px_rgba(18,21,14,0.6)] lg:w-full lg:max-w-[30rem]"
           />
 
