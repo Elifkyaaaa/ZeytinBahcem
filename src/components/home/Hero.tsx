@@ -173,15 +173,27 @@ export function Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-10 flex flex-col items-center px-6 text-center"
+          className="relative z-10 flex w-full flex-col items-center px-6 text-center"
         >
-          <p className="font-display text-[1.75rem] leading-none font-semibold tracking-[0.14em] text-cream-50 uppercase drop-shadow-[0_2px_18px_rgba(18,21,14,0.85)] sm:text-[2.4rem] sm:tracking-[0.18em] lg:text-[2.7rem]">
-            {site.name}
-          </p>
+          {/*
+            The wordmark is dark green on gold; straight over the photograph the
+            lettering disappears into the scrim. A cream plaque gives it the light
+            surface it was drawn for and reads like a label on a bottle.
+          */}
+          <div className="w-full max-w-[26rem] rounded-2xl border border-gold-500/25 bg-cream-50/95 px-6 py-7 shadow-[0_24px_60px_-22px_rgba(0,0,0,0.7)] backdrop-blur-[2px] sm:max-w-[30rem] sm:px-9 sm:py-9">
+            <Image
+              src={IMG.brandWordmark}
+              alt={site.name}
+              width={1416}
+              height={638}
+              priority
+              sizes="(min-width: 1024px) 30rem, (min-width: 640px) 26rem, 80vw"
+              quality={86}
+              className="h-auto w-full"
+            />
+          </div>
 
-          <span aria-hidden className="mt-6 h-px w-24 bg-gold-400/55 sm:w-32" />
-
-          <p className="mt-6 text-[0.64rem] tracking-[0.24em] text-gold-200/85 uppercase sm:text-[0.7rem]">
+          <p className="mt-7 text-[0.64rem] tracking-[0.24em] text-gold-200/85 uppercase sm:text-[0.7rem]">
             {heroText.badge}
           </p>
           <p className="mt-3 text-[0.64rem] tracking-[0.18em] text-cream-100/60 uppercase sm:text-[0.68rem]">

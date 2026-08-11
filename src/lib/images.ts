@@ -19,6 +19,12 @@ const PHOTO = {
   /** Olive-laden branches against a clear blue sky, shot from below */
   dal: '/images/olive-branch.jpg',
   /**
+   * Horizontal wordmark (1416×638, transparent PNG). Dark green lettering with
+   * a gold subtitle, so it needs a light surface; the hero sets it on a cream
+   * plaque rather than straight onto the photograph.
+   */
+  wordmark: '/images/elmora-wordmark.png',
+  /**
    * Brand logo (1049×947, transparent PNG).
    * The vignette from the source image was removed and the background made
    * transparent. Its lettering is dark green, so it must always sit on a
@@ -28,8 +34,10 @@ const PHOTO = {
 } as const;
 
 export const IMG = {
-  // Brand logo — shown at its own aspect ratio on a light surface
+  // Brand logo — round badge lockup, used as the hero watermark
   brandLogo: PHOTO.logo,
+  // Horizontal wordmark — the brand name as artwork, always on a light surface
+  brandWordmark: PHOTO.wordmark,
   // Olive branch against the sky — fills the hero's brand panel
   heroBranch: PHOTO.dal,
 
