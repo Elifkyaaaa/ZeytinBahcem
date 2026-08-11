@@ -71,7 +71,7 @@ export function Hero() {
       ====================================================== */}
 
       <motion.div
-        className="absolute inset-0 -z-20"
+        className="absolute inset-0"
         style={
           enabled
             ? {
