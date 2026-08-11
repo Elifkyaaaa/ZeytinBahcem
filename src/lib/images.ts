@@ -38,11 +38,11 @@ const PHOTO = {
    * that keeps the left branch mass and the view. On a phone the right-hand
    * branches fall outside the frame; a portrait photograph would fix that.
    */
-  bahceIsik: '/images/hero-grove.jpg',
-  bahceGenis: '/images/hero-grove-wide.jpg',
-  bahceGenisWebp: '/images/hero-grove-wide.webp',
-  bahceDikey: '/images/hero-grove-tall.jpg',
-  bahceDikeyWebp: '/images/hero-grove-tall.webp',
+  bahceIsik: '/images/olive-hero.png',
+  bahceGenis: '/images/olive-hero-wide.jpg',
+  bahceGenisWebp: '/images/olive-hero-wide.webp',
+  bahceDikey: '/images/olive-hero-tall.jpg',
+  bahceDikeyWebp: '/images/olive-hero-tall.webp',
   /**
    * Horizontal wordmark (1416×638, transparent PNG). Dark green lettering with
    * a gold subtitle, so it needs a light, untextured surface. Kept for light
