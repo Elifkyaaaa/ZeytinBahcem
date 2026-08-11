@@ -23,54 +23,71 @@ export function Hero() {
     offset: ['start start', 'end start'],
   });
 
-  const copyY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const copyOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const branchY = useTransform(scrollYProgress, [0, 1], ['0%', '12%']);
-  const branchScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
-  // The watermark drifts slower than the panels, which separates the layers.
-  const markY = useTransform(scrollYProgress, [0, 1], ['0%', '6%']);
+  const branchY = useTransform(scrollYProgress, [0, 1], ['0%', '14%']);
+  const branchScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
     <section
       ref={ref}
       data-dark-hero
-      className="relative grid min-h-[100svh] grid-cols-1 overflow-hidden bg-olive-950 lg:grid-cols-2"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-olive-950"
       aria-label={heroText.regionLabel}
     >
-      {/* ---------------------------------------------------------------- */}
-      {/*  Left half: the promise                                          */}
-      {/* ---------------------------------------------------------------- */}
-      <div className="relative order-2 flex items-center justify-center px-6 py-20 sm:px-10 lg:order-1 lg:py-24 lg:pl-[max(3rem,calc((100vw-80rem)/2+3rem))] lg:pr-14">
-        {/*
-          The logo sits behind the copy as a watermark. Its artwork is dark
-          green and would disappear against this ground, so the filter
-          flattens it to white and opacity takes it back to a whisper.
-          Decorative: the brand name is written as text in the panel opposite.
-        */}
-        <motion.div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 flex items-center justify-center"
-          style={enabled ? { y: markY } : undefined}
-          initial={{ opacity: 0, scale: 1.05 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <Image
-            src={IMG.brandLogo}
-            alt=""
-            width={1049}
-            height={947}
-            sizes="(min-width: 1024px) 44rem, 130vw"
-            quality={86}
-            className="w-[130%] max-w-none opacity-[0.07] brightness-0 invert lg:w-[44rem]"
-          />
-        </motion.div>
+      {/* One photograph behind everything */}
+      <motion.div
+        className="absolute inset-0 -z-20"
+        style={enabled ? { y: branchY, scale: branchScale } : undefined}
+      >
+        <Image
+          src={IMG.heroBranch}
+          alt={heroText.branchAlt}
+          fill
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          quality={74}
+          placeholder="blur"
+          blurDataURL={blurDataURL('olive')}
+          className="object-cover object-center"
+        />
+      </motion.div>
 
-        <motion.div
-          style={enabled ? { y: copyY, opacity: copyOpacity } : undefined}
-          className="relative z-10 flex max-w-xl flex-col items-center text-center lg:items-start lg:text-left"
-        >
-          <h1 className="max-w-[16ch] font-display text-[2.5rem] leading-[1.06] font-semibold text-cream-50 sm:text-6xl lg:text-[4rem]">
+      {/*
+        The two sides want opposite things from the same photograph: the copy is
+        cream and needs shadow, the wordmark is dark green and needs light. One
+        gradient serves both — deep shade where the copy sits, opening toward
+        the brand as if the light came from that side. On narrow screens the
+        blocks stack, so the same gradient runs top to bottom instead, keeping
+        the shade under the header where the copy is.
+      */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-olive-950/92 via-olive-950/58 to-cream-50/22 lg:bg-gradient-to-r lg:from-olive-950/94 lg:via-olive-950/55 lg:to-cream-50/20"
+      />
+
+      {/* Light bloom behind the wordmark, so the lettering separates cleanly */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_18%_at_50%_82%,rgba(253,251,247,0.58),transparent_74%)] lg:bg-[radial-gradient(ellipse_24%_24%_at_75%_46%,rgba(253,251,247,0.62),transparent_74%)]"
+      />
+
+      {/* The header sits over the hero, so the very top stays dark for its links */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-olive-950/85 to-transparent"
+      />
+
+      <motion.div
+        style={enabled ? { y: contentY, opacity: contentOpacity } : undefined}
+        className="container-x relative z-10 grid grid-cols-1 items-center gap-16 py-24 lg:grid-cols-2 lg:gap-12 lg:py-28"
+      >
+        {/* ------------------------------------------------------------ */}
+        {/*  The promise                                                 */}
+        {/* ------------------------------------------------------------ */}
+        <div className="flex max-w-xl flex-col items-center text-center lg:items-start lg:text-left">
+          <h1 className="max-w-[16ch] font-display text-[2.5rem] leading-[1.06] font-semibold text-cream-50 sm:text-6xl lg:text-[3.9rem]">
             {heroText.titleWords.map((word, i) => (
               <motion.span
                 key={word}
@@ -96,7 +113,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.54, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-7 max-w-lg text-base leading-relaxed text-cream-100/78 sm:text-lg"
+            className="mt-7 max-w-lg text-base leading-relaxed text-cream-100/82 sm:text-lg"
           >
             {heroText.subtitle}
           </motion.p>
@@ -133,64 +150,19 @@ export function Hero() {
               </span>
             ))}
           </motion.div>
-        </motion.div>
-      </div>
+        </div>
 
-      {/* ---------------------------------------------------------------- */}
-      {/*  Right half: the brand, over the olive branch                    */}
-      {/* ---------------------------------------------------------------- */}
-      <div className="relative order-1 flex min-h-[52svh] items-center justify-center overflow-hidden lg:order-2 lg:min-h-0">
-        <motion.div
-          className="absolute inset-0"
-          style={enabled ? { y: branchY, scale: branchScale } : undefined}
-        >
-          <Image
-            src={IMG.heroBranch}
-            alt={heroText.branchAlt}
-            fill
-            priority
-            fetchPriority="high"
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            quality={74}
-            placeholder="blur"
-            blurDataURL={blurDataURL('olive')}
-            className="object-cover object-center"
-          />
-        </motion.div>
-
-        {/*
-          The wordmark is dark green, so this panel is lifted rather than
-          darkened: a warm veil keeps the sky bright enough for the lettering to
-          read straight off the photograph, with no plaque behind it.
-        */}
-        <div aria-hidden className="absolute inset-0 bg-cream-50/16" />
-
-        {/* Light bloom directly behind the wordmark — no edges, just contrast */}
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[radial-gradient(ellipse_55%_30%_at_50%_44%,rgba(253,251,247,0.42),transparent_72%)]"
-        />
-
-        {/* The header sits over this panel, so the top stays dark for its links */}
-        <div
-          aria-hidden
-          className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-olive-950/80 to-transparent"
-        />
-
-        {/* Softens the seam between the two halves on desktop */}
-        <div
-          aria-hidden
-          className="absolute inset-0 lg:bg-gradient-to-r lg:from-olive-950/55 lg:via-transparent lg:to-transparent"
-        />
-
+        {/* ------------------------------------------------------------ */}
+        {/*  The brand                                                   */}
+        {/* ------------------------------------------------------------ */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.1, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-10 flex w-full flex-col items-center px-6 text-center"
+          transition={{ duration: 1.1, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col items-center text-center"
         >
           {/*
-            No plaque: the drop-shadow puts a cream halo around the letterforms
+            No plaque: the drop-shadows put a cream halo on the letterforms
             themselves, which lifts the dark green off the branches without
             drawing a box around the logo.
           */}
@@ -200,9 +172,9 @@ export function Hero() {
             width={1416}
             height={638}
             priority
-            sizes="(min-width: 1024px) 32rem, (min-width: 640px) 27rem, 84vw"
+            sizes="(min-width: 1024px) 30rem, (min-width: 640px) 26rem, 84vw"
             quality={86}
-            className="h-auto w-[84%] max-w-[27rem] drop-shadow-[0_0_10px_rgba(253,251,247,1)] drop-shadow-[0_0_28px_rgba(253,251,247,0.92)] sm:w-full lg:max-w-[32rem]"
+            className="h-auto w-[86%] max-w-[26rem] drop-shadow-[0_0_10px_rgba(253,251,247,1)] drop-shadow-[0_0_28px_rgba(253,251,247,0.92)] lg:w-full lg:max-w-[30rem]"
           />
 
           <p className="mt-8 text-[0.64rem] font-semibold tracking-[0.24em] text-olive-900 uppercase drop-shadow-[0_0_8px_rgba(253,251,247,1)] drop-shadow-[0_0_16px_rgba(253,251,247,0.9)] sm:text-[0.7rem]">
@@ -212,7 +184,7 @@ export function Hero() {
             {heroText.brandTagline}
           </p>
         </motion.div>
-      </div>
+      </motion.div>
 
       <motion.a
         href="#istatistikler"
