@@ -11,11 +11,11 @@
 
 const PHOTO = {
   /** Rows of olive trees, morning sun, blue sky */
-  bahce: '/images/zeytin-bahcesi.jpg',
+  bahce: '/images/olive_grove.jpg',
   /** Olive tree on ploughed soil with a harvest crate */
-  hasat: '/images/hasat.jpg',
+  hasat: '/images/harvest.jpg',
   /** A handful of large black olives, full crate behind */
-  zeytin: '/images/siyah-zeytin.jpg',
+  zeytin: '/images/black.jpg',
   /** Olive-laden branches against a clear blue sky, shot from below */
   dal: '/images/olive-branch.jpg',
   /**

@@ -71,7 +71,7 @@ export function Hero() {
 
       <motion.div
         style={enabled ? { y: contentY, opacity: contentOpacity } : undefined}
-        className="container-x relative z-10 flex flex-col items-center py-28 text-center"
+        className="container-x relative z-10 flex flex-col items-center pt-28 pb-16 text-center"
       >
         {/*
           The full-colour lockup, which is what this background finally allows:
@@ -83,12 +83,12 @@ export function Hero() {
           width={1416}
           height={638}
           priority
-          sizes="(min-width: 1024px) 24rem, (min-width: 640px) 20rem, 66vw"
+          sizes="(min-width: 1024px) 16rem, (min-width: 640px) 15rem, 58vw"
           quality={86}
-          className="h-auto w-[66%] max-w-[20rem] lg:max-w-[24rem]"
+          className="h-auto w-[58%] max-w-[15rem] lg:max-w-[16rem]"
         />
 
-        <h1 className="mt-10 max-w-[15ch] font-display text-[2.4rem] leading-[1.06] font-semibold text-olive-900 sm:text-5xl lg:text-[3.6rem]">
+        <h1 className="mt-7 max-w-[15ch] font-display text-[2.3rem] leading-[1.06] font-semibold text-olive-900 sm:text-[2.9rem] lg:text-[3.1rem]">
           {heroText.titleWords.map((word, i) => (
             <motion.span
               key={word}
@@ -123,7 +123,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.74, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-10 flex w-full flex-col gap-3.5 sm:w-auto sm:flex-row sm:gap-4"
+          className="mt-8 flex w-full flex-col gap-3.5 sm:w-auto sm:flex-row sm:gap-4"
         >
           <Button href="/urunler" variant="gold" size="xl">
             {heroText.primaryCta}
@@ -143,7 +143,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
-          className="mt-11 flex flex-col items-center gap-4"
+          className="mt-8 flex flex-col items-center gap-4"
         >
           <p className="text-[0.64rem] font-semibold tracking-[0.24em] text-gold-700 uppercase sm:text-[0.7rem]">
             {heroText.badge}

@@ -85,7 +85,7 @@ const ALLOWED_IMAGE_HOSTS = [
 /** Placeholder for broken records. We do not return an empty string:
  *  `next/image` throws on an empty `src` too, which would move the problem
  *  rather than fix it. */
-export const IMAGE_FALLBACK = '/images/gorsel-yok.svg';
+export const IMAGE_FALLBACK = '/images/image-missing.svg';
 
 export function safeImageSrc(src: string | null | undefined, fallback = IMAGE_FALLBACK): string {
   if (!src) return fallback;
