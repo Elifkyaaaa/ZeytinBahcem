@@ -23,8 +23,19 @@ const PHOTO = {
    * stone ledge along the bottom. The middle is deliberately empty and very
    * bright (luma ~245), so the hero built on it is a light one: its copy is
    * dark olive and the header keeps its normal colours.
+   *
+   * Two crops are derived from it because one aspect cannot serve both a wide
+   * desktop and a phone: filling a 2.3:1 window from the 3:2 original cropped
+   * 36% off the top and bottom and took the framing branches with it, and a
+   * phone lost 69% sideways. Each variant extends the original with a blurred
+   * copy of itself rather than mirroring, which would repeat the branches
+   * visibly. `hero-grove.jpg` stays as the master the two are cut from.
    */
   bahceIsik: '/images/hero-grove.jpg',
+  bahceGenis: '/images/hero-grove-wide.jpg',
+  bahceGenisWebp: '/images/hero-grove-wide.webp',
+  bahceDikey: '/images/hero-grove-tall.jpg',
+  bahceDikeyWebp: '/images/hero-grove-tall.webp',
   /**
    * Horizontal wordmark (1416×638, transparent PNG). Dark green lettering with
    * a gold subtitle, so it needs a light, untextured surface. Kept for light
@@ -55,8 +66,12 @@ export const IMG = {
   brandEmblem: PHOTO.emblem,
   // Olive branch against the sky
   heroBranch: PHOTO.dal,
-  // Sunlit grove — the hero background
+  // Sunlit grove — the hero background, art directed by viewport
   heroGroveLight: PHOTO.bahceIsik,
+  heroGroveWide: PHOTO.bahceGenis,
+  heroGroveWideWebp: PHOTO.bahceGenisWebp,
+  heroGroveTall: PHOTO.bahceDikey,
+  heroGroveTallWebp: PHOTO.bahceDikeyWebp,
 
   // Grove and landscape
   heroGrove: PHOTO.bahce,

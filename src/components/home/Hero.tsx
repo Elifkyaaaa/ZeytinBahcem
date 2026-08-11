@@ -9,7 +9,6 @@ import { useMediaQuery } from '@/hooks';
 import { site } from '@/lib/data/site';
 import { heroText } from '@/lib/data/text/home';
 import { IMG } from '@/lib/images';
-import { blurDataURL } from '@/lib/utils';
 
 /**
  * A light hero. The photograph behind it is a sunlit grove whose middle is
@@ -40,22 +39,33 @@ export function Hero() {
       className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-cream-100"
       aria-label={heroText.regionLabel}
     >
+      {/*
+        Art direction, not just resizing: the photograph's whole point is the
+        branches around its edge, and one aspect ratio cannot keep them on both
+        a wide desktop and a phone. Filling a 2.3:1 window from the 3:2 master
+        cropped 36% off the top and bottom — the framing went with it — while a
+        phone lost 69% sideways and showed only empty sky.
+
+        `next/image` has no art direction, so this is a plain <picture>: the
+        browser fetches only the source that matches, and both variants are
+        pre-encoded to webp (108 KB and 27 KB) with jpeg fallbacks.
+      */}
       <motion.div
         className="absolute inset-0 -z-20"
         style={enabled ? { y: photoY, scale: photoScale } : undefined}
       >
-        <Image
-          src={IMG.heroGroveLight}
-          alt={heroText.groveAlt}
-          fill
-          priority
-          fetchPriority="high"
-          sizes="100vw"
-          quality={74}
-          placeholder="blur"
-          blurDataURL={blurDataURL('cream')}
-          className="object-cover object-center"
-        />
+        <picture>
+          <source media="(min-width: 1024px)" srcSet={IMG.heroGroveWideWebp} type="image/webp" />
+          <source media="(min-width: 1024px)" srcSet={IMG.heroGroveWide} />
+          <source srcSet={IMG.heroGroveTallWebp} type="image/webp" />
+          <img
+            src={IMG.heroGroveTall}
+            alt={heroText.groveAlt}
+            fetchPriority="high"
+            decoding="async"
+            className="size-full object-cover object-center"
+          />
+        </picture>
       </motion.div>
 
       {/*
