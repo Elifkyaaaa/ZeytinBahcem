@@ -152,23 +152,26 @@ export function Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col items-center text-center"
+          className="relative flex flex-col items-center text-center"
         >
           {/*
-            The cream knockout, not the full-colour lockup. Over a photograph the
-            hairline gold ornaments and the ZEYTINCILIK line broke up against the
-            leaves whatever the backdrop was tuned to; flattened to one light
-            tone every element of the mark survives.
+            The gold lockup, drawn for a dark ground — which is what this hero
+            is. Nothing has to be lightened behind it; the shade below simply
+            keeps the branches from crossing the thinner strokes.
           */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_58%_46%_at_50%_50%,rgba(18,21,14,0.62),transparent_70%)]"
+          />
           <Image
-            src={IMG.brandWordmarkLight}
+            src={IMG.brandEmblem}
             alt={site.name}
-            width={1416}
-            height={638}
+            width={1078}
+            height={1024}
             priority
-            sizes="(min-width: 1024px) 30rem, (min-width: 640px) 26rem, 84vw"
+            sizes="(min-width: 1024px) 24rem, (min-width: 640px) 20rem, 68vw"
             quality={86}
-            className="h-auto w-[86%] max-w-[26rem] drop-shadow-[0_2px_16px_rgba(18,21,14,0.6)] lg:w-full lg:max-w-[30rem]"
+            className="h-auto w-[68%] max-w-[20rem] drop-shadow-[0_4px_24px_rgba(18,21,14,0.75)] lg:w-full lg:max-w-[24rem]"
           />
 
           <p className="mt-8 text-[0.64rem] font-semibold tracking-[0.24em] text-gold-200/90 uppercase drop-shadow-[0_2px_10px_rgba(18,21,14,0.7)] sm:text-[0.7rem]">

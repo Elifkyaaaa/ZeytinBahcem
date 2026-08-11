@@ -20,16 +20,16 @@ const PHOTO = {
   dal: '/images/olive-branch.jpg',
   /**
    * Horizontal wordmark (1416×638, transparent PNG). Dark green lettering with
-   * a gold subtitle, so it needs a light surface; the hero sets it on a cream
-   * plaque rather than straight onto the photograph.
+   * a gold subtitle, so it needs a light, untextured surface. Kept for light
+   * layouts; the hero uses the gold lockup below instead.
    */
   wordmark: '/images/elmora-wordmark.png',
   /**
-   * Knockout of the same wordmark in a single cream tone. The hairline gold
-   * ornaments in the full-colour version break up over a photograph; flattened
-   * to one light colour every element survives on a dark image.
+   * Gold lockup (1078×1024, transparent PNG): monogram emblem over the
+   * wordmark. Drawn for a dark ground, so gold reads on the hero photograph
+   * exactly as intended — this is the primary mark on dark surfaces.
    */
-  wordmarkLight: '/images/elmora-wordmark-light.png',
+  emblem: '/images/elmora-emblem.png',
   /**
    * Brand logo (1049×947, transparent PNG).
    * The vignette from the source image was removed and the background made
@@ -40,12 +40,12 @@ const PHOTO = {
 } as const;
 
 export const IMG = {
-  // Brand logo — round badge lockup, used as the hero watermark
+  // Round badge lockup, for light surfaces
   brandLogo: PHOTO.logo,
   // Horizontal wordmark — full colour, needs a light and untextured surface
   brandWordmark: PHOTO.wordmark,
-  // Same wordmark knocked out in cream — for photographic backgrounds
-  brandWordmarkLight: PHOTO.wordmarkLight,
+  // Gold lockup — the primary mark wherever the background is dark
+  brandEmblem: PHOTO.emblem,
   // Olive branch against the sky — fills the hero's brand panel
   heroBranch: PHOTO.dal,
 
