@@ -22,6 +22,8 @@ export const heroText = {
   secondaryCta: 'Hemen Sipariş Ver',
   trustMarks: ['Soğuk Sıkım', '%100 Doğal', 'Katkısız', 'Ücretsiz Kargo'],
   branchAlt: 'Mavi gökyüzüne uzanan zeytin dalları ve olgunlaşmakta olan yeşil zeytinler',
+  groveAlt:
+    'Güneşin altında denize bakan zeytinlik; kenarlarda zeytin dalları, aşağıda taş bir seki',
   /** Sits under the brand name in the hero's brand panel */
   brandTagline: 'Olive & Gift · From Olive Trees, With Love.',
   scrollLabel: 'Keşfet',

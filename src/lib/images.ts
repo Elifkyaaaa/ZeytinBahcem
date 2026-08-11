@@ -19,6 +19,13 @@ const PHOTO = {
   /** Olive-laden branches against a clear blue sky, shot from below */
   dal: '/images/olive-branch.jpg',
   /**
+   * Sunlit grove looking out to the sea, branches framing the edges and a
+   * stone ledge along the bottom. The middle is deliberately empty and very
+   * bright (luma ~245), so the hero built on it is a light one: its copy is
+   * dark olive and the header keeps its normal colours.
+   */
+  bahceIsik: '/images/hero-grove.jpg',
+  /**
    * Horizontal wordmark (1416×638, transparent PNG). Dark green lettering with
    * a gold subtitle, so it needs a light, untextured surface. Kept for light
    * layouts; the hero uses the gold lockup below instead.
@@ -46,8 +53,10 @@ export const IMG = {
   brandWordmark: PHOTO.wordmark,
   // Gold lockup — the primary mark wherever the background is dark
   brandEmblem: PHOTO.emblem,
-  // Olive branch against the sky — fills the hero's brand panel
+  // Olive branch against the sky
   heroBranch: PHOTO.dal,
+  // Sunlit grove — the hero background
+  heroGroveLight: PHOTO.bahceIsik,
 
   // Grove and landscape
   heroGrove: PHOTO.bahce,
