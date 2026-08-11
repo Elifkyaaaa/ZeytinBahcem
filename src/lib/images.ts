@@ -27,9 +27,16 @@ const PHOTO = {
    * Two crops are derived from it because one aspect cannot serve both a wide
    * desktop and a phone: filling a 2.3:1 window from the 3:2 original cropped
    * 36% off the top and bottom and took the framing branches with it, and a
-   * phone lost 69% sideways. Each variant extends the original with a blurred
-   * copy of itself rather than mirroring, which would repeat the branches
-   * visibly. `hero-grove.jpg` stays as the master the two are cut from.
+   * phone lost 69% sideways.
+   *
+   * The wide variant is a nine-slice stretch: the branch masses at either side
+   * keep their own scale and only the middle band — sky, sea, hills, ledge —
+   * is stretched, so nothing about the leaves is distorted. Mirroring and
+   * blurred fills were both tried first and looked obviously fabricated.
+   *
+   * The tall variant invents nothing at all: it is a straight portrait crop
+   * that keeps the left branch mass and the view. On a phone the right-hand
+   * branches fall outside the frame; a portrait photograph would fix that.
    */
   bahceIsik: '/images/hero-grove.jpg',
   bahceGenis: '/images/hero-grove-wide.jpg',
