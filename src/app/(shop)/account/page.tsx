@@ -6,6 +6,22 @@ import { buildMetadata } from '@/lib/seo';
 import { isSupabaseConfigured } from '@/utils/env';
 import { createClient, getCurrentUser } from '@/utils/supabase/server';
 
+/**
+ * `noIndex` here is one of three places that have to agree for a personal page
+ * to stay out of search results and out of caches:
+ *
+ *   1. this flag        -> <meta name="robots" content="noindex, nofollow">
+ *   2. `src/app/robots.ts`   -> /account in the disallow list
+ *   3. `next.config.ts`      -> privateHeaders on /account/:path*, which sends
+ *                               X-Robots-Tag and Cache-Control: no-store
+ *
+ * The meta tag alone is not enough: a crawler that never fetches the page
+ * cannot read it, and a shared cache would still be free to store the
+ * response. Adding a route under /account means adding it to all three.
+ *
+ * `path` feeds the canonical URL, so it must match the real route — it was
+ * /hesap before the routes were renamed.
+ */
 export const metadata = buildMetadata({
   title: 'Profilim',
   description: 'Hesap bilgilerinizi görüntüleyin ve güncelleyin.',
