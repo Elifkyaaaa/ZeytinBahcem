@@ -158,15 +158,29 @@ export function Hero() {
           />
         </motion.div>
 
-        {/* Scrim: darkest where the brand name sits, and along the seam so the
-            two halves meet without a hard edge. */}
+        {/*
+          The wordmark is dark green, so this panel is lifted rather than
+          darkened: a warm veil keeps the sky bright enough for the lettering to
+          read straight off the photograph, with no plaque behind it.
+        */}
+        <div aria-hidden className="absolute inset-0 bg-cream-50/16" />
+
+        {/* Light bloom directly behind the wordmark — no edges, just contrast */}
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-olive-950/88 via-olive-950/45 to-olive-950/30"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_55%_30%_at_50%_44%,rgba(253,251,247,0.42),transparent_72%)]"
         />
+
+        {/* The header sits over this panel, so the top stays dark for its links */}
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-b from-olive-950/70 to-transparent lg:bg-gradient-to-r lg:from-olive-950/85 lg:via-olive-950/10 lg:to-transparent"
+          className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-olive-950/80 to-transparent"
+        />
+
+        {/* Softens the seam between the two halves on desktop */}
+        <div
+          aria-hidden
+          className="absolute inset-0 lg:bg-gradient-to-r lg:from-olive-950/55 lg:via-transparent lg:to-transparent"
         />
 
         <motion.div
@@ -176,27 +190,25 @@ export function Hero() {
           className="relative z-10 flex w-full flex-col items-center px-6 text-center"
         >
           {/*
-            The wordmark is dark green on gold; straight over the photograph the
-            lettering disappears into the scrim. A cream plaque gives it the light
-            surface it was drawn for and reads like a label on a bottle.
+            No plaque: the drop-shadow puts a cream halo around the letterforms
+            themselves, which lifts the dark green off the branches without
+            drawing a box around the logo.
           */}
-          <div className="w-full max-w-[26rem] rounded-2xl border border-gold-500/25 bg-cream-50/95 px-6 py-7 shadow-[0_24px_60px_-22px_rgba(0,0,0,0.7)] backdrop-blur-[2px] sm:max-w-[30rem] sm:px-9 sm:py-9">
-            <Image
-              src={IMG.brandWordmark}
-              alt={site.name}
-              width={1416}
-              height={638}
-              priority
-              sizes="(min-width: 1024px) 30rem, (min-width: 640px) 26rem, 80vw"
-              quality={86}
-              className="h-auto w-full"
-            />
-          </div>
+          <Image
+            src={IMG.brandWordmark}
+            alt={site.name}
+            width={1416}
+            height={638}
+            priority
+            sizes="(min-width: 1024px) 32rem, (min-width: 640px) 27rem, 84vw"
+            quality={86}
+            className="h-auto w-[84%] max-w-[27rem] drop-shadow-[0_0_10px_rgba(253,251,247,1)] drop-shadow-[0_0_28px_rgba(253,251,247,0.92)] sm:w-full lg:max-w-[32rem]"
+          />
 
-          <p className="mt-7 text-[0.64rem] tracking-[0.24em] text-gold-200/85 uppercase sm:text-[0.7rem]">
+          <p className="mt-8 text-[0.64rem] font-semibold tracking-[0.24em] text-olive-900 uppercase drop-shadow-[0_0_8px_rgba(253,251,247,1)] drop-shadow-[0_0_16px_rgba(253,251,247,0.9)] sm:text-[0.7rem]">
             {heroText.badge}
           </p>
-          <p className="mt-3 text-[0.64rem] tracking-[0.18em] text-cream-100/60 uppercase sm:text-[0.68rem]">
+          <p className="mt-3 text-[0.64rem] tracking-[0.18em] text-olive-800 uppercase drop-shadow-[0_0_8px_rgba(253,251,247,1)] drop-shadow-[0_0_16px_rgba(253,251,247,0.9)] sm:text-[0.68rem]">
             {heroText.brandTagline}
           </p>
         </motion.div>
