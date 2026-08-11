@@ -55,28 +55,21 @@ export function Hero() {
       </motion.div>
 
       {/*
-        The two sides want opposite things from the same photograph: the copy is
-        cream and needs shadow, the wordmark is dark green and needs light. One
-        gradient serves both — deep shade where the copy sits, opening toward
-        the brand as if the light came from that side. On narrow screens the
-        blocks stack, so the same gradient runs top to bottom instead, keeping
-        the shade under the header where the copy is.
+        Everything on top of the photograph is cream, so the whole frame is
+        shaded evenly rather than lit on one side. The copy sits over the
+        deepest part; the wordmark keeps enough of the branches visible behind
+        it to still read as a photograph.
       */}
+      <div aria-hidden className="absolute inset-0 -z-10 bg-olive-950/62" />
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-olive-950/92 via-olive-950/58 to-cream-50/22 lg:bg-gradient-to-r lg:from-olive-950/94 lg:via-olive-950/55 lg:to-cream-50/20"
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-olive-950/45 via-transparent to-transparent lg:bg-gradient-to-r lg:from-olive-950/42 lg:via-olive-950/8 lg:to-transparent"
       />
 
-      {/* Light bloom behind the wordmark, so the lettering separates cleanly */}
+      {/* The header sits over the hero, so the very top stays darkest of all */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_18%_at_50%_82%,rgba(253,251,247,0.58),transparent_74%)] lg:bg-[radial-gradient(ellipse_24%_24%_at_75%_46%,rgba(253,251,247,0.62),transparent_74%)]"
-      />
-
-      {/* The header sits over the hero, so the very top stays dark for its links */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-olive-950/85 to-transparent"
+        className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-olive-950/55 to-transparent"
       />
 
       <motion.div
@@ -162,25 +155,26 @@ export function Hero() {
           className="flex flex-col items-center text-center"
         >
           {/*
-            No plaque: the drop-shadows put a cream halo on the letterforms
-            themselves, which lifts the dark green off the branches without
-            drawing a box around the logo.
+            The cream knockout, not the full-colour lockup. Over a photograph the
+            hairline gold ornaments and the ZEYTINCILIK line broke up against the
+            leaves whatever the backdrop was tuned to; flattened to one light
+            tone every element of the mark survives.
           */}
           <Image
-            src={IMG.brandWordmark}
+            src={IMG.brandWordmarkLight}
             alt={site.name}
             width={1416}
             height={638}
             priority
             sizes="(min-width: 1024px) 30rem, (min-width: 640px) 26rem, 84vw"
-            quality={86}
-            className="h-auto w-[86%] max-w-[26rem] drop-shadow-[0_0_10px_rgba(253,251,247,1)] drop-shadow-[0_0_28px_rgba(253,251,247,0.92)] lg:w-full lg:max-w-[30rem]"
+            quality={90}
+            className="h-auto w-[86%] max-w-[26rem] drop-shadow-[0_2px_16px_rgba(18,21,14,0.6)] lg:w-full lg:max-w-[30rem]"
           />
 
-          <p className="mt-8 text-[0.64rem] font-semibold tracking-[0.24em] text-olive-900 uppercase drop-shadow-[0_0_8px_rgba(253,251,247,1)] drop-shadow-[0_0_16px_rgba(253,251,247,0.9)] sm:text-[0.7rem]">
+          <p className="mt-8 text-[0.64rem] font-semibold tracking-[0.24em] text-gold-200/90 uppercase drop-shadow-[0_2px_10px_rgba(18,21,14,0.7)] sm:text-[0.7rem]">
             {heroText.badge}
           </p>
-          <p className="mt-3 text-[0.64rem] tracking-[0.18em] text-olive-800 uppercase drop-shadow-[0_0_8px_rgba(253,251,247,1)] drop-shadow-[0_0_16px_rgba(253,251,247,0.9)] sm:text-[0.68rem]">
+          <p className="mt-3 text-[0.64rem] tracking-[0.18em] text-cream-100/65 uppercase drop-shadow-[0_2px_10px_rgba(18,21,14,0.7)] sm:text-[0.68rem]">
             {heroText.brandTagline}
           </p>
         </motion.div>

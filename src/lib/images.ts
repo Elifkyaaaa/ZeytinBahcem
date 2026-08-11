@@ -25,6 +25,12 @@ const PHOTO = {
    */
   wordmark: '/images/elmora-wordmark.png',
   /**
+   * Knockout of the same wordmark in a single cream tone. The hairline gold
+   * ornaments in the full-colour version break up over a photograph; flattened
+   * to one light colour every element survives on a dark image.
+   */
+  wordmarkLight: '/images/elmora-wordmark-light.png',
+  /**
    * Brand logo (1049×947, transparent PNG).
    * The vignette from the source image was removed and the background made
    * transparent. Its lettering is dark green, so it must always sit on a
@@ -36,8 +42,10 @@ const PHOTO = {
 export const IMG = {
   // Brand logo — round badge lockup, used as the hero watermark
   brandLogo: PHOTO.logo,
-  // Horizontal wordmark — the brand name as artwork, always on a light surface
+  // Horizontal wordmark — full colour, needs a light and untextured surface
   brandWordmark: PHOTO.wordmark,
+  // Same wordmark knocked out in cream — for photographic backgrounds
+  brandWordmarkLight: PHOTO.wordmarkLight,
   // Olive branch against the sky — fills the hero's brand panel
   heroBranch: PHOTO.dal,
 
