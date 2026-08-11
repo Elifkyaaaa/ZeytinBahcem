@@ -13,10 +13,10 @@ import { cn } from '@/lib/utils';
 import { commonText, userMenuText } from '@/lib/data/text/layout';
 
 const items = [
-  { label: 'Profilim', href: '/hesap', Icon: User },
-  { label: 'Siparişlerim', href: '/hesap/siparislerim', Icon: Package },
-  { label: 'Favorilerim', href: '/hesap/favoriler', Icon: Heart },
-  { label: 'Adreslerim', href: '/hesap/adreslerim', Icon: MapPin },
+  { label: 'Profilim', href: '/account', Icon: User },
+  { label: 'Siparişlerim', href: '/account/orders', Icon: Package },
+  { label: 'Favorilerim', href: '/account/favorites', Icon: Heart },
+  { label: 'Adreslerim', href: '/account/addresses', Icon: MapPin },
 ];
 
 function initialsOf(name: string) {
@@ -59,10 +59,10 @@ export function UserMenu({ user, loading }: { user: SessionUser | null; loading:
   if (!user) {
     return (
       <div className="ml-1.5 hidden items-center gap-2 xl:flex">
-        <Button href="/giris" variant="ghost" size="sm">
+        <Button href="/login" variant="ghost" size="sm">
           {commonText.signIn}
         </Button>
-        <Button href="/kayit" variant="gold" size="sm">
+        <Button href="/register" variant="gold" size="sm">
           {commonText.signUp}
         </Button>
       </div>

@@ -18,7 +18,7 @@ const CODE_LENGTH = 6;
 export function MfaChallenge() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const next = searchParams.get('next') ?? '/hesap';
+  const next = searchParams.get('next') ?? '/account';
 
   const [code, setCode] = useState('');
   const [busy, setBusy] = useState(false);

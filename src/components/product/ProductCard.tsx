@@ -71,7 +71,7 @@ export function ProductCard({
         {/* `fill` needs its immediate parent to be positioned; the wrapper one level
             up being relative does not help when this link sits in between. */}
         <Link
-          href={`/urunler/${product.slug}`}
+          href={`/products/${product.slug}`}
           aria-label={product.name}
           className="relative block size-full"
         >
@@ -161,7 +161,7 @@ export function ProductCard({
 
         <h3 className="mt-2.5 font-display text-[1.05rem] leading-snug text-foreground">
           <Link
-            href={`/urunler/${product.slug}`}
+            href={`/products/${product.slug}`}
             className="transition-colors duration-300 after:absolute after:inset-0 hover:text-gold-700 dark:hover:text-gold-400"
           >
             {product.name}

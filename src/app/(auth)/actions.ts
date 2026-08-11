@@ -39,7 +39,7 @@ export async function signInWithPassword(
 
   const email = readString(formData, 'email');
   const password = readString(formData, 'password');
-  const next = readString(formData, 'next') || '/hesap';
+  const next = readString(formData, 'next') || '/account';
 
   if (!email || !password) return { error: 'E-posta ve şifre zorunludur.' };
 
@@ -86,7 +86,7 @@ export async function signUpWithPassword(
     email,
     password,
     options: {
-      emailRedirectTo: `${origin}/auth/callback?next=/hesap`,
+      emailRedirectTo: `${origin}/auth/callback?next=/account`,
       data: {
         full_name: fullName,
         phone,
@@ -115,10 +115,10 @@ export async function signUpWithPassword(
 export async function signInWithGoogle(formData: FormData): Promise<void> {
   const supabase = await createClient();
   if (!supabase) {
-    redirect(`/giris?hata=${encodeURIComponent(DEMO_MESSAGE)}`);
+    redirect(`/login?hata=${encodeURIComponent(DEMO_MESSAGE)}`);
   }
 
-  const next = readString(formData, 'next') || '/hesap';
+  const next = readString(formData, 'next') || '/account';
   const origin = await siteOrigin();
 
   const { data, error } = await supabase.auth.signInWithOAuth({
@@ -130,7 +130,7 @@ export async function signInWithGoogle(formData: FormData): Promise<void> {
   });
 
   if (error || !data.url) {
-    redirect('/giris?hata=Google%20ile%20giri%C5%9F%20ba%C5%9Flat%C4%B1lamad%C4%B1.');
+    redirect('/login?hata=Google%20ile%20giri%C5%9F%20ba%C5%9Flat%C4%B1lamad%C4%B1.');
   }
 
   redirect(data.url);
@@ -154,7 +154,7 @@ export async function requestPasswordReset(
 
   const origin = await siteOrigin();
   await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${origin}/auth/callback?next=/hesap/sifre-degistir`,
+    redirectTo: `${origin}/auth/callback?next=/account/change-password`,
   });
 
   // Always answer the same way so we do not leak whether the account exists.
@@ -198,7 +198,7 @@ export async function resendVerification(
   const { error } = await supabase.auth.resend({
     type: 'signup',
     email,
-    options: { emailRedirectTo: `${origin}/auth/callback?next=/hesap` },
+    options: { emailRedirectTo: `${origin}/auth/callback?next=/account` },
   });
 
   if (error) return { error: 'Doğrulama e-postası gönderilemedi.' };

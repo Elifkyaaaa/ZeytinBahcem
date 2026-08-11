@@ -50,8 +50,8 @@ export async function setReviewStatus(form: FormData) {
 
   await auth.supabase.from('reviews').update({ status }).eq('id', id);
 
-  revalidatePath('/admin/yorumlar');
-  revalidatePath('/urunler', 'layout');
+  revalidatePath('/admin/reviews');
+  revalidatePath('/products', 'layout');
 }
 
 export async function deleteReview(form: FormData) {
@@ -63,6 +63,6 @@ export async function deleteReview(form: FormData) {
 
   await auth.supabase.from('reviews').delete().eq('id', id);
 
-  revalidatePath('/admin/yorumlar');
-  revalidatePath('/urunler', 'layout');
+  revalidatePath('/admin/reviews');
+  revalidatePath('/products', 'layout');
 }

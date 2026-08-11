@@ -28,14 +28,14 @@ export function RegisterForm() {
           <p className="font-medium text-foreground">{registerFormText.noEmailHeading}</p>
           <p className="mt-1.5">
             {registerFormText.noEmailBefore}{' '}
-            <Link href="/giris" className="text-gold-700 underline underline-offset-2 dark:text-gold-400">
+            <Link href="/login" className="text-gold-700 underline underline-offset-2 dark:text-gold-400">
               {registerFormText.noEmailLinkLabel}
             </Link>{' '}
             {registerFormText.noEmailAfter}
           </p>
         </div>
         <Link
-          href="/giris"
+          href="/login"
           className="inline-flex h-12 w-full items-center justify-center rounded-full border border-border text-sm font-medium transition-colors hover:border-gold-500/50"
         >
           {registerFormText.backToLogin}

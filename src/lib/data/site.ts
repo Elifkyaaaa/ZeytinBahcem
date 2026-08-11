@@ -58,26 +58,26 @@ export const site = {
 
 export const mainNav: NavItem[] = [
   { label: 'Ana Sayfa', href: '/' },
-  { label: 'Ürünler', href: '/urunler' },
-  { label: 'Hakkımızda', href: '/hakkimizda' },
+  { label: 'Ürünler', href: '/products' },
+  { label: 'Hakkımızda', href: '/about' },
   { label: 'Blog', href: '/blog' },
-  { label: 'İletişim', href: '/iletisim' },
+  { label: 'İletişim', href: '/contact' },
 ];
 
 export const footerNav: { title: string; items: NavItem[] }[] = [
   {
     title: 'Kurumsal',
     items: [
-      { label: 'Hakkımızda', href: '/hakkimizda' },
-      { label: 'Kurumsal', href: '/kurumsal' },
+      { label: 'Hakkımızda', href: '/about' },
+      { label: 'Kurumsal', href: '/corporate' },
       { label: 'Blog', href: '/blog' },
-      { label: 'İletişim', href: '/iletisim' },
+      { label: 'İletişim', href: '/contact' },
     ],
   },
   {
     title: 'Müşteri Hizmetleri',
     items: [
-      { label: 'Sipariş Takibi', href: '/siparis-takibi' },
+      { label: 'Sipariş Takibi', href: '/order-tracking' },
       { label: 'Teslimat ve Kargo', href: '/teslimat-ve-kargo' },
       { label: 'İade Politikası', href: '/iade-politikasi' },
       { label: 'Ön Bilgilendirme Formu', href: '/on-bilgilendirme-formu' },

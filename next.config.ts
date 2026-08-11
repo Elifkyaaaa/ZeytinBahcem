@@ -12,9 +12,9 @@ const nextConfig: NextConfig = {
       { source: '/:path*', headers: securityHeaders },
       // Account, cart, checkout and admin pages must not be cached and must
       // not show up in search engines.
-      { source: '/hesap/:path*', headers: privateHeaders },
-      { source: '/sepet', headers: privateHeaders },
-      { source: '/odeme/:path*', headers: privateHeaders },
+      { source: '/account/:path*', headers: privateHeaders },
+      { source: '/cart', headers: privateHeaders },
+      { source: '/checkout/:path*', headers: privateHeaders },
       { source: '/admin/:path*', headers: privateHeaders },
       { source: '/api/:path*', headers: privateHeaders },
     ];

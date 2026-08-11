@@ -121,7 +121,7 @@ export function Header() {
               <Search className="size-[1.15rem]" strokeWidth={1.7} />
             </button>
 
-            <Link href="/favoriler" className={cn(iconButton, 'hidden sm:grid')} aria-label="Favorilerim">
+            <Link href="/favorites" className={cn(iconButton, 'hidden sm:grid')} aria-label="Favorilerim">
               <Heart className="size-[1.15rem]" strokeWidth={1.7} />
               <CountBadge value={wishlistCount} />
             </Link>

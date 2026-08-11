@@ -394,7 +394,7 @@ export function ProductManager({
                     <Td align="right">
                       <span className="flex items-center justify-end gap-1">
                         <Link
-                          href={`/urunler/${product.slug}`}
+                          href={`/products/${product.slug}`}
                           target="_blank"
                           aria-label={`${product.name} sayfasını gör`}
                           className="grid size-8 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-foreground/6 hover:text-foreground"

@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
   const token = form.get('token');
 
   if (typeof token !== 'string' || !token) {
-    return NextResponse.redirect(`${env.siteUrl}/odeme/sonuc?durum=hata`, { status: 303 });
+    return NextResponse.redirect(`${env.siteUrl}/checkout/result?durum=hata`, { status: 303 });
   }
 
   const result = await retrieveCheckoutResult(token);
@@ -76,13 +76,13 @@ export async function POST(request: NextRequest) {
   }
 
   const target = failed
-    ? `${env.siteUrl}/odeme/sonuc?durum=hata&mesaj=${encodeURIComponent(result.errorMessage ?? 'Ödeme tamamlanamadı.')}`
-    : `${env.siteUrl}/odeme/sonuc?durum=basarili&no=${encodeURIComponent(conversationId ?? '')}`;
+    ? `${env.siteUrl}/checkout/result?durum=hata&mesaj=${encodeURIComponent(result.errorMessage ?? 'Ödeme tamamlanamadı.')}`
+    : `${env.siteUrl}/checkout/result?durum=basarili&no=${encodeURIComponent(conversationId ?? '')}`;
 
   // 303 turns the POST into a GET redirect
   return NextResponse.redirect(target, { status: 303 });
 }
 
 export async function GET() {
-  return NextResponse.redirect(`${env.siteUrl}/odeme/sonuc?durum=hata`, { status: 303 });
+  return NextResponse.redirect(`${env.siteUrl}/checkout/result?durum=hata`, { status: 303 });
 }

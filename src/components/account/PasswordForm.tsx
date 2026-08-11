@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState, useState } from 'react';
-import { changePassword, type ActionState } from '@/app/(shop)/hesap/actions';
+import { changePassword, type ActionState } from '@/app/(shop)/account/actions';
 import { AuthField, FormAlert, PasswordInput, SubmitButton } from '@/components/auth/FormParts';
 import { cn } from '@/lib/utils';
 import { passwordFormText } from '@/lib/data/text/account';

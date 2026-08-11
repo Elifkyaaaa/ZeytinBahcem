@@ -96,7 +96,7 @@ export async function sendOrderConfirmation(payload: OrderMailPayload) {
 <p style="margin:24px 0 6px;font-size:13px;font-weight:600;">Teslimat adresi</p>
 <p style="margin:0 0 28px;font-size:13px;line-height:1.7;color:#6a7360;">${payload.address}</p>
 
-<a href="${env.siteUrl}/siparis-takibi?no=${encodeURIComponent(payload.orderNo)}"
+<a href="${env.siteUrl}/order-tracking?no=${encodeURIComponent(payload.orderNo)}"
    style="display:inline-block;background:#c9a227;color:#12150e;font-size:14px;font-weight:600;padding:13px 28px;border-radius:999px;text-decoration:none;">
   Siparişimi Takip Et
 </a>`;
@@ -133,7 +133,7 @@ export async function sendAdminOrderNotice(payload: OrderMailPayload) {
   </tr>
 </table>
 <p style="margin:24px 0 0;">
-  <a href="${env.siteUrl}/admin/siparisler" style="color:#a9861b;font-size:14px;font-weight:600;">Yönetim panelinde aç →</a>
+  <a href="${env.siteUrl}/admin/orders" style="color:#a9861b;font-size:14px;font-weight:600;">Yönetim panelinde aç →</a>
 </p>`;
 
   const { error } = await resend.emails.send({
@@ -172,7 +172,7 @@ export async function sendShippingNotice(params: {
       <td style="padding-top:8px;text-align:right;font-size:14px;font-weight:600;">${params.trackingNumber}</td></tr>
 </table>
 <p style="margin:28px 0 0;">
-  <a href="${env.siteUrl}/siparis-takibi?no=${encodeURIComponent(params.orderNo)}"
+  <a href="${env.siteUrl}/order-tracking?no=${encodeURIComponent(params.orderNo)}"
      style="display:inline-block;background:#c9a227;color:#12150e;font-size:14px;font-weight:600;padding:13px 28px;border-radius:999px;text-decoration:none;">
     Kargomu Takip Et
   </a>

@@ -73,7 +73,7 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
                 <p className="text-xs leading-relaxed text-muted-foreground">
                   Sorularınız için{' '}
                   <Link
-                    href="/iletisim"
+                    href="/contact"
                     className="font-medium text-gold-700 underline underline-offset-2 dark:text-gold-400"
                   >
                     bize yazın

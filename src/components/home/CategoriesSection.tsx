@@ -27,7 +27,7 @@ export function CategoriesSection() {
                 className={cn(wide && 'lg:col-span-1 lg:row-span-2')}
               >
                 <Link
-                  href={`/urunler?kategori=${category.slug}`}
+                  href={`/products?kategori=${category.slug}`}
                   className={cn(
                     'group relative flex h-full overflow-hidden rounded-3xl',
                     'shadow-soft transition-all duration-500 hover:shadow-lift',

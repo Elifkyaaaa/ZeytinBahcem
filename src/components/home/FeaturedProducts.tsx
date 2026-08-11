@@ -18,7 +18,7 @@ export function FeaturedProducts() {
             align="left"
             className="max-w-xl"
           />
-          <Button href="/urunler" variant="outline" size="md" className="shrink-0 self-start sm:self-end">
+          <Button href="/products" variant="outline" size="md" className="shrink-0 self-start sm:self-end">
             {featuredProductsText.allCta}
             <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2} />
           </Button>

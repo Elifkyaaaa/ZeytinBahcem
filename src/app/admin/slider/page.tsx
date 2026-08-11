@@ -15,7 +15,7 @@ const initialSlides: SliderItem[] = [
     title: 'Doğadan Sofranıza Gerçek Zeytinyağı',
     subtitle: 'Dalından özenle toplanan zeytinlerden soğuk sıkım olarak üretilmiştir.',
     image: IMG.heroGrove,
-    link: '/urunler',
+    link: '/products',
     order: 1,
     active: true,
   },
@@ -24,7 +24,7 @@ const initialSlides: SliderItem[] = [
     title: 'Erken Hasat Sezonu Başladı',
     subtitle: 'Ekimin ilk haftasında toplanan zeytinlerden, sınırlı üretim.',
     image: IMG.branchMacro,
-    link: '/urunler?kategori=erken-hasat',
+    link: '/products?kategori=erken-hasat',
     order: 2,
     active: true,
   },
@@ -33,7 +33,7 @@ const initialSlides: SliderItem[] = [
     title: 'Kahvaltı Sofraları İçin',
     subtitle: 'Doğal salamura sofralık zeytin çeşitleri.',
     image: IMG.olivesBowls,
-    link: '/urunler?kategori=sofralik-zeytin',
+    link: '/products?kategori=sofralik-zeytin',
     order: 3,
     active: true,
   },
@@ -42,7 +42,7 @@ const initialSlides: SliderItem[] = [
     title: 'Hediye Setleri',
     subtitle: 'Ahşap kutuda, el yazısı notunuzla birlikte.',
     image: IMG.ingredients,
-    link: '/urunler/organik-hediye-seti',
+    link: '/products/organik-hediye-seti',
     order: 4,
     active: false,
   },
@@ -188,7 +188,7 @@ export default function AdminSliderPage() {
             </AdminField>
 
             <AdminField label="Bağlantı" hint="Butonun yönlendireceği sayfa">
-              <input className={adminInput} placeholder="/urunler" />
+              <input className={adminInput} placeholder="/products" />
             </AdminField>
 
             <button className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-olive-700 text-sm font-semibold text-cream-50 transition-all hover:bg-olive-600 active:scale-[0.98] dark:bg-gold-500 dark:text-olive-950">

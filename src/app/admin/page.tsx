@@ -27,9 +27,9 @@ import { paymentMethodMeta } from '@/lib/data/payment';
 import { blurDataURL, formatNumber, formatPrice, safeImageSrc } from '@/lib/utils';
 
 const quickLinks = [
-  { label: 'Bekleyen sipariş', value: dashboardStats.pendingOrders, href: '/admin/siparisler', Icon: ShoppingCart },
-  { label: 'Kritik stok', value: dashboardStats.lowStock, href: '/admin/stok', Icon: Warehouse },
-  { label: 'Onay bekleyen yorum', value: dashboardStats.pendingReviews, href: '/admin/yorumlar', Icon: MessageSquare },
+  { label: 'Bekleyen sipariş', value: dashboardStats.pendingOrders, href: '/admin/orders', Icon: ShoppingCart },
+  { label: 'Kritik stok', value: dashboardStats.lowStock, href: '/admin/stock', Icon: Warehouse },
+  { label: 'Onay bekleyen yorum', value: dashboardStats.pendingReviews, href: '/admin/reviews', Icon: MessageSquare },
 ];
 
 export default function AdminDashboard() {
@@ -129,7 +129,7 @@ export default function AdminDashboard() {
           padded={false}
           actions={
             <Link
-              href="/admin/siparisler"
+              href="/admin/orders"
               className="inline-flex items-center gap-1.5 text-sm font-medium text-gold-700 transition-colors hover:text-gold-600 dark:text-gold-400"
             >
               Tümü
@@ -217,7 +217,7 @@ export default function AdminDashboard() {
                 </span>
                 <span className="min-w-0 flex-1">
                   <Link
-                    href={`/urunler/${product.slug}`}
+                    href={`/products/${product.slug}`}
                     className="line-clamp-1 text-sm font-medium text-foreground transition-colors hover:text-gold-600"
                   >
                     {product.name}

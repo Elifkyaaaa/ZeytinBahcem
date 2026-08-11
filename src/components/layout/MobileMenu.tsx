@@ -110,7 +110,7 @@ export function MobileMenu() {
                   {categories.map((c) => (
                     <li key={c.slug}>
                       <Link
-                        href={`/urunler?kategori=${c.slug}`}
+                        href={`/products?kategori=${c.slug}`}
                         onClick={handleClose}
                         className="block rounded-lg px-4 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
                       >
@@ -123,14 +123,14 @@ export function MobileMenu() {
 
               <div className="mt-7 grid grid-cols-2 gap-2.5 border-t border-border pt-6">
                 <Link
-                  href="/favoriler"
+                  href="/favorites"
                   onClick={handleClose}
                   className="flex items-center gap-2 rounded-xl border border-border px-4 py-3 text-sm font-medium transition-colors hover:border-gold-500/50"
                 >
                   <Heart className="size-4" strokeWidth={1.8} /> Favoriler
                 </Link>
                 <Link
-                  href="/sepet"
+                  href="/cart"
                   onClick={handleClose}
                   className="flex items-center gap-2 rounded-xl border border-border px-4 py-3 text-sm font-medium transition-colors hover:border-gold-500/50"
                 >
@@ -141,7 +141,7 @@ export function MobileMenu() {
                 ) : auth.user ? (
                   <>
                     <Link
-                      href="/hesap"
+                      href="/account"
                       onClick={handleClose}
                       className="flex items-center gap-2 rounded-xl border border-border px-4 py-3 text-sm font-medium transition-colors hover:border-gold-500/50"
                     >
@@ -168,14 +168,14 @@ export function MobileMenu() {
                 ) : (
                   <>
                     <Link
-                      href="/giris"
+                      href="/login"
                       onClick={handleClose}
                       className="flex items-center gap-2 rounded-xl border border-border px-4 py-3 text-sm font-medium transition-colors hover:border-gold-500/50"
                     >
                       <LogIn className="size-4" strokeWidth={1.8} /> {commonText.signIn}
                     </Link>
                     <Link
-                      href="/kayit"
+                      href="/register"
                       onClick={handleClose}
                       className="flex items-center gap-2 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 px-4 py-3 text-sm font-semibold text-olive-950"
                     >

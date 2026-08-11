@@ -45,7 +45,7 @@ function Inner() {
   );
 }
 
-export function GoogleButton({ next = '/hesap' }: { next?: string }) {
+export function GoogleButton({ next = '/account' }: { next?: string }) {
   return (
     <form action={signInWithGoogle}>
       <input type="hidden" name="next" value={next} />

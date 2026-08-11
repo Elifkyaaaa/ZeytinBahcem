@@ -75,7 +75,7 @@ export async function updateUserRole(
   const { error } = await auth.supabase.from('users').update({ role }).eq('id', targetId);
   if (error) return { error: 'Rol güncellenemedi. Lütfen tekrar deneyin.' };
 
-  revalidatePath('/admin/yetkiler');
+  revalidatePath('/admin/permissions');
   return { success: 'Kullanıcı rolü güncellendi.' };
 }
 
@@ -109,7 +109,7 @@ export async function invitePanelUser(
   if (existing) {
     const { error } = await auth.supabase.from('users').update({ role }).eq('id', existing.id);
     if (error) return { error: 'Rol güncellenemedi.' };
-    revalidatePath('/admin/yetkiler');
+    revalidatePath('/admin/permissions');
     return { success: `${email} adresine ${role} yetkisi verildi.` };
   }
 
@@ -129,7 +129,7 @@ export async function invitePanelUser(
   if (error) return { error: `Davet gönderilemedi: ${error.message}` };
 
   // The trigger creates the profile once the invite is accepted, so we cannot set the role yet.
-  revalidatePath('/admin/yetkiler');
+  revalidatePath('/admin/permissions');
   return {
     success: `${email} adresine davet gönderildi. Üyelik tamamlandığında rolünü buradan yükseltebilirsiniz.`,
   };

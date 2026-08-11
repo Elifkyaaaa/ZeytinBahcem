@@ -56,7 +56,7 @@ export function ProductPurchase({ product }: { product: Product }) {
 
   const variant = product.variants[variantIndex];
   const discount = discountPercent(variant.price, variant.oldPrice);
-  const shareUrl = `${site.url}/urunler/${product.slug}`;
+  const shareUrl = `${site.url}/products/${product.slug}`;
 
   const handleAdd = () => {
     add(product, variant, quantity);
@@ -71,7 +71,7 @@ export function ProductPurchase({ product }: { product: Product }) {
 
   const handleBuyNow = () => {
     add(product, variant, quantity);
-    router.push('/odeme');
+    router.push('/checkout');
   };
 
   return (

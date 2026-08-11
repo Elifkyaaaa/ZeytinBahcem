@@ -9,7 +9,7 @@
  * sunucuya/`.env.local`'a erişimi olan kişi çalıştırabilir.
  *
  * Kullanıcı bundan sonra yalnızca şifresiyle girer; güvenliği yeniden
- * kurmak için /hesap/guvenlik üzerinden tekrar kurulum yapmalıdır.
+ * kurmak için /account/security üzerinden tekrar kurulum yapmalıdır.
  */
 
 import { readFile } from 'node:fs/promises';
@@ -122,7 +122,7 @@ async function main() {
     `\n${c.green('✓')} ${removed} faktör kaldırıldı. ${user.email} artık yalnızca şifresiyle girebilir.`,
   );
   console.log(
-    `  ${c.yellow('Öneri:')} Giriş yaptıktan sonra /hesap/guvenlik üzerinden yeniden kurun.\n`,
+    `  ${c.yellow('Öneri:')} Giriş yaptıktan sonra /account/security üzerinden yeniden kurun.\n`,
   );
 }
 

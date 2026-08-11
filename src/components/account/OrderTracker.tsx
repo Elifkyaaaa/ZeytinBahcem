@@ -184,7 +184,7 @@ export function OrderTracker() {
             </a>{' '}
             {orderTrackerText.helpBetween}{' '}
             <Link
-              href="/iletisim"
+              href="/contact"
               className="font-medium text-gold-700 underline underline-offset-4 dark:text-gold-400"
             >
               {orderTrackerText.contactCta}

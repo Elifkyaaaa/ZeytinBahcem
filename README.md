@@ -92,7 +92,7 @@ npm run dev                        # http://localhost:3000
 sepet, checkout, ödeme sonucu, blog + blog detayı, hakkımızda, iletişim, kurumsal,
 sipariş takibi, favoriler, dört yasal sayfa, 404.
 
-**Müşteri paneli** (`/hesap`) — Profil, Siparişlerim, Favoriler, Adreslerim,
+**Müşteri paneli** (`/account`) — Profil, Siparişlerim, Favoriler, Adreslerim,
 Şifre Değiştir, Çıkış Yap.
 
 **Yönetim paneli** (`/admin`) — Dashboard (4 KPI + alan/sütun/halka grafik + son
@@ -142,7 +142,7 @@ npm run dev
 npm run db:seed    # kategori, ürün ve blog verisini aktarır
 ```
 
-**4. Kendinizi yönetici yapın** — `/kayit` üzerinden üye olduktan sonra SQL Editor'de:
+**4. Kendinizi yönetici yapın** — `/register` üzerinden üye olduktan sonra SQL Editor'de:
 
 ```sql
 update public.users set role = 'admin' where email = 'sizin@epostaniz.com';
@@ -162,7 +162,7 @@ update public.users set role = 'admin' where email = 'sizin@epostaniz.com';
 - **Google OAuth** — Supabase panelinde Google sağlayıcısını etkinleştirin, dönüş
   adresi olarak `{SITE_URL}/auth/callback` tanımlayın
 - **E-posta + şifre** — doğrulama e-postası, şifre sıfırlama ve şifre değiştirme dâhil
-- `middleware.ts` her istekte oturumu yeniler; `/hesap` oturum, `/admin` ise
+- `middleware.ts` her istekte oturumu yeniler; `/account` oturum, `/admin` ise
   `admin`/`staff` rolü ister
 
 > ⚠️ Supabase yapılandırılmadığında middleware yönlendirme yapmaz — yani `/admin`
@@ -175,7 +175,7 @@ update public.users set role = 'admin' where email = 'sizin@epostaniz.com';
 ## Sipariş akışı
 
 ```
-Ürün → Sepet → Adres & Ödeme (/odeme)
+Ürün → Sepet → Adres & Ödeme (/checkout)
    → POST /api/checkout
        ├─ Tutarlar sunucuda yeniden hesaplanır
        ├─ orders + order_items kaydı 'pending' olarak açılır
@@ -183,7 +183,7 @@ update public.users set role = 'admin' where email = 'sizin@epostaniz.com';
        │                   → sonuç iyzico'dan sorgulanarak doğrulanır → 'paid'
        └─ Havale / Kapıda: doğrudan onay
    → Müşteriye sipariş onayı + yöneticiye bildirim maili (Resend)
-   → /odeme/sonuc → sepet temizlenir
+   → /checkout/result → sepet temizlenir
    → Admin panelinde görünür → kargoya verilir → müşteriye kargo maili
 ```
 
@@ -231,7 +231,7 @@ Koyu tema `next-themes` ile class stratejisinde çalışır; `globals.css` için
 - `next/image` + AVIF/WebP, doğru `sizes`, hero'da `priority`, paylaşılan blur placeholder
 - JSON-LD: `Organization`, `WebSite` (SearchAction), `Product` (+ `AggregateOffer`,
   `AggregateRating`, `Review`), `BlogPosting`, `BreadcrumbList`, `FAQPage`
-- `sitemap.xml` ve `robots.txt` üretilir; hesap/sepet/ödeme sayfaları indekslenmez
+- `sitemap.xml` ve `robots.txt` üretilir; hesap/cart/ödeme sayfaları indekslenmez
 - Erişilebilirlik: `focus-visible` altın halka, aria etiketleri, klavyeyle kapanabilir
   overlay'ler, "İçeriğe geç" bağlantısı
 

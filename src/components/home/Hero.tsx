@@ -133,7 +133,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.74, ease: [0.22, 1, 0.36, 1] }}
           className="mt-8 flex w-full flex-col gap-3.5 sm:w-auto sm:flex-row sm:gap-4"
         >
-          <Button href="/urunler" variant="gold" size="xl">
+          <Button href="/products" variant="gold" size="xl">
             {heroText.primaryCta}
             <ArrowRight
               className="size-5 transition-transform duration-300 group-hover:translate-x-1"
@@ -141,7 +141,7 @@ export function Hero() {
             />
           </Button>
           {/* `glass` is built for dark grounds and would vanish here */}
-          <Button href="/urunler?siralama=populer" variant="outline" size="xl">
+          <Button href="/products?siralama=populer" variant="outline" size="xl">
             <ShoppingBag className="size-5" strokeWidth={2} />
             {heroText.secondaryCta}
           </Button>

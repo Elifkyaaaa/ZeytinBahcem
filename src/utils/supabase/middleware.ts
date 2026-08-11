@@ -4,11 +4,11 @@ import { env, isSupabaseConfigured } from '@/utils/env';
 import type { Database } from '@/types/database';
 
 /** Oturum gerektiren yollar */
-const protectedPrefixes = ['/hesap'];
+const protectedPrefixes = ['/account'];
 /** Paths restricted to the admin and staff roles */
 const adminPrefixes = ['/admin'];
 /** Paths that a signed-in user should not reach */
-const guestOnlyPrefixes = ['/giris', '/kayit', '/sifremi-unuttum'];
+const guestOnlyPrefixes = ['/login', '/register', '/forgot-password'];
 
 export async function updateSession(request: NextRequest) {
   const response = NextResponse.next({ request });
@@ -43,14 +43,14 @@ export async function updateSession(request: NextRequest) {
 
   if (!user && (isProtected || isAdminArea)) {
     const url = request.nextUrl.clone();
-    url.pathname = '/giris';
+    url.pathname = '/login';
     url.searchParams.set('next', pathname);
     return NextResponse.redirect(url);
   }
 
   if (user && isGuestOnly) {
     const url = request.nextUrl.clone();
-    url.pathname = '/hesap';
+    url.pathname = '/account';
     url.search = '';
     return NextResponse.redirect(url);
   }
@@ -64,7 +64,7 @@ export async function updateSession(request: NextRequest) {
 
     if (!profile || !['admin', 'staff'].includes(profile.role)) {
       const url = request.nextUrl.clone();
-      url.pathname = '/hesap';
+      url.pathname = '/account';
       url.search = '';
       return NextResponse.redirect(url);
     }
@@ -76,7 +76,7 @@ export async function updateSession(request: NextRequest) {
 
     if (aal && aal.nextLevel === 'aal2' && aal.nextLevel !== aal.currentLevel) {
       const url = request.nextUrl.clone();
-      url.pathname = '/dogrulama';
+      url.pathname = '/verify';
       url.search = `?next=${encodeURIComponent(pathname)}`;
       return NextResponse.redirect(url);
     }

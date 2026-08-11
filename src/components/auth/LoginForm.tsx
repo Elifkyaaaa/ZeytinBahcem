@@ -19,7 +19,7 @@ const initialState: AuthState = {};
 
 export function LoginForm() {
   const searchParams = useSearchParams();
-  const next = searchParams.get('next') ?? '/hesap';
+  const next = searchParams.get('next') ?? '/account';
   const urlError = searchParams.get('hata');
 
   const [state, formAction] = useActionState(signInWithPassword, initialState);
@@ -59,7 +59,7 @@ export function LoginForm() {
               {loginFormText.passwordLabel}
             </label>
             <Link
-              href="/sifremi-unuttum"
+              href="/forgot-password"
               className="text-xs text-gold-700 underline-offset-4 transition-colors hover:underline dark:text-gold-400"
             >
               {loginFormText.forgotPassword}

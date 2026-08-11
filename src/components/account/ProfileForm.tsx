@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState } from 'react';
-import { updateProfile, type ActionState } from '@/app/(shop)/hesap/actions';
+import { updateProfile, type ActionState } from '@/app/(shop)/account/actions';
 import { AuthField, FormAlert, SubmitButton, authInput } from '@/components/auth/FormParts';
 import { cn } from '@/lib/utils';
 import { profileFormText } from '@/lib/data/text/account';

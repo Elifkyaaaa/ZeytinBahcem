@@ -8,7 +8,7 @@ import {
   saveAddress,
   setDefaultAddress,
   type ActionState,
-} from '@/app/(shop)/hesap/actions';
+} from '@/app/(shop)/account/actions';
 import { AuthField, FormAlert, SubmitButton, authInput } from '@/components/auth/FormParts';
 import { Badge } from '@/components/ui/Badge';
 import { cities, cityNames } from '@/lib/data/cities';

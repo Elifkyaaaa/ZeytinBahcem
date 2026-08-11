@@ -217,7 +217,7 @@ async function main() {
       `     curl -X POST http://localhost:3000/api/admin/seed -H "x-seed-token: $SUPABASE_SERVICE_ROLE_KEY"`,
     ),
   );
-  console.log(`  2. Üye olun (/kayit), ardından kendinizi yönetici yapın:`);
+  console.log(`  2. Üye olun (/register), ardından kendinizi yönetici yapın:`);
   console.log(c.dim(`     update public.users set role = 'admin' where email = 'sizin@epostaniz.com';`));
   console.log('');
 }

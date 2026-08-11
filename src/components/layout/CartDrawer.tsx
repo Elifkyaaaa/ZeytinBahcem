@@ -109,7 +109,7 @@ export function CartDrawer() {
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     {cartDrawerText.emptyBody}
                   </p>
-                  <Button href="/urunler" variant="primary" size="md" className="mt-6" onClick={handleClose}>
+                  <Button href="/products" variant="primary" size="md" className="mt-6" onClick={handleClose}>
                     {cartDrawerText.emptyCta}
                     <ArrowRight className="size-4" strokeWidth={2} />
                   </Button>
@@ -129,7 +129,7 @@ export function CartDrawer() {
                       >
                         <div className="flex gap-3.5 rounded-2xl border border-border bg-surface p-3">
                           <Link
-                            href={`/urunler/${item.slug}`}
+                            href={`/products/${item.slug}`}
                             onClick={handleClose}
                             className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-surface-muted"
                           >
@@ -147,7 +147,7 @@ export function CartDrawer() {
                           <div className="flex min-w-0 flex-1 flex-col">
                             <div className="flex items-start justify-between gap-2">
                               <Link
-                                href={`/urunler/${item.slug}`}
+                                href={`/products/${item.slug}`}
                                 onClick={handleClose}
                                 className="line-clamp-2 text-sm leading-snug font-medium text-foreground transition-colors hover:text-gold-600"
                               >
@@ -194,11 +194,11 @@ export function CartDrawer() {
                   {cartDrawerText.totalsNote}
                 </p>
                 <div className="mt-4 grid gap-2.5">
-                  <Button href="/odeme" variant="gold" size="lg" onClick={handleClose}>
+                  <Button href="/checkout" variant="gold" size="lg" onClick={handleClose}>
                     {cartDrawerText.checkoutCta}
                     <ArrowRight className="size-4" strokeWidth={2.2} />
                   </Button>
-                  <Button href="/sepet" variant="outline" size="md" onClick={handleClose}>
+                  <Button href="/cart" variant="outline" size="md" onClick={handleClose}>
                     {cartDrawerText.viewCartCta}
                   </Button>
                 </div>

@@ -105,7 +105,7 @@ export function SearchOverlay() {
                         transition={{ delay: i * 0.04, duration: 0.28 }}
                       >
                         <Link
-                          href={`/urunler/${p.slug}`}
+                          href={`/products/${p.slug}`}
                           onClick={handleClose}
                           className="group flex items-center gap-4 rounded-2xl p-2.5 transition-colors hover:bg-foreground/5"
                         >
@@ -176,7 +176,7 @@ export function SearchOverlay() {
                       {categories.map((c) => (
                         <Link
                           key={c.slug}
-                          href={`/urunler?kategori=${c.slug}`}
+                          href={`/products?kategori=${c.slug}`}
                           onClick={handleClose}
                           className="rounded-xl px-3.5 py-2.5 text-sm text-foreground/85 transition-colors hover:bg-foreground/5"
                         >

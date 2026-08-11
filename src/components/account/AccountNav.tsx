@@ -10,12 +10,12 @@ import { blurDataURL, cn } from '@/lib/utils';
 import { accountNavText } from '@/lib/data/text/account';
 
 const items = [
-  { label: 'Profil', href: '/hesap', Icon: User },
-  { label: 'Siparişlerim', href: '/hesap/siparislerim', Icon: Package },
-  { label: 'Favoriler', href: '/hesap/favoriler', Icon: Heart },
-  { label: 'Adreslerim', href: '/hesap/adreslerim', Icon: MapPin },
-  { label: 'Güvenlik', href: '/hesap/guvenlik', Icon: ShieldCheck },
-  { label: 'Şifre Değiştir', href: '/hesap/sifre-degistir', Icon: KeyRound },
+  { label: 'Profil', href: '/account', Icon: User },
+  { label: 'Siparişlerim', href: '/account/orders', Icon: Package },
+  { label: 'Favoriler', href: '/account/favorites', Icon: Heart },
+  { label: 'Adreslerim', href: '/account/addresses', Icon: MapPin },
+  { label: 'Güvenlik', href: '/account/security', Icon: ShieldCheck },
+  { label: 'Şifre Değiştir', href: '/account/change-password', Icon: KeyRound },
 ];
 
 export function AccountNav({
@@ -67,7 +67,7 @@ export function AccountNav({
         <nav aria-label={accountNavText.menuLabel} className="mt-5 border-t border-border pt-4">
           <ul className="space-y-0.5">
             {items.map(({ label, href, Icon }) => {
-              const active = href === '/hesap' ? pathname === '/hesap' : pathname.startsWith(href);
+              const active = href === '/account' ? pathname === '/account' : pathname.startsWith(href);
               return (
                 <li key={href}>
                   <Link

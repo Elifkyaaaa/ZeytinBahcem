@@ -84,12 +84,12 @@ export function ProductBrowser() {
     setMaxPrice(PRICE_MAX);
     setInStockOnly(false);
     setDiscountOnly(false);
-    router.replace('/urunler', { scroll: false });
+    router.replace('/products', { scroll: false });
   };
 
   const selectCategory = (slug: string) => {
     setCategory(slug);
-    router.replace(slug ? `/urunler?kategori=${slug}` : '/urunler', { scroll: false });
+    router.replace(slug ? `/products?kategori=${slug}` : '/products', { scroll: false });
   };
 
   const filterPanel = (

@@ -10,23 +10,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: site.url, lastModified: now, changeFrequency: 'weekly', priority: 1 },
-    { url: `${site.url}/urunler`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
-    { url: `${site.url}/hakkimizda`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${site.url}/products`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
+    { url: `${site.url}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${site.url}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${site.url}/iletisim`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${site.url}/kurumsal`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${site.url}/siparis-takibi`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
+    { url: `${site.url}/contact`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${site.url}/corporate`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${site.url}/order-tracking`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
   ];
 
   const categoryRoutes: MetadataRoute.Sitemap = categories.map((category) => ({
-    url: `${site.url}/urunler?kategori=${category.slug}`,
+    url: `${site.url}/products?kategori=${category.slug}`,
     lastModified: now,
     changeFrequency: 'weekly',
     priority: 0.7,
   }));
 
   const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
-    url: `${site.url}/urunler/${product.slug}`,
+    url: `${site.url}/products/${product.slug}`,
     lastModified: now,
     changeFrequency: 'weekly',
     priority: 0.8,

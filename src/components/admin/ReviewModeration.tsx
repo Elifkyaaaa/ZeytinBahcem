@@ -161,7 +161,7 @@ export function ReviewModeration({ reviews }: { reviews: PanelReview[] }) {
                       </div>
 
                       <Link
-                        href={`/urunler/${review.productSlug}`}
+                        href={`/products/${review.productSlug}`}
                         target="_blank"
                         className="mt-1 block text-xs text-muted-foreground transition-colors hover:text-gold-600"
                       >

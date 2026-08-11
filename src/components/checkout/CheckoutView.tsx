@@ -261,10 +261,10 @@ export function CheckoutView() {
         </div>
 
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <Button href="/siparis-takibi" variant="gold" size="lg">
+          <Button href="/order-tracking" variant="gold" size="lg">
             {checkoutText.trackOrder}
           </Button>
-          <Button href="/urunler" variant="outline" size="lg">
+          <Button href="/products" variant="outline" size="lg">
             {checkoutText.continueShopping}
           </Button>
         </div>
@@ -294,7 +294,7 @@ export function CheckoutView() {
         <p className="mt-3 max-w-md text-sm text-muted-foreground">
           {checkoutText.emptyBody}
         </p>
-        <Button href="/urunler" variant="gold" size="lg" className="mt-8">
+        <Button href="/products" variant="gold" size="lg" className="mt-8">
           {checkoutText.emptyCta}
         </Button>
       </div>
@@ -682,7 +682,7 @@ export function CheckoutView() {
         </section>
 
         <div>
-          <Button href="/sepet" variant="outline" size="md">
+          <Button href="/cart" variant="outline" size="md">
             <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" strokeWidth={2} />
             {checkoutText.backToCart}
           </Button>
@@ -716,7 +716,7 @@ export function CheckoutView() {
                 </span>
                 <span className="min-w-0 flex-1">
                   <Link
-                    href={`/urunler/${item.slug}`}
+                    href={`/products/${item.slug}`}
                     className="line-clamp-1 text-xs font-medium text-foreground hover:text-gold-600"
                   >
                     {item.name}

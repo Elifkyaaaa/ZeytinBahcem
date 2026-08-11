@@ -15,15 +15,15 @@ Durum anahtarı: **✅ hazır** · **⚠️ sizin doldurmanız gerekiyor** · **
 | # | Gereklilik | Durum | Nerede |
 | --- | --- | --- | --- |
 | 1.1 | Ticaret ünvanı sitede görünür | ✅ | Footer künye bloğu, tüm sayfalar |
-| 1.2 | Açık adres (mahalle, cadde, no, ilçe, il) | ✅ | Footer, `/iletisim` |
-| 1.3 | Telefon numarası | ✅ | Footer, `/iletisim`, mobil menü |
-| 1.4 | E-posta adresi | ✅ | Footer, `/iletisim` |
+| 1.2 | Açık adres (mahalle, cadde, no, ilçe, il) | ✅ | Footer, `/contact` |
+| 1.3 | Telefon numarası | ✅ | Footer, `/contact`, mobil menü |
+| 1.4 | E-posta adresi | ✅ | Footer, `/contact` |
 | 1.5 | Vergi dairesi ve vergi numarası | ⚠️ | Footer künye — `src/lib/data/site.ts` → `legal.taxOffice`, `legal.taxNumber` |
 | 1.6 | MERSİS numarası | ⚠️ | Footer künye — `legal.mersis` |
 | 1.7 | Ticaret sicil numarası | ⚠️ | Footer künye — `legal.tradeRegistryNo` |
 | 1.8 | KEP adresi | ⚠️ | `legal.kepAddress` |
-| 1.9 | Hakkımızda sayfası | ✅ | `/hakkimizda` |
-| 1.10 | Çalışma saatleri | ✅ | Footer, `/iletisim` |
+| 1.9 | Hakkımızda sayfası | ✅ | `/about` |
+| 1.10 | Çalışma saatleri | ✅ | Footer, `/contact` |
 
 > **Yapmanız gereken:** `src/lib/data/site.ts` içindeki `legal` bloğundaki
 > yer tutucu değerleri (`0000000000` vb.) gerçek ticari kayıtlarınızla değiştirin.
@@ -73,7 +73,7 @@ Durum anahtarı: **✅ hazır** · **⚠️ sizin doldurmanız gerekiyor** · **
        └─ İki ayrı onay kutusu (Ön Bilgilendirme + Mesafeli Satış)
    → iyzico 3D Secure
    → /api/checkout/callback — sonuç iyzico'dan sorgulanarak doğrulanır
-   → /odeme/sonuc (başarılı / başarısız)
+   → /checkout/result (başarılı / başarısız)
    → Sipariş onay e-postası + yönetici bildirimi
    → Admin panelinde görünür → kargoya verilir → müşteriye kargo e-postası
 ```
@@ -87,7 +87,7 @@ Durum anahtarı: **✅ hazır** · **⚠️ sizin doldurmanız gerekiyor** · **
 | 4.5 | Onaylar işaretlenmeden sipariş tamamlanamıyor | ✅ |
 | 4.6 | Sipariş numarası üretiliyor (`ZB-YYMMDD-XXXX`) | ✅ veritabanı trigger'ı |
 | 4.7 | Sipariş onay e-postası gönderiliyor | ✅ Resend — `RESEND_API_KEY` gerekli |
-| 4.8 | Sipariş takibi sayfası | ✅ `/siparis-takibi` |
+| 4.8 | Sipariş takibi sayfası | ✅ `/order-tracking` |
 | 4.9 | Üye olmadan sipariş verilebiliyor | ✅ |
 
 ---
@@ -124,7 +124,7 @@ Durum anahtarı: **✅ hazır** · **⚠️ sizin doldurmanız gerekiyor** · **
 | 6.4 | Veritabanı satır düzeyi güvenlik (RLS) | ✅ | 12 tabloda etkin, 26 politika |
 | 6.5 | Yönetim paneli rol denetimli | ✅ | `middleware.ts` + her sunucu eyleminde kontrol |
 | 6.6 | Servis anahtarı istemciye sızmıyor | ✅ | Derleme çıktısında doğrulandı |
-| 6.7 | Hesap/sepet/ödeme sayfaları indekslenmiyor | ✅ | `robots.ts` |
+| 6.7 | Hesap/cart/ödeme sayfaları indekslenmiyor | ✅ | `robots.ts` |
 
 ---
 

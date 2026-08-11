@@ -61,9 +61,9 @@ const navGroups: { title: string; items: NavEntry[] }[] = [
   {
     title: 'Katalog',
     items: [
-      { label: 'Ürün Yönetimi', href: '/admin/urunler', Icon: Package },
-      { label: 'Kategori Yönetimi', href: '/admin/kategoriler', Icon: Folder },
-      { label: 'Stok Takibi', href: '/admin/stok', Icon: Warehouse, badge: dashboardStats.lowStock },
+      { label: 'Ürün Yönetimi', href: '/admin/products', Icon: Package },
+      { label: 'Kategori Yönetimi', href: '/admin/categories', Icon: Folder },
+      { label: 'Stok Takibi', href: '/admin/stock', Icon: Warehouse, badge: dashboardStats.lowStock },
     ],
   },
   {
@@ -71,13 +71,13 @@ const navGroups: { title: string; items: NavEntry[] }[] = [
     items: [
       {
         label: 'Sipariş Yönetimi',
-        href: '/admin/siparisler',
+        href: '/admin/orders',
         Icon: ShoppingCart,
         badge: dashboardStats.pendingOrders,
       },
-      { label: 'Müşteri Yönetimi', href: '/admin/musteriler', Icon: Users },
-      { label: 'Kampanyalar', href: '/admin/kampanyalar', Icon: Percent },
-      { label: 'Kuponlar', href: '/admin/kuponlar', Icon: Ticket },
+      { label: 'Müşteri Yönetimi', href: '/admin/customers', Icon: Users },
+      { label: 'Kampanyalar', href: '/admin/campaigns', Icon: Percent },
+      { label: 'Kuponlar', href: '/admin/coupons', Icon: Ticket },
     ],
   },
   {
@@ -85,22 +85,22 @@ const navGroups: { title: string; items: NavEntry[] }[] = [
     items: [
       {
         label: 'Yorum Yönetimi',
-        href: '/admin/yorumlar',
+        href: '/admin/reviews',
         Icon: MessageSquare,
         badge: dashboardStats.pendingReviews,
       },
       { label: 'Blog Yönetimi', href: '/admin/blog', Icon: FileText },
       { label: 'Slider Yönetimi', href: '/admin/slider', Icon: Images },
-      { label: 'Görsel Yönetimi', href: '/admin/gorseller', Icon: ImageUp },
+      { label: 'Görsel Yönetimi', href: '/admin/images', Icon: ImageUp },
     ],
   },
   {
     title: 'Ayarlar',
     items: [
-      { label: 'Site Ayarları', href: '/admin/ayarlar', Icon: Settings },
-      { label: 'Kargo Ayarları', href: '/admin/kargo', Icon: Truck },
-      { label: 'Ödeme Ayarları', href: '/admin/odeme-ayarlari', Icon: CreditCard },
-      { label: 'Kullanıcı Yetkileri', href: '/admin/yetkiler', Icon: UserCog },
+      { label: 'Site Ayarları', href: '/admin/settings', Icon: Settings },
+      { label: 'Kargo Ayarları', href: '/admin/shipping', Icon: Truck },
+      { label: 'Ödeme Ayarları', href: '/admin/payment-settings', Icon: CreditCard },
+      { label: 'Kullanıcı Yetkileri', href: '/admin/permissions', Icon: UserCog },
     ],
   },
 ];
@@ -277,7 +277,7 @@ function AdminUserMenu({ user }: { user: AdminUser }) {
                   Tanıtım Turu
                 </button>
                 <Link
-                  href="/hesap/guvenlik"
+                  href="/account/security"
                   onClick={close}
                   className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
                 >
@@ -285,7 +285,7 @@ function AdminUserMenu({ user }: { user: AdminUser }) {
                   İki Adımlı Doğrulama
                 </Link>
                 <Link
-                  href="/admin/sifre-degistir"
+                  href="/admin/change-password"
                   onClick={close}
                   className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
                 >
@@ -293,7 +293,7 @@ function AdminUserMenu({ user }: { user: AdminUser }) {
                   Şifre Değiştir
                 </Link>
                 <Link
-                  href="/hesap"
+                  href="/account"
                   onClick={close}
                   className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
                 >

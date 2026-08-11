@@ -85,11 +85,11 @@ export function CartView() {
           {cartText.emptyBody}
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Button href="/urunler" variant="gold" size="lg">
+          <Button href="/products" variant="gold" size="lg">
             {cartText.emptyCta}
             <ArrowRight className="size-4" strokeWidth={2.2} />
           </Button>
-          <Button href="/favoriler" variant="outline" size="lg">
+          <Button href="/favorites" variant="outline" size="lg">
             Favorilerime Bak
           </Button>
         </div>
@@ -157,7 +157,7 @@ export function CartView() {
               >
                 <div className="flex flex-col gap-4 rounded-2xl border border-border bg-surface p-4 shadow-soft transition-shadow duration-400 hover:shadow-lift sm:flex-row sm:items-center sm:p-5">
                   <Link
-                    href={`/urunler/${item.slug}`}
+                    href={`/products/${item.slug}`}
                     className="relative aspect-square w-full shrink-0 overflow-hidden rounded-xl bg-surface-muted sm:size-28"
                   >
                     <Image
@@ -173,7 +173,7 @@ export function CartView() {
 
                   <div className="min-w-0 flex-1">
                     <Link
-                      href={`/urunler/${item.slug}`}
+                      href={`/products/${item.slug}`}
                       className="font-display text-lg leading-snug text-foreground transition-colors hover:text-gold-700 dark:hover:text-gold-400"
                     >
                       {item.name}
@@ -210,7 +210,7 @@ export function CartView() {
         </ul>
 
         <div className="mt-7">
-          <Button href="/urunler" variant="outline" size="md">
+          <Button href="/products" variant="outline" size="md">
             <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" strokeWidth={2} />
             {cartText.continueShopping}
           </Button>
@@ -341,7 +341,7 @@ export function CartView() {
             </div>
           </dl>
 
-          <Button href="/odeme" variant="gold" size="lg" className="mt-6 w-full">
+          <Button href="/checkout" variant="gold" size="lg" className="mt-6 w-full">
             {cartText.checkoutCta}
             <ArrowRight className="size-4" strokeWidth={2.2} />
           </Button>

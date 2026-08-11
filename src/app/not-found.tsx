@@ -30,7 +30,7 @@ export default function NotFound() {
             <Home className="size-5" strokeWidth={2} />
             Ana Sayfaya Dön
           </Button>
-          <Button href="/urunler" variant="outline" size="lg">
+          <Button href="/products" variant="outline" size="lg">
             <Search className="size-5" strokeWidth={2} />
             Ürünleri İncele
           </Button>
@@ -44,7 +44,7 @@ export default function NotFound() {
             {categories.map((category) => (
               <li key={category.slug}>
                 <Link
-                  href={`/urunler?kategori=${category.slug}`}
+                  href={`/products?kategori=${category.slug}`}
                   className="group inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-gold-500/50 hover:text-foreground"
                 >
                   {category.name}

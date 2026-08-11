@@ -123,8 +123,8 @@ export async function saveProduct(
     return { error: `Kaydedilemedi: ${error.message}` };
   }
 
-  revalidatePath('/admin/urunler');
-  revalidatePath('/urunler');
+  revalidatePath('/admin/products');
+  revalidatePath('/products');
   return { success: id ? 'Ürün güncellendi.' : 'Ürün eklendi.' };
 }
 
@@ -140,8 +140,8 @@ export async function deleteProduct(form: FormData) {
   if (!id) return;
 
   await auth.supabase.from('products').delete().eq('id', id);
-  revalidatePath('/admin/urunler');
-  revalidatePath('/urunler');
+  revalidatePath('/admin/products');
+  revalidatePath('/products');
 }
 
 /* -------------------------------------------------------------------------- */
@@ -157,8 +157,8 @@ export async function toggleProductActive(form: FormData) {
   if (!id) return;
 
   await auth.supabase.from('products').update({ is_active: next }).eq('id', id);
-  revalidatePath('/admin/urunler');
-  revalidatePath('/urunler');
+  revalidatePath('/admin/products');
+  revalidatePath('/products');
 }
 
 export async function updateStock(
@@ -179,7 +179,7 @@ export async function updateStock(
 
   if (error) return { error: 'Stok güncellenemedi.' };
 
-  revalidatePath('/admin/stok');
-  revalidatePath('/admin/urunler');
+  revalidatePath('/admin/stock');
+  revalidatePath('/admin/products');
   return { success: 'Stok güncellendi.' };
 }

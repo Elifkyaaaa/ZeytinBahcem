@@ -87,7 +87,7 @@ export function websiteJsonLd() {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: `${site.url}/urunler?q={search_term_string}`,
+        urlTemplate: `${site.url}/products?q={search_term_string}`,
       },
       'query-input': 'required name=search_term_string',
     },
@@ -119,7 +119,7 @@ export function productJsonLd(product: Product) {
       availability: product.inStock
         ? 'https://schema.org/InStock'
         : 'https://schema.org/OutOfStock',
-      url: `${site.url}/urunler/${product.slug}`,
+      url: `${site.url}/products/${product.slug}`,
     },
     review: product.reviews.map((r) => ({
       '@type': 'Review',

@@ -22,21 +22,21 @@ interface Result {
 /** Quick navigation targets inside the panel. */
 const pages: { label: string; href: string }[] = [
   { label: 'Dashboard', href: '/admin' },
-  { label: 'Ürün Yönetimi', href: '/admin/urunler' },
-  { label: 'Kategori Yönetimi', href: '/admin/kategoriler' },
-  { label: 'Stok Takibi', href: '/admin/stok' },
-  { label: 'Sipariş Yönetimi', href: '/admin/siparisler' },
-  { label: 'Müşteri Yönetimi', href: '/admin/musteriler' },
-  { label: 'Kampanyalar', href: '/admin/kampanyalar' },
-  { label: 'Kuponlar', href: '/admin/kuponlar' },
-  { label: 'Yorum Yönetimi', href: '/admin/yorumlar' },
+  { label: 'Ürün Yönetimi', href: '/admin/products' },
+  { label: 'Kategori Yönetimi', href: '/admin/categories' },
+  { label: 'Stok Takibi', href: '/admin/stock' },
+  { label: 'Sipariş Yönetimi', href: '/admin/orders' },
+  { label: 'Müşteri Yönetimi', href: '/admin/customers' },
+  { label: 'Kampanyalar', href: '/admin/campaigns' },
+  { label: 'Kuponlar', href: '/admin/coupons' },
+  { label: 'Yorum Yönetimi', href: '/admin/reviews' },
   { label: 'Blog Yönetimi', href: '/admin/blog' },
   { label: 'Slider Yönetimi', href: '/admin/slider' },
-  { label: 'Görsel Yönetimi', href: '/admin/gorseller' },
-  { label: 'Site Ayarları', href: '/admin/ayarlar' },
-  { label: 'Kargo Ayarları', href: '/admin/kargo' },
-  { label: 'Ödeme Ayarları', href: '/admin/odeme-ayarlari' },
-  { label: 'Kullanıcı Yetkileri', href: '/admin/yetkiler' },
+  { label: 'Görsel Yönetimi', href: '/admin/images' },
+  { label: 'Site Ayarları', href: '/admin/settings' },
+  { label: 'Kargo Ayarları', href: '/admin/shipping' },
+  { label: 'Ödeme Ayarları', href: '/admin/payment-settings' },
+  { label: 'Kullanıcı Yetkileri', href: '/admin/permissions' },
 ];
 
 export function AdminSearch() {
@@ -84,7 +84,7 @@ export function AdminSearch() {
         group: 'Ürün',
         title: p.name,
         meta: `${p.volume} · ${formatPrice(p.price)} · ${p.stockCount} adet stok`,
-        href: `/admin/urunler`,
+        href: `/admin/products`,
         Icon: Package,
       }));
 
@@ -96,7 +96,7 @@ export function AdminSearch() {
         group: 'Sipariş',
         title: o.id,
         meta: `${o.customer} · ${formatPrice(o.total)}`,
-        href: `/admin/siparisler`,
+        href: `/admin/orders`,
         Icon: ShoppingCart,
       }));
 
@@ -108,7 +108,7 @@ export function AdminSearch() {
         group: 'Sipariş',
         title: o.customer,
         meta: o.email,
-        href: `/admin/musteriler`,
+        href: `/admin/customers`,
         Icon: User,
       }));
 

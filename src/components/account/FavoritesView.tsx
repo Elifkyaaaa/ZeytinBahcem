@@ -38,7 +38,7 @@ export function FavoritesView() {
         <p className="mt-2.5 max-w-sm text-sm leading-relaxed text-muted-foreground">
           {favoritesText.emptyBody}
         </p>
-        <Button href="/urunler" variant="gold" size="lg" className="mt-7">
+        <Button href="/products" variant="gold" size="lg" className="mt-7">
           {favoritesText.emptyCta}
           <ArrowRight className="size-4" strokeWidth={2.2} />
         </Button>

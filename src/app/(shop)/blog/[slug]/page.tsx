@@ -204,7 +204,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   önerileriniz için bize her zaman yazabilirsiniz.
                 </p>
               </div>
-              <Button href="/iletisim" variant="outline" size="md" className="shrink-0">
+              <Button href="/contact" variant="outline" size="md" className="shrink-0">
                 İletişim
               </Button>
             </div>

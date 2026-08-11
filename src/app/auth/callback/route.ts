@@ -11,18 +11,18 @@ export async function GET(request: NextRequest) {
   const code = searchParams.get('code');
   const tokenHash = searchParams.get('token_hash');
   const type = searchParams.get('type');
-  const next = searchParams.get('next') ?? '/hesap';
+  const next = searchParams.get('next') ?? '/account';
   const errorDescription = searchParams.get('error_description');
 
   if (errorDescription) {
     return NextResponse.redirect(
-      `${origin}/giris?hata=${encodeURIComponent(errorDescription)}`,
+      `${origin}/login?hata=${encodeURIComponent(errorDescription)}`,
     );
   }
 
   const supabase = await createClient();
   if (!supabase) {
-    return NextResponse.redirect(`${origin}/giris?hata=supabase-yapilandirilmadi`);
+    return NextResponse.redirect(`${origin}/login?hata=supabase-yapilandirilmadi`);
   }
 
   // OAuth flow
@@ -40,5 +40,5 @@ export async function GET(request: NextRequest) {
     if (!error) return NextResponse.redirect(`${origin}${next}`);
   }
 
-  return NextResponse.redirect(`${origin}/giris?hata=dogrulama-basarisiz`);
+  return NextResponse.redirect(`${origin}/login?hata=dogrulama-basarisiz`);
 }
