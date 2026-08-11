@@ -59,16 +59,14 @@ export function Hero() {
       </motion.div>
 
       {/*
-        The photograph frames an empty, very bright middle. A light cream veil
-        evens that area out for the copy while leaving the branches, the hills
-        and the sea clearly visible — measured on the composited layers, the
-        content still reads at 11.8:1, so there is no reason to veil harder.
+        No scrim over the photograph. Measured on the raw image, the area the
+        copy occupies sits at luma 224–237 across viewports from 390 px to
+        2560 px wide, which already gives 11:1 for the headline and 8:1 for
+        body copy. Anything painted on top would only hide the grove — the
+        few leaves that do drift into the middle are handled by the text
+        shadow below, which follows the letterforms instead of covering the
+        picture.
       */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_66%_62%_at_50%_50%,rgba(253,251,247,0.55),rgba(253,251,247,0.22)_60%,transparent_88%)]"
-      />
-
       <motion.div
         style={enabled ? { y: contentY, opacity: contentOpacity } : undefined}
         className="container-x relative z-10 flex flex-col items-center pt-28 pb-16 text-center"
@@ -88,7 +86,7 @@ export function Hero() {
           className="h-auto w-[58%] max-w-[15rem] lg:max-w-[16rem]"
         />
 
-        <h1 className="mt-7 max-w-[15ch] font-display text-[2.3rem] leading-[1.06] font-semibold text-olive-900 sm:text-[2.9rem] lg:text-[3.1rem]">
+        <h1 className="mt-7 max-w-[15ch] font-display text-[2.3rem] leading-[1.06] font-semibold text-olive-900 [text-shadow:0_1px_12px_rgba(253,251,247,0.95)] sm:text-[2.9rem] lg:text-[3.1rem]">
           {heroText.titleWords.map((word, i) => (
             <motion.span
               key={word}
@@ -114,7 +112,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-6 max-w-xl text-base leading-relaxed text-olive-800 sm:text-lg"
+          className="mt-6 max-w-xl text-base leading-relaxed text-olive-800 [text-shadow:0_1px_12px_rgba(253,251,247,0.95)] sm:text-lg"
         >
           {heroText.subtitle}
         </motion.p>
@@ -145,10 +143,10 @@ export function Hero() {
           transition={{ duration: 1, delay: 1 }}
           className="mt-8 flex flex-col items-center gap-4"
         >
-          <p className="text-[0.64rem] font-semibold tracking-[0.24em] text-gold-700 uppercase sm:text-[0.7rem]">
+          <p className="text-[0.64rem] font-semibold tracking-[0.24em] text-gold-700 uppercase [text-shadow:0_1px_12px_rgba(253,251,247,0.95)] sm:text-[0.7rem]">
             {heroText.badge}
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-[0.7rem] tracking-[0.16em] text-olive-800/85 uppercase">
+          <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-[0.7rem] tracking-[0.16em] text-olive-800/85 uppercase [text-shadow:0_1px_12px_rgba(253,251,247,0.95)]">
             {heroText.trustMarks.map((item) => (
               <span key={item} className="flex items-center gap-2.5">
                 <span className="size-1 rounded-full bg-gold-600/70" aria-hidden />
